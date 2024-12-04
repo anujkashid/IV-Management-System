@@ -2,14 +2,16 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
-const route = require('./route');
+const registration_route = require('./registration_route');
+const agenda_route = require('./agenda_route');
+const fees_route = require('./fees_route');
 
 
 //  CORS
 app.use(cors());
 
 // Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017/KnightOne")
+mongoose.connect("mongodb://localhost:27017/ivms")
 
 // Middleware to  JSON 
 app.use(express.json());
@@ -18,7 +20,9 @@ app.use(express.json());
 app.use('/images',express.static('Images'))
 
 // Routes
-app.use('/', route);
+app.use('/', registration_route);
+app.use('/', agenda_route);
+app.use('/', fees_route);
 
 
 app.get('/', (req, res) => {
