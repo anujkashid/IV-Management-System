@@ -2,14 +2,19 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
-const route = require('./route');
+
+const locationroute = require('./location/location_route');
+const universityroute = require('./university/university-route');
+const stateroute=require("./state/state_route");
+const districtroute=require("./district/district_route");
+const cityroute=require('./city/city_route');
 
 
 //  CORS
 app.use(cors());
 
 // Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017/KnightOne")
+mongoose.connect("mongodb://localhost:27017/ivms")
 
 // Middleware to  JSON 
 app.use(express.json());
@@ -18,7 +23,11 @@ app.use(express.json());
 app.use('/images',express.static('Images'))
 
 // Routes
-app.use('/', route);
+app.use('/', locationroute);
+app.use('/',universityroute);
+app.use('/',stateroute);
+app.use('/',districtroute);
+app.use('/',cityroute);
 
 
 app.get('/', (req, res) => {
