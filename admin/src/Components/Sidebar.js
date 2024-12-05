@@ -107,6 +107,11 @@ const Sidebar = () => {
               <BsBarChartLineFill size={30} className='me-2' /> IV Requests
             </Link>
           </Nav.Item>
+          <Nav.Item>
+            <Link to="/head/college_registration" className="nav-link p-2">
+              <BsBarChartLineFill size={30} className='me-2' /> Collage Registration
+            </Link>
+          </Nav.Item>
           {/* Add more Nav.Items as needed */}
         </Nav>
       </div>

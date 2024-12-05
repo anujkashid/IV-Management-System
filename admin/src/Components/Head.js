@@ -10,6 +10,7 @@ import Agenda from "./Agenda";
 import Location from "./Location";
 import University from "./University";
 import State from "./State";
+import College_registration from "./College_registration";
 
 const Head = () => {
   return (
@@ -29,6 +30,7 @@ const Head = () => {
             <Route path="/location" element={<Location />} />
             <Route path="/university" element={<University />} />
             <Route path="/state" element={<State />} />
+            <Route path="/college_registration" element={<College_registration />} />
           </Routes>
         </Container>
       </div>

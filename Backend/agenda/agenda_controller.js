@@ -5,12 +5,14 @@ require('dotenv').config();
 const Adduser = async (req, res) => {
     const {agenda_title,
         agenda_description,
-        agenda_time} = req.body;
+        agenda_time,
+        agenda_status} = req.body;
     try{
         const ServiceData = new rmodel({
             agenda_title,
         agenda_description,
-        agenda_time
+        agenda_time,
+        agenda_status
         })
         const data = await ServiceData.save()
         res.status(200).send({data, message: "Service added successfully" })
@@ -64,6 +66,7 @@ const Updateuser = async (req, res) => {
         agenda_title,
         agenda_description,
         agenda_time,
+        agenda_status,
         } = req.body;
     try {
 
@@ -75,6 +78,7 @@ const Updateuser = async (req, res) => {
                     agenda_title,
                     agenda_description,
                     agenda_time,
+                    agenda_status,
                 }
             },
         );

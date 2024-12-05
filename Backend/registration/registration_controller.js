@@ -18,7 +18,8 @@ const Adduser = async (req, res) => {
         reg_college_username,
         reg_password,
         reg_visit_location,
-        reg_mou_sign } = req.body;
+        reg_mou_sign,
+        reg_status } = req.body;
     
     try {
         // Check if the student already exists
@@ -46,7 +47,8 @@ const Adduser = async (req, res) => {
             reg_college_username,
             reg_password: hashedPassword,
             reg_visit_location,
-            reg_mou_sign
+            reg_mou_sign,
+            reg_status,
             
         })
         // const data = await RegistrationData.save()
@@ -158,7 +160,8 @@ const Updateuser = async (req, res) => {
             reg_college_username,
             reg_password: hashedPassword,
             reg_visit_location,
-            reg_mou_sign
+            reg_mou_sign,
+            reg_status,
         } = req.body;
     try {
 
@@ -180,7 +183,8 @@ const Updateuser = async (req, res) => {
                     reg_college_username,
                     reg_password: hashedPassword,
                     reg_visit_location,
-                    reg_mou_sign
+                    reg_mou_sign,
+                    reg_status,
                 }
             },
         );

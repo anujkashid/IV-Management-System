@@ -3,20 +3,23 @@ import React, { useState } from "react";
 import { Button, Col, Form, Row, Container } from "react-bootstrap";
 
 const Fees = () => {
-  const [location_city, setLocationcity] = useState("");
-  const [location_name, setLocationname] = useState("");
-  const [location_status, setLocationstatus] = useState("");
+  const [agenda_title, setAgenda_title] = useState("");
+  const [agenda_description, setAgenda_description] = useState("");
+  const [agenda_time, setAgenda_time] = useState("");
+  const [agenda_status, setAgenda_status] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const userdata={
-        location_city,
-        location_name,
-        location_status
+        agenda_title,
+        agenda_description,
+        agenda_time,
+        agenda_status,
+        
     }
 
-    axios.post("http://localhost:8000/addlocation",userdata)
+    axios.post("http://localhost:8000/add_agenda",userdata)
     .then((res)=>{
         console.log(res.data.data);
         handleClear();
@@ -25,9 +28,10 @@ const Fees = () => {
   };
 
   const handleClear = () => {
-    setLocationcity("");
-    setLocationname("");
-    setLocationstatus("");
+    setAgenda_title("");
+    setAgenda_description("");
+    setAgenda_time("");
+    setAgenda_status("");
   };
 
   return (
@@ -47,8 +51,8 @@ const Fees = () => {
                     id="city"
                     placeholder="Enter title"
                     type="text"
-                    value={location_city}
-                    onChange={(e) => setLocationcity(e.target.value)}
+                    value={agenda_title}
+                    onChange={(e) => setAgenda_title(e.target.value)}
                     required
                     className="py-2"
                   />
@@ -64,8 +68,8 @@ const Fees = () => {
                     id="name"
                     placeholder="Enter Amount"
                     type="text"
-                    value={location_name}
-                    onChange={(e) => setLocationname(e.target.value)}
+                    value={agenda_description}
+                    onChange={(e) => setAgenda_description(e.target.value)}
                     required
                     className="py-2"
                   />
@@ -80,8 +84,8 @@ const Fees = () => {
                     id="name"
                     placeholder="Enter Time"
                     type="datetime"
-                    value={location_name}
-                    onChange={(e) => setLocationname(e.target.value)}
+                    value={agenda_time}
+                    onChange={(e) => setAgenda_time(e.target.value)}
                     required
                     className="py-2"
                   />
@@ -100,8 +104,8 @@ const Fees = () => {
                       name="status"
                       value="active"
                       className="me-5 text-dark"
-                      checked={location_status === "Active"}
-                      onChange={(e) => setLocationstatus(e.target.value)}
+                      checked={agenda_status === "Active"}
+                      onChange={(e) => setAgenda_status(e.target.value)}
                       inline
                     />
                     <Form.Check
@@ -109,8 +113,8 @@ const Fees = () => {
                       label="Inactive"
                       name="status"
                       value="inactive"
-                      checked={location_status === "Inactive"}
-                      onChange={(e) => setLocationstatus(e.target.value)}
+                      checked={agenda_status === "Inactive"}
+                      onChange={(e) => setAgenda_status(e.target.value)}
                       inline
                     />
                   </div>

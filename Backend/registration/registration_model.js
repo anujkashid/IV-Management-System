@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
 const FormData = mongoose.Schema({
-    
         collage_name:String,
         reg_state:String,
         reg_district:String,
@@ -15,8 +14,8 @@ const FormData = mongoose.Schema({
         reg_college_username:String,
         reg_password:String,
         reg_visit_location:String,
-        reg_mou_sign:String
-
-
+        reg_mou_sign:String,
+        reg_status:String,
+        
 });
 module.exports= mongoose.model('registration', FormData)

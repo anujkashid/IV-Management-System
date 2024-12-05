@@ -3,20 +3,20 @@ import React, { useState } from "react";
 import { Button, Col, Form, Row, Container } from "react-bootstrap";
 
 const Fees = () => {
-  const [location_city, setLocationcity] = useState("");
-  const [location_name, setLocationname] = useState("");
-  const [location_status, setLocationstatus] = useState("");
+  const [fees_title, setFees_title] = useState("");
+  const [fees_amount, setFees_amount] = useState("");
+  const [fees_status, setFees_status] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const userdata={
-        location_city,
-        location_name,
-        location_status
+        fees_title,
+        fees_amount,
+        fees_status
     }
 
-    axios.post("http://localhost:8000/addlocation",userdata)
+    axios.post("http://localhost:8000/add_fees",userdata)
     .then((res)=>{
         console.log(res.data.data);
         handleClear();
@@ -25,9 +25,9 @@ const Fees = () => {
   };
 
   const handleClear = () => {
-    setLocationcity("");
-    setLocationname("");
-    setLocationstatus("");
+    setFees_title("");
+    setFees_amount("");
+    setFees_status("");
   };
 
   return (
@@ -47,8 +47,8 @@ const Fees = () => {
                     id="city"
                     placeholder="Enter title"
                     type="text"
-                    value={location_city}
-                    onChange={(e) => setLocationcity(e.target.value)}
+                    value={fees_title}
+                    onChange={(e) => setFees_title(e.target.value)}
                     required
                     className="py-2"
                   />
@@ -64,8 +64,8 @@ const Fees = () => {
                     id="name"
                     placeholder="Enter Amount"
                     type="text"
-                    value={location_name}
-                    onChange={(e) => setLocationname(e.target.value)}
+                    value={fees_amount}
+                    onChange={(e) => setFees_amount(e.target.value)}
                     required
                     className="py-2"
                   />
@@ -84,8 +84,8 @@ const Fees = () => {
                       name="status"
                       value="active"
                       className="me-5 text-dark"
-                      checked={location_status === "Active"}
-                      onChange={(e) => setLocationstatus(e.target.value)}
+                      checked={setFees_status === "Active"}
+                      onChange={(e) => setFees_status(e.target.value)}
                       inline
                     />
                     <Form.Check
@@ -93,8 +93,8 @@ const Fees = () => {
                       label="Inactive"
                       name="status"
                       value="inactive"
-                      checked={location_status === "Inactive"}
-                      onChange={(e) => setLocationstatus(e.target.value)}
+                      checked={setFees_status === "Inactive"}
+                      onChange={(e) => setFees_status(e.target.value)}
                       inline
                     />
                   </div>
