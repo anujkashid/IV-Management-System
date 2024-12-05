@@ -7,6 +7,9 @@ import Dashboard from "./Dashboard";
 import HeaderComponent from "./HeaderComponent";
 import Fees from "./Fees";
 import Agenda from "./Agenda";
+import Location from "./Location";
+import University from "./University";
+import State from "./State";
 
 const Head = () => {
   return (
@@ -23,9 +26,9 @@ const Head = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/fees" element={<Fees />} />
             <Route path="/agenda" element={<Agenda />} />
-            {/* <Route path="/location" element={<Location />} />
+            <Route path="/location" element={<Location />} />
             <Route path="/university" element={<University />} />
-            <Route path="/state" element={<State />} /> */}
+            <Route path="/state" element={<State />} />
           </Routes>
         </Container>
       </div>
