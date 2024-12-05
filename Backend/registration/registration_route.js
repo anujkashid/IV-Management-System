@@ -1,4 +1,4 @@
-const {  Adduser,Login, Getuser, GetuserById, Deleteuser, Updateuser } = require ('./registration_controller')
+const {  Adduser,Login, Getuser, GetuserById, Deleteuser, Updateuser,forgetPassword } = require ('./registration_controller')
 
 const express = require('express');
 const router = express.Router();
@@ -18,6 +18,8 @@ route.get('/get_registration', Getuser);
 route.get('/get_registration_aone/:_id', GetuserById);
 
 route.delete('/delete_registration/:_id', Deleteuser);
+
+route.put("/forget",forgetPassword);
 
 route.put('/update_registration/:_id', Updateuser);
 

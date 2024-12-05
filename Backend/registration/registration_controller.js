@@ -72,17 +72,17 @@ const Adduser = async (req, res) => {
 
 // User Login
 const Login = async (req, res) => {
-    const { username, password } = req.body;
+    const { reg_college_username,reg_password } = req.body;
 
     try {
         // Check if the student exists
-        let user = await rmodel.findOne({ username });
+        let user = await rmodel.findOne({ reg_college_username });
         if (!user) {
             return res.status(400).json({ msg: 'Invalid credentials' });
         }
 
         // Check if the password matches
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(reg_password, user.reg_password);
         if (!isMatch) {
             return res.status(400).json({ msg: 'Invalid credentials' });
         }
@@ -96,8 +96,7 @@ const Login = async (req, res) => {
 
         // Respond with the token
         res.json({ 
-            fname: user.fname,
-            lname: user.lname,
+            collage_name:user.collage_name,
             id: user._id,
             token : token
          });
@@ -199,4 +198,30 @@ const Updateuser = async (req, res) => {
         res.status(500).send({ message: "Internal server error" });
     }
 };
-module.exports = { Adduser, Login, Getuser, GetuserById, Deleteuser, Updateuser }
+
+
+const forgetPassword = async (req, res) => {
+    const { reg_college_email_id, reg_password } = req.body;
+  
+    try {
+      // Check if the student exists by email
+      const student = await rmodel.findOne({ reg_college_email_id });
+      if (!student) {
+        return res.status(404).json({ msg: 'User not found' });
+      }
+  
+      // Hash the new password
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(reg_password, salt);
+  
+      // Update the password in the database
+      student.reg_password = hashedPassword;
+      await student.save();
+  
+      res.status(200).json({ msg: 'Password updated successfully' });
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send('Server Error');
+    }
+  };
+module.exports = { Adduser, Login, Getuser, GetuserById, Deleteuser, Updateuser,forgetPassword }
