@@ -8,9 +8,9 @@ const universityroute = require('./university/university-route');
 const stateroute=require("./state/state_route");
 const districtroute=require("./district/district_route");
 const cityroute=require('./city/city_route');
-const registration_route = require('./registration_route');
-const agenda_route = require('./agenda_route');
-const fees_route = require('./fees_route');
+const registration_route = require('./registration/registration_route');
+const agenda_route = require('./agenda/agenda_route');
+const fees_route = require('./fees/fees_route');
 
 
 //  CORS
