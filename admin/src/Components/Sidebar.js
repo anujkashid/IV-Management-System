@@ -4,16 +4,10 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Col, Nav, Row } from 'react-bootstrap';
 import { Offcanvas, Button } from 'react-bootstrap';
 import { BsBarChartLineFill } from "react-icons/bs";
-import { RiContactsBook2Fill } from "react-icons/ri";
-import { BsCart } from "react-icons/bs";
-import { RiCustomerServiceFill } from "react-icons/ri";
-import { IoIosLogIn } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import sumago from '../Images/sumago-logo.png';
-
 const Sidebar = () => {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -56,7 +50,7 @@ const Sidebar = () => {
       <div className="sidebar d-none d-md-block">
         <div  className='mt-3 mb-4' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <img src={sumago} alt="profile" style={{ width: "50px", height: "50px" }} />
-          <h4 className='text-danger fw-bold' style={{fontFamily:"Times New Roman"}}>Sumago Infotech</h4>
+          <h4 className='text-danger fw-bold ms-2' style={{fontFamily:"Times New Roman"}}>Sumago Infotech</h4>
         </div>
         <Nav defaultActiveKey="/dashboard" className="flex-column">
           <Nav.Item>
@@ -79,37 +73,27 @@ const Sidebar = () => {
               menuVariant="dark"
               className='d-flex'
             >
-            <Link to="/head/dashboard" className="nav-link p-2">
-            <NavDropdown.Item href="#action/3.1">Location
+            <NavDropdown.Item as={Link} to="/head/location" className='nav-link p-2 ms-4 text-white'>Location
             </NavDropdown.Item>
-            </Link>
-            <Link to="/head/dashboard" className="nav-link p-2">
-            <NavDropdown.Item href="#action/3.1">University
+            <NavDropdown.Item as={Link} to="/head/university" className='nav-link p-2 ms-4 text-white'>University
             </NavDropdown.Item>
-            </Link>
-            <Link to="/head/dashboard" className="nav-link p-2">
-            <NavDropdown.Item href="#action/3.1">State
+            <NavDropdown.Item as={Link} to="/head/state" className='nav-link p-2 ms-4 text-white'>State
             </NavDropdown.Item>
-            </Link>
-            <Link to="/head/dashboard" className="nav-link p-2">
-            <NavDropdown.Item href="#action/3.1">District
+            <NavDropdown.Item as={Link} to="/head/district" className='nav-link p-2 ms-4 text-white'>District
             </NavDropdown.Item>
-            </Link>
-            <Link to="/head/dashboard" className="nav-link p-2">
-            <NavDropdown.Item href="#action/3.1">City
+            <NavDropdown.Item as={Link} to="/head/city" className='nav-link p-2 ms-4 text-white'>City
             </NavDropdown.Item>
-            </Link>
-            </NavDropdown> 
+            </NavDropdown>
             </Col>
             </Row>
           </Nav.Item>
           <Nav.Item>
-            <Link to="/head/dashboard" className="nav-link p-2">
+            <Link to="/head/agenda" className="nav-link p-2">
               <BsBarChartLineFill size={30} className='me-2' /> Agenda
             </Link>
           </Nav.Item>
           <Nav.Item>
-            <Link to="/head/dashboard" className="nav-link p-2">
+            <Link to="/head/fees" className="nav-link p-2">
               <BsBarChartLineFill size={30} className='me-2' /> Fees
             </Link>
           </Nav.Item>
