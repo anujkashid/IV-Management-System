@@ -10,6 +10,8 @@ import Agenda from "./Agenda";
 import Location from "./Location";
 import University from "./University";
 import State from "./State";
+import District from "./District";
+import City from "./City";
 
 const Head = () => {
   return (
@@ -29,6 +31,8 @@ const Head = () => {
             <Route path="/location" element={<Location />} />
             <Route path="/university" element={<University />} />
             <Route path="/state" element={<State />} />
+            <Route path="/district" element={<District/>}/>
+            <Route path="/city" element={<City/>}/>
           </Routes>
         </Container>
       </div>
