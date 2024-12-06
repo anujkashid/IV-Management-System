@@ -8,124 +8,127 @@ import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 
 const College_registration = () => {
-    const [collage_name, setCollage_name] = useState("");
-    const [reg_state, setReg_state] = useState("");
-    const [reg_district, setReg_district] = useState("");
-    const [reg_city, setReg_city] = useState("");
-    const [reg_university_name, setReg_university_name] = useState("");
-    const [reg_principal_name, setReg_principal_name] = useState("");
-    const [reg_contact_person, setReg_contact_person] = useState("");
-    const [reg_contact_person_contact1, setReg_contact_person_contact1] = useState("");
-    const [reg_contact_person_contact2, setReg_contact_person_contact2] = useState("");
-    const [reg_college_email_id, setReg_college_email_id] = useState("");
-    const [reg_college_username, setReg_college_username] = useState("");
-    const [reg_password, setReg_password] = useState("");
-    const [reg_visit_location, setReg_visit_location] = useState("");
-    const [reg_mou_sign, setReg_mou_sign] = useState("");
-    const [reg_status, setReg_status] = useState("");
-    const [state, setState] = useState([]);
-    const [district, setDistrict] = useState([]);
-    const [city, setCity] = useState([]);
-    const [university, setUniversity] = useState([]);
+  const [collage_name, setCollage_name] = useState("");
+  const [reg_state, setReg_state] = useState("");
+  const [reg_district, setReg_district] = useState("");
+  const [reg_city, setReg_city] = useState("");
+  const [reg_university_name, setReg_university_name] = useState("");
+  const [reg_principal_name, setReg_principal_name] = useState("");
+  const [reg_contact_person, setReg_contact_person] = useState("");
+  const [reg_contact_person_contact1, setReg_contact_person_contact1] = useState("");
+  const [reg_contact_person_contact2, setReg_contact_person_contact2] = useState("");
+  const [reg_college_email_id, setReg_college_email_id] = useState("");
+  const [reg_college_username, setReg_college_username] = useState("");
+  const [reg_password, setReg_password] = useState("");
+  const [reg_confirm_password, setReg_confirm_password] = useState("");
+  const [reg_visit_location, setReg_visit_location] = useState("");
+  const [reg_mou_sign, setReg_mou_sign] = useState("");
+  const [reg_status, setReg_status] = useState("");
+  const [state, setState] = useState([]);
+  const [district, setDistrict] = useState([]);
+  const [city, setCity] = useState([]);
+  const [university, setUniversity] = useState([]);
 
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      const userdata={
-        collage_name,
-        reg_state,
-        reg_district,
-        reg_city,
-        reg_university_name,
-        reg_principal_name,
-        reg_contact_person,
-        reg_contact_person_contact1,
-        reg_contact_person_contact2,
-        reg_college_email_id,
-        reg_college_username,
-        reg_password,
-        reg_visit_location,
-        reg_mou_sign,
-        reg_status    
-      }
-      axios.post("http://localhost:8000/add_registration",userdata)
-      .then((res)=>{
-          console.log(res.data.data);
-          handleClear();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const userdata = {
+      collage_name,
+      reg_state,
+      reg_district,
+      reg_city,
+      reg_university_name,
+      reg_principal_name,
+      reg_contact_person,
+      reg_contact_person_contact1,
+      reg_contact_person_contact2,
+      reg_college_email_id,
+      reg_college_username,
+      reg_password,
+      reg_confirm_password,
+      reg_visit_location,
+      reg_mou_sign,
+      reg_status
+    }
+    axios.post("http://localhost:8000/add_registration", userdata)
+      .then((res) => {
+        console.log(res.data);
+        handleClear();
       })
-      .catch((err)=> console.log(err))
-    };
-    const handleClear = () => {
-        setCollage_name("");
-        setReg_state("");
-        setReg_district("");
-        setReg_city("");
-        setReg_university_name("");
-        setReg_principal_name("");
-        setReg_contact_person("");
-        setReg_contact_person_contact1("");
-        setReg_contact_person_contact2("");
-        setReg_college_email_id("");
-        setReg_college_username("");
-        setReg_password("");
-        setReg_visit_location("");
-        setReg_mou_sign("");
-        setReg_status("");
-    };
+      .catch((err) => console.log(err))
+  };
+  const handleClear = () => {
+    setCollage_name("");
+    setReg_state("");
+    setReg_district("");
+    setReg_city("");
+    setReg_university_name("");
+    setReg_principal_name("");
+    setReg_contact_person("");
+    setReg_contact_person_contact1("");
+    setReg_contact_person_contact2("");
+    setReg_college_email_id("");
+    setReg_college_username("");
+    setReg_password("");
+    setReg_confirm_password("");
+    setReg_visit_location("");
+    setReg_mou_sign("");
+    setReg_status("");
+  };
 
-    // Get State
-    useEffect(() => {
-        axios
-          .get("http://localhost:8000/getstate")
-          .then((res) => {
-            setState(res.data.data);
-            // console.log("1",res.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }, []);
-// Get District
-      useEffect(() => {
-        axios
-          .get("http://localhost:8000/getdistrict")
-          .then((res) => {
-            setDistrict(res.data.data);
-            // console.log("1",res.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }, []);
+  // Get State
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/getstate")
+      .then((res) => {
+        setState(res.data.data);
+        // console.log("1",res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  // Get District
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/getdistrict")
+      .then((res) => {
+        setDistrict(res.data.data);
+        // console.log("1",res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-// Get City
-      useEffect(() => {
-        axios
-          .get("http://localhost:8000/getcity")
-          .then((res) => {
-            setCity(res.data.data);
-            // console.log("1",res.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }, []);
+  // Get City
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/getcity")
+      .then((res) => {
+        setCity(res.data.data);
+        // console.log("1",res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-      //   Get University
-      useEffect(() => {
-        axios
-          .get("http://localhost:8000/getuniversity")
-          .then((res) => {
-            setUniversity(res.data.data);
-            // console.log("1",res.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }, []);
+  //   Get University
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/getuniversity")
+      .then((res) => {
+        setUniversity(res.data.data);
+        // console.log("1",res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   return (
     <>
-      <h2 className="text-center">Registration Form</h2>
+      <h2 className="text-center my-4">Registration Form</h2>
       {/* Form  */}
       <Container
         className="border border-dark h-100  p-4 d-flex justify-content-center"
@@ -146,43 +149,58 @@ const College_registration = () => {
           {/* State  */}
           <Form.Group className="mb-3" controlId="formGroupState">
             <Form.Label>State:</Form.Label>
-            <Form.Select aria-label="Default select example" className="w-100">
+            <Form.Select 
+            aria-label="Select State"
+            className="w-100"
+            value={reg_state} 
+            onChange={(e) => setReg_state(e.target.value)}
+            >
               <option>Select State</option>
               {state.map((item, index) => {
-                    return (
-                      <option key={item._id} value={item.state_name}>
-                        {item.state_name}
-                      </option>
-                    );
-                  })}
+                return (
+                  <option key={item._id} value={item.state_name}>
+                    {item.state_name}
+                  </option>
+                );
+              })}
             </Form.Select>
           </Form.Group>
           {/* District */}
           <Form.Group className="mb-3" controlId="formGroupDistrict">
             <Form.Label>District:</Form.Label>
-            <Form.Select aria-label="Default select example" className="w-100">
+            <Form.Select 
+            aria-label="Default select example" 
+            className="w-100"
+            value={reg_district} 
+            onChange={(e) => setReg_district(e.target.value)}
+            >
               <option>Select District</option>
               {district.map((item, index) => {
-                    return (
-                      <option key={item._id} value={item.state_name}>
-                        {item.state_name}
-                      </option>
-                    );
-                  })}
+                return (
+                  <option key={item._id} value={item.state_name}>
+                    {item.district_name}
+                  </option>
+                );
+              })}
             </Form.Select>
           </Form.Group>
           {/* City */}
           <Form.Group className="mb-3" controlId="formGroupCity">
             <Form.Label>City:</Form.Label>
-            <Form.Select aria-label="Default select example" className="w-100">
+            <Form.Select 
+            aria-label="Default select example"
+             className="w-100"
+             value={reg_city} 
+             onChange={(e) => setReg_city(e.target.value)}
+             >
               <option>Select City</option>
               {city.map((item, index) => {
-                    return (
-                      <option key={item._id} value={item.state_name}>
-                        {item.state_name}
-                      </option>
-                    );
-                  })}
+                return (
+                  <option key={item._id} value={item.state_name}>
+                    {item.city_name}
+                  </option>
+                );
+              })}
             </Form.Select>
           </Form.Group>
           {/* University Name */}
@@ -283,10 +301,11 @@ const College_registration = () => {
             <Form.Control
               type="password"
               placeholder="Confirm password"
+              value={reg_confirm_password}
               className="w-100"
             />
           </Form.Group>
-          {/* Select Visiting Location */}
+          {/* Select Visiting Location 
           <Form.Group className="mb-3" controlId="formGroupLocation">
             <Form.Label>Visiting Location:</Form.Label>
             <Form.Select aria-label="Default select example" className="w-100">
@@ -295,57 +314,58 @@ const College_registration = () => {
               <option value="2">Nashik</option>
             </Form.Select>
           </Form.Group>
-          {/* Is MOU signed? */}
-          <Form.Group className="mb-3" controlId="formGroupMOUSign">
-            <Form.Label>Is MOU Signed?</Form.Label>
+          */}
+          {/* Is MOU Signed? */}
+          <Row>
+            <Form.Group className="mb-3 mt-3" controlId="MOUSign">
+              <Form.Label className="mx-5">Is MOU Signed?</Form.Label>
+              <Form.Check
+                type="radio"
+                label="Yes"
+                name="mouGroup" // Unique name for this group
+                value="yes"
+                className="me-5 text-dark"
+                checked={reg_mou_sign === "yes"}
+                onChange={(e) => setReg_mou_sign(e.target.value)}
+                inline
+              />
+              <Form.Check
+                type="radio"
+                label="No"
+                name="mouGroup" // Unique name for this group
+                value="no"
+                checked={reg_mou_sign === "no"}
+                onChange={(e) => setReg_mou_sign(e.target.value)}
+                inline
+              />
             </Form.Group>
-            <Form.Group className="text-center">
-                    <Form.Check
-                      type="radio"
-                      label="Yes"
-                      name="mou"
-                      value="active"
-                      className="me-5 text-dark"
-                      checked={reg_mou_sign === "Active"}
-                      onChange={(e) => setReg_mou_sign(e.target.value)}
-                      inline
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="No"
-                      name="mou"
-                      value="inactive"
-                      checked={reg_mou_sign === "Inactive"}
-                      onChange={(e) => setReg_mou_sign(e.target.value)}
-                      inline
-                    />
-          </Form.Group>
-          
+          </Row>
+
           {/* Active/Inactive Status */}
-          
-          {/* <Form.Label className="mb-3" controlId="formGroupStatus">Select Status:
-            </Form.Label>    
-            <Form.Group className="text-center">    
-                    <Form.Check
-                      type="radio"
-                      label="Active"
-                      name="status"
-                      value="active"
-                      className="me-5 text-dark"
-                      checked={reg_status === "Active"}
-                      onChange={(e) => setReg_status(e.target.value)}
-                      inline
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="Inactive"
-                      name="status"
-                      value="inactive"
-                      checked={reg_status === "Inactive"}
-                      onChange={(e) => setReg_status(e.target.value)}
-                      inline
-                    />
-          </Form.Group> */}
+          <Row>
+            <Form.Group className="" controlId="Status">
+              <Form.Label className="mb-3 mx-5">Select Status :</Form.Label>
+              <Form.Check
+                type="radio"
+                label="Active"
+                name="statusGroup" // Unique name for this group
+                value="Active"
+                className="me-5 text-dark"
+                checked={reg_status === "Active"}
+                onChange={(e) => setReg_status(e.target.value)}
+                inline
+              />
+              <Form.Check
+                type="radio"
+                label="Inactive"
+                name="statusGroup" // Unique name for this group
+                value="Inactive"
+                checked={reg_status === "Inactive"}
+                onChange={(e) => setReg_status(e.target.value)}
+                inline
+              />
+            </Form.Group>
+          </Row>
 
 
           {/* Submit button */}
