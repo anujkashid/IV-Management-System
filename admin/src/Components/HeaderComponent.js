@@ -3,6 +3,7 @@ import { Nav, Navbar } from "react-bootstrap";
 import { IoIosNotificationsOutline, IoIosLogOut } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa";
 import "../App.css"
+import { Link } from "react-router-dom";
 const HeaderComponent = () => {
   return (
     <Navbar expand="sm" className="bg-secondary px-3" style={{ marginBottom: 0 }}>
@@ -29,9 +30,11 @@ const HeaderComponent = () => {
           <Nav.Link href="">
             <FaRegUser className="me-4 text-white fw-bold" size={24} />
           </Nav.Link>
-          <Nav.Link href="">
+          <Nav.Item>
+            <Link to="/" className="nav-link p-2">
             <IoIosLogOut className="me-4 text-white fw-bold" size={24} />
-          </Nav.Link>
+            </Link>
+          </Nav.Item>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

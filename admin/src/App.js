@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Head from './Components/Head';
+import Login from "./Components/Login";
 
 
 const App = () => {
@@ -10,7 +11,7 @@ const App = () => {
 
       <Routes>
         {/* Login Page - Offcanvas is hidden here */}
-         {/* <Route path="/" element={<Login />} /> */}
+         <Route path="/" element={<Login />} /> 
         {/* All other routes are wrapped inside Head */}
         <Route path="/head/*" element={<Head />} />
          {/* <Route path="/home" element={<Homecomponent />} />
