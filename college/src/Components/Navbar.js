@@ -11,29 +11,47 @@ const ColHeader = () => {
       <Navbar collapseOnSelect expand="lg" bg="danger" variant="dark">
         <Container>
           {/* Brand */}
-          <Navbar.Brand>{collegename}</Navbar.Brand>
+          <Navbar.Brand className="fs-4">{collegename}</Navbar.Brand>
 
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mx-auto">
               {/* Home Link */}
-              <Nav.Link href="#home" className="text-white fs-5">
+              <Nav.Link href="/home" className="text-white fs-5 me-3">
                 Home
               </Nav.Link>
 
+              <Nav.Link href="/addvisit" className="text-white fs-5 me-3">
+                Schedule Visit
+              </Nav.Link>
+
+              <Nav.Link href="/feedback" className="text-white fs-5 me-3">
+                Feedback
+              </Nav.Link>
+
+              <Nav.Link href="/gallery" className="text-white fs-5 me-3">
+                Gallery
+              </Nav.Link>
+
+              <Nav.Link href="/report" className="text-white fs-5">
+                Report
+              </Nav.Link>
+
+
               {/* Dropdown Menu */}
-              <NavDropdown
+              {/* <NavDropdown
                 title={<span className="text-white">Masters</span>}
                 id="collapsible-nav-dropdown"
                 className="ms-4 fs-5"
               >
-                <NavDropdown.Item href="#action/1">University</NavDropdown.Item>
-                <NavDropdown.Item href="#action/2">State</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3">District</NavDropdown.Item>
-                <NavDropdown.Item href="#action/4">City</NavDropdown.Item>
+                <NavDropdown.Item href="/university">University</NavDropdown.Item>
+                <NavDropdown.Item href="/state">State</NavDropdown.Item>
+                <NavDropdown.Item href="/district">District</NavDropdown.Item>
+                <NavDropdown.Item href="/city">City</NavDropdown.Item>
               </NavDropdown>
-            </Nav>
+             */}
+             </Nav>
 
             {/* Right-Aligned Icons */}
             <Nav className="ms-auto d-flex align-items-center">

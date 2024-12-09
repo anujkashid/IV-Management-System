@@ -1,23 +1,21 @@
-const multer = require('multer')
-const path = require('path')
+const multer = require('multer');
+const path = require('path');
 
 const photoStorage = multer.diskStorage({
-    destination : ( req, file, cb) => {
-        cb(null,path.join(__dirname,'./Images'))
+    destination: (req, file, cb) => {
+        cb(null, path.join(__dirname, './Images')); 
     },
     filename: (req, file, cb) => {
-        cb(null,file.originalname)
+        cb(null, `${Date.now()}-${file.originalname}`); 
     }
-})
+});
 
 const photoUpload = multer({
-    storage:photoStorage,
-    limits: { fileSize: 5 * 1024 * 1024 *1024 },
-}).single('visit_student_data');
+    storage: photoStorage,
+    limits: { fileSize: 5 * 1024 * 1024 }, 
+}).fields([
+    { name: 'student_details', maxCount: 1 },
+    { name: 'faculty_details', maxCount: 1 },
+]);
 
-const photoUpload1 = multer({
-    storage:photoStorage,
-    limits: { fileSize: 5 * 1024 * 1024 *1024 },
-}).single('visit_faculty_data');
-
-module.exports = {photoUpload, photoUpload1}
+module.exports = { photoUpload };
