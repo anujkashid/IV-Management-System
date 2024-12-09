@@ -11,6 +11,8 @@ const cityroute=require('./city/city_route');
 const registration_route = require('./registration/registration_route');
 const agenda_route = require('./agenda/agenda_route');
 const fees_route = require('./fees/fees_route');
+// const visit_route = require('./Visits/visit_route');
+const admin_route = require('./Admin/admin_route');
 
 
 //  CORS
@@ -34,6 +36,8 @@ app.use('/',cityroute);
 app.use('/', registration_route);
 app.use('/', agenda_route);
 app.use('/', fees_route);
+// app.use('/', visit_route);
+app.use('/', admin_route);
 
 
 app.get('/', (req, res) => {

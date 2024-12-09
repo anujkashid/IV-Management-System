@@ -1,5 +1,4 @@
 const {  Adduser,Login, Getuser, GetuserById, Deleteuser, Updateuser,forgetPassword } = require ('./registration_controller')
-
 const express = require('express');
 const router = express.Router();
 const Controller = require('./registration_controller');
@@ -15,7 +14,7 @@ route.post('/loginauth', Login);
 
 route.get('/get_registration', Getuser);
 
-route.get('/get_registration_aone/:_id', GetuserById);
+route.get('/get_registration_one/:_id', GetuserById);
 
 route.delete('/delete_registration/:_id', Deleteuser);
 

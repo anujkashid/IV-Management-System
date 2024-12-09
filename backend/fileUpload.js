@@ -13,9 +13,11 @@ const photoStorage = multer.diskStorage({
 const photoUpload = multer({
     storage:photoStorage,
     limits: { fileSize: 5 * 1024 * 1024 *1024 },
-}).single('image');
+}).single('visit_student_data');
 
+const photoUpload1 = multer({
+    storage:photoStorage,
+    limits: { fileSize: 5 * 1024 * 1024 *1024 },
+}).single('visit_faculty_data');
 
-
-module.exports = {photoUpload}
- 
+module.exports = {photoUpload, photoUpload1}
