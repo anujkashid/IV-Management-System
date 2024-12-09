@@ -1,0 +1,104 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { CSVLink } from "react-csv"; // For exporting CSV
+import jsPDF from "jspdf"; // For exporting PDF
+import "jspdf-autotable";
+import * as XLSX from "xlsx"; // For exporting Excel
+import { Table, Button, Container, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
+const GetDistrict = () => {
+  const [districtData, setDistrictData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/getdistrict")
+      .then((res) => {
+        setDistrictData(res.data.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching visit data:", error);
+      });
+  }, []);
+
+  // Function to export as PDF
+  const exportPDF = () => {
+    const doc = new jsPDF();
+    const tableColumn = [
+      "district_state",
+      "district_name",
+      "district_status",
+    ];
+    const tableRows = [];
+
+    districtData.forEach((district) => {
+        tableRows.push([
+          district.district_state,
+          district.district_name,
+          district.district_status,
+        ]);
+      });
+
+    doc.autoTable(tableColumn, tableRows, { startY: 20 });
+    doc.save("distict_data.pdf");
+  };
+
+  // Function to export as Excel
+  const exportExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(districtData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "district Data");
+    XLSX.writeFile(workbook, "district_data.xlsx");
+  };
+
+  return (
+    <Container>
+      <h2 className="my-5 text-center">District Data</h2>
+      <div className="mb-4 d-flex justify-content-start gap-2">
+  <Button variant="primary" onClick={exportPDF}>
+    Export PDF
+  </Button>
+  <Button variant="success" onClick={exportExcel}>
+    Export Excel
+  </Button>
+  <CSVLink data={districtData} filename="visit_data.csv">
+    <Button variant="info">Export CSV</Button>
+  </CSVLink>
+</div>
+
+<div className="d-flex justify-content-end me-3 mb-3">
+  <Link to="/head/adddistrict">
+    <Button className="btn btn-primary py-2 px-3">Add</Button>
+  </Link>
+</div>
+
+      <Table striped bordered hover responsive>
+        <thead className="thead-dark">
+          <tr className="text-center">
+            <th>Sr.No</th>
+            <th>District State</th>
+            <th>District Name</th>
+            <th>District Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody className="text-center">
+          {districtData.map((district, index) => (
+            <tr key={index}>
+                <td>{index + 1}</td>
+              <td>{district.district_state}</td>
+              <td>{district.district_name}</td>
+              <td>{district.district_status}</td>
+              <td>
+                <Link><Button className="btn btn-primary me-4 px-3 py-2">Update</Button></Link>
+                <Link><Button className="btn btn-danger px-3 py-2">Delete</Button></Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </Container>
+  );
+};
+
+export default GetDistrict;

@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Homecomponent from './Components/Homecomponent';
 import Login from './Components/Login';
 import ForgetPasswordComponent from './Components/ForgotPassword';
+import ColLogin from './Components/CollgeVisit';
+import Feedback from './Components/Feedback';
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
          <Route path="/home" element={<Homecomponent/>} />
          <Route path="/" element={<Login/>} />
          <Route path="/forget" element={<ForgetPasswordComponent/>}/>
+         <Route path="/addvisit" element={<ColLogin/>} />
+         <Route path="/feedback" element={<Feedback/>} />
       </Routes>
       </BrowserRouter>
   );

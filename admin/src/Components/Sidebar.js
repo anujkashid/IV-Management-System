@@ -88,7 +88,7 @@ const Sidebar = () => {
             </Link>
           </Nav.Item>
           <Nav.Item>
-            <Link to="/head/dashboard" className="nav-link p-2">
+            <Link to="/head/college_registarion" className="nav-link p-2">
               <FaUserPlus size={30} className="me-2 text-dark" /> College
               Registration
             </Link>
@@ -189,15 +189,15 @@ const Sidebar = () => {
             </Link>
           </Nav.Item>
           <Nav.Item>
-            <Link to="/head/dashboard" className="nav-link p-2">
+            <Link to="/head/ivrequest" className="nav-link p-2">
               <FaRegHandshake size={30} className="me-2 text-dark" /> IV Requests
             </Link>
           </Nav.Item>
-          <Nav.Item>
+          {/* <Nav.Item>
             <Link to="/head/college_registration" className="nav-link p-2">
               <BsBarChartLineFill size={30} className='me-2' /> Collage Registration
             </Link>
-          </Nav.Item>
+          </Nav.Item> */}
           {/* Add more Nav.Items as needed */}
         </Nav>
       </div>

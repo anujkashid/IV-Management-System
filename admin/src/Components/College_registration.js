@@ -125,7 +125,7 @@ const College_registration = () => {
       }, []);
   return (
     <>
-      <h2 className="text-center">Registration Form</h2>
+      <h2 className="text-center mt-5 mb-3">Registration Form</h2>
       {/* Form  */}
       <Container
         className="border border-dark h-100  p-4 d-flex justify-content-center"
