@@ -13,6 +13,7 @@ const agenda_route = require('./agenda/agenda_route');
 const fees_route = require('./fees/fees_route');
 const feedback_route=require("./feedback/feedback_route");
 const visit_route=require("./Visit/visit_route")
+const admin_route=require("./Admin/admin_route");
 
 
 //  CORS
@@ -38,6 +39,7 @@ app.use('/', agenda_route);
 app.use('/', fees_route);
 app.use('/',feedback_route);
 app.use("/",visit_route);
+app.use("/",admin_route)
 
 
 app.get('/', (req, res) => {

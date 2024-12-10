@@ -20,6 +20,7 @@ import GetCity from "./GetCity";
 import GetUniversity from "./GetUniversity";
 import GetState from "./GetState";
 import GetDistrict from "./GetDistrict";
+import VisitCompleted from "./VisitCompleted";
 
 const Head = () => {
   return (
@@ -49,6 +50,7 @@ const Head = () => {
             <Route path="/adduniversity" element={<University/>}/>
             <Route path="/state" element={<GetState/>}/>
             <Route path="/district" element={<GetDistrict/>}/>
+            <Route path="/visitcomplete" element={<VisitCompleted/>}/>
           </Routes>
         </Container>
       </div>

@@ -6,6 +6,8 @@ import Login from './Components/Login';
 import ForgetPasswordComponent from './Components/ForgotPassword';
 import ColLogin from './Components/CollgeVisit';
 import Feedback from './Components/Feedback';
+import College_registration from './Components/College_registration';
+import Notification from './Components/Notiication';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
          <Route path="/forget" element={<ForgetPasswordComponent/>}/>
          <Route path="/addvisit" element={<ColLogin/>} />
          <Route path="/feedback" element={<Feedback/>} />
+         <Route path="/register" element={<College_registration/>}/>
+         <Route path="/notifications" element={<Notification></Notification>}/>
       </Routes>
       </BrowserRouter>
   );

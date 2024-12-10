@@ -16,7 +16,7 @@ const HeaderComponent = () => {
         const data = res.data.userData;
         console.log(data);
         setVisitData(data);
-        const count = data.filter((visit) => visit.Visit_accept === "inactive").length;
+        const count = data.filter((visit) => visit.Visit_accept === "pending").length;
         setInactiveCount(count);
       })
       .catch((error) => {
@@ -53,10 +53,9 @@ const HeaderComponent = () => {
           <Nav.Link href="#">
             <FaRegUser className="me-4 text-white fw-bold" size={24} />
           </Nav.Link>
-          <Nav.Link href="#">
+          <Nav.Link href="/">
             <IoIosLogOut className="me-4 text-white fw-bold" size={24} />
             </Nav.Link>
-          </Nav.Item>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

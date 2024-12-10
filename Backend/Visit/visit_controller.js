@@ -13,7 +13,9 @@ const addImage = async (req, res) => {
         visting_location,
         comment,
         Visit_accept,
-        Visit_status
+        Visit_status,
+        reason,
+        notification_status
     } = req.body;
 
     try {
@@ -30,7 +32,9 @@ const addImage = async (req, res) => {
             faculty_details: req.files['faculty_details'][0].filename,
             comment,
             Visit_accept,
-            Visit_status
+            Visit_status,
+            reason,
+            notification_status
         });
         const data = await Userdata.save();
         res.status(200).send({ data });
@@ -73,11 +77,11 @@ const updateImage = async (req, res) => {
     visting_location,
     comment,
     Visit_accept,
-    Visit_status } = req.body;
+    Visit_status,
+    reason,
+    notification_status } = req.body;
 
   try {
-    const hobbieArray = JSON.parse(hobbies || "[]");
-
     // Prepare update object
     const updateData = {
        college_name,
@@ -88,11 +92,11 @@ const updateImage = async (req, res) => {
         number_of_faculty,
         purpose,
         visting_location,
-        student_details: req.file.filename,
-        faculty_details: req.file.filename,
         comment,
         Visit_accept,
-        Visit_status
+        Visit_status,
+        reason,
+        notification_status
     };
 
     // Only update the image if a new file is uploaded

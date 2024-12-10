@@ -12,7 +12,7 @@ const Notification = () => {
       .then((res) => {
         const data = res.data.userData || [];
         const inactiveVisits = data.filter(
-          (visit) => visit.Visit_accept === "inactive"
+          (visit) => visit.Visit_accept === "pending"
         );
         setVisitData(inactiveVisits);
       })

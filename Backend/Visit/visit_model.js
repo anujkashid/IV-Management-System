@@ -12,13 +12,22 @@ const myProject = new mongoose.Schema({
    student_details:String,
    faculty_details:String,
    comment:String,
+   reason:{
+      type:String,
+      default:"null"
+   },
    Visit_accept:{
       type:String,
-      default:"inactive",
+      default:"pending",
    },
    Visit_status:{
       type:String,
        default:"incompleted"
+   },
+
+   notification_status:{
+     type:String,
+     default:"unseen"
    }
 });
 module.exports= mongoose.model('visit',myProject);

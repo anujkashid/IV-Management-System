@@ -2,13 +2,14 @@ const model = require('../feedback/feedback_model')
 
 // post api
 const addfeedback= async(req,res)=>{
-    const {    feedback_Visit_Date,
+    const { college_name,   feedback_Visit_Date,
         feedback_message
     }=req.body;
 
     try{
 
         const userData=new model({
+            college_name,
             feedback_Visit_Date,
             feedback_message
         })
@@ -67,7 +68,7 @@ const deletefeedback=async(req,res)=>{
 
 // update data with id
 const updatefeedback=async(req,res)=>{
-const { feedback_Visit_Date,
+const {college_name, feedback_Visit_Date,
     feedback_message}=req.body;
 
     try
@@ -77,6 +78,7 @@ const { feedback_Visit_Date,
 
             {
                 $set:{
+                    college_name,
                     feedback_Visit_Date,
         feedback_message
                 }

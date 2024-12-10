@@ -7,40 +7,68 @@ import ColHeader from "./Navbar";
 const Feedback = () => {
   const [feedback_Visit_Date, setVisitDate] = useState("");
   const [feedback_message, setMessage] = useState("");
-  const [visitData, setData] = useState([]);
+  const [visitData, setVisitData] = useState([]);
+  const [collegeData, setColleData] = useState([]);
+  const [datedata, setDateData] = useState([]);
 
-  // get API for district based on selected visit date
+  const college_name = localStorage.getItem("CollegeName");
+
   useEffect(() => {
-    
-      axios
-        .get("http://localhost:8000/getvisit")
-        .then((res) => {
-        //   const filteredDistricts = res.data.data.filter(
-        //     (district) => district.district_state =
-        //   );
-        //   setDistrictdata(filteredDistricts);
-        })
-        .catch((err) => console.log(err));
-    
+    axios
+      .get("http://localhost:8000/getvisit")
+      .then((res) => {
+        const data = res.data.userData;
+        console.log("data", res.data.userData);
+        setVisitData(data);
+
+        const filteredCollege = [
+          ...new Set(data.map((item) => item.college_name)),
+        ];
+        setColleData(filteredCollege);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
-  //   add data API
+  useEffect(() => {
+    if (college_name) {
+      const today = new Date();
+      const pastWeek = new Date(today);
+      pastWeek.setDate(today.getDate() - 30);
+
+
+      const filteredDate = visitData.filter(
+        (item) =>
+          item.college_name === college_name &&
+          new Date(item.Date_of_visit) <= today &&
+          new Date(item.Date_of_visit) >= pastWeek
+      );
+
+      setDateData(filteredDate);
+    } else {
+      setDateData([]);
+    }
+  }, [college_name, visitData]);
+
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const userdata = {
-       feedback_Visit_Date,
-       feedback_message
+      college_name,
+      feedback_Visit_Date,
+      feedback_message,
     };
 
     axios
       .post("http://localhost:8000/addfeedback", userdata)
       .then((res) => {
         handleClear();
+        // Optional: Provide a success message or redirect
       })
       .catch((err) => console.log(err));
   };
 
+  // Clear form data
   const handleClear = () => {
     setVisitDate("");
     setMessage("");
@@ -48,74 +76,71 @@ const Feedback = () => {
 
   return (
     <>
-    <ColHeader></ColHeader>
-    <Container className="mt-5" fluid>
-      <Row>
-        <Col md={4} className="mx-auto">
-          <h2 className="text-center">Add Feedback</h2>
-          <Form className="border border-dark p-4 mt-5" onSubmit={handleSubmit}>
-            <Row className="mb-3 text-center">
-              <Form.Group controlId="categoryDropdown" className="mt-4">
-                <Form.Label className="fs-5 text-dark">Visit Date:</Form.Label>
-                <Form.Control
-                  as="select"
-                  value={feedback_Visit_Date}
-                  onChange={(e) => setVisitDate(e.target.value)}
-                  className="mx-auto mt-3 py-2 dropdown-width"
-                >
-                  <option value="">
-                    -- Select Date --{" "}
-                    <FaCaretDown className="ms-2 text-primary" />
-                  </option>
-                  {visitData.map((item, index) => {
-                    return (
-                      <option key={item._id} value={item.state_name}>
-                        {item.state_name}
-                      </option>
-                    );
-                  })}
-                </Form.Control>
-              </Form.Group>
-            </Row>
-
-           
-            <Row className="mb-3">
-              <Col>
-                <Form.Group className="text-center">
-                  <Form.Label htmlFor="feedback" className="text-dark fs-5">
-                    Feedback Message:
-                  </Form.Label>
+      <ColHeader />
+      <Container className="mt-5" fluid>
+        <Row>
+          <Col md={4} className="mx-auto">
+            <h2 className="text-center">Add Feedback</h2>
+            <Form className="border border-dark p-4 mt-5" onSubmit={handleSubmit}>
+              <Row className="mb-3 text-center">
+                <Form.Group controlId="categoryDropdown" className="mt-4">
+                  <Form.Label className="fs-5 text-dark">Visit Date:</Form.Label>
                   <Form.Control
-                    id="feedback"
-                    placeholder="Enter message"
-                    type="text"
-                    value={feedback_message}
-                    onChange={(e) => setMessage (e.target.value)}
-                    required
-                    className="py-2"
-                  />
+                    as="select"
+                    value={feedback_Visit_Date}
+                    onChange={(e) => setVisitDate(e.target.value)}
+                    className="mx-auto mt-3 py-2 dropdown-width"
+                  >
+                    <option value="">
+                      -- Select Date --{" "}
+                      <FaCaretDown className="ms-2 text-primary" />
+                    </option>
+                    {datedata.map((item, index) => (
+                      <option key={index} value={item.Date_of_visit}>
+                        {item.Date_of_visit} {/* Display the Date_of_visit or another field */}
+                      </option>
+                    ))}
+                  </Form.Control>
                 </Form.Group>
-              </Col>
-            </Row>
+              </Row>
 
-            <Row className="text-center mt-4">
-              <Col>
-                <Button type="submit" className="btn btn-primary">
-                  Submit
-                </Button>
-                <Button
-                  type="button"
-                  className="btn btn-danger ms-5"
-                  onClick={handleClear}
-                >
-                  Clear
-                </Button>
-              </Col>
-            </Row>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+              <Row className="mb-3">
+                <Col>
+                  <Form.Group className="text-center">
+                    <Form.Label htmlFor="feedback" className="text-dark fs-5">
+                      Feedback Message:
+                    </Form.Label>
+                    <Form.Control
+                      id="feedback"
+                      placeholder="Enter message"
+                      type="text"
+                      value={feedback_message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      required
+                      className="py-2"
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+
+              <Row className="text-center mt-4">
+                <Col>
+                  <Button type="submit" className="btn btn-primary">
+                    Submit
+                  </Button>
+                  <Button
+                    type="button"
+                    className="btn btn-danger ms-5"
+                    onClick={handleClear}
+                  >
+                    Clear
+                  </Button>
+                </Col>
+              </Row>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };

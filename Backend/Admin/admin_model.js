@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const FormData = mongoose.Schema({
         
-        name:String,
+        admin_name:String,
         username:String,
         password:String,
         

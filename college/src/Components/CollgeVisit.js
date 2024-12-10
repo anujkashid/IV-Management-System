@@ -139,7 +139,7 @@ const ColLogin = () => {
                       }}
                       showTimeSelect
                       showTimeSelectOnly
-                      timeIntervals={30}
+                      timeIntervals={60}
                       timeCaption="Time"
                       dateFormat="hh:mm aa"
                       className="form-control ms-2"
@@ -154,7 +154,7 @@ const ColLogin = () => {
                       onChange={(time) => setEndTime(time)}
                       showTimeSelect
                       showTimeSelectOnly
-                      timeIntervals={30}
+                      timeIntervals={120}
                       timeCaption="Time"
                       dateFormat="hh:mm aa"
                       className="form-control ms-2"
