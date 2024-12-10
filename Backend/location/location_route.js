@@ -1,7 +1,6 @@
 const { addlocation,getlocation,getOnelocation,deletelocation,updatelocation} = require ('../location/location_controller')
 const express=require('express');
 const Controller=require('../location/location_controller');
-
 const route=express.Router();
 
 route.post('/addlocation',addlocation);

@@ -29,7 +29,7 @@ const Login = () => {
         const { token } = response.data.token;
         console.log(response.data);
           localStorage.setItem("accessToken", token);
-          localStorage.setItem("userid",response.data.id);
+          localStorage.setItem("userid",response.data._id);
           localStorage.setItem("CollegeName",response.data.collage_name);
           navigate("/home");
       })
@@ -101,7 +101,7 @@ const Login = () => {
               <Link to="/forget" className=""><span className="">Forgot Password</span></Link>
               </div>
               <div className="text-center mt-2">
-                  <p>Don't have an account?  <Link to="/register" className=""><span className="ms-3  ">Register</span></Link></p>
+                  <p>Dont have an account?  <Link to="/register" className=""><span className="ms-3  ">Register</span></Link></p>
               </div>
               </Form>
             </Card.Body>

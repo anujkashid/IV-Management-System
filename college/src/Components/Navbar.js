@@ -44,6 +44,11 @@ const ColHeader = () => {
               <Nav.Link href="/home" className="text-white fs-5 me-3">
                 Home
               </Nav.Link>
+
+              <Nav.Link href="/about" className="text-white fs-5 me-3">
+                About
+              </Nav.Link>
+
               <Nav.Link href="/addvisit" className="text-white fs-5 me-3">
                 Schedule Visit
               </Nav.Link>

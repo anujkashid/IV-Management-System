@@ -9,5 +9,4 @@ route.get('/getcity',getcity);
 route.get('/getonecity/:id',getOnecity);
 route.delete('/deletecity/:id',deletecity);
 route.put('/updatecity/:id',updatecity);
-
 module.exports=route;

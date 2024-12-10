@@ -193,12 +193,14 @@ const Sidebar = () => {
               <FaRegHandshake size={30} className="me-2 text-dark" /> IV Requests
             </Link>
           </Nav.Item>
+
           <Nav.Item>
             <Link to="/head/visitcomplete" className="nav-link p-2">
               <FaRegHandshake size={30} className="me-2 text-dark" /> Visit Confirmation
             </Link>
           </Nav.Item>
           
+
         </Nav>
       </div>
 

@@ -21,6 +21,24 @@ const GetUniversity = () => {
       });
   }, []);
 
+  const deletedata = (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this university?");
+    if (confirmDelete) {
+      axios
+        .delete(`http://localhost:8000/deleteuniversity/${id}`)
+        .then((res) => {
+          alert("University Deleted Successfully");
+          // Optionally, refresh the data here by fetching again
+          setUniversityData((prevData) => prevData.filter((university) => university._id !== id));
+        })
+        .catch((error) => {
+          console.error("Error Deleting University:", error);
+        });
+    } else {
+      alert("Univesity deletion canceled.");
+    }
+  };
+  
   // Function to export as PDF
   const exportPDF = () => {
     const doc = new jsPDF();
@@ -47,6 +65,10 @@ const GetUniversity = () => {
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "university Data");
     XLSX.writeFile(workbook, "university_data.xlsx");
+  };
+
+  const handleUpdate = (id) => {
+    localStorage.setItem('updateuniversityid', id);
   };
 
   return (
@@ -86,8 +108,12 @@ const GetUniversity = () => {
               <td>{university.university_name}</td>
               <td>{university.university_status}</td>
               <td>
-                <Link><Button className="btn btn-primary me-4 px-3 py-2">Update</Button></Link>
-                <Link><Button className="btn btn-danger px-3 py-2">Delete</Button></Link>
+              <Link
+              to='/head/update_university'
+              onClick={() => handleUpdate(university._id)}>
+              <Button className="btn btn-primary me-4 px-3 py-2">Update</Button></Link>
+              <Button  variant="danger"
+              onClick={() => deletedata(university._id)} className="btn btn-danger px-3 py-2">Delete</Button>
               </td>
             </tr>
           ))}

@@ -21,6 +21,25 @@ const GetLocation = () => {
       });
   }, []);
 
+  const deletedata = (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this location?");
+    if (confirmDelete) {
+      axios
+        .delete(`http://localhost:8000/deletelocation/${id}`)
+        .then((res) => {
+          alert("City Deleted Successfully");
+          // Optionally, refresh the data here by fetching again
+          setLocationData((prevData) => prevData.filter((location) => location._id !== id));
+        })
+        .catch((error) => {
+          console.error("Error Deleting Location:", error);
+        });
+    } else {
+      alert("Location deletion canceled.");
+    }
+  };
+  
+
   // Function to export as PDF
   const exportPDF = () => {
     const doc = new jsPDF();
@@ -49,6 +68,10 @@ const GetLocation = () => {
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "location Data");
     XLSX.writeFile(workbook, "location_data.xlsx");
+  };
+
+  const handleUpdate = (id) => {
+    localStorage.setItem('updatelocationid', id);
   };
 
   return (
@@ -90,8 +113,12 @@ const GetLocation = () => {
               <td>{location.location_city}</td>
               <td>{location.location_status}</td>
               <td>
-                <Link><Button className="btn btn-primary me-4 px-3 py-2">Update</Button></Link>
-                <Link><Button className="btn btn-danger px-3 py-2">Delete</Button></Link>
+              <Link
+              to='/head/update_location'
+              onClick={() => handleUpdate(location._id)}>
+              <Button className="btn btn-primary me-4 px-3 py-2">Update</Button></Link>
+              <Button  variant="danger"
+              onClick={() => deletedata(location._id)} className="btn btn-danger px-3 py-2">Delete</Button>
               </td>
             </tr>
           ))}

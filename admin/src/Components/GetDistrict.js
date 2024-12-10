@@ -21,6 +21,25 @@ const GetDistrict = () => {
       });
   }, []);
 
+
+  const deletedata = (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this district?");
+    if (confirmDelete) {
+      axios
+        .delete(`http://localhost:8000/deletedistrict/${id}`)
+        .then((res) => {
+          alert("District Deleted Successfully");
+          // Optionally, refresh the data here by fetching again
+          setDistrictData((prevData) => prevData.filter((district) => district._id !== id));
+        })
+        .catch((error) => {
+          console.error("Error Deleting District:", error);
+        });
+    } else {
+      alert("District deletion canceled.");
+    }
+  };
+  
   // Function to export as PDF
   const exportPDF = () => {
     const doc = new jsPDF();
@@ -51,6 +70,9 @@ const GetDistrict = () => {
     XLSX.writeFile(workbook, "district_data.xlsx");
   };
 
+  const handleUpdate = (id) => {
+    localStorage.setItem('updatedistrictid', id);
+  };
   return (
     <Container>
       <h2 className="my-5 text-center">District Data</h2>
@@ -90,8 +112,12 @@ const GetDistrict = () => {
               <td>{district.district_name}</td>
               <td>{district.district_status}</td>
               <td>
-                <Link><Button className="btn btn-primary me-4 px-3 py-2">Update</Button></Link>
-                <Link><Button className="btn btn-danger px-3 py-2">Delete</Button></Link>
+              <Link
+              to='/head/update_district'
+              onClick={() => handleUpdate(district._id)}>
+              <Button className="btn btn-primary me-4 px-3 py-2">Update</Button></Link>
+              <Button  variant="danger"
+              onClick={() => deletedata(district._id)} className="btn btn-danger px-3 py-2">Delete</Button>
               </td>
             </tr>
           ))}
@@ -100,5 +126,4 @@ const GetDistrict = () => {
     </Container>
   );
 };
-
 export default GetDistrict;
