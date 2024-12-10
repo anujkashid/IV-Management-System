@@ -22,6 +22,25 @@ const GetState = () => {
       });
   }, []);
 
+  const deletedata = (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this state?");
+    if (confirmDelete) {
+      axios
+        .delete(`http://localhost:8000/deletestate/${id}`)
+        .then((res) => {
+          alert("State Deleted Successfully");
+          // Optionally, refresh the data here by fetching again
+          setStateData((prevData) => prevData.filter((state) => state._id !== id));
+        })
+        .catch((error) => {
+          console.error("Error Deleting State:", error);
+        });
+    } else {
+      alert("State deletion canceled.");
+    }
+  };
+  
+
   // Function to export as PDF
   const exportPDF = () => {
     const doc = new jsPDF();
@@ -48,6 +67,10 @@ const GetState = () => {
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "state Data");
     XLSX.writeFile(workbook, "state_data.xlsx");
+  };
+
+  const handleUpdate = (id) => {
+    localStorage.setItem('updatestateid', id);
   };
 
   return (
@@ -87,8 +110,12 @@ const GetState = () => {
               <td>{state.state_name}</td>
               <td>{state.state_status}</td>
               <td>
-                <Link><Button className="btn btn-primary me-4 px-3 py-2">Update</Button></Link>
-                <Link><Button className="btn btn-danger px-3 py-2">Delete</Button></Link>
+              <Link
+              to='/head/update_state'
+              onClick={() => handleUpdate(state._id)}>
+              <Button className="btn btn-primary me-4 px-3 py-2">Update</Button></Link>
+              <Button  variant="danger"
+              onClick={() => deletedata(state._id)} className="btn btn-danger px-3 py-2">Delete</Button>
               </td>
             </tr>
           ))}

@@ -45,7 +45,7 @@ const getcity=async(req,res)=>{
 const getOnecity=async(req,res)=>{
     try{
         const{id}=req.params;
-        const data=await model.findOne({ _id: id });
+        const data=await model.findOne({ _id:id });
         res.status(200).send(data);
     }
     catch(error)

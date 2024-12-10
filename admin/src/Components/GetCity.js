@@ -4,7 +4,7 @@ import { CSVLink } from "react-csv"; // For exporting CSV
 import jsPDF from "jspdf"; // For exporting PDF
 import "jspdf-autotable";
 import * as XLSX from "xlsx"; // For exporting Excel
-import { Table, Button, Container, Row } from "react-bootstrap";
+import { Table, Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const GetCity = () => {
@@ -20,6 +20,25 @@ const GetCity = () => {
         console.error("Error fetching visit data:", error);
       });
   }, []);
+
+  const deletedata = (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this city?");
+    if (confirmDelete) {
+      axios
+        .delete(`http://localhost:8000/deletecity/${id}`)
+        .then((res) => {
+          alert("City Deleted Successfully");
+          // Optionally, refresh the data here by fetching again
+          setCityData((prevData) => prevData.filter((city) => city._id !== id));
+        })
+        .catch((error) => {
+          console.error("Error Deleting City:", error);
+        });
+    } else {
+      alert("City deletion canceled.");
+    }
+  };
+  
 
   // Function to export as PDF
   const exportPDF = () => {
@@ -52,6 +71,11 @@ const GetCity = () => {
     XLSX.utils.book_append_sheet(workbook, worksheet, "city Data");
     XLSX.writeFile(workbook, "city_data.xlsx");
   };
+
+const handleUpdate = (id) => {
+    localStorage.setItem('updateid', id);
+    // console.log("id",id);
+};
 
   return (
     <Container>
@@ -94,8 +118,13 @@ const GetCity = () => {
               <td>{city.city_name}</td>
               <td>{city.city_status}</td>
               <td>
-                <Link><Button className="btn btn-primary me-4 px-3 py-2">Update</Button></Link>
-                <Link><Button className="btn btn-danger px-3 py-2">Delete</Button></Link>
+                <Link
+                to='/head/update_city'
+                onClick={() => handleUpdate(city._id)}>
+                <Button className="btn btn-primary me-4 px-3 py-2">Update</Button></Link>
+
+                <Button  variant="danger"
+                onClick={() => deletedata(city._id)} className="btn btn-danger px-3 py-2">Delete</Button>
               </td>
             </tr>
           ))}

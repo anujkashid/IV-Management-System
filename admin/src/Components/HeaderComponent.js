@@ -56,7 +56,6 @@ const HeaderComponent = () => {
           <Nav.Link href="#">
             <IoIosLogOut className="me-4 text-white fw-bold" size={24} />
             </Nav.Link>
-          </Nav.Item>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

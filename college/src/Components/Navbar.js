@@ -22,6 +22,10 @@ const ColHeader = () => {
                 Home
               </Nav.Link>
 
+              <Nav.Link href="/about" className="text-white fs-5 me-3">
+                About
+              </Nav.Link>
+
               <Nav.Link href="/addvisit" className="text-white fs-5 me-3">
                 Schedule Visit
               </Nav.Link>
@@ -75,7 +79,7 @@ const ColHeader = () => {
               </Nav.Link>
 
               {/* Logout */}
-              <Nav.Link href="/logout">
+              <Nav.Link href="/">
                 <IoIosLogOut size={30} className="me-4 text-white" />
               </Nav.Link>
             </Nav>
