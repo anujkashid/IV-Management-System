@@ -184,7 +184,7 @@ const Sidebar = () => {
             </Link>
           </Nav.Item>
           <Nav.Item>
-            <Link to="/head/dashboard" className="nav-link p-2">
+            <Link to="/head/report" className="nav-link p-2">
               <MdReport size={30} className="me-2 text-dark" /> Report
             </Link>
           </Nav.Item>
@@ -197,6 +197,18 @@ const Sidebar = () => {
           <Nav.Item>
             <Link to="/head/visitcomplete" className="nav-link p-2">
               <FaRegHandshake size={30} className="me-2 text-dark" /> Visit Confirmation
+            </Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Link to="/head/media" className="nav-link p-2">
+              <FaRegHandshake size={30} className="me-2 text-dark" /> Media add
+            </Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Link to="/head/feeverification" className="nav-link p-2">
+              <FaRegHandshake size={30} className="me-2 text-dark" /> Fees Confirmation
             </Link>
           </Nav.Item>
           

@@ -74,6 +74,11 @@ const Feedback = () => {
     setMessage("");
   };
 
+  const formatDate = (date) => {
+    const d = new Date(date);
+    return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+  };
+
   return (
     <>
       <ColHeader />
@@ -97,7 +102,7 @@ const Feedback = () => {
                     </option>
                     {datedata.map((item, index) => (
                       <option key={index} value={item.Date_of_visit}>
-                        {item.Date_of_visit} {/* Display the Date_of_visit or another field */}
+                        {formatDate(item.Date_of_visit)} 
                       </option>
                     ))}
                   </Form.Control>

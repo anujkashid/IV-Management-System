@@ -9,6 +9,8 @@ const HeaderComponent = () => {
   const [visitData, setVisitData] = useState([]); // To store visit data
   const [inactiveCount, setInactiveCount] = useState(0); // To store the count of "inactive" visits
 
+  const adminname=localStorage.getItem("admin_name");
+
   useEffect(() => {
     axios
       .get("http://localhost:8000/getvisit")
@@ -33,6 +35,10 @@ const HeaderComponent = () => {
         style={{ borderColor: "white", color: "white" }}
       />
       <Navbar.Collapse id="basic-navbar-nav">
+         <h3 className="text-white fs-5 ms-3">
+            {adminname}
+            </h3>
+    
         <Nav className="ms-auto d-flex align-items-center">
           {/* Notifications Icon with Badge */}
           <Nav.Link href="/head/notification" className="position-relative">
@@ -50,11 +56,11 @@ const HeaderComponent = () => {
             )}
           </Nav.Link>
           {/* User Icon */}
-          <Nav.Link href="#">
+          {/* <Nav.Link href="#">
             <FaRegUser className="me-4 text-white fw-bold" size={24} />
-          </Nav.Link>
+          </Nav.Link> */}
           <Nav.Link href="/">
-            <IoIosLogOut className="me-4 text-white fw-bold" size={24} />
+            <IoIosLogOut className="me-4 text-white fw-bold" size={27} />
             </Nav.Link>
         </Nav>
       </Navbar.Collapse>

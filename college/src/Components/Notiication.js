@@ -30,6 +30,14 @@ const Notification = () => {
     axios
       .put(`http://localhost:8000/updatevisit/${id}`, fetchData)
       .then(() => {
+        // Optionally, update state to reflect changes immediately without refetching
+        setVisitData(prevState =>
+          prevState.map(visit =>
+            visit._id === id
+              ? { ...visit, notification_status: "seen" }
+              : visit
+          )
+        );
       })
       .catch((err) => {
         console.error("Error updating notification status:", err);
@@ -49,7 +57,10 @@ const Notification = () => {
               .toISOString()
               .split("T")[0];
             return (
-              <div key={visit.id} className="alert alert-primary d-flex justify-content-between align-items-center">
+              <div
+                key={visit.id}
+                className="alert alert-primary d-flex justify-content-between align-items-center"
+              >
                 <div>
                   {visit.Visit_accept === "accept" ? (
                     <p>
@@ -62,14 +73,18 @@ const Notification = () => {
                       Reason: <strong>{visit.reason}</strong>
                     </p>
                   ) : (
-                    <p>Pending status for your visit on {visitDate}.</p>
+                    <p>
+                      Pending status for your visit on {visitDate}.
+                      <br />
+                      Pay fees {visit.fees} to confirm visit.
+                    </p>
                   )}
                 </div>
-      
 
                 <button
                   className="btn btn-success btn-md"
                   onClick={() => handleSeen(visit._id)}
+                  disabled={visit.Visit_accept !== "accept" && visit.Visit_accept !== "reject"}
                 >
                   Seen
                 </button>

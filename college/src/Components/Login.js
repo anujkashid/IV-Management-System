@@ -27,10 +27,12 @@ const Login = () => {
       )
       .then((response) => {
         const { token } = response.data.token;
-        console.log(response.data);
+        // console.log(response.data);
           localStorage.setItem("accessToken", token);
           localStorage.setItem("userid",response.data._id);
           localStorage.setItem("CollegeName",response.data.collage_name);
+          localStorage.setItem("mousigned",response.data.mousigned);
+          // console.log(response.data.mousigned)
           navigate("/home");
       })
       .catch((err) => {

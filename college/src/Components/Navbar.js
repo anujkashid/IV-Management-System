@@ -19,7 +19,7 @@ const ColHeader = () => {
             visit.college_name === collegename &&
             visit.Date_of_visit >= today &&
             visit.notification_status === "unseen" && 
-            (visit.Visit_accept === "accept" || visit.Visit_accept === "reject")
+            (visit.Visit_accept === "accept" || visit.Visit_accept === "reject" || visit.Visit_accept === "pending")
         );
         setVisitData(filteredData);
         setNotificationCount(filteredData.length);
@@ -58,14 +58,14 @@ const ColHeader = () => {
               <Nav.Link href="/gallery" className="text-white fs-5 me-3">
                 Gallery
               </Nav.Link>
-              <Nav.Link href="/report" className="text-white fs-5">
-                Report
+              <Nav.Link href="/pendingfee" className="text-white fs-5">
+                Pending Fee
               </Nav.Link>
             </Nav>
 
             <Nav className="ms-auto d-flex align-items-center">
               {/* Notifications */}
-              <Nav.Link href="/notifications" className="position-relative">
+              <Nav.Link href="/notification" className="position-relative">
                 <IoIosNotificationsOutline
                   className="me-4 text-white fw-bold"
                   size={35}

@@ -1,48 +1,24 @@
-const model = require("./visit_model");
+const model = require("./moufee_model");
 
 // POST API
 const addImage = async (req, res) => {
     const {
         college_name,
-        number_of_students,
-        Date_of_visit,
-        start_time,
-        end_time,
-        number_of_faculty,
-        purpose,
-        visting_location,
-        comment,
-        Visit_accept,
-        Visit_status,
-        reason,
-        notification_status,
-        mousigned,
+        fees_title,
         fees,
         fees_status,
-        fees_received
+        fees_received,
+        mousigned,
     } = req.body;
 
     try {
         const Userdata = new model({
-          college_name,
-            number_of_students,
-            Date_of_visit,
-            start_time,
-            end_time,
-            number_of_faculty,
-            purpose,
-            visting_location,
-            student_details: req.files['student_details'][0].filename,
-            faculty_details: req.files['faculty_details'][0].filename,
-            comment,
-            Visit_accept,
-            Visit_status,
-            reason,
-            notification_status,
-            mousigned,
+            college_name,
+            fees_title,
             fees,
             fees_status,
-            fees_received
+            fees_received,
+            mousigned,
         });
         const data = await Userdata.save();
         res.status(200).send({ data });
@@ -76,43 +52,21 @@ const deleteImage = async (req, res) => {
 const updateImage = async (req, res) => {
   const {
     college_name,
-    number_of_students,
-    Date_of_visit,
-    start_time,
-    end_time,
-    number_of_faculty,
-    purpose,
-    visting_location,
-    comment,
-    Visit_accept,
-    Visit_status,
-    reason,
-    notification_status,
-    mousigned,
-    fees,
-    fees_status,
-    fees_received } = req.body;
+        fees_title,
+        fees,
+        fees_status,
+        fees_received,
+        mousigned, } = req.body;
 
   try {
     // Prepare update object
     const updateData = {
-       college_name,
-        number_of_students,
-        Date_of_visit,
-        start_time,
-        end_time,
-        number_of_faculty,
-        purpose,
-        visting_location,
-        comment,
-        Visit_accept,
-        Visit_status,
-        reason,
-        notification_status,
-        mousigned,
+        college_name,
+        fees_title,
         fees,
         fees_status,
-        fees_received
+        fees_received,
+        mousigned,
     };
 
     // Only update the image if a new file is uploaded

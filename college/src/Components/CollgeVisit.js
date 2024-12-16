@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import ColHeader from "./Navbar";
 import axios from "axios";
 
+
 const ColLogin = () => {
   const [number_of_students, setNumberofStudent] = useState("");
   const [Date_of_visit, setStartDate] = useState(new Date());
@@ -23,6 +24,9 @@ const ColLogin = () => {
   const[locationData,setLocationData]=useState([]);
   const[visitdata,setVisitData]=useState([]);
   const college_name =localStorage.getItem("CollegeName");
+  const mousigned=localStorage.getItem("mousigned");
+  
+  console.log("mou",mousigned);
 
   useEffect(()=>{
       axios.get("http://localhost:8000/getlocation")
@@ -34,7 +38,7 @@ const ColLogin = () => {
   useEffect(()=>{
     axios.get("http://localhost:8000/getvisit")
     .then((res)=>{
-       setVisitData(res.data.data);
+       setVisitData(res.data.userData);
     })
 },[])
 
@@ -66,6 +70,7 @@ const ColLogin = () => {
     formData.append('student_details', student_details); 
     formData.append('faculty_details', faculty_details);
     formData.append('comment', comment);
+    formData.append('mousigned',mousigned)
 
     axios
         .post('http://localhost:8000/addvisit', formData, {

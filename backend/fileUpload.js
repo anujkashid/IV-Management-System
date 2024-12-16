@@ -18,4 +18,11 @@ const photoUpload = multer({
     { name: 'faculty_details', maxCount: 1 },
 ]);
 
-module.exports = { photoUpload };
+
+const photoUpload1 = multer({
+    storage: photoStorage,
+    limits: { fileSize: 5 * 1024 * 1024 },
+}).array('galleryimage', 5); 
+
+
+module.exports = { photoUpload,photoUpload1 };

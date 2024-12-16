@@ -17,7 +17,7 @@ const Adduser = async (req, res) => {
         reg_college_email_id,
         reg_college_username,
         reg_password,
-        reg_visit_location,
+        reg_visit_location,  
         reg_mou_sign,
         reg_status } = req.body;
     
@@ -98,7 +98,8 @@ const Login = async (req, res) => {
         res.json({ 
             collage_name:user.collage_name,
             _id: user._id,
-            token : token
+            token : token,
+            mousigned:user.reg_mou_sign
          });
     } catch (error) {
         console.error(error.message);

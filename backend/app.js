@@ -14,7 +14,8 @@ const fees_route = require('./fees/fees_route');
 const feedback_route=require("./feedback/feedback_route");
 const visit_route=require("./Visit/visit_route");
 const admin_route=require("./Admin/admin_route");
-
+const gallery_route=require("./Gallery/galllery_route")
+const moudfeeroute=require("./Moufee/moufee_route");
 
 //  CORS
 app.use(cors());
@@ -40,6 +41,8 @@ app.use('/', fees_route);
 app.use('/',feedback_route);
 app.use("/",visit_route);
 app.use("/",admin_route);
+app.use("/",gallery_route);
+app.use("/",moudfeeroute)
 
 
 app.get('/', (req, res) => {

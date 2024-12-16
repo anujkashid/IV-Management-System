@@ -12,6 +12,20 @@ const myProject = new mongoose.Schema({
    student_details:String,
    faculty_details:String,
    comment:String,
+   mousigned:String,
+   fees:{
+      type:Number,
+      default:0
+   },
+   fees_status:{
+      type:String,
+      default:"unpaid"
+   },
+
+   fees_received:{
+      type:String,
+      default:"incomplete"
+   },
    reason:{
       type:String,
       default:"null"
@@ -22,7 +36,7 @@ const myProject = new mongoose.Schema({
    },
    Visit_status:{
       type:String,
-       default:"incompleted"
+       default:"incomplete"
    },
 
    notification_status:{

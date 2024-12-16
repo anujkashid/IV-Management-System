@@ -26,6 +26,17 @@ import Update_state from "./Update_state";
 import Update_location from "./Update_location";
 import Update_university from "./Update_university";
 import VisitCompleted from "./VisitCompleted";
+import GalleryAdd from "./GalleryAdd";
+import Total_Visits from "./Total_Visits";
+import CurrentWeekVisits from "./Current_Week_Visits";
+import CurrentMonthVisits from "./CurrentMonthVisits";
+import TotalCollege from "./TotalCollegeData";
+import MouSigned from "./MouSignedColleges";
+import NonMouSigned from "./NonMouSignedCollege";
+import UpcomingVisits from "./UpcomingVisits";
+import Report from "./Report";
+import FeesVerification from "./FeesVerification";
+
 
 const Head = () => {
   return (
@@ -61,6 +72,18 @@ const Head = () => {
             <Route path="/update_location" element={<Update_location/>}/>
             <Route path="/update_university" element={<Update_university/>}/>
             <Route path="/visitcomplete" element={<VisitCompleted></VisitCompleted>}/>
+            <Route path="/media" element={<GalleryAdd/>}/>
+            <Route path="/totalvisits" element={<Total_Visits/>}/>
+            <Route path="/currentweekvisits" element={<CurrentWeekVisits/>}/>
+            <Route path="/currentmonthvisists" element={<CurrentMonthVisits/>}/>
+            <Route path="/totalcollege" element={<TotalCollege/>}/>
+            <Route path="/mousigned" element={<MouSigned/>}/>
+            <Route path="/nonmousigned" element={<NonMouSigned/>}/>
+            <Route path="/upcomingVisits" element={<UpcomingVisits/>}/>
+            <Route path="/report" element={<Report/>}/>
+            <Route path="/feeverification" element={<FeesVerification/>}/>
+            
+  
           </Routes>
         </Container>
       </div>
