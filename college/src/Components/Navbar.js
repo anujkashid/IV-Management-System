@@ -77,7 +77,6 @@ const ColHeader = () => {
     }
   };
 
-
 return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="danger" variant="dark">

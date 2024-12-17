@@ -3,20 +3,21 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Homecomponent from './Components/Homecomponent';
 import Login from './Components/Login';
 import ForgetPasswordComponent from './Components/ForgotPassword';
-import ColLogin from './Components/CollgeVisit';
+import CollgeVisite from './Components/CollgeVisit';
 import Feedback from './Components/Feedback';
 import About from './Components/About';
 import Profile from './Components/Profile';
 import Notification from './Components/Notiication';
-import Gallery from './Components/Gallery';
+import Update_profile from './Components/Update_profile';
 import College_registration from './Components/College_registration';
-import PendingFee from './Components/PendingFee';
-import Agenda from './Components/Agenda';
+import TotalVisit from './Components/TotalVisits';
 import PendingVisit from './Components/PendingVisits';
 import RejectedVisit from './Components/RejectedVisit';
-import TotalVisit from './Components/TotalVisits';
+import Agenda from './Components/Agenda';
+import PendingFee from './Components/PendingFee';
 import CancelledVisit from './Components/CancelledVisit';
 import UpdateProfile from './Components/Update_profile';
+import Gallery from './Components/Gallery';
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
          <Route path="/home" element={<Homecomponent/>} />
          <Route path="/" element={<Login/>} />
          <Route path="/forget" element={<ForgetPasswordComponent/>}/>
-         <Route path="/addvisit" element={<ColLogin/>} />
+         <Route path="/addvisit" element={<CollgeVisite/>} />
          <Route path="/feedback" element={<Feedback/>} />
          <Route path="/about" element={<About/>} />
          <Route path="/profile" element={<Profile/>} />

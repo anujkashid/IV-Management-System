@@ -16,8 +16,7 @@ const Adduser = async (req, res) => {
         reg_contact_person_contact2,
         reg_college_email_id,
         reg_college_username,
-        reg_password,
-        reg_visit_location,  
+        reg_password,  
         reg_mou_sign,
         reg_status } = req.body;
     
@@ -46,7 +45,6 @@ const Adduser = async (req, res) => {
             reg_college_email_id,
             reg_college_username,
             reg_password: hashedPassword,
-            reg_visit_location,
             reg_mou_sign,
             reg_status,
             
@@ -159,7 +157,6 @@ const Updateuser = async (req, res) => {
             reg_college_email_id,
             reg_college_username,
             reg_password: hashedPassword,
-            reg_visit_location,
             reg_mou_sign,
             reg_status,
         } = req.body;
@@ -182,7 +179,6 @@ const Updateuser = async (req, res) => {
                     reg_college_email_id,
                     reg_college_username,
                     reg_password: hashedPassword,
-                    reg_visit_location,
                     reg_mou_sign,
                     reg_status,
                 }

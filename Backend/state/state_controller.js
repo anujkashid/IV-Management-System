@@ -2,7 +2,8 @@ const model = require('../state/state_model')
 
 // post api
 const addstate= async(req,res)=>{
-    const { state_name,
+    const { 
+        state_name,
         state_status
     }=req.body;
 

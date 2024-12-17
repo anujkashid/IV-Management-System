@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -122,8 +123,8 @@ const ColLogin = () => {
         <Row>
           <Col md={9} className="mx-auto">
             <h3 className="text-center mt-4 mb-4 text-danger">Add Visit</h3>
-            <Container className="border border-dark p-4 d-flex justify-content-center">
-              <Form className="w-100" onSubmit={handleSubmit}>
+            <Container className="border border-dark p-4 d-flex justify-content-center bg-white">
+              <Form className="w-100 =" onSubmit={handleSubmit} >
                 <Row className="mb-3">
                   <Col md={5} className="d-flex align-items-center">
                     <Form.Label className="mb-0">Number of Students:</Form.Label>
@@ -287,3 +288,4 @@ const ColLogin = () => {
 };
 
 export default ColLogin;
+

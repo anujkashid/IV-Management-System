@@ -1,41 +1,48 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { CSVLink } from "react-csv"; // For exporting CSV
-import jsPDF from "jspdf"; // For exporting PDF
+import { CSVLink } from "react-csv";
+import jsPDF from "jspdf";
 import "jspdf-autotable";
-import * as XLSX from "xlsx"; // For exporting Excel
-import { Table, Button, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import * as XLSX from "xlsx";
+import { Table, Button, Container, Pagination } from "react-bootstrap";
 
 const UpcomingVisits = () => {
   const [visitData, setVisitData] = useState([]);
   const [upcomingVisits, setUpcomingVisits] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const visitsPerPage = 10;
 
   useEffect(() => {
-    axios.get("http://localhost:8000/getvisit")
+    axios
+      .get("http://localhost:8000/getvisit")
       .then((res) => {
         const data = res.data.userData;
-        setVisitData(data);      
-        const upcomingVisits = data.filter((visit) => {
-            const visitDate = new Date(visit.Date_of_visit);
-            return visitDate >= new Date();
-          });
-          setUpcomingVisits(upcomingVisits);
+        setVisitData(data);
+
+        // Filter upcoming visits
+        const upcoming = data.filter((visit) => {
+          const visitDate = new Date(visit.Date_of_visit);
+          return visitDate >= new Date();
+        });
+
+        setUpcomingVisits(upcoming);
       })
-      .catch(err => {
-        console.log(err);
+      .catch((err) => {
+        console.error("Error fetching data:", err);
       });
   }, []);
 
   const formatDate = (date) => {
-    return new Date(date).toLocaleDateString(); 
+    return new Date(date).toLocaleDateString();
   };
 
   const formatTime = (time) => {
-    return new Date(time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); 
+    return new Date(time).toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
   };
 
-  // Function to export as PDF
   const exportPDF = () => {
     const doc = new jsPDF();
     const tableColumn = [
@@ -48,7 +55,7 @@ const UpcomingVisits = () => {
       "Number of Faculty",
       "Visiting Location",
       "Visit Accept",
-      "Visit Status"
+      "Visit Status",
     ];
     const tableRows = [];
 
@@ -63,7 +70,7 @@ const UpcomingVisits = () => {
         visit.number_of_faculty,
         visit.visting_location,
         visit.Visit_accept,
-        visit.Visit_status
+        visit.Visit_status,
       ]);
     });
 
@@ -71,15 +78,38 @@ const UpcomingVisits = () => {
     doc.save("upcomingVisits.pdf");
   };
 
-  // Function to export as Excel
   const exportExcel = () => {
-    const worksheet = XLSX.utils.json_to_sheet(UpcomingVisits);
+    const worksheet = XLSX.utils.json_to_sheet(upcomingVisits);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "upcomingVisits");
     XLSX.writeFile(workbook, "upcomingVisits.xlsx");
   };
 
+  // Pagination logic
+  const indexOfLastVisit = currentPage * visitsPerPage;
+  const indexOfFirstVisit = indexOfLastVisit - visitsPerPage;
+  const currentVisits = upcomingVisits.slice(
+    indexOfFirstVisit,
+    indexOfLastVisit
+  );
 
+  const totalPages = Math.ceil(upcomingVisits.length / visitsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
 
   return (
     <Container>
@@ -112,9 +142,9 @@ const UpcomingVisits = () => {
           </tr>
         </thead>
         <tbody className="text-center">
-          {upcomingVisits.map((visit, index) => (
+          {currentVisits.map((visit, index) => (
             <tr key={visit._id}>
-              <td>{index + 1}</td>
+              <td>{indexOfFirstVisit + index + 1}</td>
               <td>{visit.college_name}</td>
               <td>{visit.number_of_students}</td>
               <td>{formatDate(visit.Date_of_visit)}</td>
@@ -128,6 +158,29 @@ const UpcomingVisits = () => {
           ))}
         </tbody>
       </Table>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <Pagination className="justify-content-end">
+          <Pagination.Prev
+            disabled={currentPage === 1}
+            onClick={handlePrevPage}
+          />
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <Pagination.Item
+              key={page}
+              active={page === currentPage}
+              onClick={() => handlePageChange(page)}
+            >
+              {page}
+            </Pagination.Item>
+          ))}
+          <Pagination.Next
+            disabled={currentPage === totalPages}
+            onClick={handleNextPage}
+          />
+        </Pagination>
+      )}
     </Container>
   );
 };

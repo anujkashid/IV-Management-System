@@ -4,31 +4,31 @@ import { CSVLink } from "react-csv"; // For exporting CSV
 import jsPDF from "jspdf"; // For exporting PDF
 import "jspdf-autotable";
 import * as XLSX from "xlsx"; // For exporting Excel
-import { Table, Button, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Table, Button, Container, Pagination } from "react-bootstrap";
 
 const GetState = () => {
   const [visitData, setVisitData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const visitsPerPage = 10; // Number of rows per page
 
   useEffect(() => {
-    axios.get("http://localhost:8000/getvisit")
+    axios
+      .get("http://localhost:8000/getvisit")
       .then((res) => {
         const data = res.data.userData;
         setVisitData(data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
-  }, []); 
-
+  }, []);
 
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString(); // Format to 'MM/DD/YYYY'
   };
 
-  
   const formatTime = (time) => {
-    return new Date(time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); // Format to 'HH:mm'
+    return new Date(time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }); // Format to 'HH:mm'
   };
 
   // Function to export as PDF
@@ -44,7 +44,7 @@ const GetState = () => {
       "Number of Faculty",
       "Visiting Location",
       "Visit Accept",
-      "Visit Status"
+      "Visit Status",
     ];
     const tableRows = [];
 
@@ -59,7 +59,7 @@ const GetState = () => {
         state.number_of_faculty,
         state.visting_location,
         state.Visit_accept,
-        state.Visit_status
+        state.Visit_status,
       ]);
     });
 
@@ -71,12 +71,31 @@ const GetState = () => {
   const exportExcel = () => {
     const worksheet = XLSX.utils.json_to_sheet(visitData);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "visit Data");
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Visit Data");
     XLSX.writeFile(workbook, "visit_data.xlsx");
   };
 
-  const handleUpdate = (id) => {
-    localStorage.setItem('updatestateid', id);
+  // Pagination logic
+  const indexOfLastVisit = currentPage * visitsPerPage;
+  const indexOfFirstVisit = indexOfLastVisit - visitsPerPage;
+  const currentVisits = visitData.slice(indexOfFirstVisit, indexOfLastVisit);
+
+  const totalPages = Math.ceil(visitData.length / visitsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
   };
 
   return (
@@ -110,9 +129,9 @@ const GetState = () => {
           </tr>
         </thead>
         <tbody className="text-center">
-          {visitData.map((state, index) => (
+          {currentVisits.map((state, index) => (
             <tr key={state._id}>
-              <td>{index + 1}</td>
+              <td>{indexOfFirstVisit + index + 1}</td>
               <td>{state.college_name}</td>
               <td>{state.number_of_students}</td>
               <td>{formatDate(state.Date_of_visit)}</td>
@@ -126,6 +145,26 @@ const GetState = () => {
           ))}
         </tbody>
       </Table>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <Pagination className="justify-content-end">
+          <Pagination.Prev disabled={currentPage === 1} onClick={handlePrevPage} />
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <Pagination.Item
+              key={page}
+              active={page === currentPage}
+              onClick={() => handlePageChange(page)}
+            >
+              {page}
+            </Pagination.Item>
+          ))}
+          <Pagination.Next
+            disabled={currentPage === totalPages}
+            onClick={handleNextPage}
+          />
+        </Pagination>
+      )}
     </Container>
   );
 };

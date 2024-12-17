@@ -2,7 +2,8 @@ const model = require('../district/district_model')
 
 // post api
 const adddistrict= async(req,res)=>{
-    const { district_state,
+    const { 
+        district_state,
         district_name,
         district_status,
     }=req.body;

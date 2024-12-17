@@ -258,14 +258,137 @@ const Sidebar = () => {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div className="sidebar d-block d-md-none">
-            <Nav defaultActiveKey="/dashboard" className="flex-column">
-              <Nav.Item>
-                <Link to="/head/dashboard" className="nav-link p-2">
-                  <BsBarChartLineFill size={30} className="me-2" /> Dashboard
-                </Link>
-              </Nav.Item>
-              {/* Add more Nav.Items as needed */}
-            </Nav>
+          <Nav defaultActiveKey="/dashboard" className="flex-column">
+          <Nav.Item>
+            <Link to="/head/dashboard" className="nav-link p-2">
+              <BsBarChartLineFill size={30} className="me-3 text-darks" /> Dashboard
+            </Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Link to="/head/college_registarion" className="nav-link p-2">
+              <FaUserPlus size={30} className="me-2 text-dark" /> College
+              Registration
+            </Link>
+          </Nav.Item>
+          <Nav.Item>
+  <Row>
+    <Col md={12}>
+      
+      <div className="">
+        <Button
+          variant="link "
+          className="nav-link p-2"
+          style={{ fontSize: "20px", textDecoration: "none" }}
+          onClick={() => setShowDropdown(!showDropdown)}
+        ><MdAppRegistration size={30} className=" me-2 text-dark mt-2" />
+          Master
+          <IoIosArrowDropdown size={20} style={{marginLeft:"70px"}} />
+        </Button>
+        {showDropdown && (
+          <div className="mt-2 d-flex flex-column">
+            <div>
+              <FaMapMarkerAlt size={24} className="text-dark me-2"></FaMapMarkerAlt>
+            <Link
+              to="/head/location"
+              className="nav-link p-2 text-dark"
+              style={{ display: "inline-block" }}
+            >
+              Location
+            </Link>
+            </div>
+                
+            <div>
+              <FaGraduationCap size={24} className="text-dark me-2"/>   
+            <Link
+              to="/head/university"
+              className="nav-link p-2 text-dark"
+              style={{ display: "inline-block" }}
+            >
+              University
+            </Link>
+            </div>
+           
+           <div>
+           <MdLocationOn size={24} className="text-dark me-2" />
+           <Link
+              to="/head/state"
+              className="nav-link p-2 text-dark"
+              style={{ display: "inline-block" }}
+            >
+              State
+            </Link>
+          </div>
+
+          <div>
+            <FaMapPin size={24} className="text-dark me-2"/>
+            <Link
+              to="/head/district"
+              className="nav-link p-2 text-dark"
+              style={{ display: "inline-block" }}
+            >
+              District
+            </Link>
+          </div>
+  
+          <div>
+            <FaMapPin size={24} className="text-dark me-2"/>
+            <Link
+              to="/head/city"
+              className="nav-link p-2 text-dark"
+              style={{ display: "inline-block" }}
+            >
+              City
+            </Link>
+          </div>
+          </div>
+        )}
+      </div>
+    </Col>
+  </Row>
+</Nav.Item>
+
+
+          <Nav.Item>
+            <Link to="/head/agenda" className="nav-link p-2">
+              <AiOutlineCalendar size={30} className="me-2 text-dark" /> Agenda
+            </Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Link to="/head/fees" className="nav-link p-2">
+              <FaMoneyBillWave size={30} className="me-2 text-dark" /> Fees
+            </Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Link to="/head/report" className="nav-link p-2">
+              <MdReport size={30} className="me-2 text-dark" /> Report
+            </Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Link to="/head/ivrequest" className="nav-link p-2">
+              <FaRegHandshake size={30} className="me-2 text-dark" /> IV Requests
+            </Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Link to="/head/visitcomplete" className="nav-link p-2">
+              <FaRegHandshake size={30} className="me-2 text-dark" /> Visit Confirmation
+            </Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Link to="/head/media" className="nav-link p-2">
+              <FaRegHandshake size={30} className="me-2 text-dark" /> Media add
+            </Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Link to="/head/feeverification" className="nav-link p-2">
+              <FaRegHandshake size={30} className="me-2 text-dark" /> Fees Confirmation
+            </Link>
+          </Nav.Item>
+          
+
+        </Nav>
           </div>
         </Offcanvas.Body>
       </Offcanvas>
