@@ -46,11 +46,12 @@ const Gallery = () => {
   return (
     <>
       <ColHeader />
+      <Container fluid className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>
       <Container className="py-4">
-        <h2 className="text-center mb-4">Gallery</h2>
-
-        <Form.Group controlId="visitDateDropdown" className="mb-4">
-          <Form.Label>Select Visit Date:</Form.Label>
+        <h2 className="text-center mb-4 text-danger">Gallery</h2>
+       <Col md={8} className="mx-auto">
+        <Form.Group controlId="visitDateDropdown" className="mb-4 text-center fs-5">
+          <Form.Label className="mb-2">Select Visit Date:</Form.Label>
           <Form.Control
             as="select"
             value={selectedDate}
@@ -85,10 +86,12 @@ const Gallery = () => {
             ))}
           </Row>
         ) : selectedDate ? (
-          <p>No images available for the selected date.</p>
+          <p className="text-center">No images available for the selected date.</p>
         ) : (
-          <p>Please select a visit date to view the gallery images.</p>
+          <p className="text-center">Please select a visit date to view the gallery images.</p>
         )}
+        </Col>
+      </Container>
       </Container>
     </>
   );

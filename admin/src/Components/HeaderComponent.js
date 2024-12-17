@@ -6,8 +6,8 @@ import "../App.css";
 import axios from "axios";
 
 const HeaderComponent = () => {
-  const [visitData, setVisitData] = useState([]); // To store visit data
-  const [inactiveCount, setInactiveCount] = useState(0); // To store the count of "inactive" visits
+  const [visitData, setVisitData] = useState([]); 
+  const [inactiveCount, setInactiveCount] = useState(0); 
 
   const adminname=localStorage.getItem("admin_name");
 
@@ -18,7 +18,7 @@ const HeaderComponent = () => {
         const data = res.data.userData;
         console.log(data);
         setVisitData(data);
-        const count = data.filter((visit) => visit.Visit_accept === "pending").length;
+        const count = data.filter((visit) => visit.Visit_accept === "pending" || visit.visit_cancelled==="cancelled").length;
         setInactiveCount(count);
       })
       .catch((error) => {

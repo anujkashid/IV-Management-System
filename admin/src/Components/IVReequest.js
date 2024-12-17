@@ -146,7 +146,7 @@ const IVRequest = () => {
     axios
       .put(`http://localhost:8000/updatevisit/${id}`, formData)
       .then(() => {
-        
+        handleClose();
       })
       .catch((err) => {
         console.error("Error updating visit:", err);
@@ -157,6 +157,7 @@ const IVRequest = () => {
     axios
       .put(`http://localhost:8000/updatevisit/${id}`, formData)
       .then(() => {
+        handleClose();
         handleClear();
         setShow(false);
       })

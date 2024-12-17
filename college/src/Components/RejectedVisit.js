@@ -35,11 +35,11 @@ const RejectedVisit = () => {
 
 
     return (
-      <>
+      <div className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>
       <ColHeader></ColHeader>
         <Container>
         
-            <h2 className="my-5 text-center">Rejected Visits</h2>
+            <h2 className="my-4 text-center text-danger">Rejected Visits</h2>
             <Table striped bordered hover responsive>
                 <thead className="thead-dark">
                     <tr className="text-center">
@@ -67,7 +67,7 @@ const RejectedVisit = () => {
                 </tbody>
             </Table>
         </Container>
-        </>
+        </div>
     );
 };
 export default RejectedVisit;

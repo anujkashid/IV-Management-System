@@ -70,12 +70,12 @@ const ForgetPasswordComponent = () => {
   };
 
   return (
-    <div className="d-flex align-items-center justify-content-center vh-100" style={{ backgroundColor: '#91ace6' }}>
+    <div className="d-flex align-items-center justify-content-center vh-100" style={{ background: "linear-gradient(135deg, #145a76, #1d809f, #67b7d1)" }}>
       <Container>
         <Row>
-          <Col md={4} className="mx-auto border border-dark p-3">
-            <h3 className="text-center">Forgot Password</h3>
-            <Form>
+          <Col md={4} className="mx-auto bg-white border border-dark p-3 shadow shadow-md">
+            <h3 className="text-center text-primary fs-3">Forgot Password</h3>
+            <Form >
               {!emailExists ? (
                 <>
                   {/* Email Field */}
@@ -88,12 +88,14 @@ const ForgetPasswordComponent = () => {
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </Form.Group>
+                  <div className='text-center mt-3'>
                   <Button className="btn btn-primary mt-3" onClick={checkEmail}>
                     Verify Email
                   </Button>
                   <Link to="/" className="text-decoration-none">
                     <Button className="btn btn-danger mt-3 ms-5">Cancel</Button>
                   </Link>
+                  </div>
                 </>
               ) : (
                 <>

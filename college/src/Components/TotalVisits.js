@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Table, Container } from "react-bootstrap";
 import ColHeader from "./Navbar";
+import { MdFileDownload } from "react-icons/md";
 
 const TotalVisit = () => {
   const [ivcount, setIvcount] = useState([]);
@@ -29,10 +30,10 @@ const TotalVisit = () => {
   };
 
     return (
-        <>
+        <div className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>
         <ColHeader></ColHeader>
         <Container>
-            <h2 className="my-5 text-center">Total Visits</h2>
+            <h2 className="my-4 text-center text-danger">Total Visits</h2>
             <Table striped bordered hover responsive>
                 <thead className="thead-dark">
                     <tr className="text-center">
@@ -41,7 +42,8 @@ const TotalVisit = () => {
                         <th>Number of faculty</th>
                         <th>Date of visit</th>
                         <th>Visiting Location</th>
-                        <th>Visit Status</th>
+                        <th>Student Details</th>
+                        <th>Faculty Details</th>
                     </tr>
                 </thead>
                 <tbody className="text-center">
@@ -52,13 +54,30 @@ const TotalVisit = () => {
                             <td>{IV.number_of_faculty}</td>
                             <td>{formatDate(IV.Date_of_visit)}</td>
                             <td>{IV.visting_location}</td>
-                            <td>{IV.Visit_status}</td>
+                            <td>
+                <a
+                  href={`http://localhost:8000/images/${IV.student_details}`}
+                  download
+                  className="btn btn-link"
+                >
+                  <MdFileDownload size={30} />
+                </a>
+              </td>
+              <td>
+                <a
+                  href={`http://localhost:8000/images/${IV.faculty_details}`}
+                  download
+                  className="btn btn-link"
+                >
+                  <MdFileDownload size={30} />
+                </a>
+              </td>
                         </tr>
                     ))}
                 </tbody>
             </Table>
         </Container>
-        </>
+        </div>
     );
 };
 export default TotalVisit;

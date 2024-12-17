@@ -55,12 +55,12 @@ const UpdateProfile = () => {
   };
 
   return (
-    <>
+    <div className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>
       <ColHeader />
       <Container>
         <Row>
           <Col md={8} className="mx-auto">
-            <h2 className="text-center mt-3 mb-4">Update Profile</h2>
+            <h2 className="text-center mt-4 text-danger mb-4">Update Profile</h2>
             <Container className="border border-dark p-4">
               <Form onSubmit={handleSubmit}>
                 {Object.keys(profileData).map((key) => (
@@ -88,7 +88,7 @@ const UpdateProfile = () => {
           </Col>
         </Row>
       </Container>
-    </>
+    </div>
   );
 };
 

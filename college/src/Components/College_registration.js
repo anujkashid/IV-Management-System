@@ -141,18 +141,18 @@ const College_registration = () => {
   return (
     <>
      <div  style={{
-      backgroundColor: "#91ace6",
+      background: "linear-gradient(135deg, #145a76, #1d809f, #67b7d1)",
       height: "100%",           
       width: "100vw"                
     }}>
      
       {/* Form  */}
       <Container
-        className=" h-100  p-4 "
-        style={{ maxWidth: "600px" }}
       >
-         <h2 className="text-center mt-3 mb-3">Registration Form</h2>
-        <Form className="border border-dark p-2" noValidate validated={validated} onSubmit={handleSubmit}>
+        <Row>
+          <Col  className="mx-auto h-100  p-4 bg-white mt-5 rounded-2 "style={{ maxWidth: "600px" }}  >
+         <h2 className="text-center text-primary fs-3 mb-3">Registration Form</h2>
+        <Form className=" p-2" noValidate validated={validated} onSubmit={handleSubmit}>
           {/* College Name */}
           <Form.Group className="mb-3 text-center" controlId="formGroupCollege">
             <Form.Label>College Name</Form.Label>
@@ -438,12 +438,17 @@ const College_registration = () => {
           <Button type="submit"  variant="primary">
             Submit
           </Button>
+          <Button type="submit"  variant="danger" className="ms-5" onClick={handleClear}>
+            Clear
+          </Button>
           </div>
 
-          <div className="text-center mt-2">
+          <div className="text-center mt-3">
                   <p>Already have an account?  <Link to="/" className=""><span className="ms-3  ">Login</span></Link></p>
               </div>
         </Form>
+        </Col>
+        </Row>
       </Container>
       </div>
     </>

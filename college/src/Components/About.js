@@ -1,26 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import ColHeader from './Navbar'
+import ColHeader from './Navbar';
+import Footer from './Footer';
 // Images section
 import iv1 from "../Images/IMG-20241210-WA0002.jpg";
 import features from "../Images/IMG-20241210-WA0003.jpg";
 import student from "../Images/IMG-20241210-WA0005.jpg";
 import process from "../Images/IMG-20241210-WA0008.jpg";
 import visit from "../Images/IMG-20241210-WA0015.jpg";
+
 // Icons
 import { FaArrowRight } from "react-icons/fa";
-import Footer from "./Footer";
+import axios from "axios";
 const About = () => {
+     const[stateData,setStateData]=useState([]);
+
+     useEffect(() => {
+        axios.get('https://api.npoint.io/c462b5f3f1efad8b74e1')
+            .then((response) => {
+                console.log('Data fetched:', response.data);
+                setStateData(response.data);
+            })
+            .catch((err) => {
+                console.error('Error fetching data:', err.message);
+            });
+    }, []);
+    
     return (
         <>
         <ColHeader></ColHeader>
+        <Container fluid style={{ backgroundColor: "#EEEEFF" }}>
             <Container>
                 {/* About IVMS */}
-                <Row>
+                <Row className="text-center">
                     <Col md={6} xs={12}>
-                        <h2 className="fw-bold mt-5">About IVMS</h2>
+                        <h3 className="fw-bold mt-5 text-danger ">About IVMS</h3>
                         <p className="mt-4 fs-5">
                             Industrial visits are a crucial part of bridging the gap between
                             academic knowledge and real-world applications. The<br></br>
@@ -33,28 +49,29 @@ const About = () => {
                         </p>
                     </Col>
                     <Col md={6} xs={12}>
-                        <img src={iv1} alt="about" className="w-100 h-75 rounded-2" />
+                        <img src={iv1} alt="about" style={{width:"500px",height:"300px"}} />
                     </Col>
-                </Row>
+               
                 {/* Key Features */}
-                <Row>
+                
                     <Col md={6} xs={12}>
                         <img
                             src={features}
                             alt="key-features"
-                            className="w-100 h-75 mt-1"
+                            className="mt-4"
+                            style={{width:"500px",height:"300px"}}
                         />
                     </Col>
                     <Col md={6} xs={12}>
-                        <h2 className="mt-4 fw-bold">Key Features:</h2>
-                        <ul className="mt-4 fs-5">
+                        <h3 className="mt-4 fw-bold text-danger">Key Features:</h3>
+                        <ul className="mt-4 fs-5 text-start">
                             <li>
                                 <span className="fw-bold">Effortless Planning:</span> Helps to
                                 schedule and manage visits with ease, from approvals to
                                 logistics.
                             </li>
                             <li>
-                                <span className="fw-bold"> Transparent Communication:</span>
+                                <span className="fw-bold">Transparent Communication:</span>
                                 Keeps colleges and faculty updated with notifications about
                                 schedules, itineraries, and guidelines.
                             </li>
@@ -69,16 +86,15 @@ const About = () => {
                             </li>
                         </ul>
                     </Col>
-                </Row>
+                
                 {/*Benefits for students  */}
-                <Row>
-                    <Col md={6} xs={12}>
-                        <h2 className="fw-bold">Benefits For Students:</h2>
-                        <ul style={{ listStyleType: "Square" }} className="fs-5 mt-4">
+                
+                    <Col md={6} xs={12} className="mt-4">
+                        <h3 className="fw-bold text-danger">Benefits For Students:</h3>
+                        <ul style={{ listStyleType: "Square" }} className="fs-5 mt-4 text-start">
                             <li>
                                 Helps to explore
-                                <span className="fw-bold">real-world industry practices</span>
-                                and technology.
+                                &nbsp;<span className="fw-bold">real-world industry practices</span> &nbsp; and technology.
                             </li>
                             <li>
                                 Gain <span className="fw-bold">practical exposure</span> to
@@ -86,23 +102,23 @@ const About = () => {
                             </li>
                             <li>
                                 Build
-                                <span className="fw-bold">networks with professionals</span> in
+                                &nbsp; <span className="fw-bold">networks with professionals</span> in
                                 your field of study.
                             </li>
                         </ul>
                     </Col>
-                    <Col>
-                        <img src={student} alt="student" className="w-100 h-75 rounded-2" />
+                    <Col  className="mt-4">
+                        <img src={student} alt="student" style={{width:"500px",height:"250px"}} />
                     </Col>
-                </Row>
+            
                 {/*How It Works?  */}
-                <Row>
-                    <Col md={6} xs={12}>
-                        <img src={process} alt="how" className="w-75 h-75 rounded-2" />
+    
+                    <Col md={6} xs={12} className="mb-3">
+                        <img src={process} alt="how" className="mt-4" style={{width:"500px",height:"250px"}}  />
                     </Col>
-                    <Col md={6} xs={12}>
-                        <h2 className="fw-bold">How It Works?</h2>
-                        <ul style={{ listStyleType: "circle" }} className="fs-5 mt-4">
+                    <Col md={6} xs={12} className="mt-4">
+                        <h3 className="fw-bold text-danger">How It Works?</h3>
+                        <ul style={{ listStyleType: "circle" }} className="fs-5 mt-2 text-start">
                             <li>Faculty and administrators propose an industrial visit.</li>
                             <li>The visit is approved and scheduled through IVMS.</li>
                             <li>Students are notified with all necessary details.</li>
@@ -112,52 +128,9 @@ const About = () => {
                             </li>
                         </ul>
                     </Col>
+            
                 </Row>
-                {/* Call to Action  */}
-                <Row
-                    className="text-center py-5"
-                    style={{ backgroundColor: "#f8f9fa" }}
-                >
-                    <Col md={6} xs={12}>
-                        <h3 className="fs-2 fw-bold">
-                            Join Us in Bridging the Gap Between Academia and Industry!
-                        </h3>
-                        <p className="fs-6 text-left">
-                            Discover a world of learning opportunities beyond the classroom.
-                            Embrace the power of IVMS for a more organized, engaging, and
-                            enriching industrial visit experience.
-                        </p>
-                        {/* Call to Action Buttons */}
-                        <div className="d-block mt-4">
-                            {/* Plan Your Visit */}
-                            <a
-                                href="#"
-                                className="d-block mb-3 text-decoration-none  hover-link"
-                            >
-                                <FaArrowRight style={{ color: "#000" }} className="me-2" />
-                                Plan Your Visit Now
-                            </a>
-
-                            {/* Learn More About IVMS */}
-                            <a
-                                href="#"
-                                className="d-block mb-3 text-decoration-none hover-link"
-                            >
-                                <FaArrowRight style={{ color: "#000" }} className="me-2" />
-                                Learn More About IVMS
-                            </a>
-
-                            {/* Contact Us */}
-                            <a href="#" className="d-block text-decoration-none  hover-link">
-                                <FaArrowRight style={{ color: "#000" }} className="me-2" />
-                                Contact Us for Support
-                            </a>
-                        </div>
-                    </Col>
-                    <Col md={6} xs={12}>
-                        <img src={visit} alt="visit" className="w-100 h-100 rounded-2" />
-                    </Col>
-                </Row>
+            </Container>
             </Container>
 
             <Footer></Footer>

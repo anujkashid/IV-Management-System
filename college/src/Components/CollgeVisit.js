@@ -8,6 +8,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ColHeader from "./Navbar";
 import axios from "axios";
+import Footer from "./Footer";
 
 
 const ColLogin = () => {
@@ -22,7 +23,7 @@ const ColLogin = () => {
   const [faculty_details, setFacultyDetails] = useState(null);
   const [comment, setComment] = useState("");
   const[locationData,setLocationData]=useState([]);
-  const[visitdata,setVisitData]=useState([]);
+  const[visitData,setVisitData]=useState([]);
   const college_name =localStorage.getItem("CollegeName");
   const mousigned=localStorage.getItem("mousigned");
   
@@ -58,41 +59,69 @@ const ColLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("college_name",college_name);
-    formData.append('number_of_students', number_of_students);
-    formData.append('Date_of_visit', Date_of_visit.toISOString().split('T')[0]);
-    formData.append('start_time', start_time);
-    formData.append('end_time', end_time);
-    formData.append('number_of_faculty', number_of_faculty);
-    formData.append('purpose', purpose);
-    formData.append('visting_location',visting_location);
-    formData.append('student_details', student_details); 
-    formData.append('faculty_details', faculty_details);
-    formData.append('comment', comment);
-    formData.append('mousigned',mousigned)
+    const startDateTime = new Date(Date_of_visit);
+    startDateTime.setHours(start_time.getHours(), start_time.getMinutes(), 0, 0);
 
+    const endDateTime = new Date(Date_of_visit);
+    endDateTime.setHours(end_time.getHours(), end_time.getMinutes(), 0, 0); 
+
+
+    const isTimeConflict = visitData.some((visit) => {
+        const existingStartTime = new Date(visit.start_time); 
+        existingStartTime.setSeconds(0, 0); 
+
+        return existingStartTime.getTime() === startDateTime.getTime() && visit.visting_location === visting_location;
+    });
+
+    if (isTimeConflict) {
+        alert("Schedule is busy.");
+        return;
+    }
+
+    // Prepare form data for submission
+    const formData = new FormData();
+    formData.append("college_name", college_name);
+    formData.append("number_of_students", number_of_students);
+    formData.append("Date_of_visit", Date_of_visit.toISOString().split("T")[0]);
+    formData.append("start_time", startDateTime.toISOString());
+    formData.append("end_time", endDateTime.toISOString());
+    formData.append("number_of_faculty", number_of_faculty);
+    formData.append("purpose", purpose);
+    formData.append("visting_location", visting_location);
+    formData.append("student_details", student_details);
+    formData.append("faculty_details", faculty_details);
+    formData.append("comment", comment);
+    formData.append("mousigned", mousigned);
+
+    // Send the data to the backend
     axios
-        .post('http://localhost:8000/addvisit', formData, {
+        .post("http://localhost:8000/addvisit", formData, {
             headers: {
-                'Content-Type': 'multipart/form-data',
+                "Content-Type": "multipart/form-data",
             },
         })
         .then((res) => {
             console.log(res.data);
-            handleClear(); 
+            alert("Visit successfully added!");
+            handleClear(); // Clear the form
         })
-        .catch((err) => console.error('Error:', err));
+        .catch((err) => {
+            console.error("Error:", err);
+            alert("Failed to add visit. Please try again.");
+        });
 };
+
+
 
 
   return (
     <>
       <ColHeader />
-      <Container>
+      <Container fluid style={{ backgroundColor: "#EEEEFF" }}>
+      <Container className="mb-1">
         <Row>
           <Col md={9} className="mx-auto">
-            <h2 className="text-center mt-3 mb-3">Add Visit</h2>
+            <h3 className="text-center mt-4 mb-4 text-danger">Add Visit</h3>
             <Container className="border border-dark p-4 d-flex justify-content-center">
               <Form className="w-100" onSubmit={handleSubmit}>
                 <Row className="mb-3">
@@ -122,7 +151,7 @@ const ColLogin = () => {
                 <Row>
                   <Col md={4} className="d-flex align-items-center">
                   <Form.Label className="mb-0">Date of Visit:</Form.Label>
-                    <DatePicker
+                  <DatePicker
                       selected={Date_of_visit}
                       onChange={(date) => setStartDate(date)}
                       className="form-control ms-2"
@@ -134,13 +163,13 @@ const ColLogin = () => {
                   </Col>
                   <Col md={4} className="d-flex align-items-center">
                   <Form.Label className="mb-0">Start Time:</Form.Label>
-                    <DatePicker
+                  <DatePicker
                       selected={start_time}
                       onChange={(time) => {
                         setStartTime(time);
-                        if (end_time && time >= end_time) {
-                          setEndTime(null);
-                        }
+                        const endTime = new Date(time);
+                        endTime.setHours(time.getHours() + 2);
+                        setEndTime(endTime);
                       }}
                       showTimeSelect
                       showTimeSelectOnly
@@ -154,7 +183,7 @@ const ColLogin = () => {
                   </Col>
                   <Col md={4} className="d-flex align-items-center">
                   <Form.Label className="mb-0">End Time:</Form.Label>
-                    <DatePicker
+                  <DatePicker
                       selected={end_time}
                       onChange={(time) => setEndTime(time)}
                       showTimeSelect
@@ -251,6 +280,7 @@ const ColLogin = () => {
             </Container>
           </Col>
         </Row>
+      </Container>
       </Container>
     </>
   );

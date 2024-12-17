@@ -17,10 +17,10 @@ const Agenda = () => {
   }, []);
 
   return (
-    <>
+    <div className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>
       <ColHeader />
       <Container>
-        <h2 className="my-5 text-center">Visit Agendas</h2>
+        <h3 className="mt-4 text-danger mb-4 text-center">Visit Agenda</h3>
         <Table striped bordered hover responsive>
           <thead className="thead-dark">
             <tr className="text-center">
@@ -50,7 +50,7 @@ const Agenda = () => {
           </tbody>
         </Table>
       </Container>
-    </>
+    </div>
   );
 };
 

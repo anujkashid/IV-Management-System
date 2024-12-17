@@ -43,7 +43,7 @@ const Login = () => {
 
   return (
     <div  style={{
-      backgroundColor: "#91ace6",
+      background: "linear-gradient(135deg, #145a76, #1d809f, #67b7d1)",
       height: "100vh",           
       width: "100vw",            
       display: "flex",           
@@ -55,7 +55,7 @@ const Login = () => {
         <Col md={4} className="mx-auto">
           <Card className="border border-primary">
             <Card.Body>
-              <h3 className="text-center text-primary">Login</h3>
+              <h3 className="text-center text-primary fs-2">Login</h3>
               {serverError && <Alert variant="danger">{serverError}</Alert>}
               <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="email" className="mb-3 mt-3 text-center">
@@ -86,9 +86,9 @@ const Login = () => {
                     className="ms-2"
                   >
                     {showPassword ? (
-                      <><FaEyeSlash size={24} className="me-1 text-success" /></>
+                      <><FaEyeSlash size={24} className="me-1 text-dark" /></>
                     ) : (
-                      <><FaEye size={24} className="me-1 text-success" /></>
+                      <><FaEye size={24} className="me-1 text-dark" /></>
                     )}
                   </Button>
 
@@ -100,7 +100,7 @@ const Login = () => {
                 </Button>
 
               <div className="mt-3 text-center">
-              <Link to="/forget" className=""><span className="">Forgot Password</span></Link>
+              <Link to="/forget" className=""><span className="">Forgot Password?</span></Link>
               </div>
               <div className="text-center mt-2">
                   <p>Dont have an account?  <Link to="/register" className=""><span className="ms-3  ">Register</span></Link></p>

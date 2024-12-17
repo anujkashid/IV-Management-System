@@ -51,7 +51,7 @@ const Footer = () => {
           <h4 className="mt-4 mb-3">Social Media</h4>
           <div className="d-flex justify-content-center">
             <a
-              href="https://www.youtube.com/"
+              href="https://www.youtube.com/c/SumagoInfotechPvtLtd"
               target="_blank"
               className="text-decoration-none text-white me-3 rounded-circle bg-primary px-2 py-2 text-center"
               title="YouTube"
@@ -59,7 +59,7 @@ const Footer = () => {
               <FaYoutube size={24} />
             </a>
             <a
-              href="https://www.instagram.com"
+              href="https://www.instagram.com/sumago_infotech/?hl=en"
               target="_blank"
               className="text-decoration-none text-white me-3 rounded-circle bg-primary px-2 py-2 text-center"
               title="Instagram"
@@ -67,7 +67,7 @@ const Footer = () => {
               <FaInstagram size={24} />
             </a>
             <a
-              href="https://www.linkedin.com"
+              href="https://www.linkedin.com/company/sumago-infotech-pvt-ltd/?originalSubdomain=in"
               target="_blank"
               className="text-decoration-none text-white me-3 rounded-circle bg-primary px-2 py-2 text-center"
               title="LinkedIn"

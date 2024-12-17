@@ -36,6 +36,7 @@ import NonMouSigned from "./NonMouSignedCollege";
 import UpcomingVisits from "./UpcomingVisits";
 import Report from "./Report";
 import FeesVerification from "./FeesVerification";
+import FeedbackDisplayComponent from "./FeedbackDisplayComponent";
 
 
 const Head = () => {
@@ -82,7 +83,7 @@ const Head = () => {
             <Route path="/upcomingVisits" element={<UpcomingVisits/>}/>
             <Route path="/report" element={<Report/>}/>
             <Route path="/feeverification" element={<FeesVerification/>}/>
-            
+            <Route path="/feedback" element={<FeedbackDisplayComponent/>}/>
   
           </Routes>
         </Container>

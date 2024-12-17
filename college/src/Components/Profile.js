@@ -25,13 +25,13 @@ const Profile = () => {
   }, []);
 
   return (
-    <>
+    <div className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>
       <ColHeader />
       <Container>
         <Row>
           <Col md={9} className="mx-auto">
-            <h2 className="text-center mt-3 mb-3">Profile Details</h2>
-            <Container className="border border-dark mb-4 ">
+            <h3 className="text-center mt-4 mb-4 text-danger">Profile Details</h3>
+            <Container className="border border-dark bg-white ">
               <Table  hover className="text-center">
                 <tbody>
                   <tr>
@@ -89,7 +89,7 @@ const Profile = () => {
           </Col>
         </Row>
       </Container>
-    </>
+    </div>
   );
 };
 

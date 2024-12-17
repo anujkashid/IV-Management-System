@@ -42,6 +42,12 @@ const myProject = new mongoose.Schema({
    notification_status:{
      type:String,
      default:"unseen"
+   },
+
+   visit_cancelled:
+   {
+      type:String,
+      default:"accept"
    }
 });
 module.exports= mongoose.model('visit',myProject);

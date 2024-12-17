@@ -76,16 +76,17 @@ const Feedback = () => {
 
   const formatDate = (date) => {
     const d = new Date(date);
-    return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+    return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
   };
 
   return (
     <>
+    <Container fluid className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>
       <ColHeader />
-      <Container className="mt-5" fluid>
+      <Container className="mt-4" fluid>
         <Row>
           <Col md={4} className="mx-auto">
-            <h2 className="text-center">Add Feedback</h2>
+            <h2 className="text-center text-danger">Add Feedback</h2>
             <Form className="border border-dark p-4 mt-5" onSubmit={handleSubmit}>
               <Row className="mb-3 text-center">
                 <Form.Group controlId="categoryDropdown" className="mt-4">
@@ -145,6 +146,7 @@ const Feedback = () => {
             </Form>
           </Col>
         </Row>
+      </Container>
       </Container>
     </>
   );

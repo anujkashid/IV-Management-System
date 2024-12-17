@@ -45,10 +45,10 @@ const Notification = () => {
   };
 
   return (
-    <>
+    <div className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>
       <ColHeader />
       <div className="container mt-4">
-        <h3 className="text-center mb-4">Notifications</h3>
+        <h3 className="text-center mb-4 text-danger">Notifications</h3>
         {visitData.length === 0 ? (
           <p>No notifications to display.</p>
         ) : (
@@ -93,7 +93,7 @@ const Notification = () => {
           })
         )}
       </div>
-    </>
+    </div>
   );
 };
 

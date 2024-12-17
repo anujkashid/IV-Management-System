@@ -34,10 +34,10 @@ const PendingVisit = () => {
   };
 
     return (
-      <>
+      <div className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>
       <ColHeader></ColHeader>
         <Container>    
-            <h2 className="my-5 text-center">Pending Visits</h2>
+            <h2 className="my-4 text-danger text-center">Pending Visits</h2>
             <Table striped bordered hover responsive>
                 <thead className="thead-dark">
                     <tr className="text-center">
@@ -63,7 +63,8 @@ const PendingVisit = () => {
                 </tbody>
             </Table>
         </Container>
-        </>
+        </div>
     );
 };
 export default PendingVisit;
+

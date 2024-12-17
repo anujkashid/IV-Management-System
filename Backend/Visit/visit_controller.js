@@ -19,7 +19,7 @@ const addImage = async (req, res) => {
         mousigned,
         fees,
         fees_status,
-        fees_received
+        fees_received,visit_cancelled
     } = req.body;
 
     try {
@@ -42,7 +42,7 @@ const addImage = async (req, res) => {
             mousigned,
             fees,
             fees_status,
-            fees_received
+            fees_received,visit_cancelled
         });
         const data = await Userdata.save();
         res.status(200).send({ data });
@@ -91,7 +91,7 @@ const updateImage = async (req, res) => {
     mousigned,
     fees,
     fees_status,
-    fees_received } = req.body;
+    fees_received,visit_cancelled } = req.body;
 
   try {
     // Prepare update object
@@ -112,7 +112,7 @@ const updateImage = async (req, res) => {
         mousigned,
         fees,
         fees_status,
-        fees_received
+        fees_received,visit_cancelled
     };
 
     // Only update the image if a new file is uploaded
