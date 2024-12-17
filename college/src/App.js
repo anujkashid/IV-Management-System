@@ -3,14 +3,19 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Homecomponent from './Components/Homecomponent';
 import Login from './Components/Login';
 import ForgetPasswordComponent from './Components/ForgotPassword';
-import ColLogin from './Components/CollgeVisit';
+import CollgeVisite from './Components/CollgeVisit';
 import Feedback from './Components/Feedback';
 import About from './Components/About';
 import Profile from './Components/Profile';
 import Notification from './Components/Notiication';
-import Gallery from './Components/Gallery';
+import Update_profile from './Components/Update_profile';
 import College_registration from './Components/College_registration';
+import TotalVisit from './Components/TotalVisits';
+import PendingVisit from './Components/PendingVisits';
+import RejectedVisit from './Components/RejectedVisit';
+import Agenda from './Components/Agenda';
 import PendingFee from './Components/PendingFee';
+import Gallery from './Components/Gallery';
 
 function App() {
   return (
@@ -19,14 +24,19 @@ function App() {
          <Route path="/home" element={<Homecomponent/>} />
          <Route path="/" element={<Login/>} />
          <Route path="/forget" element={<ForgetPasswordComponent/>}/>
-         <Route path="/addvisit" element={<ColLogin/>} />
+         <Route path="/addvisit" element={<CollgeVisite/>} />
          <Route path="/feedback" element={<Feedback/>} />
          <Route path="/about" element={<About/>} />
          <Route path="/profile" element={<Profile/>} />
-         <Route path='/notification' element={<Notification></Notification>}/>
-         <Route path="/gallery" element={<Gallery></Gallery>}/>
-         <Route path="/register" element={<College_registration/>}/>
-         <Route path="/pendingfee" element={<PendingFee/>}/>
+         <Route path="/agenda" element={<Agenda/>} />
+         <Route path="/notifications" element={<Notification/>} />
+         <Route path="/update_profile" element={<Update_profile/>} />
+         <Route path="/registration" element={<College_registration/>}/>
+         <Route path="/totalvisit" element={<TotalVisit/>}/>
+         <Route path="/pendingvisit" element={<PendingVisit/>}/>
+         <Route path='/rejectedvisit' element={<RejectedVisit/>}/>
+         <Route path='/pendingfees' element={<PendingFee/>}/>
+         <Route path='/gallery' element={<Gallery/>}/>
       </Routes>
       </BrowserRouter>
   );

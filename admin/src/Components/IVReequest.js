@@ -4,7 +4,7 @@ import { CSVLink } from "react-csv"; // For exporting CSV
 import jsPDF from "jspdf"; // For exporting PDF
 import "jspdf-autotable";
 import * as XLSX from "xlsx"; // For exporting Excel
-import { Table, Button, Container, Row, Form, Modal } from "react-bootstrap";
+import { Table, Button, Container, Row, Form, Modal, Pagination } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { FaCaretDown, FaRegThumbsDown, FaRegThumbsUp } from "react-icons/fa";
 import { MdFileDownload } from "react-icons/md";
@@ -23,17 +23,18 @@ const IVRequest = () => {
   const [feesdata, setFeesData] = useState([]);
   const [feestitle, setFeestitle] = useState([]);
   const [selectedFeeTitle, setSelectedFeeTitle] = useState("");
-  const [selectedFee, setSelectedFee] = useState(null);
+  const [selectedFee, setSelectedFee] = useState(null);;
+  const [currentPage, setCurrentPage] = useState(1);
+  const visitsPerPage = 10; // Number of rows per page
 
   const handleClose = () => setShow(false);
   const handleClose1 = () => setShowAddFeeModal(false);
 
-    // disabled={isButtonDisabled()}
+  // disabled={isButtonDisabled()}
 
 
   const handleOpenModal = (visit, type) => {
-    if(visit.mousigned==="Yes")
-    {
+    if (visit.mousigned === "Yes") {
       setId(visit._id);
       setCollegeName(visit.college_name);
       setModalType(type);
@@ -41,17 +42,15 @@ const IVRequest = () => {
       setShowAddFeeModal(false);
     }
 
-    else if(visit.mousigned==="No")
-    {
-      if(visit.fees_status==="paid" && visit.fees_received==="complete")
-      {
+    else if (visit.mousigned === "No") {
+      if (visit.fees_status === "paid" && visit.fees_received === "complete") {
         setId(visit._id);
         setCollegeName(visit.college_name);
         setModalType(type);
         setShow(true);
       }
     }
-   
+
   };
 
   const handleClear = () => {
@@ -139,14 +138,40 @@ const IVRequest = () => {
     XLSX.writeFile(workbook, "visit_data.xlsx");
   };
 
- 
+ // Pagination logic
+ const indexOfLastVisit = currentPage * visitsPerPage;
+ const indexOfFirstVisit = indexOfLastVisit - visitsPerPage;
+ const currentVisits = visitData.slice(
+   indexOfFirstVisit,
+   indexOfLastVisit
+ );
+
+ const totalPages = Math.ceil(visitData.length / visitsPerPage);
+
+ const handlePageChange = (pageNumber) => {
+   setCurrentPage(pageNumber);
+ };
+
+ const handleNextPage = () => {
+   if (currentPage < totalPages) {
+     setCurrentPage((prevPage) => prevPage + 1);
+   }
+ };
+
+ const handlePrevPage = () => {
+   if (currentPage > 1) {
+     setCurrentPage((prevPage) => prevPage - 1);
+   }
+ };
+
+
 
   const handleUpdate = () => {
     const formData = { college_name: collegeName, Visit_accept };
     axios
       .put(`http://localhost:8000/updatevisit/${id}`, formData)
       .then(() => {
-        
+
       })
       .catch((err) => {
         console.error("Error updating visit:", err);
@@ -167,6 +192,9 @@ const IVRequest = () => {
 
   const renderModalContent = () => {
     if (modalType === "accept") {
+
+
+
       return (
         <>
           <Modal.Header closeButton>
@@ -266,13 +294,13 @@ const IVRequest = () => {
 
   // feesget
   const feesget = () => {
-    const fees=selectedFee.fees_amount
-    const userData={
+    const fees = selectedFee.fees_amount
+    const userData = {
       fees
     }
-    
+
     axios
-      .put(`http://localhost:8000/updatevisit/${id}`,userData)
+      .put(`http://localhost:8000/updatevisit/${id}`, userData)
       .then((res) => {
         handleClose1();
       })
@@ -280,7 +308,7 @@ const IVRequest = () => {
         console.error("Error updating fee data:", err);
       });
   };
-  
+
   const handledata = (visit) => {
     localStorage.setItem("selectedcollegename", visit.college_name);
     localStorage.setItem("selectedmousigned", visit.mousigned);
@@ -322,7 +350,7 @@ const IVRequest = () => {
           </tr>
         </thead>
         <tbody className="text-center">
-          {visitData.map((visit, index) => (
+          {currentVisits.map((visit, index) => (
             <tr key={index}>
               <td>{visit.college_name}</td>
               <td>{visit.number_of_students}</td>
@@ -388,62 +416,81 @@ const IVRequest = () => {
           ))}
         </tbody>
       </Table>
-
+      {/* Pagination */}
+      <Pagination className="justify-content-end">
+        <Pagination.Prev
+          disabled={currentPage === 1}
+          onClick={handlePrevPage}
+        />
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          <Pagination.Item
+            key={page}
+            active={page === currentPage}
+            onClick={() => handlePageChange(page)}
+          >
+            {page}
+          </Pagination.Item>
+        ))}
+        <Pagination.Next
+          disabled={currentPage === totalPages}
+          onClick={handleNextPage}
+        />
+      </Pagination>
       <Modal show={show} onHide={handleClose}>
         {renderModalContent()}
       </Modal>
 
       {/* fees add modal */}
       <Modal show={showAddFeesModal} onHide={handleClose1}>
-  <Modal.Header closeButton>
-    <Modal.Title>Add Fees</Modal.Title>
-  </Modal.Header>
-  <Modal.Body>
-    <Form>
-      <Form.Group className="mb-3">
-        <Form.Label>College Name</Form.Label>
-        <Form.Control type="text" value={collegeName} readOnly />
-      </Form.Group>
-      <Form.Group as={Row} className="mb-3">
-        <Form.Label>Select Fee Title</Form.Label>
-        <Form.Control
-          as="select"
-          value={selectedFeeTitle}
-          onChange={handleFeeTitleChange}
-        >
-          <option value="">-- Select a Fee Title --</option>
-          {Array.isArray(feestitle) &&
-            feestitle.map((title, index) => (
-              <option key={index} value={title}>
-                {title}
-              </option>
-            ))}
-        </Form.Control>
-      </Form.Group>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Fees</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>College Name</Form.Label>
+              <Form.Control type="text" value={collegeName} readOnly />
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label>Select Fee Title</Form.Label>
+              <Form.Control
+                as="select"
+                value={selectedFeeTitle}
+                onChange={handleFeeTitleChange}
+              >
+                <option value="">-- Select a Fee Title --</option>
+                {Array.isArray(feestitle) &&
+                  feestitle.map((title, index) => (
+                    <option key={index} value={title}>
+                      {title}
+                    </option>
+                  ))}
+              </Form.Control>
+            </Form.Group>
 
-      {/* Fee Details */}
-      {selectedFee && (
-        <>
-          <Form.Group as={Row} className="mb-3">
-            <Form.Label>Fee Amount</Form.Label>
-            <Form.Control
-              type="text"
-              value={selectedFee.fees_amount}
-            />
-          </Form.Group>
-        </>
-      )}
-    </Form>
-  </Modal.Body>
-  <Modal.Footer>
-    <Button variant="secondary" onClick={handleClose}>
-      Close
-    </Button>
-    <Button variant="primary" onClick={feesget}>
-      Save Changes
-    </Button>
-  </Modal.Footer>
-</Modal>
+            {/* Fee Details */}
+            {selectedFee && (
+              <>
+                <Form.Group as={Row} className="mb-3">
+                  <Form.Label>Fee Amount</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={selectedFee.fees_amount}
+                  />
+                </Form.Group>
+              </>
+            )}
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={feesget}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };

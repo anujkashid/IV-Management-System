@@ -16,10 +16,8 @@ const College_registration = () => {
   const [reg_university_name, setReg_university_name] = useState("");
   const [reg_principal_name, setReg_principal_name] = useState("");
   const [reg_contact_person, setReg_contact_person] = useState("");
-  const [reg_contact_person_contact1, setReg_contact_person_contact1] =
-    useState("");
-  const [reg_contact_person_contact2, setReg_contact_person_contact2] =
-    useState("");
+  const [reg_contact_person_contact1, setReg_contact_person_contact1] =useState("");
+  const [reg_contact_person_contact2, setReg_contact_person_contact2] =useState("");
   const [reg_college_email_id, setReg_college_email_id] = useState("");
   const [reg_college_username, setReg_college_username] = useState("");
   const [reg_password, setReg_password] = useState("");
@@ -29,6 +27,8 @@ const College_registration = () => {
   const [reg_status, setstatus] = useState("");
   const [state, setState] = useState([]);
   const [district, setDistrict] = useState([]);
+  const [filteredDistricts, setFilteredDistricts] = useState([]);
+  const [filteredCity, setFilteredCity] = useState([]);
   const [city, setCity] = useState([]);
   const [university, setUniversity] = useState([]);
 
@@ -112,6 +112,21 @@ const College_registration = () => {
       });
   }, []);
 
+  // Filter Districts When State Changes
+  useEffect(() => {
+    console.log(reg_state)
+    if (reg_state) {
+      
+      const filtered = district.filter(
+        (district) => district.district_state === reg_state
+      );
+      setFilteredDistricts(filtered);
+    } else {
+      setFilteredDistricts([]); // Reset if no state is selected
+    }
+  }, [reg_state, district]);
+
+
   // Get City
   useEffect(() => {
     axios
@@ -124,6 +139,20 @@ const College_registration = () => {
         console.log(error);
       });
   }, []);
+
+  // Filter City When District Changes
+  useEffect(() => {
+    console.log(reg_district)
+    if (reg_district) {
+      
+      const filtered = city.filter(
+        (city) => city.city_district === reg_district
+      );
+      setFilteredCity(filtered);
+    } else {
+      setFilteredCity([]); // Reset if no state is selected
+    }
+  }, [reg_district, city]);
 
   //   Get University
   useEffect(() => {
@@ -197,7 +226,7 @@ const College_registration = () => {
               onChange={(e) => setReg_district(e.target.value)}
             >
               <option value="">Select District</option>
-              {district.map((item) => (
+              {filteredDistricts.map((item) => (
                 <option key={item._id} value={item.district_name}>
                   {item.district_name}
                 </option>
@@ -217,7 +246,7 @@ const College_registration = () => {
               onChange={(e) => setReg_city(e.target.value)}
             >
               <option value="">Select City</option>
-              {city.map((item) => (
+              {filteredCity.map((item) => (
                 <option key={item._id} value={item.city_name}>
                   {item.city_name}
                 </option>
@@ -229,17 +258,22 @@ const College_registration = () => {
           </Form.Group>
 
           {/* University Name */}
-          <Form.Group className="mb-3 text-center" controlId="formGroupUniversity">
-            <Form.Label>University Name</Form.Label>
-            <Form.Control
+           <Form.Group className="mb-3 text-center" controlId="formGroupCity">
+            <Form.Label>Univesity Name</Form.Label>
+            <Form.Select
               required
-              type="text"
               value={reg_university_name}
               onChange={(e) => setReg_university_name(e.target.value)}
-              placeholder="Enter University Name"
-            />
+            >
+              <option value="">Select University</option>
+              {university.map((item) => (
+                <option key={item._id} value={item.university_name}>
+                  {item.university_name}
+                </option>
+              ))}
+            </Form.Select>
             <Form.Control.Feedback type="invalid">
-              Please provide the university name.
+              Please select a University.
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -371,21 +405,6 @@ const College_registration = () => {
             />
             <Form.Control.Feedback type="invalid">
               Passwords do not match.
-            </Form.Control.Feedback>
-          </Form.Group>
-
-          {/* Visiting Location */}
-          <Form.Group className="mb-3 text-center" controlId="formGroupVisitLocation">
-            <Form.Label>Visiting Location</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              value={reg_visit_location}
-              onChange={(e) => setReg_visit_location(e.target.value)}
-              placeholder="Enter Visiting Location"
-            />
-            <Form.Control.Feedback type="invalid">
-              Please provide a visiting location.
             </Form.Control.Feedback>
           </Form.Group>
 

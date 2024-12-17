@@ -13,7 +13,6 @@ const FormData = mongoose.Schema({
         reg_college_email_id:String,
         reg_college_username:String,
         reg_password:String,
-        reg_visit_location:String,
         reg_mou_sign:String,
         reg_status:String,
         

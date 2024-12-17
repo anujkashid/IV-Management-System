@@ -4,11 +4,12 @@ import { CSVLink } from "react-csv"; // For exporting CSV
 import jsPDF from "jspdf"; // For exporting PDF
 import "jspdf-autotable";
 import * as XLSX from "xlsx"; // For exporting Excel
-import { Table, Button, Container } from "react-bootstrap";
+import { Table, Button, Container, Pagination } from "react-bootstrap";
 
 const MouSigned = () => {
   const [collegeData, setCollegeData] = useState([]);
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const visitsPerPage = 10; // Number of rows per page
   useEffect(() => {
     axios
       .get("http://localhost:8000/get_registration")
@@ -84,6 +85,29 @@ const MouSigned = () => {
     XLSX.writeFile(workbook, "college_data.xlsx");
   };
 
+// Pagination logic
+const indexOfLastVisit = currentPage * visitsPerPage;
+const indexOfFirstVisit = indexOfLastVisit - visitsPerPage;
+const currentVisits = collegeData.slice(indexOfFirstVisit, indexOfLastVisit);
+
+const totalPages = Math.ceil(collegeData.length / visitsPerPage);
+
+const handlePageChange = (pageNumber) => {
+  setCurrentPage(pageNumber);
+};
+
+const handleNextPage = () => {
+  if (currentPage < totalPages) {
+    setCurrentPage((prevPage) => prevPage + 1);
+  }
+};
+
+const handlePrevPage = () => {
+  if (currentPage > 1) {
+    setCurrentPage((prevPage) => prevPage - 1);
+  }
+};
+
   return (
     <Container>
       <h2 className="mt-5 text-center mb-3">College Data</h2>
@@ -117,7 +141,7 @@ const MouSigned = () => {
           </tr>
         </thead>
         <tbody className="text-center">
-          {collegeData.map((state, index) => (
+          {currentVisits.map((state, index) => (
             <tr key={state._id}>
               <td>{index + 1}</td>
               <td>{state.college_name}</td>
@@ -135,6 +159,27 @@ const MouSigned = () => {
           ))}
         </tbody>
       </Table>
+
+       {/* Pagination */}
+       {totalPages > 1 && (
+        <Pagination className="justify-content-end">
+          <Pagination.Prev disabled={currentPage === 1} onClick={handlePrevPage} />
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <Pagination.Item
+              key={page}
+              active={page === currentPage}
+              onClick={() => handlePageChange(page)}
+            >
+              {page}
+            </Pagination.Item>
+          ))}
+          <Pagination.Next
+            disabled={currentPage === totalPages}
+            onClick={handleNextPage}
+          />
+        </Pagination>
+      )}
+
     </Container>
   );
 };
