@@ -10,8 +10,11 @@ const Agenda = () => {
     axios
       .get("http://localhost:8000/get_agenda")
       .then((res) => {
-        console.log("API Response:", res.data); // Debug response
-        setAgendaData(res.data.data); // Fallback to empty array
+        const data = res.data.data;
+        const activeagneda = data.filter( 
+          (a) =>  a.agenda_status === "active"
+      )
+        setAgendaData(activeagneda); 
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
