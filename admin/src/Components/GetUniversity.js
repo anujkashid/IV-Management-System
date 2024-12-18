@@ -6,6 +6,8 @@ import "jspdf-autotable";
 import * as XLSX from "xlsx"; // For exporting Excel
 import { Table, Button, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { MdModeEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 
 const GetUniversity = () => {
   const [universityData, setUniversityData] = useState([]);
@@ -73,16 +75,16 @@ const GetUniversity = () => {
 
   return (
     <Container>
-      <h2 className="my-5 text-center">University Data</h2>
+      <h2 className="my-4 text-center">University Data</h2>
       <div className="mb-4 d-flex justify-content-start gap-2">
   <Button variant="primary" onClick={exportPDF}>
     Export PDF
   </Button>
-  <Button variant="success" onClick={exportExcel}>
+  <Button variant="primary" onClick={exportExcel}>
     Export Excel
   </Button>
   <CSVLink data={universityData} filename="visit_data.csv">
-    <Button variant="info">Export CSV</Button>
+    <Button variant="primary">Export CSV</Button>
   </CSVLink>
 </div>
 
@@ -95,9 +97,9 @@ const GetUniversity = () => {
       <Table striped bordered hover responsive>
         <thead className="thead-dark">
           <tr className="text-center">
-            <th>Sr.No</th>
-            <th>University Name</th>
-            <th>University Status</th>
+            <th>Sr.</th>
+            <th> Name</th>
+            <th> Status</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -111,9 +113,9 @@ const GetUniversity = () => {
               <Link
               to='/head/update_university'
               onClick={() => handleUpdate(university._id)}>
-              <Button className="btn btn-primary me-4 px-3 py-2">Update</Button></Link>
+              <Button className="btn btn-primary me-4 px-2 py-1"><MdModeEdit size={24}/></Button></Link>
               <Button  variant="danger"
-              onClick={() => deletedata(university._id)} className="btn btn-danger px-3 py-2">Delete</Button>
+              onClick={() => deletedata(university._id)} className="btn btn-danger px-2 py-1"><MdDelete size={24}/></Button>
               </td>
             </tr>
           ))}

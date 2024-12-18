@@ -68,6 +68,7 @@ const IVRequest = () => {
         const count = data.filter((visit) => visit.Visit_accept === "pending");
         const formattedData = count.map((visit) => ({
           ...visit,
+          isExpanded: false,
           Date_of_visit: visit.Date_of_visit.split("T")[0],
           start_time: visit.start_time.split("T")[1].slice(0, 5),
           end_time: visit.end_time.split("T")[1].slice(0, 5),
@@ -315,20 +316,28 @@ const IVRequest = () => {
     localStorage.setItem("selectedmousigned", visit.mousigned);
   };
 
+  const toggleRowExpansion = (id) => {
+    setVisitData((prevData) =>
+      prevData.map((item) =>
+        item._id === id ? { ...item, isExpanded: !item.isExpanded } : item
+      )
+    );
+  };
+
 
   return (
     <Container>
-      <h2 className="my-5 text-center">Visit Requests</h2>
+      <h2 className="my-4 text-center">Visit Requests</h2>
       <Row>
         <div className="mb-4 d-flex justify-content-start gap-2">
           <Button variant="primary" onClick={exportPDF}>
             Export PDF
           </Button>
-          <Button variant="success" onClick={exportExcel}>
+          <Button variant="primary" onClick={exportExcel}>
             Export Excel
           </Button>
           <CSVLink data={visitData} filename="visit_data.csv">
-            <Button variant="info">Export CSV</Button>
+            <Button variant="primary">Export CSV</Button>
           </CSVLink>
         </div>
       </Row>
@@ -339,52 +348,34 @@ const IVRequest = () => {
             <th>Students</th>
             <th>Date of Visit</th>
             <th>Start Time</th>
-            <th>End Time</th>
+            {/* <th>End Time</th> */}
             <th>Visiting Location</th>
             <th>Mou Signed</th>
             <th>Fee Status</th>
             <th>Fee Received</th>
-            <th>Student Details</th>
-            <th>Faculty Details</th>
+            {/* <th>Student Details</th>
+            <th>Faculty Details</th> */}
             <th>Add Fee</th>
             <th>Visit Accept/reject</th>
           </tr>
         </thead>
         <tbody className="text-center">
           {currentVisits.map((visit, index) => (
-            <tr key={index}>
-              <td>{visit.college_name}</td>
-              <td>{visit.number_of_students}</td>
-              <td>{visit.Date_of_visit}</td>
-              <td>{visit.start_time}</td>
-              <td>{visit.end_time}</td>
-              <td>{visit.visting_location}</td>
-              <td>{visit.mousigned}</td>
-              <td>{visit.fees_status}</td>
-              <td>{visit.fees_received}</td>
-              <td>
-                <a
-                  href={`http://localhost:8000/images/${visit.student_details}`}
-                  download
-                  className="btn btn-link"
-                >
-                  <MdFileDownload size={30} />
-                </a>
-              </td>
-              <td>
-                <a
-                  href={`http://localhost:8000/images/${visit.faculty_details}`}
-                  download
-                  className="btn btn-link"
-                >
-                  <MdFileDownload size={30} />
-                </a>
-              </td>
-              <td>
+           <React.Fragment key={visit._id}>
+           <tr>
+             <td>{visit.college_name}</td>
+             <td>{visit.number_of_students}</td>
+             <td>{visit.Date_of_visit}</td>
+             <td>{visit.start_time}</td>
+             <td>{visit.visting_location}</td>
+             <td>{visit.mousigned}</td>
+             <td>{visit.fees_status}</td>
+             <td>{visit.fees_received}</td>
+             <td>
                 {visit.fees}
                 <Button
                   variant="link"
-                  className="bg-primary  px-2 mt-2"
+                  className="bg-primary  px-2 mt-1 ms-3"
                   onClick={() => handleOpenFeesModal(visit)}
                 >
                   <span className="text-white" >Add</span>
@@ -413,7 +404,65 @@ const IVRequest = () => {
                   ></FaRegThumbsDown>
                 </Button>
               </td>
-            </tr>
+             <td>
+               <Button
+                 variant="link"
+                 className="fs-4"
+                 onClick={() => toggleRowExpansion(visit._id)}
+               >
+                 {visit.isExpanded ? "-" : "+"}
+               </Button>
+             </td>
+           </tr>
+           {visit.isExpanded && (
+  <>
+    <tr>
+      <th>End Time</th>
+      <th>Number of Faculty</th>
+      <th>Student Details</th>
+      <th>Faculty Details</th>
+      <th>Purpose</th>
+      <th>Comment</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr>
+      <td>{visit.end_time}</td>
+      <td>{visit.number_of_faculty}</td>
+      <td>
+                <a
+                  href={`http://localhost:8000/images/${visit.student_details}`}
+                  download
+                  className="btn btn-link"
+                >
+                  <MdFileDownload size={30} />
+                </a>
+              </td>
+              <td>
+                <a
+                  href={`http://localhost:8000/images/${visit.faculty_details}`}
+                  download
+                  className="btn btn-link"
+                >
+                  <MdFileDownload size={30} />
+                </a>
+              </td>
+      <td>{visit.purpose}</td>
+      <td>{visit.comment}</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+      
+    </tr>
+  </>
+)}
+
+         </React.Fragment>
           ))}
         </tbody>
       </Table>

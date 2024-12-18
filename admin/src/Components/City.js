@@ -63,19 +63,19 @@ const City = () => {
   };
 
   return (
-    <Container className="mt-5" fluid>
+    <Container className="mt-4" fluid>
       <Row>
-        <Col md={4} className="mx-auto">
+        <Col md={5} className="mx-auto">
           <h2 className="text-center">Add City</h2>
-          <Form className="border border-dark p-4 mt-5" onSubmit={handleSubmit}>
-            <Row className="mb-3 text-center">
-              <Form.Group controlId="categoryDropdown" className="mt-4">
-                <Form.Label className="fs-5 text-dark">State:</Form.Label>
+          <Form className="border border-dark p-4 mt-4" onSubmit={handleSubmit}>
+            <Row className="mb-3 text-start">
+              <Form.Group controlId="categoryDropdown" className="">
+                <Form.Label className="fw-bold ms-3">State</Form.Label>
                 <Form.Control
                   as="select"
                   value={city_state}
                   onChange={(e) => setCityState(e.target.value)}
-                  className="mx-auto mt-3 py-2 dropdown-width"
+                  className="mx-auto  py-2 dropdown-width"
                 >
                   <option value="">
                     -- Select State --{" "}
@@ -92,14 +92,14 @@ const City = () => {
               </Form.Group>
             </Row>
 
-            <Row className="mb-3 text-center">
-              <Form.Group controlId="categoryDropdown" className="mt-4">
-                <Form.Label className="fs-5 text-dark">District:</Form.Label>
+            <Row className="mb-3 text-start">
+              <Form.Group controlId="categoryDropdown" className="">
+                <Form.Label className="fw-bold ms-3">District</Form.Label>
                 <Form.Control
                   as="select"
                   value={city_district}
                   onChange={(e) => setCityDistrict(e.target.value)}
-                  className="mx-auto mt-3 py-2 dropdown-width"
+                  className="mx-auto  py-2 dropdown-width"
                 >
                   <option value="">
                     -- Select District --{" "}
@@ -119,9 +119,9 @@ const City = () => {
             
             <Row className="mb-3">
               <Col>
-                <Form.Group className="text-center">
-                  <Form.Label htmlFor="city" className="text-dark fs-5">
-                    Enter City:
+                <Form.Group className="text-start">
+                  <Form.Label htmlFor="city" className="fw-bold ms-3">
+                    Enter City
                   </Form.Label>
                   <Form.Control
                     id="city"
@@ -138,17 +138,18 @@ const City = () => {
 
             <Row className="mb-3">
               <Col>
-                <Form.Group className="text-center">
-                  <Form.Label className="text-dark fs-5">
-                    Select Status:
-                  </Form.Label>
+                <Form.Group className="text-start">
                   <div>
+                  <Form.Label className="fw-bold ms-3">
+                    Select Status
+                  </Form.Label>
+                  
                     <Form.Check
                       type="radio"
                       label="Active"
                       name="status"
                       value="active"
-                      className="me-5 text-dark"
+                      className="me-4 ms-4 text-dark"
                       checked={city_status === "Active"}
                       onChange={(e) => setstatus(e.target.value)}
                       inline

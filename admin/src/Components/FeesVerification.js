@@ -92,7 +92,7 @@ const handlePrevPage = () => {
     <div>
       <Container fluid>
         <Row>
-          <h3 className='mt-5 mb-4 text-center'>Fees Confirmation</h3>
+          <h3 className='mt-4 mb-4 text-center'>Fees Confirmation</h3>
           <Table striped bordered hover responsive>
             <thead className="thead-dark">
               <tr className="text-center">

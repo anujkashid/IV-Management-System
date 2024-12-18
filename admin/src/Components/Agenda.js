@@ -35,18 +35,18 @@ const Fees = () => {
   };
 
   return (
-    <Container className="mt-5" fluid>
+    <Container className="mt-4" fluid>
       <Row>
         <Col md={4} className="mx-auto">
           <h2 className="text-center">Add Agenda</h2>
           <Form
-            className="border border-dark p-4 mt-5"
+            className="border border-dark p-4 mt-4"
             onSubmit={handleSubmit}
           >
             <Row className="mb-3">
               <Col>
-                <Form.Group className="text-center">
-                  <Form.Label htmlFor="city" className="text-dark  fs-5"> Enter Agenda Title:</Form.Label>
+                <Form.Group className="text-start">
+                  <Form.Label htmlFor="city" className="fw-bold ms-3">  Agenda Title</Form.Label>
                   <Form.Control
                     id="city"
                     placeholder="Enter title"
@@ -62,8 +62,8 @@ const Fees = () => {
 
             <Row className="mb-3">
               <Col>
-                <Form.Group className="text-center">
-                  <Form.Label htmlFor="name" className="text-dark fs-5">Agenda Description:</Form.Label>
+                <Form.Group className="text-start">
+                  <Form.Label htmlFor="name" className="fw-bold ms-3">Agenda Description</Form.Label>
                   <Form.Control
                     id="name"
                     placeholder="Enter Amount"
@@ -78,8 +78,8 @@ const Fees = () => {
             </Row>
             <Row className="mb-3">
               <Col>
-                <Form.Group className="text-center">
-                  <Form.Label htmlFor="name" className="text-dark fs-5">Agenda Time:</Form.Label>
+                <Form.Group className="text-start">
+                  <Form.Label htmlFor="name" className="fw-bold ms-3">Agenda Time</Form.Label>
                   <Form.Control
                     id="name"
                     placeholder="Enter Time"
@@ -95,15 +95,16 @@ const Fees = () => {
 
             <Row className="mb-3">
               <Col>
-                <Form.Group className="text-center">
-                  <Form.Label className="text-dark fs-5">Select Status:</Form.Label>
-                  <div>
+                <Form.Group className="text-start">
+                <div>
+                  <Form.Label className="fw-bold ms-3">Select Status</Form.Label>
+                 
                     <Form.Check
                       type="radio"
                       label="Active"
                       name="status"
                       value="active"
-                      className="me-5 text-dark"
+                      className="me-4 ms-4 text-dark"
                       checked={agenda_status === "Active"}
                       onChange={(e) => setAgenda_status(e.target.value)}
                       inline

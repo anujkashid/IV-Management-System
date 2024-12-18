@@ -46,14 +46,14 @@ const District = () => {
   };
 
   return (
-    <Container className="mt-5" fluid>
+    <Container className="mt-4" fluid>
       <Row>
         <Col md={4} className="mx-auto">
           <h2 className="text-center">Add District</h2>
-          <Form className="border border-dark p-4 mt-5" onSubmit={handleSubmit}>
-            <Row className="mb-3 text-center">
+          <Form className="border border-dark p-4 mt-4" onSubmit={handleSubmit}>
+            <Row className="mb-3 text-start">
               <Form.Group controlId="categoryDropdown" className="mt-4">
-                <Form.Label className="fs-5 text-dark">State:</Form.Label>
+                <Form.Label className="fw-bold ms-3">State</Form.Label>
                 <Form.Control
                   as="select"
                   value={district_state}
@@ -77,10 +77,10 @@ const District = () => {
 
             <Row className="mb-3">
               <Col>
-                <Form.Group className="text-center">
-                  <Form.Label htmlFor="city" className="text-dark fs-5">
+                <Form.Group className="text-start">
+                  <Form.Label htmlFor="city" className="fw-bold ms-3">
                     {" "}
-                    Enter District:
+                    Enter District
                   </Form.Label>
                   <Form.Control
                     id="district"
@@ -97,17 +97,18 @@ const District = () => {
 
             <Row className="mb-3">
               <Col>
-                <Form.Group className="text-center">
-                  <Form.Label className="text-dark fs-5">
-                    Select Status:
+                <Form.Group className="text-start">
+                <div>
+                  <Form.Label className="fw-bold ms-3">
+                    Select Status
                   </Form.Label>
-                  <div>
+                  
                     <Form.Check
                       type="radio"
                       label="Active"
                       name="status"
                       value="active"
-                      className="me-5 text-dark"
+                      className="me-4 ms-4 text-dark"
                       checked={district_status === "Active"}
                       onChange={(e) => setstatus(e.target.value)}
                       inline

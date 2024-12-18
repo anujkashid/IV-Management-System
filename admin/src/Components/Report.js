@@ -108,9 +108,9 @@ const Report = () => {
 
   return (
     <Container>
-      <h2 className="mt-5 text-center mb-3">Report</h2>
+      <h2 className="mt-4 text-center mb-3">Report</h2>
 
-      <h4>Select College Name</h4>
+      <h6 className="ms-3 fw-bold">Select College Name</h6>
       <Form.Select
         aria-label="Select college name"
         value={selectedCollege}
@@ -126,7 +126,7 @@ const Report = () => {
 
       {selectedCollege && (
         <>
-          <h4 className="mt-4">Select Date</h4>
+          <h6 className="mt-4 ms-3 fw-bold">Select Date</h6>
           <Form.Select
             aria-label="Select date"
             value={selectedDate}
@@ -146,11 +146,11 @@ const Report = () => {
         <Button variant="primary" onClick={exportPDF}>
           Export PDF
         </Button>
-        <Button variant="success" onClick={exportExcel}>
+        <Button variant="primary" onClick={exportExcel}>
           Export Excel
         </Button>
         <CSVLink data={filteredData} filename="state_data.csv">
-          <Button variant="info">Export CSV</Button>
+          <Button variant="primary">Export CSV</Button>
         </CSVLink>
       </div>
 

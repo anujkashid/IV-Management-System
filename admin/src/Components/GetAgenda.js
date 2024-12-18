@@ -6,6 +6,9 @@ import "jspdf-autotable";
 import * as XLSX from "xlsx"; // For exporting Excel
 import { Table, Button, Container} from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { MdModeEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
+
 
 const GetAgenda = () => {
   const [agendaData, setAgendaData] = useState([]);
@@ -79,7 +82,7 @@ const GetAgenda = () => {
 
   return (
     <Container>
-      <h2 className="my-5 text-center">Agenda Data</h2>
+      <h2 className="my-4 text-center">Agenda Data</h2>
       <div className="mb-4 d-flex justify-content-start gap-2">
   <Button variant="primary" onClick={exportPDF}>
     Export PDF
@@ -102,10 +105,10 @@ const GetAgenda = () => {
         <thead className="thead-dark">
           <tr className="text-center">
             <th>Sr.</th>
-            <th>Agenda Title</th>
-            <th>Agenda Description</th>
-            <th>Agenda Time</th>
-            <th>Agenda Status</th>
+            <th> Title</th>
+            <th> Description</th>
+            <th> Time</th>
+            <th> Status</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -121,9 +124,9 @@ const GetAgenda = () => {
               <Link
               to='/head/update_agenda'
               onClick={() => handleUpdate(agenda._id)}>
-              <Button className="btn btn-primary me-4 px-3 py-2">Update</Button></Link>
+              <Button className="btn btn-primary me-4 px-2 py-1"><MdModeEdit size={24}/></Button></Link>
               <Button  variant="danger"
-              onClick={() => deletedata(agenda._id)} className="btn btn-danger px-3 py-2">Delete</Button>
+              onClick={() => deletedata(agenda._id)} className="btn btn-danger px-2 py-1"><MdDelete size={24}/></Button>
               </td>
             </tr>
           ))}

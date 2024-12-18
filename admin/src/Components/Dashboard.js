@@ -119,7 +119,7 @@ const Dashboard = () => {
             </Card.Body>
             <Card.Footer className="text-center border border-0">
               <Card.Link href="/head/upcomingVisits">
-                <Button className="btn btn-success">Details</Button>
+                <Button className="btn btn-primary">Details</Button>
               </Card.Link>
             </Card.Footer>
           </Card>
@@ -144,7 +144,7 @@ const Dashboard = () => {
             </Card.Body>
             <Card.Footer className="text-center border border-0">
               <Card.Link href="/head/totalvisits">
-                <Button className="btn btn-success">Details</Button>
+                <Button className="btn btn-primary">Details</Button>
               </Card.Link>
             </Card.Footer>
           </Card>
@@ -169,7 +169,7 @@ const Dashboard = () => {
             </Card.Body>
             <Card.Footer className="text-center border border-0">
               <Card.Link href="/head/currentweekvisits">
-                <Button className="btn btn-success">Details</Button>
+                <Button className="btn btn-primary">Details</Button>
               </Card.Link>
             </Card.Footer>
           </Card>
@@ -194,7 +194,7 @@ const Dashboard = () => {
             </Card.Body>
             <Card.Footer className="text-center border border-0">
               <Card.Link href="/head/currentmonthvisists">
-                <Button className="btn btn-success">Details</Button>
+                <Button className="btn btn-primary">Details</Button>
               </Card.Link>
             </Card.Footer>
           </Card>
@@ -219,7 +219,7 @@ const Dashboard = () => {
             </Card.Body>
             <Card.Footer className="text-center border border-0">
               <Card.Link href="/head/totalcollege">
-                <Button className="btn btn-success">Details</Button>
+                <Button className="btn btn-primary">Details</Button>
               </Card.Link>
             </Card.Footer>
           </Card>
@@ -244,7 +244,7 @@ const Dashboard = () => {
             </Card.Body>
             <Card.Footer className="text-center border border-0">
               <Card.Link href="/head/mousigned">
-                <Button className="btn btn-success">Details</Button>
+                <Button className="btn btn-primary">Details</Button>
               </Card.Link>
             </Card.Footer>
           </Card>
@@ -269,7 +269,7 @@ const Dashboard = () => {
             </Card.Body>
             <Card.Footer className="text-center border border-0">
               <Card.Link href="/head/nonmousigned">
-                <Button className="btn btn-success">Details</Button>
+                <Button className="btn btn-primary">Details</Button>
               </Card.Link>
             </Card.Footer>
           </Card>
