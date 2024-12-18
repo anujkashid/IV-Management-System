@@ -77,7 +77,7 @@ const Update_city = () => {
       .put(`http://localhost:8000/updatecity/${id}`, userdata)
       .then(() => {
         console.log("City updated successfully");
-        navigate("/GetCity");
+        navigate("/head/city");
       })
       .catch((err) => {
         console.log(err);
@@ -146,8 +146,8 @@ const Update_city = () => {
                   type="radio"
                   label="Active"
                   name="status"
-                  value="Active"
-                  checked={city_status === "Active"}
+                  value="active"
+                  checked={city_status === "active"}
                   onChange={(e) => setStatus(e.target.value)}
                   inline
                 />
@@ -155,8 +155,8 @@ const Update_city = () => {
                   type="radio"
                   label="Inactive"
                   name="status"
-                  value="Inactive"
-                  checked={city_status === "Inactive"}
+                  value="inactive"
+                  checked={city_status === "inactive"}
                   onChange={(e) => setStatus(e.target.value)}
                   inline
                 />

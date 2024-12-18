@@ -5,13 +5,11 @@ import { Button, Col, Form, Row, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const Update_district = () => {
-  const [city_state, setCityState] = useState("");
-  const [city_district, setCityDistrict] = useState("");
-  const [city_name, setCityname] = useState("");
-  const [city_status, setStatus] = useState("");
+  const [district_state, setDistrictstate] = useState("");
+  const [district_name, setDistrictname] = useState("");
+  const [district_status, setDistrictstatus] = useState("");
   const [statedata, setStatedata] = useState([]); // Store all states
-  const [districtdata, setDistrictdata] = useState([]); // Store districts of selected state
-  const [citydata, setCitydata] = useState({}); // Data of the city to update
+  const [districrtdata, setDistrictdata] = useState({}); // Data of the city to update
   const navigate = useNavigate();
 
   const id = localStorage.getItem("updatedistrictid");
@@ -19,13 +17,13 @@ const Update_district = () => {
   // Fetch city data for updating
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/getonecity/${id}`)
+      .get(`http://localhost:8000/getonedistrict/${id}`)
       .then((response) => {
-        setCitydata(response.data);
-        setCityState(response.data.city_state);
-        setCityDistrict(response.data.city_district);
-        setCityname(response.data.city_name);
-        setStatus(response.data.city_status);
+        console.log(response.data.data)
+        setDistrictdata(response.data);
+        setDistrictstate(response.data.district_state);
+        setDistrictname(response.data.district_name);
+        setDistrictstatus(response.data.district_status);
       })
       .catch((err) => console.log(err));
   }, [id]);
@@ -40,44 +38,28 @@ const Update_district = () => {
         .catch((err) => console.log(err));
     }, []);
   
-    // get API for district based on selected state
-    useEffect(() => {
-      if (city_state) {
-        axios
-          .get("http://localhost:8000/getdistrict")
-          .then((res) => {
-            const filteredDistricts = res.data.data.filter(
-              (district) => district.district_state === city_state
-            );
-            setDistrictdata(filteredDistricts);
-          })
-          .catch((err) => console.log(err));
-      }
-    }, [city_state]);
   
 
   const handleClear = () => {
-    setCityname("");
-    setCityDistrict("");
-    setCityState("");
-    setStatus("");
+    setDistrictname("");
+    setDistrictstate("");
+    setDistrictstatus("");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const userdata = {
-      city_name,
-      city_district,
-      city_state,
-      city_status,
+      district_name,
+      district_state,
+      district_status,
     };
 
     axios
       .put(`http://localhost:8000/updatedistrict/${id}`, userdata)
       .then(() => {
         console.log("City updated successfully");
-        navigate("/GetDistrict");
+        navigate("/head/district");
       })
       .catch((err) => {
         console.log(err);
@@ -95,8 +77,8 @@ const Update_district = () => {
               <Form.Label>State:</Form.Label>
               <Form.Control
                 as="select"
-                value={city_state}
-                onChange={(e) => setCityState(e.target.value)}
+                value={district_state}
+                onChange={(e) => setDistrictstate(e.target.value)}
                 required
               >
                 <option value="">-- Select State --</option>
@@ -109,31 +91,13 @@ const Update_district = () => {
             </Form.Group>
 
             {/* District Dropdown */}
-            <Form.Group controlId="districtDropdown" className="mb-3">
-              <Form.Label>District:</Form.Label>
-              <Form.Control
-                as="select"
-                value={city_district}
-                onChange={(e) => setCityDistrict(e.target.value)}
-                required
-              >
-                <option value="">-- Select District --</option>
-                {districtdata.map((district) => (
-                  <option key={district._id} value={district.district_name}>
-                    {district.district_name}
-                  </option>
-                ))}
-              </Form.Control>
-            </Form.Group>
-
-            {/* City Name */}
-            <Form.Group controlId="cityName" className="mb-3">
-              <Form.Label>City Name:</Form.Label>
+            <Form.Group controlId="districtName" className="mb-3">
+              <Form.Label>District Name:</Form.Label>
               <Form.Control
                 type="text"
-                value={city_name}
-                onChange={(e) => setCityname(e.target.value)}
-                placeholder="Enter City Name"
+                value={district_name}
+                onChange={(e) => setDistrictname(e.target.value)}
+                placeholder="Enter District Name"
                 required
               />
             </Form.Group>
@@ -146,18 +110,18 @@ const Update_district = () => {
                   type="radio"
                   label="Active"
                   name="status"
-                  value="Active"
-                  checked={city_status === "Active"}
-                  onChange={(e) => setStatus(e.target.value)}
+                  value="active"
+                  checked={district_status === "active"}
+                  onChange={(e) => setDistrictstatus(e.target.value)}
                   inline
                 />
                 <Form.Check
                   type="radio"
                   label="Inactive"
                   name="status"
-                  value="Inactive"
-                  checked={city_status === "Inactive"}
-                  onChange={(e) => setStatus(e.target.value)}
+                  value="inactive"
+                  checked={district_status === "inactive"}
+                  onChange={(e) => setDistrictstatus(e.target.value)}
                   inline
                 />
               </div>

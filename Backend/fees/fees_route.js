@@ -10,7 +10,7 @@ route.post('/add_fees', Adduser);
 
 route.get('/get_fees', Getuser);
 
-route.get('/get_fees_aone/:_id', GetuserById);
+route.get('/get_fees_one/:_id', GetuserById);
 
 route.delete('/delete_fees/:_id', Deleteuser);
 

@@ -73,8 +73,8 @@ const GetAgenda = () => {
     XLSX.writeFile(workbook, "agenda_data.xlsx");
   };
 
-  const handleUpdate = (id) => {
-    localStorage.setItem('updateagendaid', id);
+  const handleUpdate = (_id) => {
+    localStorage.setItem('updateagendaid', _id);
   };
 
   return (
@@ -84,16 +84,16 @@ const GetAgenda = () => {
   <Button variant="primary" onClick={exportPDF}>
     Export PDF
   </Button>
-  <Button variant="success" onClick={exportExcel}>
+  <Button variant="primary" onClick={exportExcel}>
     Export Excel
   </Button>
   <CSVLink data={agendaData} filename="agenda_data.csv">
-    <Button variant="info">Export CSV</Button>
+    <Button variant="primary">Export CSV</Button>
   </CSVLink>
 </div>
 
 <div className="d-flex justify-content-end me-3 mb-3">
-  <Link to="/head/addagenda">
+  <Link to="/head/agenda">
     <Button className="btn btn-primary py-2 px-3">Add</Button>
   </Link>
 </div>
@@ -101,7 +101,7 @@ const GetAgenda = () => {
       <Table striped bordered hover responsive>
         <thead className="thead-dark">
           <tr className="text-center">
-            <th>Sr.No</th>
+            <th>Sr.</th>
             <th>Agenda Title</th>
             <th>Agenda Description</th>
             <th>Agenda Time</th>

@@ -61,7 +61,7 @@ const CancelledVisit = () => {
   return (
     <div className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>
       <ColHeader />
-      <h3 className="text-center text-danger mb-4 mt-4">Cancelled Visit</h3>
+      <h3 className="text-center text-danger mb-4 mt-4">Cancel Visit</h3>
       <Col md={4} className="mx-auto">
         <div className="container">
           <form className="border border-dark p-2" onSubmit={handleSubmit}>

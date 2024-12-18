@@ -22,7 +22,7 @@ const Update_fees = () => {
     .put(`http://localhost:8000/update_fees/${id}`, userdata)
     .then((res) => {
       alert("fees Details Updated Successfully");
-      console.log(res.data);
+      // console.log(res.data);
     })
     .catch((err) => {
       console.log("Error while updating fees:", err);
@@ -33,8 +33,8 @@ useEffect(() => {
   axios
     .get(`http://localhost:8000/get_fees_one/${id}`)
     .then((res) => {
-      // setFeesData(res.data.userData);
-      const data = res.data.userData;
+      setFeesData(res.data.data);
+      const data = res.data.data;
       setFees_title(data.fees_title || ""); // Set the initial value for university_name
       setFees_amount(data.fees_amount || "");
       setFees_status(data.fees_status || "");
@@ -96,7 +96,7 @@ useEffect(() => {
                       type="radio"
                       label="Active"
                       name="status"
-                      value="active"
+                      value={fees_status}
                       className="me-5 text-dark"
                       checked={fees_status === "Active"}
                       onChange={(e) => setFees_status(e.target.value)}
@@ -106,7 +106,7 @@ useEffect(() => {
                       type="radio"
                       label="Inactive"
                       name="status"
-                      value="inactive"
+                      value={fees_status}
                       checked={fees_status === "Inactive"}
                       onChange={(e) => setFees_status(e.target.value)}
                       inline

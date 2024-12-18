@@ -81,7 +81,7 @@ useEffect(() => {
                       name="status"
                       value="active"
                       className="me-5 text-dark"
-                      checked={university_status === "Active"}
+                      checked={university_status === "active"}
                       onChange={(e) => setUniversitystatus(e.target.value)}
                       inline
                     />
@@ -90,7 +90,7 @@ useEffect(() => {
                       label="Inactive"
                       name="status"
                       value="inactive"
-                      checked={university_status === "Inactive"}
+                      checked={university_status === "inactive"}
                       onChange={(e) => setUniversitystatus(e.target.value)}
                       inline
                     />

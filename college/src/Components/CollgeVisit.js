@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -9,8 +8,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ColHeader from "./Navbar";
 import axios from "axios";
-import Footer from "./Footer";
-
 
 const ColLogin = () => {
   const [number_of_students, setNumberofStudent] = useState("");
@@ -111,9 +108,6 @@ const ColLogin = () => {
             alert("Failed to add visit. Please try again.");
         });
 };
-
-
-
 
   return (
     <>

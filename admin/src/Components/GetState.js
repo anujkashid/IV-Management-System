@@ -69,8 +69,8 @@ const GetState = () => {
     XLSX.writeFile(workbook, "state_data.xlsx");
   };
 
-  const handleUpdate = (id) => {
-    localStorage.setItem('updatestateid', id);
+  const handleUpdate = (_id) => {
+    localStorage.setItem('updatestateid', _id);
   };
 
   return (
@@ -89,7 +89,7 @@ const GetState = () => {
 </div>
 
 <div className="d-flex justify-content-end me-3 mb-3">
-  <Link to="/head/addstate">
+  <Link to="/head/state">
     <Button className="btn btn-primary py-2 px-3">Add</Button>
   </Link>
 </div>

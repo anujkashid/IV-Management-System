@@ -37,6 +37,10 @@ import UpcomingVisits from "./UpcomingVisits";
 import Report from "./Report";
 import FeesVerification from "./FeesVerification";
 import FeedbackDisplayComponent from "./FeedbackDisplayComponent";
+import GetAgenda from "./GetAgenda";
+import GetFees from "./GetFees";
+import Update_agenda from "./Update_agenda";
+import Update_fees from "./Update_fees";
 
 
 const Head = () => {
@@ -56,7 +60,7 @@ const Head = () => {
             <Route path="/agenda" element={<Agenda />} />
             <Route path="/location" element={<GetLocation />} />
             <Route path="/university" element={<GetUniversity/>} />
-            <Route path="/addstate" element={<State />} />
+            <Route path="/state" element={<State />} />
             <Route path="/adddistrict" element={<District/>}/>
             <Route path="/city" element={<GetCity/>}/>
             <Route path="/college_registarion" element={<College_registration/>}/>
@@ -65,13 +69,15 @@ const Head = () => {
             <Route path="/addlocation" element={<Location></Location>}/>
             <Route path="/addcity" element={<City/>}/>
             <Route path="/adduniversity" element={<University/>}/>
-            <Route path="/state" element={<GetState/>}/>
+            <Route path="/getstate" element={<GetState/>}/>
             <Route path="/district" element={<GetDistrict/>}/>
             <Route path="/update_city" element={<Update_city/>}/>
             <Route path="/update_district" element={<Update_district/>}/>
             <Route path="/update_state" element={<Update_state/>}/>
             <Route path="/update_location" element={<Update_location/>}/>
             <Route path="/update_university" element={<Update_university/>}/>
+            <Route path="/update_agenda" element={<Update_agenda/>}/>
+            <Route path="/update_fees" element={<Update_fees/>}/>
             <Route path="/visitcomplete" element={<VisitCompleted></VisitCompleted>}/>
             <Route path="/media" element={<GalleryAdd/>}/>
             <Route path="/totalvisits" element={<Total_Visits/>}/>
@@ -84,6 +90,8 @@ const Head = () => {
             <Route path="/report" element={<Report/>}/>
             <Route path="/feeverification" element={<FeesVerification/>}/>
             <Route path="/feedback" element={<FeedbackDisplayComponent/>}/>
+            <Route path="/getagenda" element={<GetAgenda/>}/>
+            <Route path="/getfees" element={<GetFees/>}/>
   
           </Routes>
         </Container>

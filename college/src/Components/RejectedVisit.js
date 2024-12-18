@@ -6,12 +6,12 @@ import ColHeader from "./Navbar";
 const RejectedVisit = () => {
   const [rejectediv, setRejectediv] = useState([]);
   const collegename = localStorage.getItem("CollegeName");
-  const [collegeData, setCollegeData] = useState([]);
+  // const [collegeData, setCollegeData] = useState([]);
 
   useEffect(() => {
     axios.get("http://localhost:8000/getvisit")
     .then((res)  => {
-      setCollegeData(res.data.userData);
+      // setCollegeData(res.data.userData);
       const data = res.data.userData;
       console.log("data",data)
 

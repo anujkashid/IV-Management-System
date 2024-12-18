@@ -38,8 +38,8 @@ const Getuser = async (req, res) => {
 // GET API ONLY FIND ONE
 const GetuserById = async (req, res) => {
     try {
-        const { id } = req.params
-        const userData = await model.findOne({ _id: id })
+        const { _id } = req.params
+        const userData = await rmodel.findOne({ _id: _id })
         res.status(200).send({ userData })
 
     } catch (err) {

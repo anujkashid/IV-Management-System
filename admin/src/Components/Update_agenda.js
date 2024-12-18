@@ -116,20 +116,20 @@ useEffect(() => {
                   <div>
                     <Form.Check
                       type="radio"
-                      label="Active"
+                      label="active"
                       name="status"
-                      value="active"
+                      value={agenda_status}
                       className="me-5 text-dark"
-                      checked={agenda_status === "Active"}
+                      checked={agenda_status === "active"}
                       onChange={(e) => setAgenda_status(e.target.value)}
                       inline
                     />
                     <Form.Check
                       type="radio"
-                      label="Inactive"
+                      label="inactive"
                       name="status"
-                      value="inactive"
-                      checked={agenda_status === "Inactive"}
+                      value={agenda_status}
+                      checked={agenda_status === "inactive"}
                       onChange={(e) => setAgenda_status(e.target.value)}
                       inline
                     />

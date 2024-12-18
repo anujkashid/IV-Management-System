@@ -81,12 +81,11 @@ const Feedback = () => {
 
   return (
     <>
-    <Container fluid className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>
-      <ColHeader />
-      <Container className="mt-4" fluid>
+     <ColHeader />
+    <Container fluid className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}> 
         <Row>
           <Col md={4} className="mx-auto">
-            <h2 className="text-center text-danger">Add Feedback</h2>
+            <h2 className="text-center text-danger mt-4">Add Feedback</h2>
             <Form className="border border-dark p-4 mt-5" onSubmit={handleSubmit}>
               <Row className="mb-3 text-center">
                 <Form.Group controlId="categoryDropdown" className="mt-4">
@@ -146,7 +145,6 @@ const Feedback = () => {
             </Form>
           </Col>
         </Row>
-      </Container>
       </Container>
     </>
   );

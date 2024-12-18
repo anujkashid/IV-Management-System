@@ -143,7 +143,7 @@ const Sidebar = () => {
            <div>
            <MdLocationOn size={24} className="text-dark me-2" />
            <Link
-              to="/head/state"
+              to="/head/getstate"
               className="nav-link p-2 text-dark"
               style={{ display: "inline-block" }}
             >
@@ -181,12 +181,12 @@ const Sidebar = () => {
 
 
           <Nav.Item>
-            <Link to="/head/agenda" className="nav-link p-2">
+            <Link to="/head/getagenda" className="nav-link p-2">
               <AiOutlineCalendar size={30} className="me-2 text-dark" /> Agenda
             </Link>
           </Nav.Item>
           <Nav.Item>
-            <Link to="/head/fees" className="nav-link p-2">
+            <Link to="/head/getfees" className="nav-link p-2">
               <FaMoneyBillWave size={30} className="me-2 text-dark" /> Fees
             </Link>
           </Nav.Item>

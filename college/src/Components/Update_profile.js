@@ -89,7 +89,7 @@ const UpdateProfile = () => {
   };
 
   return (
-    <div className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>
+    <div className="" style={{ backgroundColor: "#EEEEFF", height:"100%" }}>
       <ColHeader />
       <Container>
         <Row>

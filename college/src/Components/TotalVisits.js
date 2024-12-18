@@ -7,7 +7,7 @@ import { MdFileDownload } from "react-icons/md";
 const TotalVisit = () => {
   const [ivcount, setIvcount] = useState([]);
   const collegename = localStorage.getItem("CollegeName");
-  const [ setCollegeData] = useState([]);
+  const [collegeData, setCollegeData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const visitsPerPage = 10; // Number of rows per page
 
@@ -77,7 +77,7 @@ const TotalVisit = () => {
                 <td>{IV.number_of_faculty}</td>
                 <td>{formatDate(IV.Date_of_visit)}</td>
                 <td>{IV.visting_location}</td>
-                <td>{IV.Visit_status}</td>
+                <td>{IV.Visit_accept}</td>
               </tr>
             ))}
           </tbody>

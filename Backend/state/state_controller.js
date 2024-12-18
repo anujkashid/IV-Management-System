@@ -41,8 +41,8 @@ const getstate=async(req,res)=>{
 // get one api
 const getOnestate=async(req,res)=>{
     try{
-        const{id}=req.params;
-        const data=await model.findOne({ _id: id });
+        const{_id}=req.params;
+        const data=await model.findOne({ _id: _id });
         res.status(200).send(data);
     }
     catch(error)

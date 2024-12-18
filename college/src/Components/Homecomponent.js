@@ -26,7 +26,7 @@ const Homecomponent = () => {
   const [ivcount, setIvcount] = useState(0);
   const [pendingiv, setPendingiv] = useState(0);
   const [rejectediv, setRejectediv] = useState(0);
-  const [collegeData, setCollegeData] = useState([]);
+  // const [collegeData, setCollegeData] = useState([]);
   const collegename = localStorage.getItem("CollegeName");
 
   // Format date helper
@@ -77,7 +77,7 @@ const Homecomponent = () => {
         const data = response.data.userData.filter(
           (visit) => visit.college_name === collegename
         );
-        setCollegeData(data);
+        // setCollegeData(data);
 
         setIvcount(data.length);
         setPendingiv(

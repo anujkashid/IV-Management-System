@@ -97,7 +97,7 @@ return (
                 About
               </Nav.Link>
 
-              <Nav.Link href="/addvisit" className="text-white fs-5 me-2">
+              <Nav.Link href="/collegetotalvisit" className="text-white fs-5 me-2">
                 Schedule Visit
               </Nav.Link>
               <Nav.Link href="/feedback" className="text-white fs-5 me-2">
@@ -111,9 +111,6 @@ return (
               </Nav.Link>
               <Nav.Link href="/pendingfees" className="text-white fs-5 me-2">
               Pending Fees
-              </Nav.Link>
-              <Nav.Link href="/visitcancelled" className="text-white fs-5">
-                 Cancelled  Visit
               </Nav.Link>
             </Nav>
 
@@ -148,8 +145,6 @@ return (
                 <Dropdown.Menu>
                   <Dropdown.Item href="/profile">View Profile</Dropdown.Item>
                   <Dropdown.Item href="/update_profile">Update Profile</Dropdown.Item>
-                  <Dropdown.Divider />
-                  <Dropdown.Item  onClick={handleShow} className="text-danger">Delete Account</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
 
@@ -162,47 +157,7 @@ return (
         </Container>
       </Navbar>
 
-        {/*Account deletion code */} 
-
-      <Modal show={showModal} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Confirm Account Deletion</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleDelete}>
-            <Form.Group className="mb-3">
-              <Form.Label>Why are you deleting your account?</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                value={reason}
-                onChange={(e) => setReason(e.target.value)}
-                placeholder="Enter your reason"
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
-              />
-            </Form.Group>
-            {errorMessage && (
-              <div className="text-danger mb-3">{errorMessage}</div>
-            )}
-            <div className="text-end">
-              <Button variant="secondary" onClick={handleClose} className="me-2">
-                Cancel
-              </Button>
-              <Button variant="danger" type="submit">
-                Delete Account
-              </Button>
-            </div>
-          </Form>
-        </Modal.Body>
-      </Modal>
+       
     </>
   );
 };

@@ -103,7 +103,7 @@ useEffect(() => {
                       name="status"
                       value="active"
                       className="me-5 text-dark"
-                      checked={location_status === "Active"}
+                      checked={location_status === "active"}
                       onChange={(e) => setLocationstatus(e.target.value)}
                       inline
                     />
@@ -112,7 +112,7 @@ useEffect(() => {
                       label="Inactive"
                       name="status"
                       value="inactive"
-                      checked={location_status === "Inactive"}
+                      checked={location_status === "inactive"}
                       onChange={(e) => setLocationstatus(e.target.value)}
                       inline
                     />

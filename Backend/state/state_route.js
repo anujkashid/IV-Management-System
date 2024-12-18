@@ -6,7 +6,7 @@ const route=express.Router();
 
 route.post('/addstate',addstate);
 route.get('/getstate',getstate);
-route.get('/getonestate/:id',getOnestate);
+route.get('/getonestate/:_id',getOnestate);
 route.delete('/deletestate/:id',deletestate);
 route.put('/updatestate/:id',updatestate);
 

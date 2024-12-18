@@ -10,7 +10,7 @@ route.post('/add_agenda', Adduser);
 
 route.get('/get_agenda', Getuser);
 
-route.get('/get_agenda_aone/:_id', GetuserById);
+route.get('/get_agenda_one/:_id', GetuserById);
 
 route.delete('/delete_agenda/:_id', Deleteuser);
 

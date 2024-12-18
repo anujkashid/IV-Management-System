@@ -71,27 +71,27 @@ const GetFees = () => {
     XLSX.writeFile(workbook, "fees_data.xlsx");
   };
 
-  const handleUpdate = (id) => {
-    localStorage.setItem('updatefeesid', id);
+  const handleUpdate = (_id) => {
+    localStorage.setItem('updatefeesid', _id);
   };
 
   return (
     <Container>
-      <h2 className="my-5 text-center">fees Data</h2>
+      <h2 className="my-5 text-center">Fees Data</h2>
       <div className="mb-4 d-flex justify-content-start gap-2">
   <Button variant="primary" onClick={exportPDF}>
     Export PDF
   </Button>
-  <Button variant="success" onClick={exportExcel}>
+  <Button variant="primary" onClick={exportExcel}>
     Export Excel
   </Button>
   <CSVLink data={feesData} filename="fees_data.csv">
-    <Button variant="info">Export CSV</Button>
+    <Button variant="primary">Export CSV</Button>
   </CSVLink>
 </div>
 
 <div className="d-flex justify-content-end me-3 mb-3">
-  <Link to="/head/addfees">
+  <Link to="/head/fees">
     <Button className="btn btn-primary py-2 px-3">Add</Button>
   </Link>
 </div>
@@ -99,7 +99,7 @@ const GetFees = () => {
       <Table striped bordered hover responsive>
         <thead className="thead-dark">
           <tr className="text-center">
-            <th>Sr.No</th>
+            <th>Sr.</th>
             <th>fees Title</th>
             <th>fees Amount</th>
             <th>fees Status</th>

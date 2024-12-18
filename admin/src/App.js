@@ -8,7 +8,6 @@ const App = () => {
   return (
     <>
     <BrowserRouter>
-
       <Routes>
         {/* Login Page - Offcanvas is hidden here */}
          <Route path="/" element={<Login />} /> 
@@ -18,10 +17,7 @@ const App = () => {
          <Route path="/" element={ <Login></Login>} /> */}
       </Routes>
       </BrowserRouter>
-
-      
-      
-      </> 
+      </>
   );
 };
 

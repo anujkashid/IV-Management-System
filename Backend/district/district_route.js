@@ -6,7 +6,7 @@ const route=express.Router();
 
 route.post('/adddistrict',adddistrict);
 route.get('/getdistrict',getdistrict);
-route.get('/getonedistrict/:id',getOnedistrict);
+route.get('/getonedistrict/:_id',getOnedistrict);
 route.delete('/deletedistrict/:id',deletedistrict);
 route.put('/updatedistrict/:id',updatedistrict);
 

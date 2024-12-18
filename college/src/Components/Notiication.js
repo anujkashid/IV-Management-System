@@ -45,7 +45,7 @@ const Notification = () => {
   };
 
   return (
-    <div className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>
+    <div className="" style={{ backgroundColor: "#EEEEFF", height:"100%" }}>
       <ColHeader />
       <div className="container mt-4">
         <h3 className="text-center mb-4 text-danger">Notifications</h3>
