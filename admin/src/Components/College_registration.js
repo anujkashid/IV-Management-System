@@ -93,7 +93,11 @@ const College_registration = () => {
     axios
       .get("http://localhost:8000/getstate")
       .then((res) => {
-        setState(res.data.data);
+        const data = res.data.data;
+        const activestate = data.filter( 
+          (a) =>  a.state_status === "active"
+      )
+        setState(activestate);
       })
       .catch((error) => {
         console.log(error);
@@ -104,7 +108,11 @@ const College_registration = () => {
     axios
       .get("http://localhost:8000/getdistrict")
       .then((res) => {
-        setDistrict(res.data.data);
+        const data = res.data.data;
+        const activedistrict = data.filter( 
+          (a) =>  a.district_status === "active"
+      )
+        setDistrict(activedistrict);
         // console.log("1",res.data);
       })
       .catch((error) => {
@@ -132,7 +140,11 @@ const College_registration = () => {
     axios
       .get("http://localhost:8000/getcity")
       .then((res) => {
-        setCity(res.data.data);
+        const data = res.data.data;
+        const activecity = data.filter( 
+          (a) =>  a.city_status === "active"
+      )
+        setCity(activecity);
         // console.log("1",res.data);
       })
       .catch((error) => {
@@ -159,7 +171,11 @@ const College_registration = () => {
     axios
       .get("http://localhost:8000/getuniversity")
       .then((res) => {
-        setUniversity(res.data.data);
+        const data = res.data.data;
+        const activeuniversity = data.filter( 
+          (a) =>  a.university_status === "active"
+      )
+        setUniversity(activeuniversity);
         // console.log("1",res.data);
       })
       .catch((error) => {
