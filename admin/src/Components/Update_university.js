@@ -46,18 +46,18 @@ useEffect(() => {
   };
 
   return (
-    <Container className="mt-5" fluid>
+    <Container className="mt-4" fluid>
       <Row>
         <Col md={4} className="mx-auto">
           <h2 className="text-center">Update University</h2>
           <Form
-            className="border border-dark p-4 mt-5"
+            className="border border-dark p-4 mt-4"
             onSubmit={handleSubmit}
           >
             <Row className="mb-3">
               <Col>
-                <Form.Group className="text-center">
-                  <Form.Label className="text-dark  fs-5"> Enter University Name:</Form.Label>
+                <Form.Group className="text-start">
+                  <Form.Label className="fw-bold ms-3"> University Name</Form.Label>
                   <Form.Control
                     placeholder="Enter name"
                     type="text"
@@ -72,15 +72,16 @@ useEffect(() => {
 
             <Row className="mb-3">
               <Col>
-                <Form.Group className="text-center">
-                  <Form.Label className="text-dark fs-5">Select Status:</Form.Label>
-                  <div>
+                <Form.Group className="text-start">
+                <div>
+                  <Form.Label className="fw-bold ms-3">Select Status</Form.Label>
+                
                     <Form.Check
                       type="radio"
                       label="Active"
                       name="status"
                       value="active"
-                      className="me-5 text-dark"
+                      className="me-4 ms-4 text-dark"
                       checked={university_status === "active"}
                       onChange={(e) => setUniversitystatus(e.target.value)}
                       inline

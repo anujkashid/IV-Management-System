@@ -48,14 +48,14 @@ const Update_state = () => {
   };
 
   return (
-    <Container className="mt-5" fluid>
+    <Container className="mt-4" fluid>
       <Row>
         <Col md={4} className="mx-auto">
           <h2 className="text-center">Update State</h2>
-          <Form className="border border-dark p-4 mt-5" onSubmit={handleSubmit}>
+          <Form className="border border-dark p-4 mt-4" onSubmit={handleSubmit}>
             {/* State Dropdown */}
             <Form.Group controlId="stateName" className="mb-3">
-              <Form.Label>State Name:</Form.Label>
+              <Form.Label className="fw-bold ms-3">State Name</Form.Label>
               <Form.Control
                 type="text"
                 value={state_name}
@@ -67,13 +67,15 @@ const Update_state = () => {
         
             {/* Status */}
             <Form.Group className="mb-3">
-              <Form.Label>Status:</Form.Label>
-              <div>
+            <div>
+              <Form.Label className="fw-bold ms-3">Status</Form.Label>
+           
                 <Form.Check
                   type="radio"
                   label="Active"
                   name="status"
                   value="active"
+                  className="me-4 ms-4"
                   checked={state_status === "active"}
                   onChange={(e) => setStatus(e.target.value)}
                   inline

@@ -67,14 +67,14 @@ const Update_district = () => {
   };
 
   return (
-    <Container className="mt-5" fluid>
+    <Container className="mt-4" fluid>
       <Row>
         <Col md={4} className="mx-auto">
           <h2 className="text-center">Update District</h2>
-          <Form className="border border-dark p-4 mt-5" onSubmit={handleSubmit}>
+          <Form className="border border-dark p-4 mt-4" onSubmit={handleSubmit}>
             {/* State Dropdown */}
             <Form.Group controlId="stateDropdown" className="mb-3">
-              <Form.Label>State:</Form.Label>
+              <Form.Label className="fw-bold ms-3">State</Form.Label>
               <Form.Control
                 as="select"
                 value={district_state}
@@ -92,7 +92,7 @@ const Update_district = () => {
 
             {/* District Dropdown */}
             <Form.Group controlId="districtName" className="mb-3">
-              <Form.Label>District Name:</Form.Label>
+              <Form.Label className="fw-bold ms-3">District Name</Form.Label>
               <Form.Control
                 type="text"
                 value={district_name}
@@ -104,13 +104,15 @@ const Update_district = () => {
 
             {/* Status */}
             <Form.Group className="mb-3">
-              <Form.Label>Status:</Form.Label>
               <div>
+              <Form.Label className="fw-bold ms-3">Status</Form.Label>
+              
                 <Form.Check
                   type="radio"
                   label="Active"
                   name="status"
                   value="active"
+                  className="ms-4 me-4"
                   checked={district_status === "active"}
                   onChange={(e) => setDistrictstatus(e.target.value)}
                   inline

@@ -6,6 +6,8 @@ import "jspdf-autotable";
 import * as XLSX from "xlsx"; // For exporting Excel
 import { Table, Button, Container} from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { MdModeEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 
 const GetFees = () => {
   const [feesData, setFeesData] = useState([]);
@@ -77,7 +79,7 @@ const GetFees = () => {
 
   return (
     <Container>
-      <h2 className="my-5 text-center">Fees Data</h2>
+      <h2 className="my-4 text-center">Fees Data</h2>
       <div className="mb-4 d-flex justify-content-start gap-2">
   <Button variant="primary" onClick={exportPDF}>
     Export PDF
@@ -100,9 +102,9 @@ const GetFees = () => {
         <thead className="thead-dark">
           <tr className="text-center">
             <th>Sr.</th>
-            <th>fees Title</th>
-            <th>fees Amount</th>
-            <th>fees Status</th>
+            <th> Title</th>
+            <th> Amount</th>
+            <th> Status</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -117,9 +119,9 @@ const GetFees = () => {
               <Link
               to='/head/update_fees'
               onClick={() => handleUpdate(fees._id)}>
-              <Button className="btn btn-primary me-4 px-3 py-2">Update</Button></Link>
+              <Button className="btn btn-primary me-4 px-2 py-1"><MdModeEdit size={24}/></Button></Link>
               <Button  variant="danger"
-              onClick={() => deletedata(fees._id)} className="btn btn-danger px-3 py-2">Delete</Button>
+              onClick={() => deletedata(fees._id)} className="btn btn-danger px-2 py-1"><MdDelete size={24}/></Button>
               </td>
             </tr>
           ))}

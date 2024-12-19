@@ -85,14 +85,14 @@ const Update_city = () => {
   };
 
   return (
-    <Container className="mt-5" fluid>
+    <Container className="mt-4" fluid>
       <Row>
         <Col md={4} className="mx-auto">
           <h2 className="text-center">Update City</h2>
-          <Form className="border border-dark p-4 mt-5" onSubmit={handleSubmit}>
+          <Form className="border border-dark p-4 mt-4" onSubmit={handleSubmit}>
             {/* State Dropdown */}
             <Form.Group controlId="stateDropdown" className="mb-3">
-              <Form.Label>State:</Form.Label>
+              <Form.Label className="fw-bold ms-3">State</Form.Label>
               <Form.Control
                 as="select"
                 value={city_state}
@@ -110,7 +110,7 @@ const Update_city = () => {
 
             {/* District Dropdown */}
             <Form.Group controlId="districtDropdown" className="mb-3">
-              <Form.Label>District:</Form.Label>
+              <Form.Label className="fw-bold ms-3">District</Form.Label>
               <Form.Control
                 as="select"
                 value={city_district}
@@ -128,7 +128,7 @@ const Update_city = () => {
 
             {/* City Name */}
             <Form.Group controlId="cityName" className="mb-3">
-              <Form.Label>City Name:</Form.Label>
+              <Form.Label className="fw-bold ms-3">City Name</Form.Label>
               <Form.Control
                 type="text"
                 value={city_name}
@@ -140,13 +140,14 @@ const Update_city = () => {
 
             {/* Status */}
             <Form.Group className="mb-3">
-              <Form.Label>Status:</Form.Label>
               <div>
+              <Form.Label className="fw-bold ms-3">Status</Form.Label>
                 <Form.Check
                   type="radio"
                   label="Active"
                   name="status"
                   value="active"
+                  className="ms-4 me-4"
                   checked={city_status === "active"}
                   onChange={(e) => setStatus(e.target.value)}
                   inline

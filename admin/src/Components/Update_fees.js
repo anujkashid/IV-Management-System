@@ -45,18 +45,18 @@ useEffect(() => {
 }, []);
 
   return (
-    <Container className="mt-5" fluid>
+    <Container className="mt-4" fluid>
       <Row>
         <Col md={4} className="mx-auto">
           <h2 className="text-center">Update fees</h2>
           <Form
-            className="border border-dark p-4 mt-5"
+            className="border border-dark p-4 mt-4"
             onSubmit={handleSubmit}
           >
             <Row className="mb-3">
               <Col>
-                <Form.Group className="text-center">
-                  <Form.Label htmlFor="city" className="text-dark  fs-5"> Enter Title:</Form.Label>
+                <Form.Group className="text-start">
+                  <Form.Label htmlFor="city" className="fw-bold ms-3"> Enter Title</Form.Label>
                   <Form.Control
                     id="city"
                     placeholder="Enter title"
@@ -72,8 +72,8 @@ useEffect(() => {
 
             <Row className="mb-3">
               <Col>
-                <Form.Group className="text-center">
-                  <Form.Label htmlFor="name" className="text-dark fs-5">Enter Amount:</Form.Label>
+                <Form.Group className="text-start">
+                  <Form.Label htmlFor="name" className="fw-bold ms-3">Enter Amount</Form.Label>
                   <Form.Control
                     id="name"
                     placeholder="Enter Amount"
@@ -89,15 +89,16 @@ useEffect(() => {
 
             <Row className="mb-3">
               <Col>
-                <Form.Group className="text-center">
-                  <Form.Label className="text-dark fs-5">Select Status:</Form.Label>
+                <Form.Group className="start">
                   <div>
+                  <Form.Label className="fw-bold ms-3">Select Status</Form.Label>
+                  
                     <Form.Check
                       type="radio"
                       label="Active"
                       name="status"
                       value={fees_status}
-                      className="me-5 text-dark"
+                      className="me-4 ms-4"
                       checked={fees_status === "Active"}
                       onChange={(e) => setFees_status(e.target.value)}
                       inline
