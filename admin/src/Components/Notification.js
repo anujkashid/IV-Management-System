@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Notification = () => {
   const [visitData, setVisitData] = useState([]);
@@ -50,7 +51,9 @@ const Notification = () => {
                     key={index}
                     className="border border-dark bg-primary p-2 text-white fs-5 mt-2"
                   >
+                    <Link className="text-decoration-none text-white" to="/head/ivrequest">
                     You have a visit request from <strong>{visit.college_name}</strong>
+                    </Link>
                   </div>
                 ))
               ) : (

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row, Container } from "react-bootstrap";
 import { FaCaretDown } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const City = () => {
   const [city_state, setCityState] = useState("");
@@ -10,6 +11,8 @@ const City = () => {
   const [city_status, setstatus] = useState("");
   const [statedata, setData] = useState([]);
   const [districtdata, setDistrictdata] = useState([]);
+  const navigate = useNavigate();
+
 
   //   get API for state
   useEffect(() => {
@@ -51,8 +54,11 @@ const City = () => {
       .post("http://localhost:8000/addcity", userdata)
       .then((res) => {
         handleClear();
+        navigate("/head/city");
+
       })
       .catch((err) => console.log(err));
+
   };
 
   const handleClear = () => {

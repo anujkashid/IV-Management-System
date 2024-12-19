@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Button, Col, Form, Row, Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Fees = () => {
   const [agenda_title, setAgenda_title] = useState("");
   const [agenda_description, setAgenda_description] = useState("");
   const [agenda_time, setAgenda_time] = useState("");
   const [agenda_status, setAgenda_status] = useState("");
+  const navigate=useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,6 +24,7 @@ const Fees = () => {
     axios.post("http://localhost:8000/add_agenda",userdata)
     .then((res)=>{
         console.log(res.data.data);
+        navigate("/head/getagenda")
         handleClear();
     })
     .catch((err)=> console.log(err))

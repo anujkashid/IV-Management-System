@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState, } from "react";
 import { Button, Col, Form, Row, Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Update_university = () => {
   const [universityData, setUniversityData] = useState({});
   const [university_name, setUniversityname] = useState("");
   const [university_status, setUniversitystatus] = useState("");
   const id = localStorage.getItem("updateuniversityid");
+  const navigate=useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,6 +22,7 @@ const Update_university = () => {
     .put(`http://localhost:8000/updateuniversity/${id}`, userdata)
     .then((res) => {
       alert("Univarsity Details Updated Successfully");
+      navigate("/head/university");
       console.log(res.data);
     })
     .catch((err) => {

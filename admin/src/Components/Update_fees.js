@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, } from "react";
 import { Button, Col, Form, Row, Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Update_fees = () => {
   const [feesData, setFeesData] = useState({});
@@ -8,6 +9,7 @@ const Update_fees = () => {
   const [fees_amount, setFees_amount] = useState("");
   const [fees_status, setFees_status] = useState("");
   const id = localStorage.getItem("updatefeesid");
+  const navigate=useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,6 +24,7 @@ const Update_fees = () => {
     .put(`http://localhost:8000/update_fees/${id}`, userdata)
     .then((res) => {
       alert("fees Details Updated Successfully");
+      navigate("/head/getfees")
       // console.log(res.data);
     })
     .catch((err) => {

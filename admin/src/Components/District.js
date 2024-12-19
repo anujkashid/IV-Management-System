@@ -2,12 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row, Container } from "react-bootstrap";
 import { FaCaretDown } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const District = () => {
   const [district_state, setDistrictState] = useState("");
   const [district_name, setDistrictame] = useState("");
   const [district_status, setstatus] = useState("");
   const [statedata, setData] = useState([]);
+  const navigate = useNavigate();
 
   //   get api
   useEffect(() => {
@@ -34,6 +36,7 @@ const District = () => {
       .post("http://localhost:8000/adddistrict", userdata)
       .then((res) => {
         console.log(res.data.data);
+        navigate("/head/district");
         handleClear();
       })
       .catch((err) => console.log(err));

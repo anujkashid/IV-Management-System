@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, } from "react";
 import { Button, Col, Form, Row, Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Update_agenda = () => {
   const [agendaData, setagendaData] = useState({});
@@ -8,6 +9,7 @@ const Update_agenda = () => {
   const [agenda_description, setAgenda_description] = useState("");
   const [agenda_time, setAgenda_time] = useState("");
   const [agenda_status, setAgenda_status] = useState("");
+  const navigate= useNavigate();
 
   const id = localStorage.getItem("updateagendaid");
 
@@ -25,6 +27,7 @@ const Update_agenda = () => {
     .put(`http://localhost:8000/update_agenda/${id}`, userdata)
     .then((res) => {
       alert("agenda Details Updated Successfully");
+      navigate("/head/getagenda")
       console.log(res.data);
     })
     .catch((err) => {

@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Button, Col, Form, Row, Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Fees = () => {
   const [fees_title, setFees_title] = useState("");
   const [fees_amount, setFees_amount] = useState("");
   const [fees_status, setFees_status] = useState("");
+  const navigate=useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,6 +21,7 @@ const Fees = () => {
     axios.post("http://localhost:8000/add_fees",userdata)
     .then((res)=>{
         console.log(res.data.data);
+        navigate("/head/getfees")
         handleClear();
     })
     .catch((err)=> console.log(err))

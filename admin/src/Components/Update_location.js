@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, } from "react";
 import { Button, Col, Form, Row, Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Update_location = () => {
   const [locationData, setLocationData] = useState({});
@@ -8,6 +9,7 @@ const Update_location = () => {
   const [location_name, setLocationname] = useState("");
   const [location_status, setLocationstatus] = useState("");
   const id = localStorage.getItem("updatelocationid");
+  const navigate=useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,6 +24,7 @@ const Update_location = () => {
     .put(`http://localhost:8000/updatelocation/${id}`, userdata)
     .then((res) => {
       alert("Location Details Updated Successfully");
+      navigate("/head/location");
       console.log(res.data);
     })
     .catch((err) => {

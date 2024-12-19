@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Button, Col, Form, Row, Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Location = () => {
   const [location_city, setLocationcity] = useState("");
   const [location_name, setLocationname] = useState("");
   const [location_status, setLocationstatus] = useState("");
+  const navigate=useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,6 +21,7 @@ const Location = () => {
     axios.post("http://localhost:8000/addlocation",userdata)
     .then((res)=>{
         console.log(res.data.data);
+        navigate("/head/location")
         handleClear();
     })
     .catch((err)=> console.log(err))
