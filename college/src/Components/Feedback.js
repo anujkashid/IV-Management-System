@@ -76,9 +76,9 @@ const Feedback = () => {
 
   const formatDate = (date) => {
     const d = new Date(date);
-    return `${d.getDate()}/${d.toLocaleString('default', { month: 'short' })}/${d.getFullYear()}`;
+    return `${d.getDate()}-${d.toLocaleString('default', { month: 'short' })}-${d.getFullYear()}`;
   };
-
+  
   return (
     <>
      <ColHeader />
@@ -86,10 +86,10 @@ const Feedback = () => {
         <Row>
           <Col md={4} className="mx-auto">
             <h2 className="text-center text-danger mt-4">Add Feedback</h2>
-            <Form className="border border-dark p-4 mt-5" onSubmit={handleSubmit}>
+            <Form className="border border-dark p-4 mt-4" onSubmit={handleSubmit}>
               <Row className="mb-3 text-center">
-                <Form.Group controlId="categoryDropdown" className="mt-4">
-                  <Form.Label className="fs-5 text-dark">Visit Date:</Form.Label>
+                <Form.Group controlId="categoryDropdown" className="">
+                  <Form.Label className=" text-dark">Visit Date:</Form.Label>
                   <Form.Control
                     as="select"
                     value={feedback_Visit_Date}
@@ -112,7 +112,7 @@ const Feedback = () => {
               <Row className="mb-3">
                 <Col>
                   <Form.Group className="text-center">
-                    <Form.Label htmlFor="feedback" className="text-dark fs-5">
+                    <Form.Label htmlFor="feedback" className="text-dark">
                       Feedback Message:
                     </Form.Label>
                     <Form.Control

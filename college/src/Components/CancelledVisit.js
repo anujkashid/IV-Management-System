@@ -2,23 +2,22 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Form, Button, Col } from "react-bootstrap";
 import ColHeader from "./Navbar";
+import { useNavigate } from "react-router-dom";
 
 const CancelledVisit = () => {
-  const [visitData, setVisitData] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(""); // State for selected date
-  const [visit_cancelled, setVisitStatus] = useState(""); // State for visit status (Cancelled / Accepted)
-  const [selectedVisitId, setSelectedVisitId] = useState(""); // State to store visit ID for the selected date
+  const [visitData, setVisitData] = useState({});
+  const [selectedDate, setSelectedDate] = useState("");
+  const [visit_cancelled, setVisitStatus] = useState("");
   const collegename = localStorage.getItem("CollegeName");
+  const id = localStorage.getItem("cancelvisitid");
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/getvisit")
+      .get(`http://localhost:8000/getvisitone/${id}`)
       .then((res) => {
-        const data = res.data.userData;
-        const collgedata = data.filter(
-          (visit) => visit.college_name === collegename  && visit.Visit_accept==="accept"
-        );
-        setVisitData(collgedata);
+        setVisitData(res.data.data);
+        console.log(res.data.data);
       })
       .catch((error) => {
         console.error("Error fetching visit data:", error);
@@ -27,35 +26,33 @@ const CancelledVisit = () => {
 
   const formatDate = (date) => {
     const d = new Date(date);
-    return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+    return `${d.getDate()}/${d.toLocaleString("default", {
+      month: "short",
+    })}/${d.getFullYear()}`;
   };
 
-  const handleDateChange = (event) => {
-    setSelectedDate(event.target.value);
-    const selectedVisit = visitData.find(
-      (item) => formatDate(item.Date_of_visit) === event.target.value
-    );
-    if (selectedVisit) {
-      setSelectedVisitId(selectedVisit._id); // Store the selected visit ID
-    }
-  };
+  const cancelid = visitData._id;
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const userdata = {
-      visit_cancelled
-    };
-
-    axios
-      .put(`http://localhost:8000/updatevisit/${selectedVisitId}`, userdata)
-      .then((res) => {
-        alert("Visit cancelled successfully");
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Error cancelling visit");
-      });
+    if (visitData?.Visit_accept === "accept") {
+      localStorage.setItem("resceduledid", cancelid);
+      navigate("/reschedulevisit");
+    } else if (visitData?.Visit_accept === "pending") {
+      const userdata = {
+        visit_cancelled,
+      };
+      axios
+        .put(`http://localhost:8000/updatevisit/${cancelid}`, userdata)
+        .then((res) => {
+          alert("Visit cancelled successfully");
+        })
+        .catch((err) => {
+          console.error("Error cancelling visit:", err);
+          alert("Error cancelling visit");
+        });
+    }
   };
 
   return (
@@ -80,33 +77,31 @@ const CancelledVisit = () => {
 
             <div className="mb-3 text-center">
               <label htmlFor="visitDate" className="form-label">
-                Select Visit Date
+                Visit Date
               </label>
-              <Form.Select
-                aria-label="Select Visit Date"
-                value={selectedDate}
-                onChange={handleDateChange}
-              >
-                <option value="">Select visit date</option>
-                {visitData.map((item, index) => (
-                  <option key={index} value={formatDate(item.Date_of_visit)}>
-                    {formatDate(item.Date_of_visit)}
-                  </option>
-                ))}
-              </Form.Select>
+              <Form.Control
+                type="text"
+                value={formatDate(visitData.Date_of_visit)}
+                readOnly
+              ></Form.Control>
             </div>
 
             <div className="mb-3 text-center">
-              <label htmlFor="visitStatus" className="form-label">
-                Select Visit Status
-              </label>
+              <label className="form-label">Select Visit Status</label>
               <Form.Select
                 aria-label="Select Visit Status"
                 value={visit_cancelled}
                 onChange={(e) => setVisitStatus(e.target.value)}
               >
                 <option value="">Select status</option>
-                <option value="cancelled">Cancelled</option>
+                {visitData.fees_status === "paid" && (
+                  <option value="rescheduled">Rescheduled</option>
+                  
+                )}
+
+                {visitData.fees_status === "unpaid" && (
+                  <option value="cancelled">Cancelled</option>
+                )}
               </Form.Select>
             </div>
 

@@ -1,39 +1,33 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { CSVLink } from "react-csv"; // For exporting CSV
-import jsPDF from "jspdf"; // For exporting PDF
+import { CSVLink } from "react-csv";
+import jsPDF from "jspdf";
 import "jspdf-autotable";
-import * as XLSX from "xlsx"; // For exporting Excel
+import * as XLSX from "xlsx";
 import { Table, Button, Container, Pagination } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
-const CurrentMonthVisits = () => {
+const CancelledVisits = () => {
   const [visitData, setVisitData] = useState([]);
-  const [currentMonthVisits, setCurrentMonthVisits] = useState([]);
-   const [currentPage, setCurrentPage] = useState(1);
-    const visitsPerPage = 10; // Number of rows per page
+  const [upcomingVisits, setCancelledVisits] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const visitsPerPage = 10;
 
   useEffect(() => {
-    axios.get("http://localhost:8000/getvisit")
+    axios
+      .get("http://localhost:8000/getvisit")
       .then((res) => {
         const data = res.data.userData;
         setVisitData(data);
 
-        const now = new Date();
-        const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-        startOfMonth.setHours(0, 0, 0, 0);
-        const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-        endOfMonth.setHours(23, 59, 59, 999);
+        // Filter upcoming visits
+        const upcoming = data.filter((visit) => 
+          visit.visit_cancelled === "cancelled"  
+        )
 
-        const currentMonthVisits = data.filter((visit) => {
-          const visitDate = new Date(visit.Date_of_visit);
-          return visitDate >= startOfMonth && visitDate <= endOfMonth;
-        });
-
-        setCurrentMonthVisits(currentMonthVisits);
+        setCancelledVisits(upcoming);
       })
-      .catch(err => {
-        console.log(err);
+      .catch((err) => {
+        console.error("Error fetching data:", err);
       });
   }, []);
 
@@ -43,10 +37,12 @@ const CurrentMonthVisits = () => {
   };
 
   const formatTime = (time) => {
-    return new Date(time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); 
+    return new Date(time).toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
   };
 
-  // Function to export as PDF
   const exportPDF = () => {
     const doc = new jsPDF();
     const tableColumn = [
@@ -59,11 +55,11 @@ const CurrentMonthVisits = () => {
       "Number of Faculty",
       "Visiting Location",
       "Visit Accept",
-      "Visit Status"
+      "Visit Status",
     ];
     const tableRows = [];
 
-    currentMonthVisits.forEach((visit, index) => {
+    upcomingVisits.forEach((visit, index) => {
       tableRows.push([
         index + 1,
         visit.college_name,
@@ -74,49 +70,50 @@ const CurrentMonthVisits = () => {
         visit.number_of_faculty,
         visit.visting_location,
         visit.Visit_accept,
-        visit.Visit_status
+        visit.Visit_status,
       ]);
     });
 
     doc.autoTable(tableColumn, tableRows, { startY: 20 });
-    doc.save("current_month_visits.pdf");
+    doc.save("upcomingVisits.pdf");
   };
 
-  // Function to export as Excel
   const exportExcel = () => {
-    const worksheet = XLSX.utils.json_to_sheet(currentMonthVisits);
+    const worksheet = XLSX.utils.json_to_sheet(upcomingVisits);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Current Month Visits");
-    XLSX.writeFile(workbook, "current_month_visits.xlsx");
+    XLSX.utils.book_append_sheet(workbook, worksheet, "upcomingVisits");
+    XLSX.writeFile(workbook, "upcomingVisits.xlsx");
   };
 
-    // Pagination logic
-    const indexOfLastVisit = currentPage * visitsPerPage;
-    const indexOfFirstVisit = indexOfLastVisit - visitsPerPage;
-    const currentVisits = visitData.slice(indexOfFirstVisit, indexOfLastVisit);
-  
-    const totalPages = Math.ceil(visitData.length / visitsPerPage);
-  
-    const handlePageChange = (pageNumber) => {
-      setCurrentPage(pageNumber);
-    };
-  
-    const handleNextPage = () => {
-      if (currentPage < totalPages) {
-        setCurrentPage((prevPage) => prevPage + 1);
-      }
-    };
-  
-    const handlePrevPage = () => {
-      if (currentPage > 1) {
-        setCurrentPage((prevPage) => prevPage - 1);
-      }
-    };
-  
+  // Pagination logic
+  const indexOfLastVisit = currentPage * visitsPerPage;
+  const indexOfFirstVisit = indexOfLastVisit - visitsPerPage;
+  const currentVisits = upcomingVisits.slice(
+    indexOfFirstVisit,
+    indexOfLastVisit
+  );
+
+  const totalPages = Math.ceil(upcomingVisits.length / visitsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
 
   return (
     <Container>
-      <h2 className="mt-4 text-center mb-4">Current Month Visit Data</h2>
+      <h2 className="mt-4 text-center mb-4">Upcoming Visit Data</h2>
       <div className="mb-4 d-flex justify-content-start gap-2">
         <Button variant="primary" onClick={exportPDF}>
           Export PDF
@@ -124,7 +121,7 @@ const CurrentMonthVisits = () => {
         <Button variant="primary" onClick={exportExcel}>
           Export Excel
         </Button>
-        <CSVLink data={currentMonthVisits} filename="current_month_visits.csv">
+        <CSVLink data={upcomingVisits} filename="current_week_visits.csv">
           <Button variant="primary">Export CSV</Button>
         </CSVLink>
       </div>
@@ -147,7 +144,7 @@ const CurrentMonthVisits = () => {
         <tbody className="text-center">
           {currentVisits.map((visit, index) => (
             <tr key={visit._id}>
-              <td>{index + 1}</td>
+              <td>{indexOfFirstVisit + index + 1}</td>
               <td>{visit.college_name}</td>
               <td>{visit.number_of_students}</td>
               <td>{formatDate(visit.Date_of_visit)}</td>
@@ -162,11 +159,13 @@ const CurrentMonthVisits = () => {
         </tbody>
       </Table>
 
-
       {/* Pagination */}
       {totalPages > 1 && (
         <Pagination className="justify-content-end">
-          <Pagination.Prev disabled={currentPage === 1} onClick={handlePrevPage} />
+          <Pagination.Prev
+            disabled={currentPage === 1}
+            onClick={handlePrevPage}
+          />
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
             <Pagination.Item
               key={page}
@@ -186,4 +185,4 @@ const CurrentMonthVisits = () => {
   );
 };
 
-export default CurrentMonthVisits;
+export default CancelledVisits;

@@ -111,16 +111,16 @@ const handlePrevPage = () => {
 
   return (
     <Container>
-      <h2 className="mt-5 text-center mb-3">College Data</h2>
+      <h2 className="mt-4 text-center mb-4">Non-MOU Signed College Data</h2>
       <div className="mb-4 d-flex justify-content-start gap-2">
         <Button variant="primary" onClick={exportPDF}>
           Export PDF
         </Button>
-        <Button variant="success" onClick={exportExcel}>
+        <Button variant="primary" onClick={exportExcel}>
           Export Excel
         </Button>
         <CSVLink data={collegeData} filename="college_data.csv">
-          <Button variant="info">Export CSV</Button>
+          <Button variant="primary">Export CSV</Button>
         </CSVLink>
       </div>
 

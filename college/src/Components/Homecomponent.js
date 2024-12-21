@@ -18,6 +18,8 @@ import cta from "../Images/contact.png";
 import slider1 from "../Images/slider1.jpg";
 import slider2 from "../Images/slider2.jpg";
 import slider3 from "../Images/slider3.jpg";
+import '../App.css';
+
 
 const Homecomponent = () => {
   const [bookedData, setBookedData] = useState({}); // Store booked slots
@@ -122,9 +124,8 @@ const Homecomponent = () => {
               {[slider1, slider2, slider3].map((slide, index) => (
                 <Carousel.Item key={index}>
                   <img
-                    className="d-block w-100"
+                    className="d-block w-100 sliderimage"
                     src={slide}
-                    style={{ height: "500px" }}
                     alt={`Slide ${index + 1}`}
                   />
                 </Carousel.Item>
@@ -140,7 +141,7 @@ const Homecomponent = () => {
           <Col md={8} xs={12} className="mt-4">
             <Row>
               <h2 className="text-center mb-4 mt-4 text-danger">Reports</h2>
-              <Col md={4} xs={12}>
+              <Col md={4} xs={8} className="mx-auto mx-md-0">
                 <Card
                   className="me-2"
                   style={{ width: "13rem", height: "13rem" }}
@@ -162,7 +163,7 @@ const Homecomponent = () => {
                 </Card>
               </Col>
 
-              <Col md={4} xs={12}>
+              <Col md={4} xs={8} className="mx-auto mx-md-0 mt-3 mt-md-0">
                 <Card
                   className="me-2"
                   style={{ width: "13rem", height: "13rem" }}
@@ -184,7 +185,7 @@ const Homecomponent = () => {
                 </Card>
               </Col>
 
-              <Col md={4} xs={12}>
+              <Col md={4} xs={8} className="mx-auto mx-md-0 mt-3 mt-md-0">
                 <Card
                   className="me-2"
                   style={{ width: "13rem", height: "13rem" }}
@@ -209,7 +210,7 @@ const Homecomponent = () => {
           </Col>
           {/* Calendar */}
           <Col md={4} xs={12} className="mt-4">
-            <h2 className="text-center ms-5 mt-4 mb-3 text-danger">
+            <h2 className="text-center ms-0 ms-md-5 mt-4 mb-3 text-danger">
               Booked Slots
             </h2>
             <div className="d-flex justify-content-end mb-3">

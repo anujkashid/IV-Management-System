@@ -10,7 +10,7 @@ import features from "../Images/IMG-20241210-WA0003.jpg";
 import student from "../Images/IMG-20241210-WA0005.jpg";
 import process from "../Images/IMG-20241210-WA0008.jpg";
 import visit from "../Images/IMG-20241210-WA0015.jpg";
-
+import "../App.css"
 // Icons
 import { FaArrowRight } from "react-icons/fa";
 import axios from "axios";
@@ -49,7 +49,7 @@ const About = () => {
                         </p>
                     </Col>
                     <Col md={6} xs={12}>
-                        <img src={iv1} alt="about" style={{width:"500px",height:"300px"}} />
+                        <img src={iv1} alt="about" className="sliderimage" />
                     </Col>
                
                 {/* Key Features */}
@@ -58,8 +58,8 @@ const About = () => {
                         <img
                             src={features}
                             alt="key-features"
-                            className="mt-4"
-                            style={{width:"500px",height:"300px"}}
+                            className="mt-4 sliderimage"
+                           
                         />
                     </Col>
                     <Col md={6} xs={12}>
@@ -108,13 +108,13 @@ const About = () => {
                         </ul>
                     </Col>
                     <Col  className="mt-4">
-                        <img src={student} alt="student" style={{width:"500px",height:"250px"}} />
+                        <img src={student} alt="student" className="sliderimage1" />
                     </Col>
             
                 {/*How It Works?  */}
     
                     <Col md={6} xs={12} className="mb-3">
-                        <img src={process} alt="how" className="mt-4" style={{width:"500px",height:"250px"}}  />
+                        <img src={process} alt="how" className="mt-4 sliderimage"   />
                     </Col>
                     <Col md={6} xs={12} className="mt-4">
                         <h3 className="fw-bold text-danger">How It Works?</h3>

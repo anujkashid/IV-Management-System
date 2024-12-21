@@ -11,6 +11,7 @@ const PendingFee = () => {
   const collegename = localStorage.getItem("CollegeName");
   const [fees_status, setFeesStatus] = useState("");
   const [id, setId] = useState("");
+  const [transaction_id,setTransactionId]=useState("");
 
   useEffect(() => {
     axios
@@ -24,11 +25,21 @@ const PendingFee = () => {
         );
         setVisitData(filteredData);
 
-        const datevisitdata = filteredData.map((item) => ({
-          date: item.Date_of_visit,
-          fees: item.fees,
-          id: item._id,
-        }));
+        const today = new Date(); 
+        today.setHours(0, 0, 0, 0); 
+        
+        const datevisitdata = filteredData
+          .filter((item) => {
+            const visitDate = new Date(item.Date_of_visit); 
+            visitDate.setHours(0, 0, 0, 0); 
+            return visitDate >= today;
+          })
+          .map((item) => ({
+            date: item.Date_of_visit,
+            fees: item.fees,
+            id: item._id,
+          }));
+        
         setDateData(datevisitdata);
       })
       .catch((error) => {
@@ -38,7 +49,7 @@ const PendingFee = () => {
 
   const formatDate = (date) => {
     const d = new Date(date);
-    return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+    return `${d.getDate()}-${d.toLocaleString('default', { month: 'short' })}-${d.getFullYear()}`;
   };
 
   const handleDateChange = (event) => {
@@ -53,12 +64,8 @@ const PendingFee = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!id || !fees_status) {
-      alert("Please select a visit date and update fee status.");
-      return;
-    }
 
-    const userdata = { fees_status };
+    const userdata = { fees_status,transaction_id };
 
     axios
       .put(`http://localhost:8000/updatevisit/${id}`, userdata)
@@ -86,7 +93,7 @@ const PendingFee = () => {
             <Row className="mb-3">
               <Col>
                 <Form.Group className="text-center">
-                  <Form.Label className="text-dark fs-5">College Name:</Form.Label>
+                  <Form.Label className="text-dark ">College Name:</Form.Label>
                   <Form.Control
                     placeholder="Enter name"
                     type="text"
@@ -100,7 +107,7 @@ const PendingFee = () => {
 
             <Row className="mb-3">
               <Col>
-                <Form.Group className="mb-2">
+                <Form.Group className="mb-2 text-center">
                   <Form.Label className="text-dark">Date of Visit:</Form.Label>
                   <Form.Control as="select" onChange={handleDateChange}>
                     <option value="">Select Date</option>
@@ -113,7 +120,7 @@ const PendingFee = () => {
                 </Form.Group>
               </Col>
               <Col>
-                <Form.Group className="mb-2">
+                <Form.Group className="mb-2 text-center">
                   <Form.Label className="text-dark">Fees:</Form.Label>
                   <Form.Control type="text" value={selectedFee} readOnly />
                 </Form.Group>
@@ -121,14 +128,28 @@ const PendingFee = () => {
             </Row>
 
             <Row className="mb-3">
-              <Form.Label>Fees Paid Status</Form.Label>
+              <Col>
+                <Form.Group className="text-center">
+                  <Form.Label className="text-dark">Transaction Id:</Form.Label>
+                  <Form.Control
+                    placeholder="Enter transaction id"
+                    type="text"
+                    value={transaction_id}
+                     onChange={(e)=> setTransactionId(e.target.value)}
+                    className="py-2"
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            
+            <Row className="mb-3 text-center">
+              <Form.Label>Fees Paid Status:</Form.Label>
               <Form.Select
                 value={fees_status}
                 onChange={(e) => setFeesStatus(e.target.value)}
               >
                 <option value="">Select here...</option>
                 <option value="paid">Paid</option>
-                <option value="unpaid">Unpaid</option>
               </Form.Select>
             </Row>
    

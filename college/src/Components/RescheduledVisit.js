@@ -9,35 +9,26 @@ import "react-datepicker/dist/react-datepicker.css";
 import ColHeader from "./Navbar";
 import axios from "axios";
 
-const ColLogin = () => {
+const Updatevisit = () => {
   const [number_of_students, setNumberofStudent] = useState("");
   const [Date_of_visit, setStartDate] = useState(new Date());
   const [start_time, setStartTime] = useState("");
   const [end_time, setEndTime] = useState("");
   const [number_of_faculty, setNumberOffaculty] = useState("");
-  const [purpose, setPurpose] = useState("");
   const [visting_location, setVisitingLocation] = useState("");
   const [student_details, setStudentDetails] = useState(null);
   const [faculty_details, setFacultyDetails] = useState(null);
   const [comment, setComment] = useState("");
-  const[locationData,setLocationData]=useState([]);
-  const[visitData,setVisitData]=useState([]);
+  const[visitData,setVisitData]=useState({});
   const college_name =localStorage.getItem("CollegeName");
   const mousigned=localStorage.getItem("mousigned");
+  const rescheduleid=localStorage.getItem("resceduledid");
   
-  console.log("mou",mousigned);
-
   useEffect(()=>{
-      axios.get("http://localhost:8000/getlocation")
-      .then((res)=>{
-         setLocationData(res.data.data);
-      })
-  },[])
-
-  useEffect(()=>{
-    axios.get("http://localhost:8000/getvisit")
+    axios.get(`http://localhost:8000/getvisitone/${rescheduleid}`)
     .then((res)=>{
-       setVisitData(res.data.userData);
+       setVisitData(res.data.data);
+      
     })
 },[])
 
@@ -47,7 +38,6 @@ const ColLogin = () => {
     setStartTime("");
     setEndTime("");
     setNumberOffaculty("");
-    setPurpose("");
     setVisitingLocation("");
     setStudentDetails(null);
     setFacultyDetails(null);
@@ -64,12 +54,17 @@ const ColLogin = () => {
     endDateTime.setHours(end_time.getHours(), end_time.getMinutes(), 0, 0); 
 
 
-    const isTimeConflict = visitData.some((visit) => {
-        const existingStartTime = new Date(visit.start_time); 
-        existingStartTime.setSeconds(0, 0); 
+    const isTimeConflict = visitData?.start_time && visitData?.visting_location
+  ? (() => {
+      const existingStartTime = new Date(visitData.start_time);
+      existingStartTime.setSeconds(0, 0);
 
-        return existingStartTime.getTime() === startDateTime.getTime() && visit.visting_location === visting_location;
-    });
+      return (
+        existingStartTime.getTime() === startDateTime.getTime() &&
+        visitData.visting_location === visting_location
+      );
+    })()
+  : false;
 
     if (isTimeConflict) {
         alert("Schedule is busy.");
@@ -84,23 +79,22 @@ const ColLogin = () => {
     formData.append("start_time", startDateTime.toISOString());
     formData.append("end_time", endDateTime.toISOString());
     formData.append("number_of_faculty", number_of_faculty);
-    formData.append("purpose", purpose);
-    formData.append("visting_location", visting_location);
     formData.append("student_details", student_details);
     formData.append("faculty_details", faculty_details);
     formData.append("comment", comment);
-    formData.append("mousigned", mousigned);
+    formData.append("Visit_accept","pending")
+    formData.append("visit_cancelled","rescheduled")
 
     // Send the data to the backend
     axios
-        .post("http://localhost:8000/addvisit", formData, {
+        .put(`http://localhost:8000/updatevisit/${rescheduleid}`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
         })
         .then((res) => {
             console.log(res.data);
-            alert("Visit successfully added!");
+            alert("Visit successfully rescheduled!");
             handleClear(); // Clear the form
         })
         .catch((err) => {
@@ -116,29 +110,29 @@ const ColLogin = () => {
       <Container className="mb-1">
         <Row>
           <Col md={9} className="mx-auto">
-            <h3 className="text-center mt-4 mb-4 text-danger">Add Visit</h3>
+            <h3 className="text-center mt-4 mb-4 text-danger">Reschedule Visit:</h3>
             <Container className="border border-dark p-4 d-flex justify-content-center bg-white">
               <Form className="w-100 =" onSubmit={handleSubmit} >
                 <Row className="mb-3">
                   <Col md={5} className="d-flex align-items-center">
-                    <Form.Label className="mb-0">Number of Students:</Form.Label>
+                    <Form.Label className="mb-0">Number of Students</Form.Label>
                     <Form.Control
                       type="text"
                       required
-                      value={number_of_students}
                       placeholder="Enter Number of students"
+                      value={number_of_students}
                       onChange={(e) => setNumberofStudent(e.target.value)}
                       className="ms-2"
                     />
                   </Col>
                   <Col md={1}></Col>
                   <Col md={5} className="d-flex align-items-center">
-                    <Form.Label className="mb-0">Number of Faculty:</Form.Label>
+                    <Form.Label className="mb-0">Number of Faculty</Form.Label>
                     <Form.Control
                       type="text"
                       required
-                      value={number_of_faculty}
                       placeholder="Enter Number of Faculty"
+                      value={number_of_faculty}
                       onChange={(e) => setNumberOffaculty(e.target.value)}
                       className="ms-2"
                     />
@@ -199,35 +193,15 @@ const ColLogin = () => {
 
                 <Form.Group className="mb-3 text-center" controlId="formGroupLocation">
                   <Form.Label className="mt-3">Visiting Location:</Form.Label>
-                  <Form.Select
-                    aria-label="Default select example"
-                    className="w-100 mt-2"
-                    value={visting_location}
-                    onChange={(e) => setVisitingLocation(e.target.value)}
-                    required
-                  >
-                    <option value="">Select City</option>
-                    {locationData.map((item, index) => {
-                    return (
-                      <option key={item._id} value={item.location_city}>
-                        {item.location_city}
-                      </option>
-                    );
-                  })}
-                  </Form.Select>
-                </Form.Group>
-
-                <Form.Group className="mb-3 text-center" controlId="formGroupPurpose">
-                  <Form.Label className="mt-2">Purpose of Visit:</Form.Label>
                   <Form.Control
                     type="text"
-                    required
-                    value={purpose}
-                    placeholder="Enter Purpose"
-                    onChange={(e) => setPurpose(e.target.value)}
+                    value={visitData.visting_location}
+                    readOnly
                     className="w-100"
                   />
                 </Form.Group>
+
+             
 
                 <Form.Group controlId="formFile" className="mb-3 text-center">
                   <Form.Label>Student Details:</Form.Label>
@@ -284,5 +258,5 @@ const ColLogin = () => {
   );
 };
 
-export default ColLogin;
+export default Updatevisit;
 

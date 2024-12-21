@@ -39,6 +39,11 @@ const myProject = new mongoose.Schema({
        default:"incomplete"
    },
 
+   transaction_id:{
+      type:String,
+      default:"null"
+   },
+
    notification_status:{
      type:String,
      default:"unseen"

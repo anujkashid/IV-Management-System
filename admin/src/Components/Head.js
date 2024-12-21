@@ -41,6 +41,8 @@ import GetAgenda from "./GetAgenda";
 import GetFees from "./GetFees";
 import Update_agenda from "./Update_agenda";
 import Update_fees from "./Update_fees";
+import CancelledVisits from "./CancelledVisit";
+import Calender from "./Calender";
 
 
 const Head = () => {
@@ -92,6 +94,8 @@ const Head = () => {
             <Route path="/feedback" element={<FeedbackDisplayComponent/>}/>
             <Route path="/getagenda" element={<GetAgenda/>}/>
             <Route path="/getfees" element={<GetFees/>}/>
+            <Route path="/cancelledvisit" element={<CancelledVisits/>}/>
+            <Route path="/calender" element={<Calender/>}/>
   
           </Routes>
         </Container>

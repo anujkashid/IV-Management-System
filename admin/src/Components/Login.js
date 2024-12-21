@@ -106,10 +106,10 @@ const Login = () => {
               </div>
             </Form>
           </Card.Text>
-          <Card.Link href="#">Forgot Password</Card.Link>
+          {/* <Card.Link href="#">Forgot Password</Card.Link>
           <Card.Link className="ms-5">
             <Link to='/error'>Don’t have an account? Get Started</Link>
-          </Card.Link>
+          </Card.Link> */}
         </Card.Body>
       </Card>
     </Col>

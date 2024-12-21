@@ -19,7 +19,7 @@ const addImage = async (req, res) => {
         mousigned,
         fees,
         fees_status,
-        fees_received,visit_cancelled
+        fees_received,visit_cancelled,transaction_id
     } = req.body;
 
     try {
@@ -42,7 +42,7 @@ const addImage = async (req, res) => {
             mousigned,
             fees,
             fees_status,
-            fees_received,visit_cancelled
+            fees_received,visit_cancelled,transaction_id
         });
         const data = await Userdata.save();
         res.status(200).send({ data });
@@ -62,6 +62,18 @@ const getImage = async (req, res) => {
     res.status(400).send(err);
   }
 };
+
+const GetuserById = async (req, res) => {
+  try {
+      const { _id } = req.params
+      const data = await model.findOne({ _id: _id })
+      res.status(200).send({ data })
+
+  } catch (err) {
+      
+      console.log(err)
+  }
+}
 
 // DELETE API
 const deleteImage = async (req, res) => {
@@ -91,7 +103,7 @@ const updateImage = async (req, res) => {
     mousigned,
     fees,
     fees_status,
-    fees_received,visit_cancelled } = req.body;
+    fees_received,visit_cancelled,transaction_id } = req.body;
 
   try {
     // Prepare update object
@@ -112,7 +124,7 @@ const updateImage = async (req, res) => {
         mousigned,
         fees,
         fees_status,
-        fees_received,visit_cancelled
+        fees_received,visit_cancelled,transaction_id
     };
 
     // Only update the image if a new file is uploaded
@@ -134,4 +146,4 @@ const updateImage = async (req, res) => {
   }
 };
 
-module.exports = { addImage, getImage, updateImage, deleteImage };
+module.exports = { addImage, getImage, updateImage, deleteImage ,GetuserById};

@@ -42,7 +42,8 @@ const GalleryAdd = () => {
           (item) =>
             item.college_name === college_name &&
             new Date(item.Date_of_visit) <= today &&
-            new Date(item.Date_of_visit) >= pastWeek
+            new Date(item.Date_of_visit) >= pastWeek &&
+            item.Visit_status === "complete"
         )
         .map((item) => ({ date: item.Date_of_visit, id: item._id }));
 
@@ -78,6 +79,11 @@ const GalleryAdd = () => {
         handleClear();
       })
       .catch((err) => console.log(err));
+  };
+
+  const formatDate = (date) => {
+    const d = new Date(date);
+    return `${d.getDate()}-${d.toLocaleString('default', { month: 'short' })}-${d.getFullYear()}`;
   };
 
   return (
@@ -117,8 +123,8 @@ const GalleryAdd = () => {
                 >
                   <option value="">-- Select Date of Visit --</option>
                   {datedata.map((item, index) => (
-                    <option key={index} value={item.date}>
-                      {new Date(item.date).toLocaleDateString()}
+                    <option key={index} value={formatDate(item.date)}>
+                      {formatDate(item.date)}
                     </option>
                   ))}
                 </Form.Control>

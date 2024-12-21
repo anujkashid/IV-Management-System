@@ -354,36 +354,43 @@ const Sidebar = () => {
             </Link>
           </Nav.Item>
           <Nav.Item>
-            <Link to="/head/fees" className="nav-link p-2">
+            <Link to="/head/getfees" className="nav-link p-2">
               <FaMoneyBillWave size={30} className="me-2 text-dark" /> Fees
             </Link>
           </Nav.Item>
           <Nav.Item>
             <Link to="/head/report" className="nav-link p-2">
-              <MdReport size={30} className="me-2 text-dark" /> Report
+            <TbReport size={30} className="me-2 text-dark" /> Report
             </Link>
           </Nav.Item>
           <Nav.Item>
             <Link to="/head/ivrequest" className="nav-link p-2">
-              <FaRegHandshake size={30} className="me-2 text-dark" /> IV Requests
-            </Link>
-          </Nav.Item>
-
-          <Nav.Item>
-            <Link to="/head/visitcomplete" className="nav-link p-2">
-              <FaRegHandshake size={30} className="me-2 text-dark" /> Visit Confirmation
-            </Link>
-          </Nav.Item>
-
-          <Nav.Item>
-            <Link to="/head/media" className="nav-link p-2">
-              <FaRegHandshake size={30} className="me-2 text-dark" /> Media add
+              <TbMessageUser size={30} className="me-2 text-dark" /> IV Requests
             </Link>
           </Nav.Item>
 
           <Nav.Item>
             <Link to="/head/feeverification" className="nav-link p-2">
-              <FaRegHandshake size={30} className="me-2 text-dark" /> Fees Confirmation
+              <GiConfirmed size={30} className="me-2 text-dark" />Confirm Fees
+            </Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Link to="/head/visitcomplete" className="nav-link p-2">
+              <LuCalendarCheck size={30} className="me-2 text-dark" /> Confirm Visit
+            </Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Link to="/head/media" className="nav-link p-2">
+              <PiImageSquare size={30} className="me-2 text-dark" />Add Media 
+            </Link>
+          </Nav.Item>
+
+          <Nav.Item>
+
+            <Link to="/head/feedback" className="nav-link p-2">
+              <MdOutlineFeedback size={30} className="me-2 text-dark" />Feedback
             </Link>
           </Nav.Item>
           

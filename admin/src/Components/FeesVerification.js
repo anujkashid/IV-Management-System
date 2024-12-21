@@ -1,24 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Container, Row, Table, Modal, Button, Form, Pagination } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import {
+  Container,
+  Row,
+  Table,
+  Modal,
+  Button,
+  Form,
+  Pagination,
+} from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const FeesVerification = () => {
   const [visitData, setVisitData] = useState([]);
   const [feesReceived, setFeesStatus] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-    const visitsPerPage = 10; // Number of rows per page
+  const visitsPerPage = 10; // Number of rows per page
   const [id, setId] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
       .get("http://localhost:8000/getvisit")
       .then((response) => {
-        const filteredData = response.data?.userData?.filter(
-          (visit) => visit.fees_received === "incomplete"
-        ) || [];
+        const filteredData =
+          response.data?.userData?.filter(
+            (visit) => visit.fees_received === "incomplete"
+          ) || [];
         setVisitData(filteredData);
       })
       .catch((error) => {
@@ -61,38 +70,37 @@ const FeesVerification = () => {
 
   const formatDate = (date) => {
     const d = new Date(date);
-    return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+    return `${d.getDate()}-${d.toLocaleString('default', { month: 'short' })}-${d.getFullYear()}`;
   };
 
   // Pagination logic
-const indexOfLastVisit = currentPage * visitsPerPage;
-const indexOfFirstVisit = indexOfLastVisit - visitsPerPage;
-const currentVisits = visitData.slice(indexOfFirstVisit, indexOfLastVisit);
+  const indexOfLastVisit = currentPage * visitsPerPage;
+  const indexOfFirstVisit = indexOfLastVisit - visitsPerPage;
+  const currentVisits = visitData.slice(indexOfFirstVisit, indexOfLastVisit);
 
-const totalPages = Math.ceil(visitData.length / visitsPerPage);
+  const totalPages = Math.ceil(visitData.length / visitsPerPage);
 
-const handlePageChange = (pageNumber) => {
-  setCurrentPage(pageNumber);
-};
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
-const handleNextPage = () => {
-  if (currentPage < totalPages) {
-    setCurrentPage((prevPage) => prevPage + 1);
-  }
-};
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
 
-const handlePrevPage = () => {
-  if (currentPage > 1) {
-    setCurrentPage((prevPage) => prevPage - 1);
-  }
-};
-
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
 
   return (
     <div>
       <Container fluid>
         <Row>
-          <h3 className='mt-4 mb-4 text-center'>Fees Confirmation</h3>
+          <h3 className="mt-4 mb-4 text-center">Fees Confirmation</h3>
           <Table striped bordered hover responsive>
             <thead className="thead-dark">
               <tr className="text-center">
@@ -114,37 +122,44 @@ const handlePrevPage = () => {
                   <td>{visit.mousigned}</td>
                   <td>{visit.fees_status}</td>
                   <td>{visit.fees_received}</td>
-                  <td>
-                    <button
-                      className="btn btn-primary"
-                      onClick={() => handleOpenModal(visit)}
-                    >
-                      Add
-                    </button>
-                  </td>
+                  {visit.fees_status === "paid" && (
+                    <td>
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => handleOpenModal(visit)}
+                      >
+                        Add
+                      </button>
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>
           </Table>
           {/* Pagination */}
-       {totalPages > 1 && (
-        <Pagination className="justify-content-end">
-          <Pagination.Prev disabled={currentPage === 1} onClick={handlePrevPage} />
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-            <Pagination.Item
-              key={page}
-              active={page === currentPage}
-              onClick={() => handlePageChange(page)}
-            >
-              {page}
-            </Pagination.Item>
-          ))}
-          <Pagination.Next
-            disabled={currentPage === totalPages}
-            onClick={handleNextPage}
-          />
-        </Pagination>
-      )}
+          {totalPages > 1 && (
+            <Pagination className="justify-content-end">
+              <Pagination.Prev
+                disabled={currentPage === 1}
+                onClick={handlePrevPage}
+              />
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                (page) => (
+                  <Pagination.Item
+                    key={page}
+                    active={page === currentPage}
+                    onClick={() => handlePageChange(page)}
+                  >
+                    {page}
+                  </Pagination.Item>
+                )
+              )}
+              <Pagination.Next
+                disabled={currentPage === totalPages}
+                onClick={handleNextPage}
+              />
+            </Pagination>
+          )}
         </Row>
       </Container>
 

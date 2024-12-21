@@ -26,14 +26,15 @@ const CollegeTotalVisit = () => {
 
         // total IV
         const totalIV = data.filter(
-          (TIV) => TIV.college_name === collegename
+          (TIV) => TIV.college_name === collegename && TIV.Visit_status==="incomplete"
         );
         setIvcount(totalIV);
       })
   },);
+  
   const formatDate = (date) => {
     const d = new Date(date);
-    return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+    return `${d.getDate()}-${d.toLocaleString('default', { month: 'short' })}-${d.getFullYear()}`;
   };
 
   // Pagination logic
@@ -87,6 +88,10 @@ const CollegeTotalVisit = () => {
     XLSX.writeFile(workbook, "university_data.xlsx");
   };
 
+  const handleUpdate=(id)=>
+  {
+   localStorage.setItem("cancelvisitid",id);
+  }
   return (
 
     <>
@@ -133,7 +138,7 @@ const CollegeTotalVisit = () => {
                       <td>{formatDate(IV.Date_of_visit)}</td>
                       <td>{IV.visting_location}</td>
                       <td>{IV.Visit_accept}</td>
-                      <td><Button variant="danger" href="/visitcancelled"><MdDelete/></Button></td>
+                      <td><Button variant="danger" href="/visitcancelled" onClick={()=> handleUpdate(IV._id)}><MdDelete/></Button></td>
                     </tr>
                   ))}
                 </tbody>

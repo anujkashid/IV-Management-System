@@ -9,6 +9,11 @@ const Gallery = () => {
   const [selectedDate, setSelectedDate] = useState("");
   const collegename = localStorage.getItem("CollegeName");
 
+  const formatDate = (date) => {
+    const d = new Date(date);
+    return `${d.getDate()}-${d.toLocaleString('default', { month: 'short' })}-${d.getFullYear()}`;
+  };
+
   // Fetch gallery data
   useEffect(() => {
     axios
@@ -50,7 +55,7 @@ const Gallery = () => {
       <Container className="py-4">
         <h2 className="text-center mb-4 text-danger">Gallery</h2>
        <Col md={8} className="mx-auto">
-        <Form.Group controlId="visitDateDropdown" className="mb-4 text-center fs-5">
+        <Form.Group controlId="visitDateDropdown" className="mb-4 text-center">
           <Form.Label className="mb-2">Select Visit Date:</Form.Label>
           <Form.Control
             as="select"
@@ -59,8 +64,8 @@ const Gallery = () => {
           >
             <option value="">-- Select Date --</option>
             {visitDates.map((date, index) => (
-              <option key={index} value={date}>
-                {new Date(date).toLocaleDateString()}
+              <option key={index} value={formatDate(date)}>
+                {formatDate(date)}
               </option>
             ))}
           </Form.Control>

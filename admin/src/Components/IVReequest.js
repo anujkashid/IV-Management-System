@@ -324,6 +324,11 @@ const IVRequest = () => {
     );
   };
 
+  const formatDate = (date) => {
+    const d = new Date(date);
+    return `${d.getDate()}-${d.toLocaleString('default', { month: 'short' })}-${d.getFullYear()}`;
+  };
+
 
   return (
     <Container>
@@ -344,6 +349,7 @@ const IVRequest = () => {
       <Table striped bordered hover responsive>
         <thead className="thead-dark">
           <tr className="text-center">
+            <th>View More</th>
             <th>College Name</th>
             <th>Students</th>
             <th>Date of Visit</th>
@@ -363,9 +369,18 @@ const IVRequest = () => {
           {currentVisits.map((visit, index) => (
            <React.Fragment key={visit._id}>
            <tr>
+           <td>
+               <Button
+                 variant="link"
+                 className="fs-4"
+                 onClick={() => toggleRowExpansion(visit._id)}
+               >
+                 {visit.isExpanded ? "-" : "+"}
+               </Button>
+             </td>
              <td>{visit.college_name}</td>
              <td>{visit.number_of_students}</td>
-             <td>{visit.Date_of_visit}</td>
+             <td>{formatDate(visit.Date_of_visit)}</td>
              <td>{visit.start_time}</td>
              <td>{visit.visting_location}</td>
              <td>{visit.mousigned}</td>
@@ -404,15 +419,6 @@ const IVRequest = () => {
                   ></FaRegThumbsDown>
                 </Button>
               </td>
-             <td>
-               <Button
-                 variant="link"
-                 className="fs-4"
-                 onClick={() => toggleRowExpansion(visit._id)}
-               >
-                 {visit.isExpanded ? "-" : "+"}
-               </Button>
-             </td>
            </tr>
            {visit.isExpanded && (
   <>

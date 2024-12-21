@@ -30,9 +30,8 @@ const RejectedVisit = () => {
   
   const formatDate = (date) => {
     const d = new Date(date);
-    return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+    return `${d.getDate()}-${d.toLocaleString('default', { month: 'short' })}-${d.getFullYear()}`;
   };
-
 
     return (
       <div className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>

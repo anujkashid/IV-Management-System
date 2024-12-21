@@ -36,6 +36,14 @@ const College_registration = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.stopPropagation();
+    return;
+    }
+
+    setValidated(true);
     const userdata = {
       collage_name,
       reg_state,
@@ -55,11 +63,8 @@ const College_registration = () => {
       reg_status,
     };
 
-    const form = e.currentTarget;
-    if (form.checkValidity() === false) {
-      e.stopPropagation();
-    }
-    setValidated(true);
+   
+
 
     axios
       .post("http://localhost:8000/add_registration", userdata)

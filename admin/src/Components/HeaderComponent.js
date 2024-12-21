@@ -4,6 +4,8 @@ import { IoIosNotificationsOutline, IoIosLogOut } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa";
 import "../App.css";
 import axios from "axios";
+import { SlCalender } from "react-icons/sl";
+import { Link } from "react-router-dom";
 
 const HeaderComponent = () => {
   const [visitData, setVisitData] = useState([]); 
@@ -40,6 +42,10 @@ const HeaderComponent = () => {
             </h3>
     
         <Nav className="ms-auto d-flex align-items-center">
+          <Link to="/head/calender" className="text-decoration-none">
+          <SlCalender size={24} className="text-white me-4"/>
+          </Link>
+          
           {/* Notifications Icon with Badge */}
           <Nav.Link href="/head/notification" className="position-relative">
             <IoIosNotificationsOutline

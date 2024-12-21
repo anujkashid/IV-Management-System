@@ -24,7 +24,8 @@ const GetState = () => {
   }, []);
 
   const formatDate = (date) => {
-    return new Date(date).toLocaleDateString(); // Format to 'MM/DD/YYYY'
+    const d = new Date(date);
+    return `${d.getDate()}-${d.toLocaleString('default', { month: 'short' })}-${d.getFullYear()}`;
   };
 
   const formatTime = (time) => {
@@ -100,23 +101,23 @@ const GetState = () => {
 
   return (
     <Container>
-      <h2 className="mt-5 text-center mb-3">Total Visit Data</h2>
+      <h2 className="mt-4 text-center mb-4">Total Visit Data</h2>
       <div className="mb-4 d-flex justify-content-start gap-2">
         <Button variant="primary" onClick={exportPDF}>
           Export PDF
         </Button>
-        <Button variant="success" onClick={exportExcel}>
+        <Button variant="primary" onClick={exportExcel}>
           Export Excel
         </Button>
         <CSVLink data={visitData} filename="state_data.csv">
-          <Button variant="info">Export CSV</Button>
+          <Button variant="primary">Export CSV</Button>
         </CSVLink>
       </div>
 
       <Table striped bordered hover responsive>
         <thead className="thead-dark">
           <tr className="text-center">
-            <th>Sr.No</th>
+            <th>Sr.</th>
             <th>College Name</th>
             <th>Number of Students</th>
             <th>Date of Visit</th>

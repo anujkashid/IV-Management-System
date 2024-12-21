@@ -124,7 +124,7 @@ const GetAgenda = () => {
               <Link
               to='/head/update_agenda'
               onClick={() => handleUpdate(agenda._id)}>
-              <Button className="btn btn-primary me-4 px-2 py-1"><MdModeEdit size={24}/></Button></Link>
+              <Button className="btn btn-primary me-4 px-2 py-1 ms-4 mb-2 mb-md-0 ms-md-0"><MdModeEdit size={24}/></Button></Link>
               <Button  variant="danger"
               onClick={() => deletedata(agenda._id)} className="btn btn-danger px-2 py-1"><MdDelete size={24}/></Button>
               </td>

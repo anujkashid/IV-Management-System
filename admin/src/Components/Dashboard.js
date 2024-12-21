@@ -13,6 +13,7 @@ const Dashboard = () => {
   const [noMousigned, setNomousigned] = useState(0);
   const [lastcolleges, setLastCollges] = useState([]);
   const [totalUpcomingvisitsCount,setUpcomingVisitsCount]=useState(0);
+  const [cancelledvisitcount,setCancelledVisitCount]=useState(0);
 
   useEffect(() => {
     axios.get("http://localhost:8000/get_registration").then((res) => {
@@ -43,6 +44,13 @@ const Dashboard = () => {
       .then((res) => {
         const data = res.data.userData;
         setVisitData(data);
+
+        // cancelled visit count
+         const canceledcount=data.filter((visit)=>
+         visit.visit_cancelled === "cancelled" 
+         )
+
+         setCancelledVisitCount(canceledcount.length);
 
         // total visit count
         const totalcount = data.length;
@@ -200,6 +208,7 @@ const Dashboard = () => {
           </Card>
         </Col>
 
+
         {/* card 4 */}
         <Col md={3}>
           <Card
@@ -303,6 +312,30 @@ const Dashboard = () => {
                 <Button className="btn btn-success">Details</Button>
               </Card.Link>
             </Card.Footer> */}
+          </Card>
+        </Col>
+
+        <Col md={3}>
+          <Card
+            className="h-100 shadow-md"
+            style={{
+              backgroundColor: "rgba(0, 123, 255, 0.5)",
+              borderRadius: "10px",
+            }}
+          >
+            <Card.Body>
+              <Card.Title className="fs-3 text-center mt-2">
+                {cancelledvisitcount}
+              </Card.Title>
+              <Card.Text className="text-dark fs-5 fw-bold mt-3">
+                Count Of Cancel Visit
+              </Card.Text>
+            </Card.Body>
+            <Card.Footer className="text-center border border-0">
+              <Card.Link href="/head/cancelledvisit">
+                <Button className="btn btn-primary">Details</Button>
+              </Card.Link>
+            </Card.Footer>
           </Card>
         </Col>
       </Row>

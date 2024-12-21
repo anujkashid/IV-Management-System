@@ -55,7 +55,8 @@ const Report = () => {
   }, [selectedCollege, selectedDate, visitData]);
 
   const formatDate = (date) => {
-    return new Date(date).toLocaleDateString();
+    const d = new Date(date);
+    return `${d.getDate()}-${d.toLocaleString('default', { month: 'short' })}-${d.getFullYear()}`;
   };
 
   const formatTime = (time) => {

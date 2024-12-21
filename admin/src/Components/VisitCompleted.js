@@ -73,6 +73,11 @@ const VisitCompleted = () => {
       .catch((err) => console.log(err));
   };
 
+  const formatDate = (date) => {
+    const d = new Date(date);
+    return `${d.getDate()}-${d.toLocaleString('default', { month: 'short' })}-${d.getFullYear()}`;
+  };
+
   return (
     <Container className="mt-4" fluid>
       <Row>
@@ -116,8 +121,8 @@ const VisitCompleted = () => {
                 >
                   <option value="">-- Select Date of Visit --</option>
                   {datedata.map((item, index) => (
-                    <option key={index} value={item.date}>
-                      {new Date(item.date).toLocaleDateString()}
+                    <option key={index} value={formatDate(item.date)}>
+                      {formatDate(item.date)}
                     </option>
                   ))}
                 </Form.Control>
