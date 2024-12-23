@@ -36,7 +36,7 @@ const Location = () => {
   return (
     <Container className="mt-4" fluid>
       <Row>
-        <Col md={4} className="mx-auto">
+        <Col xl={6} className="mx-auto">
           <h2 className="text-center">Add Location</h2>
           <Form
             className="border border-dark p-4 mt-4"
@@ -62,7 +62,7 @@ const Location = () => {
             <Row className="mb-3">
               <Col>
                 <Form.Group className="text-start">
-                  <Form.Label htmlFor="name" className="fw-bold ms-3">Enter Name</Form.Label>
+                  <Form.Label htmlFor="name" className="fw-bold ms-3">Enter Building Name</Form.Label>
                   <Form.Control
                     id="name"
                     placeholder="Enter Name"

@@ -19,7 +19,9 @@ const City = () => {
     axios
       .get("http://localhost:8000/getstate")
       .then((res) => {
-        setData(res.data.data);
+        const data=res.data.data;
+         const stateData=data.filter((state)=> state.state_status === "active")
+         setData(stateData);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -31,7 +33,7 @@ const City = () => {
         .get("http://localhost:8000/getdistrict")
         .then((res) => {
           const filteredDistricts = res.data.data.filter(
-            (district) => district.district_state === city_state
+            (district) => district.district_state === city_state &&  district.district_status === "active"
           );
           setDistrictdata(filteredDistricts);
         })
@@ -71,7 +73,7 @@ const City = () => {
   return (
     <Container className="mt-4" fluid>
       <Row>
-        <Col md={5} className="mx-auto">
+        <Col xl={6} className="mx-auto">
           <h2 className="text-center">Add City</h2>
           <Form className="border border-dark p-4 mt-4" onSubmit={handleSubmit}>
             <Row className="mb-3 text-start">

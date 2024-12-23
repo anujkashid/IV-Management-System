@@ -72,7 +72,7 @@ const Calender = () => {
 
   return (
     <div>
-      <Col md={4} xs={12} className="mt-4 mx-auto">
+      <Col md={6} xs={12} className="mt-4 mx-auto">
         <h2 className="text-center ms-0 ms-md-5 mt-4 mb-3 text-danger">
           Booked Slots
         </h2>

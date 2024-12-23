@@ -35,7 +35,7 @@ const State = () => {
     <>
       <Container className="mt-4" fluid>
       <Row>
-        <Col md={4} className="mx-auto">
+        <Col xl={6} className="mx-auto">
           <h2 className="text-center">Add State</h2>
           <Form
             className="border border-dark p-4 mt-4"

@@ -109,7 +109,7 @@ const Dashboard = () => {
       <Row className="g-4">
 
         {/* Card 0 */}
-        <Col md={3}>
+        <Col lg={3} md={4}>
           <Card
             className="h-100 shadow-md"
             style={{
@@ -134,7 +134,7 @@ const Dashboard = () => {
         </Col>
 
         {/* card 1 */}
-        <Col md={3}>
+        <Col lg={3} md={4}>
           <Card
             className="h-100 shadow-md"
             style={{
@@ -159,7 +159,7 @@ const Dashboard = () => {
         </Col>
 
         {/* card 2 */}
-        <Col md={3}>
+        <Col lg={3} md={4}>
           <Card
             className="h-100 shadow-md"
             style={{
@@ -184,7 +184,7 @@ const Dashboard = () => {
         </Col>
 
         {/* card 3 */}
-        <Col md={3}>
+        <Col lg={3} md={4}>
           <Card
             className="h-100 shadow-md"
             style={{
@@ -210,7 +210,7 @@ const Dashboard = () => {
 
 
         {/* card 4 */}
-        <Col md={3}>
+        <Col lg={3} md={4}>
           <Card
             className="h-100 shadow-md"
             style={{
@@ -235,7 +235,7 @@ const Dashboard = () => {
         </Col>
 
         {/* card 5  */}
-        <Col md={3}>
+        <Col md={4} lg={3}>
           <Card
             className="h-100 shadow-md"
             style={{
@@ -260,7 +260,7 @@ const Dashboard = () => {
         </Col>
 
         {/* card 6 */}
-        <Col md={3}>
+        <Col md={4} lg={3}>
           <Card
             className="h-100 shadow-md"
             style={{
@@ -285,7 +285,7 @@ const Dashboard = () => {
         </Col>
 
         {/* card 7 */}
-        <Col md={3}>
+        <Col md={4} lg={3}>
           <Card
             className="h-100 shadow-md "
             style={{
@@ -315,7 +315,7 @@ const Dashboard = () => {
           </Card>
         </Col>
 
-        <Col md={3}>
+        <Col md={4} lg={3}>
           <Card
             className="h-100 shadow-md"
             style={{

@@ -3,6 +3,7 @@ import { Container, Navbar, Nav, Dropdown, Modal, Form, Button } from "react-boo
 import { FaRegUser } from "react-icons/fa";
 import { IoIosLogOut, IoIosNotificationsOutline } from "react-icons/io";
 import axios from "axios";
+import logo from '../Images/sumago-logo.png';
 // import bcrypt from "bcryptjs";
 
 const ColHeader = () => {
@@ -82,7 +83,14 @@ return (
       <Navbar collapseOnSelect expand="lg" bg="danger" variant="dark">
         <Container>
           {/* Brand */}
-          <Navbar.Brand className="fs-4">{collegename}</Navbar.Brand>
+          <Navbar.Brand className="fs-4">
+            <img src={logo} className="" style={{width:"50px",height:"50px"}}/>
+            <span
+            className="text-white fw-bold ms-2"
+            style={{ fontFamily: "Times New Roman" }}
+          >
+            Sumago Infotech
+          </span></Navbar.Brand>
 
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
@@ -93,9 +101,9 @@ return (
                 Home
               </Nav.Link>
 
-              <Nav.Link href="/about" className="text-white fs-5 me-2">
+              {/* <Nav.Link href="/about" className="text-white fs-5 me-2">
                 About
-              </Nav.Link>
+              </Nav.Link> */}
 
               <Nav.Link href="/collegetotalvisit" className="text-white fs-5 me-2">
                 Schedule Visit
@@ -118,7 +126,7 @@ return (
               {/* Notifications */}
               <Nav.Link href="/notifications" className="position-relative">
                 <IoIosNotificationsOutline
-                  className="me-4 text-white fw-bold"
+                  className="me-3 text-white fw-bold"
                   size={35}
                 />
                 {notificationCount > 0 && (
@@ -133,7 +141,7 @@ return (
 
               {/* Profile */}
 
-              <Dropdown className="me-4">
+              <Dropdown className="me-3">
                 
                 <Dropdown.Toggle
                   variant="link"

@@ -173,13 +173,13 @@ const ColLogin = () => {
                       timeIntervals={60}
                       timeCaption="Time"
                       dateFormat="hh:mm aa"
-                      className="form-control ms-2"
+                      className="form-control ms-2 mt-2 mt-md-0"
                       placeholderText="Select Start Time"
                       required
                     />
                   </Col>
                   <Col md={4} className="d-flex align-items-center">
-                  <Form.Label className="mb-0">End Time:</Form.Label>
+                  <Form.Label className="mb-0 ">End Time:</Form.Label>
                   <DatePicker
                       selected={end_time}
                       onChange={(time) => setEndTime(time)}
@@ -188,7 +188,7 @@ const ColLogin = () => {
                       timeIntervals={120}
                       timeCaption="Time"
                       dateFormat="hh:mm aa"
-                      className="form-control ms-2"
+                      className="form-control ms-2 mt-2 mt-md-0"
                       placeholderText="Select End Time"
                       required
                       minTime={start_time || new Date().setHours(0, 0, 0, 0)}

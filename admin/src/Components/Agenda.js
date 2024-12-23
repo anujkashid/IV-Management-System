@@ -40,7 +40,7 @@ const Fees = () => {
   return (
     <Container className="mt-4" fluid>
       <Row>
-        <Col md={4} className="mx-auto">
+        <Col xl={6} className="mx-auto">
           <h2 className="text-center">Add Agenda</h2>
           <Form
             className="border border-dark p-4 mt-4"
@@ -69,7 +69,7 @@ const Fees = () => {
                   <Form.Label htmlFor="name" className="fw-bold ms-3">Agenda Description</Form.Label>
                   <Form.Control
                     id="name"
-                    placeholder="Enter Amount"
+                    placeholder="Enter Description"
                     type="text"
                     value={agenda_description}
                     onChange={(e) => setAgenda_description(e.target.value)}

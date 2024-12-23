@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ForgetPasswordComponent = () => {
   const [data, setData] = useState([]);
@@ -11,7 +11,7 @@ const ForgetPasswordComponent = () => {
   const [emailExists, setEmailExists] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-
+  const navigate=useNavigate();
   // Fetch the list of emails from the database
   useEffect(() => {
     axios
@@ -57,6 +57,7 @@ const ForgetPasswordComponent = () => {
         reg_password,
       });
 
+      navigate("/");
       setSuccessMessage('Password updated successfully.');
       setErrorMessage('');
       setEmail('');
@@ -109,19 +110,21 @@ const ForgetPasswordComponent = () => {
                     />
                   </Form.Group>
                   <Form.Group>
-                    <Form.Label>Confirm new password:</Form.Label>
+                    <Form.Label className='mt-2'>Confirm new password:</Form.Label>
                     <Form.Control
                       type="password"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                   </Form.Group>
-                  <Button className="btn btn-success mt-3" onClick={updatePassword}>
-                    Update Password
+                  <div className='d-flex justify-content-center'>
+                  <Button className="btn btn-primary mt-3" onClick={updatePassword}>
+                    Reset Password
                   </Button>
                   <Link to="/" className="text-decoration-none">
                     <Button className="btn btn-danger mt-3 ms-5">Cancel</Button>
                   </Link>
+                  </div>
                 </>
               )}
             </Form>

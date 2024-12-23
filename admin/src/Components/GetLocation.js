@@ -29,7 +29,7 @@ const GetLocation = () => {
       axios
         .delete(`http://localhost:8000/deletelocation/${id}`)
         .then((res) => {
-          alert("City Deleted Successfully");
+          alert("Location Deleted Successfully");
           // Optionally, refresh the data here by fetching again
           setLocationData((prevData) => prevData.filter((location) => location._id !== id));
         })

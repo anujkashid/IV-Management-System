@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const College_registration = () => {
   const [collage_name, setCollage_name] = useState("");
@@ -31,19 +31,91 @@ const College_registration = () => {
   const [filteredCity, setFilteredCity] = useState([]);
   const [city, setCity] = useState([]);
   const [university, setUniversity] = useState([]);
+  const navigate=useNavigate();
+  const [errors, setErrors] = useState({});
 
-  const [validated, setValidated] = useState(false);
+   // Validation function
+   const validateForm = () => {
+    let errors = {};
+    let isValid = true;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const form = e.currentTarget;
-    if (form.checkValidity() === false) {
-      e.stopPropagation();
-    return;
+    if (!collage_name) {
+      isValid = false;
+      errors["collage_name"] = "College name is required";
+    } else if (!/^[a-zA-Z]+$/.test(collage_name)) {
+      isValid = false;
+      errors["collage_name"] = "College name is invalid";
+    }
+    if (!reg_state.trim()) {
+      isValid = false;
+      errors["reg_state"] = "State is required.";
+    }
+  
+    if (!reg_district.trim()) {
+      isValid = false;
+      errors["reg_district"] = "District is required.";
+    }
+  
+    if (!reg_city.trim()) {
+      isValid = false;
+      errors["reg_city"] = "City is required.";
+    }
+  
+    if (!reg_university_name.trim()) {
+      isValid = false;
+      errors["reg_university_name"] = "University is required.";
+    }
+    if (!reg_principal_name.trim()) {
+      isValid = false;
+      errors["reg_principal_name"] = "Principal name is required.";
     }
 
-    setValidated(true);
+    if (!reg_college_email_id) {
+      isValid = false;
+      errors["reg_college_email_id"] = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(reg_college_email_id)) {
+      isValid = false;
+      errors["reg_college_email_id"] = "Email is invalid";
+    }
+
+    if (!reg_college_username.trim()) {
+      isValid = false;
+      errors["reg_college_username"] = "Username is required.";
+    }
+
+    if (!reg_password.trim()) {
+      isValid = false;
+      errors["reg_password"] = "Password is required.";
+    }
+
+    if (!/^[a-zA-Z]+$/.test(reg_contact_person)) {
+      isValid = false;
+      errors["reg_contact_person"] = "First name must contain only letters";
+    }
+
+    if (!reg_contact_person_contact1) {
+      isValid = false;
+      errors["reg_contact_person_contact1"] = "Mobile number is required";
+    } else if (!/^\d{10}$/.test(reg_contact_person_contact1)) {
+      isValid = false;
+      errors["reg_contact_person_contact1"] = "Enter a valid 10-digit mobile number";
+    }
+
+    if (!reg_mou_sign.trim()) {
+      isValid = false;
+      errors["reg_mou_sign"] = "MoU status is required.";
+    }
+    
+
+    setErrors(errors);
+    return isValid;
+  };
+  const handleSubmit = async (e) => {
+     e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
+    
     const userdata = {
       collage_name,
       reg_state,
@@ -63,17 +135,21 @@ const College_registration = () => {
       reg_status,
     };
 
-   
-
-
+    try{
     axios
       .post("http://localhost:8000/add_registration", userdata)
       .then((res) => {
-        console.log(res.data);
+        navigate('/')
+        console.log("hiiiiiiii",res.data.data);
         handleClear();
-      })
-      .catch((err) => console.log(err));
+      })}
+
+      catch (err){ 
+        console.error("Error while registration", err);
+      }
   };
+
+
   const handleClear = () => {
     setCollage_name("");
     setReg_state("");
@@ -118,7 +194,6 @@ const College_registration = () => {
           (a) =>  a.district_status === "active"
       )
         setDistrict(activedistrict);
-        // console.log("1",res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -150,7 +225,7 @@ const College_registration = () => {
           (a) =>  a.city_status === "active"
       )
         setCity(activecity);
-        // console.log("1",res.data);
+    
       })
       .catch((error) => {
         console.log(error);
@@ -181,7 +256,7 @@ const College_registration = () => {
           (a) =>  a.university_status === "active"
       )
         setUniversity(activeuniversity);
-        // console.log("1",res.data);
+       
       })
       .catch((error) => {
         console.log(error);
@@ -194,14 +269,14 @@ const College_registration = () => {
      
       {/* Form  */}
       <Container
-        className=" h-100   "
-        style={{ maxWidth: "800px" }}
       >
-         <h2 className="text-center mt-4 mb-4">Registration Form</h2>
-        <Form className="border border-dark p-2" noValidate validated={validated} onSubmit={handleSubmit}>
+        <Row>
+          <Col xs={10} className="mx-auto h-100  p-2 p-md-4 bg-white mt-5 rounded-2 "style={{ maxWidth: "600px" }}  >
+         <h2 className="text-center text-dark fs-3 mb-3">Registration Form</h2>
+        <Form className=" p-4 border border-dark">
           {/* College Name */}
-          <Form.Group className="mb-3 text-start" controlId="formGroupCollege">
-            <Form.Label className="mt-3 fw-bold ms-3">College Name</Form.Label>
+          <Form.Group className="mb-3 text-center" controlId="formGroupCollege">
+            <Form.Label>College Name</Form.Label>
             <Form.Control
               required
               type="text"
@@ -209,14 +284,13 @@ const College_registration = () => {
               onChange={(e) => setCollage_name(e.target.value)}
               placeholder="Enter College Name"
             />
-            <Form.Control.Feedback type="invalid">
-              Please provide the college name.
-            </Form.Control.Feedback>
+
+            {errors.collage_name && <p className="text-danger">{errors.collage_name}</p>}
           </Form.Group>
 
           {/* State */}
-          <Form.Group className="mb-3 text-start" controlId="formGroupState">
-            <Form.Label className="fw-bold ms-3">State</Form.Label>
+          <Form.Group className="mb-3 text-center" controlId="formGroupState">
+            <Form.Label>State</Form.Label>
             <Form.Select
               required
               value={reg_state}
@@ -229,14 +303,12 @@ const College_registration = () => {
                 </option>
               ))}
             </Form.Select>
-            <Form.Control.Feedback type="invalid">
-              Please select a state.
-            </Form.Control.Feedback>
+            {errors.reg_state && <p className="text-danger">{errors.reg_state}</p>}
           </Form.Group>
 
           {/* District */}
-          <Form.Group className="mb-3 text-start" controlId="formGroupDistrict">
-            <Form.Label className="fw-bold ms-3">District</Form.Label>
+          <Form.Group className="mb-3 text-center" controlId="formGroupDistrict">
+            <Form.Label>District</Form.Label>
             <Form.Select
               required
               value={reg_district}
@@ -249,14 +321,12 @@ const College_registration = () => {
                 </option>
               ))}
             </Form.Select>
-            <Form.Control.Feedback type="invalid">
-              Please select a district.
-            </Form.Control.Feedback>
+            {errors.reg_district && <p className="text-danger">{errors.reg_district}</p>}
           </Form.Group>
 
           {/* City */}
-          <Form.Group className="mb-3 text-start" controlId="formGroupCity">
-            <Form.Label className="fw-bold ms-3">City</Form.Label>
+          <Form.Group className="mb-3 text-center" controlId="formGroupCity">
+            <Form.Label>City</Form.Label>
             <Form.Select
               required
               value={reg_city}
@@ -269,14 +339,12 @@ const College_registration = () => {
                 </option>
               ))}
             </Form.Select>
-            <Form.Control.Feedback type="invalid">
-              Please select a city.
-            </Form.Control.Feedback>
+            {errors.reg_city && <p className="text-danger">{errors.reg_city}</p>}
           </Form.Group>
 
           {/* University Name */}
-           <Form.Group className="mb-3 text-start" controlId="formGroupCity">
-            <Form.Label className="fw-bold ms-3">Univesity Name</Form.Label>
+           <Form.Group className="mb-3 text-center" controlId="formGroupCity">
+            <Form.Label>Univesity Name</Form.Label>
             <Form.Select
               required
               value={reg_university_name}
@@ -289,14 +357,13 @@ const College_registration = () => {
                 </option>
               ))}
             </Form.Select>
-            <Form.Control.Feedback type="invalid">
-              Please select a University.
-            </Form.Control.Feedback>
+            {errors.reg_university_name && <p className="text-danger">{errors.reg_university_name}</p>}
+
           </Form.Group>
 
           {/* Principal Name */}
-          <Form.Group className="mb-3 text-start" controlId="formGroupPrincipalName">
-            <Form.Label className="fw-bold ms-3">Principal Name</Form.Label>
+          <Form.Group className="mb-3 text-center" controlId="formGroupPrincipalName">
+            <Form.Label>Principal Name</Form.Label>
             <Form.Control
               required
               type="text"
@@ -304,14 +371,12 @@ const College_registration = () => {
               onChange={(e) => setReg_principal_name(e.target.value)}
               placeholder="Enter Principal Name"
             />
-            <Form.Control.Feedback type="invalid">
-              Please provide the principal name.
-            </Form.Control.Feedback>
+            {errors.reg_principal_name && <p className="text-danger">{errors.reg_principal_name}</p>}
           </Form.Group>
 
           {/* Contact Person */}
-          <Form.Group className="mb-3 text-start" controlId="formGroupContactPerson">
-            <Form.Label className="fw-bold ms-3">Contact Person</Form.Label>
+          <Form.Group className="mb-3 text-center" controlId="formGroupContactPerson">
+            <Form.Label>Contact Person</Form.Label>
             <Form.Control
               required
               type="text"
@@ -319,15 +384,14 @@ const College_registration = () => {
               onChange={(e) => setReg_contact_person(e.target.value)}
               placeholder="Enter Contact Person Name"
             />
-            <Form.Control.Feedback type="invalid">
-              Please provide the contact persons name.
-            </Form.Control.Feedback>
+            {errors.reg_contact_person && <p className="text-danger">{errors.reg_contact_person}</p>}
+
           </Form.Group>
           <Row>
             <Col>
               {/* Contact Person Contact 1 */}
-              <Form.Group className="mb-3 text-start" controlId="formGroupContact1">
-                <Form.Label className="fw-bold ms-3">Contact Person Contact 1</Form.Label>
+              <Form.Group className="mb-3 text-center" controlId="formGroupContact1">
+                <Form.Label>Contact Person Contact 1</Form.Label>
                 <Form.Control
                   required
                   type="tel"
@@ -338,15 +402,13 @@ const College_registration = () => {
                   pattern="^\d{10}$"
                   placeholder="Enter 10-digit Contact Number"
                 />
-                <Form.Control.Feedback type="invalid">
-                  Please provide a valid 10-digit contact number.
-                </Form.Control.Feedback>
+                {errors.reg_contact_person_contact1 && <p className="text-danger">{errors.reg_contact_person_contact1}</p>}
               </Form.Group>
             </Col>
             <Col>
               {/* Contact Person Contact 2 */}
-              <Form.Group className="mb-3 text-start" controlId="formGroupContact2">
-                <Form.Label className="fw-bold ms-3">Contact Person Contact 2</Form.Label>
+              <Form.Group className="mb-3 text-center" controlId="formGroupContact2">
+                <Form.Label>Contact Person Contact 2</Form.Label>
                 <Form.Control
                   type="tel"
                   value={reg_contact_person_contact2}
@@ -356,16 +418,13 @@ const College_registration = () => {
                   pattern="^\d{10}$"
                   placeholder="Enter 10-digit Contact Number (Optional)"
                 />
-                <Form.Control.Feedback type="invalid">
-                  Please provide a valid 10-digit contact number.
-                </Form.Control.Feedback>
               </Form.Group>
             </Col>
           </Row>
 
           {/* Email ID */}
-          <Form.Group className="mb-3 text-start" controlId="formGroupEmail">
-            <Form.Label className="fw-bold ms-3">Email ID</Form.Label>
+          <Form.Group className="mb-3 text-center" controlId="formGroupEmail">
+            <Form.Label>Email ID</Form.Label>
             <Form.Control
               required
               type="email"
@@ -373,14 +432,12 @@ const College_registration = () => {
               onChange={(e) => setReg_college_email_id(e.target.value)}
               placeholder="Enter Email ID"
             />
-            <Form.Control.Feedback type="invalid">
-              Please provide a valid email address.
-            </Form.Control.Feedback>
+            {errors.reg_college_email_id && <p className="text-danger">{errors.reg_college_email_id}</p>}
           </Form.Group>
 
           {/* Username */}
-          <Form.Group className="mb-3 text-start" controlId="formGroupUsername">
-            <Form.Label className="fw-bold ms-3">Username</Form.Label>
+          <Form.Group className="mb-3 text-center" controlId="formGroupUsername">
+            <Form.Label>Username</Form.Label>
             <Form.Control
               required
               type="text"
@@ -388,14 +445,13 @@ const College_registration = () => {
               onChange={(e) => setReg_college_username(e.target.value)}
               placeholder="Enter Username"
             />
-            <Form.Control.Feedback type="invalid">
-              Please provide a username.
-            </Form.Control.Feedback>
+            {errors.reg_college_username && <p className="text-danger">{errors.reg_college_username}</p>}
+
           </Form.Group>
 
           {/* Password */}
-          <Form.Group className="mb-3 text-start" controlId="formGroupPassword">
-            <Form.Label className="fw-bold ms-3">Password</Form.Label>
+          <Form.Group className="mb-3 text-center" controlId="formGroupPassword">
+            <Form.Label>Password</Form.Label>
             <Form.Control
               required
               type="password"
@@ -404,14 +460,13 @@ const College_registration = () => {
               minLength={8}
               placeholder="Enter Password"
             />
-            <Form.Control.Feedback type="invalid">
-              Password must be at least 8 characters long.
-            </Form.Control.Feedback>
+            {errors.reg_password && <p className="text-danger">{errors.reg_password}</p>}
+
           </Form.Group>
 
           {/* Confirm Password */}
-          <Form.Group className="mb-3 text-start" controlId="formGroupConfirmPassword">
-            <Form.Label className="fw-bold ms-3">Confirm Password</Form.Label>
+          <Form.Group className="mb-3 text-center" controlId="formGroupConfirmPassword">
+            <Form.Label>Confirm Password</Form.Label>
             <Form.Control
               required
               type="password"
@@ -425,8 +480,8 @@ const College_registration = () => {
             </Form.Control.Feedback>
           </Form.Group>
 
-          <Form.Group className="mb-3 text-start" controlId="formGroupMOU">  
-        <Form.Label className="fw-bold ms-3">MOU Signed</Form.Label>  
+          <Form.Group className="mb-3 text-center" controlId="formGroupMOU">  
+        <Form.Label>MOU Signed</Form.Label>  
         <Form.Select  
           required  
           value={reg_mou_sign}  
@@ -435,23 +490,24 @@ const College_registration = () => {
           <option value="">Select</option>  
           <option value="Yes">Yes</option>  
           <option value="No">No</option>  
-        </Form.Select>    
+        </Form.Select> 
+        {errors.reg_mou_sign && <p className="text-danger">{errors.reg_mou_sign}</p>}
+
       </Form.Group>  
 
       <Row className="mb-3">
               <Col>
-                <Form.Group className="text-start">
-                <div>
-                  <Form.Label className="fw-bold ms-3">
-                    Select Status
+                <Form.Group className="text-center">
+                  <Form.Label className="text-dark fs-5">
+                    Select Status:
                   </Form.Label>
-                  
+                  <div>
                     <Form.Check
                       type="radio"
                       label="Active"
                       name="status"
                       value="active"
-                      className="me-5 ms-5 text-dark"
+                      className="me-5 text-dark"
                       checked={reg_status === "Active"}
                       onChange={(e) => setstatus(e.target.value)}
                       inline
@@ -472,12 +528,20 @@ const College_registration = () => {
 
           {/* Submit Button */}
           <div className="text-center">
-          <Button type="submit"  variant="primary">
+          <Button variant="primary" onClick={handleSubmit}>
             Submit
+          </Button>
+          <Button type="submit"  variant="danger" className="ms-5" onClick={handleClear}>
+            Clear
           </Button>
           </div>
 
+          <div className="text-center mt-3">
+                  <p>Already have an account?  <Link to="/" className=""><span className="ms-1  ">Login</span></Link></p>
+              </div>
         </Form>
+        </Col>
+        </Row>
       </Container>
       </div>
     </>

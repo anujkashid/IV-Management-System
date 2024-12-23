@@ -116,8 +116,12 @@ const Homecomponent = () => {
   return (
     <div style={{ backgroundColor: "#EEEEFF" }}>
       <ColHeader />
+      
+      <h2 className="text-center text-danger mt-2">Welcome To Sumago Infotech !!!!</h2>
+      <h3 className="text-center text-dark ">{collegename}</h3>
+      
       {/* Carousel Section */}
-      <Container fluid>
+      <Container fluid className="mt-3">
         <Container>
           <Col md={10} className="mx-auto">
             <Carousel data-bs-theme="dark">
@@ -138,10 +142,10 @@ const Homecomponent = () => {
       <Container>
         <Row>
           {/* Report Cards */}
-          <Col md={8} xs={12} className="mt-4">
+          <Col  lg={8} md={12} xs={12} className="mt-4 ">
             <Row>
               <h2 className="text-center mb-4 mt-4 text-danger">Reports</h2>
-              <Col md={4} xs={8} className="mx-auto mx-md-0">
+              <Col md={3} xs={8} className="mx-auto me-md-4">
                 <Card
                   className="me-2"
                   style={{ width: "13rem", height: "13rem" }}
@@ -163,7 +167,7 @@ const Homecomponent = () => {
                 </Card>
               </Col>
 
-              <Col md={4} xs={8} className="mx-auto mx-md-0 mt-3 mt-md-0">
+              <Col md={3} xs={8} className="mx-auto me-md-4 mt-3 mt-md-0">
                 <Card
                   className="me-2"
                   style={{ width: "13rem", height: "13rem" }}
@@ -185,7 +189,7 @@ const Homecomponent = () => {
                 </Card>
               </Col>
 
-              <Col md={4} xs={8} className="mx-auto mx-md-0 mt-3 mt-md-0">
+              <Col md={3} xs={8} className="mx-auto  mt-3 mt-md-0">
                 <Card
                   className="me-2"
                   style={{ width: "13rem", height: "13rem" }}
@@ -209,11 +213,11 @@ const Homecomponent = () => {
             </Row>
           </Col>
           {/* Calendar */}
-          <Col md={4} xs={12} className="mt-4">
-            <h2 className="text-center ms-0 ms-md-5 mt-4 mb-3 text-danger">
+          <Col  md={12} lg={4} xs={12} className="mt-4">
+            <h2 className="text-center  mt-4 mb-3 text-danger">
               Booked Slots
             </h2>
-            <div className="d-flex justify-content-end mb-3">
+            <div className="ms-3  mb-3 d-flex justify-content-md-center">
               <Calendar
                 onClickDay={handleDateClick}
                 tileClassName={tileClassName}
@@ -250,22 +254,22 @@ const Homecomponent = () => {
 
       {/* Rules and regulations */}
       <Container>
-          <Row className=" mt-4">
+          <Row className="mt-4">
             <h3 className="text-danger text-center mt-2 mb-2">Code Of Conduct For Attending IV</h3>
              <Col md={6} className="mt-3">
               <ul>
-                <li className="fs-5 mb-2">All students must be in their college uniform.</li>
-                <li className="fs-5 mb-2">All students should wear their identity cards.</li>
-                <li className="fs-5 ">Maintain discipline during visit.</li>
+                <li className="text-md-class mb-2">All students must be in their college uniform.</li>
+                <li className="text-md-class mb-2">All students should wear their identity cards.</li>
+                <li className="text-md-class ">Maintain discipline during visit.</li>
               </ul>
 
              </Col>
 
-             <Col md={6} className="mt-3">
+             <Col md={6} className="mt-md-3 mt-0">
               <ul>
-                <li className="fs-5 mb-2">Be polite and professional while interacting with the  staff.</li>
-                <li className="fs-5 mb-2">Avoid touching system.</li>
-                <li className="fs-5 ">All students are supposed to follow the agenda for visit.</li>
+                <li className="text-md-class mb-2">Be polite and professional while interacting with the  staff.</li>
+                <li className="text-md-class mb-2">Avoid touching system.</li>
+                <li className="text-md-class">All students are supposed to follow the agenda for visit.</li>
               </ul>
 
              </Col>
@@ -277,16 +281,16 @@ const Homecomponent = () => {
           {/* Left Column */}
           <Col md={6} className="text-center mt-5">
             <h3 className="text-danger">
-              <strong>
+              <p className="fs-lg-5 fs-md-0 fw-bold">
                 Let us help you bridge the gap between education and industry,
                 shaping the innovators and leaders of tomorrow.
-              </strong>
+              </p>
             </h3>
             <Button
               variant="danger"
-              className="mt-4 py-3 px-5 mb-3 rounded-pill"
+              className="mt-lg-4 py-3 px-5 mb-3 rounded-pill"
             >
-              <a href="/about" className="text-white text-decoration-none fs-5">
+              <a href="/about" className="text-white text-decoration-none fs-lg-5 fs-md-0">
                 About Us
               </a>
             </Button>
@@ -299,7 +303,7 @@ const Homecomponent = () => {
             <img
               src={cta}
               alt="Contact Us"
-              style={{ width: "300px", height: "200px" }}
+              className="home-img"
             />
           </Col>
         </Row>
@@ -311,12 +315,12 @@ const Homecomponent = () => {
             <img
               src={vision}
               alt="Our Vision"
-              className="h-75 w-100 mt-4 rounded-2"
+              className="vision-img mt-4 rounded-2"
             />
           </Col>
           <Col md={6}>
-            <h2 className="text-center mt-4 fs-2 text-danger">Our Vision</h2>
-            <p className="fs-5 mt-3">
+            <h2 className="text-center mt-lg-4 mt-3 mt-md-0 fs-2 text-danger">Our Vision</h2>
+            <p className="text-md-class ms-3 ms-md-0  text-start mt-lg-3">
               To create a comprehensive learning environment that prepares
               students for the demands of the professional world by integrating
               academic knowledge with industrial exposure.
@@ -324,10 +328,6 @@ const Homecomponent = () => {
               innovation, creativity, and critical thinking among our students,
               empowering them to become leaders and changemakers in their
               respective fields. 
-              <br/> Through strong industry partnerships,
-              cutting-edge research, and a focus on practical skill development,
-              we aim to bridge the gap between education and the ever-evolving
-              professional landscape.
             </p>
           </Col>
         </Row>

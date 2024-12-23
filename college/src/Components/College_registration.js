@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const College_registration = () => {
   const [collage_name, setCollage_name] = useState("");
@@ -31,11 +31,91 @@ const College_registration = () => {
   const [filteredCity, setFilteredCity] = useState([]);
   const [city, setCity] = useState([]);
   const [university, setUniversity] = useState([]);
+  const navigate=useNavigate();
+  const [errors, setErrors] = useState({});
 
-  const [validated, setValidated] = useState(false);
+   // Validation function
+   const validateForm = () => {
+    let errors = {};
+    let isValid = true;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    if (!collage_name) {
+      isValid = false;
+      errors["collage_name"] = "College name is required";
+    } else if (!/^[a-zA-Z]+$/.test(collage_name)) {
+      isValid = false;
+      errors["collage_name"] = "College name is invalid";
+    }
+    if (!reg_state.trim()) {
+      isValid = false;
+      errors["reg_state"] = "State is required.";
+    }
+  
+    if (!reg_district.trim()) {
+      isValid = false;
+      errors["reg_district"] = "District is required.";
+    }
+  
+    if (!reg_city.trim()) {
+      isValid = false;
+      errors["reg_city"] = "City is required.";
+    }
+  
+    if (!reg_university_name.trim()) {
+      isValid = false;
+      errors["reg_university_name"] = "University is required.";
+    }
+    if (!reg_principal_name.trim()) {
+      isValid = false;
+      errors["reg_principal_name"] = "Principal name is required.";
+    }
+
+    if (!reg_college_email_id) {
+      isValid = false;
+      errors["reg_college_email_id"] = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(reg_college_email_id)) {
+      isValid = false;
+      errors["reg_college_email_id"] = "Email is invalid";
+    }
+
+    if (!reg_college_username.trim()) {
+      isValid = false;
+      errors["reg_college_username"] = "Username is required.";
+    }
+
+    if (!reg_password.trim()) {
+      isValid = false;
+      errors["reg_password"] = "Password is required.";
+    }
+
+    if (!/^[a-zA-Z]+$/.test(reg_contact_person)) {
+      isValid = false;
+      errors["reg_contact_person"] = "First name must contain only letters";
+    }
+
+    if (!reg_contact_person_contact1) {
+      isValid = false;
+      errors["reg_contact_person_contact1"] = "Mobile number is required";
+    } else if (!/^\d{10}$/.test(reg_contact_person_contact1)) {
+      isValid = false;
+      errors["reg_contact_person_contact1"] = "Enter a valid 10-digit mobile number";
+    }
+
+    if (!reg_mou_sign.trim()) {
+      isValid = false;
+      errors["reg_mou_sign"] = "MoU status is required.";
+    }
+    
+
+    setErrors(errors);
+    return isValid;
+  };
+  const handleSubmit = async (e) => {
+     e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
+    
     const userdata = {
       collage_name,
       reg_state,
@@ -55,20 +135,21 @@ const College_registration = () => {
       reg_status,
     };
 
-    const form = e.currentTarget;
-    if (form.checkValidity() === false) {
-      e.stopPropagation();
-    }
-    setValidated(true);
-
+    try{
     axios
       .post("http://localhost:8000/add_registration", userdata)
       .then((res) => {
-        console.log(res.data);
+        navigate('/')
+        console.log("hiiiiiiii",res.data.data);
         handleClear();
-      })
-      .catch((err) => console.log(err));
+      })}
+
+      catch (err){ 
+        console.error("Error while registration", err);
+      }
   };
+
+
   const handleClear = () => {
     setCollage_name("");
     setReg_state("");
@@ -113,7 +194,6 @@ const College_registration = () => {
           (a) =>  a.district_status === "active"
       )
         setDistrict(activedistrict);
-        // console.log("1",res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -145,7 +225,7 @@ const College_registration = () => {
           (a) =>  a.city_status === "active"
       )
         setCity(activecity);
-        // console.log("1",res.data);
+    
       })
       .catch((error) => {
         console.log(error);
@@ -176,7 +256,7 @@ const College_registration = () => {
           (a) =>  a.university_status === "active"
       )
         setUniversity(activeuniversity);
-        // console.log("1",res.data);
+       
       })
       .catch((error) => {
         console.log(error);
@@ -195,9 +275,9 @@ const College_registration = () => {
       <Container
       >
         <Row>
-          <Col  className="mx-auto h-100  p-4 bg-white mt-5 rounded-2 "style={{ maxWidth: "600px" }}  >
+          <Col xs={10} className="mx-auto h-100  p-2 p-md-4 bg-white mt-5 rounded-2 "style={{ maxWidth: "600px" }}  >
          <h2 className="text-center text-primary fs-3 mb-3">Registration Form</h2>
-        <Form className=" p-2" noValidate validated={validated} onSubmit={handleSubmit}>
+        <Form className=" p-2">
           {/* College Name */}
           <Form.Group className="mb-3 text-center" controlId="formGroupCollege">
             <Form.Label>College Name</Form.Label>
@@ -208,9 +288,8 @@ const College_registration = () => {
               onChange={(e) => setCollage_name(e.target.value)}
               placeholder="Enter College Name"
             />
-            <Form.Control.Feedback type="invalid">
-              Please provide the college name.
-            </Form.Control.Feedback>
+
+            {errors.collage_name && <p className="text-danger">{errors.collage_name}</p>}
           </Form.Group>
 
           {/* State */}
@@ -228,9 +307,7 @@ const College_registration = () => {
                 </option>
               ))}
             </Form.Select>
-            <Form.Control.Feedback type="invalid">
-              Please select a state.
-            </Form.Control.Feedback>
+            {errors.reg_state && <p className="text-danger">{errors.reg_state}</p>}
           </Form.Group>
 
           {/* District */}
@@ -248,9 +325,7 @@ const College_registration = () => {
                 </option>
               ))}
             </Form.Select>
-            <Form.Control.Feedback type="invalid">
-              Please select a district.
-            </Form.Control.Feedback>
+            {errors.reg_district && <p className="text-danger">{errors.reg_district}</p>}
           </Form.Group>
 
           {/* City */}
@@ -268,9 +343,7 @@ const College_registration = () => {
                 </option>
               ))}
             </Form.Select>
-            <Form.Control.Feedback type="invalid">
-              Please select a city.
-            </Form.Control.Feedback>
+            {errors.reg_city && <p className="text-danger">{errors.reg_city}</p>}
           </Form.Group>
 
           {/* University Name */}
@@ -288,9 +361,8 @@ const College_registration = () => {
                 </option>
               ))}
             </Form.Select>
-            <Form.Control.Feedback type="invalid">
-              Please select a University.
-            </Form.Control.Feedback>
+            {errors.reg_university_name && <p className="text-danger">{errors.reg_university_name}</p>}
+
           </Form.Group>
 
           {/* Principal Name */}
@@ -303,9 +375,7 @@ const College_registration = () => {
               onChange={(e) => setReg_principal_name(e.target.value)}
               placeholder="Enter Principal Name"
             />
-            <Form.Control.Feedback type="invalid">
-              Please provide the principal name.
-            </Form.Control.Feedback>
+            {errors.reg_principal_name && <p className="text-danger">{errors.reg_principal_name}</p>}
           </Form.Group>
 
           {/* Contact Person */}
@@ -318,9 +388,8 @@ const College_registration = () => {
               onChange={(e) => setReg_contact_person(e.target.value)}
               placeholder="Enter Contact Person Name"
             />
-            <Form.Control.Feedback type="invalid">
-              Please provide the contact persons name.
-            </Form.Control.Feedback>
+            {errors.reg_contact_person && <p className="text-danger">{errors.reg_contact_person}</p>}
+
           </Form.Group>
           <Row>
             <Col>
@@ -337,9 +406,7 @@ const College_registration = () => {
                   pattern="^\d{10}$"
                   placeholder="Enter 10-digit Contact Number"
                 />
-                <Form.Control.Feedback type="invalid">
-                  Please provide a valid 10-digit contact number.
-                </Form.Control.Feedback>
+                {errors.reg_contact_person_contact1 && <p className="text-danger">{errors.reg_contact_person_contact1}</p>}
               </Form.Group>
             </Col>
             <Col>
@@ -355,9 +422,6 @@ const College_registration = () => {
                   pattern="^\d{10}$"
                   placeholder="Enter 10-digit Contact Number (Optional)"
                 />
-                <Form.Control.Feedback type="invalid">
-                  Please provide a valid 10-digit contact number.
-                </Form.Control.Feedback>
               </Form.Group>
             </Col>
           </Row>
@@ -372,9 +436,7 @@ const College_registration = () => {
               onChange={(e) => setReg_college_email_id(e.target.value)}
               placeholder="Enter Email ID"
             />
-            <Form.Control.Feedback type="invalid">
-              Please provide a valid email address.
-            </Form.Control.Feedback>
+            {errors.reg_college_email_id && <p className="text-danger">{errors.reg_college_email_id}</p>}
           </Form.Group>
 
           {/* Username */}
@@ -387,9 +449,8 @@ const College_registration = () => {
               onChange={(e) => setReg_college_username(e.target.value)}
               placeholder="Enter Username"
             />
-            <Form.Control.Feedback type="invalid">
-              Please provide a username.
-            </Form.Control.Feedback>
+            {errors.reg_college_username && <p className="text-danger">{errors.reg_college_username}</p>}
+
           </Form.Group>
 
           {/* Password */}
@@ -403,9 +464,8 @@ const College_registration = () => {
               minLength={8}
               placeholder="Enter Password"
             />
-            <Form.Control.Feedback type="invalid">
-              Password must be at least 8 characters long.
-            </Form.Control.Feedback>
+            {errors.reg_password && <p className="text-danger">{errors.reg_password}</p>}
+
           </Form.Group>
 
           {/* Confirm Password */}
@@ -434,7 +494,9 @@ const College_registration = () => {
           <option value="">Select</option>  
           <option value="Yes">Yes</option>  
           <option value="No">No</option>  
-        </Form.Select>    
+        </Form.Select> 
+        {errors.reg_mou_sign && <p className="text-danger">{errors.reg_mou_sign}</p>}
+
       </Form.Group>  
 
       <Row className="mb-3">
@@ -470,7 +532,7 @@ const College_registration = () => {
 
           {/* Submit Button */}
           <div className="text-center">
-          <Button type="submit"  variant="primary">
+          <Button variant="primary" onClick={handleSubmit}>
             Submit
           </Button>
           <Button type="submit"  variant="danger" className="ms-5" onClick={handleClear}>
@@ -479,7 +541,7 @@ const College_registration = () => {
           </div>
 
           <div className="text-center mt-3">
-                  <p>Already have an account?  <Link to="/" className=""><span className="ms-3  ">Login</span></Link></p>
+                  <p>Already have an account?  <Link to="/" className=""><span className="ms-1  ">Login</span></Link></p>
               </div>
         </Form>
         </Col>

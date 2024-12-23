@@ -30,7 +30,7 @@ const GetAgenda = () => {
       axios
         .delete(`http://localhost:8000/delete_agenda/${id}`)
         .then((res) => {
-          alert("City Deleted Successfully");
+          alert("Agenda Deleted Successfully");
           // Optionally, refresh the data here by fetching again
           setAgendaData((prevData) => prevData.filter((agenda) => agenda._id !== id));
         })
@@ -107,7 +107,7 @@ const GetAgenda = () => {
             <th>Sr.</th>
             <th> Title</th>
             <th> Description</th>
-            <th> Time</th>
+            <th> Time (in hrs)</th>
             <th> Status</th>
             <th>Actions</th>
           </tr>

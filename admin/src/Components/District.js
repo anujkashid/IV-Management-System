@@ -16,8 +16,9 @@ const District = () => {
     axios
       .get("http://localhost:8000/getstate")
       .then((res) => {
-        setData(res.data.data);
-        console.log(res.data.data);
+        const data=res.data.data;
+         const stateData=data.filter((state)=> state.state_status === "active")
+        setData(stateData);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -51,7 +52,7 @@ const District = () => {
   return (
     <Container className="mt-4" fluid>
       <Row>
-        <Col md={4} className="mx-auto">
+        <Col xl={6} className="mx-auto">
           <h2 className="text-center">Add District</h2>
           <Form className="border border-dark p-4 mt-4" onSubmit={handleSubmit}>
             <Row className="mb-3 text-start">

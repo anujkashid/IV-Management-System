@@ -75,11 +75,11 @@ const About = () => {
                                 Keeps colleges and faculty updated with notifications about
                                 schedules, itineraries, and guidelines.
                             </li>
-                            <li>
+                            {/* <li>
                                 <span className="fw-bold">Comprehensive Records: </span> A
                                 centralized database of all past and upcoming visits, including
                                 industry details and feedback.
-                            </li>
+                            </li> */}
                             <li>
                                 <span className="fw-bold"> Eco-friendly Operations:</span>
                                 Minimizes paperwork with a fully digital solution.
@@ -113,7 +113,7 @@ const About = () => {
             
                 {/*How It Works?  */}
     
-                    <Col md={6} xs={12} className="mb-3">
+                    {/* <Col md={6} xs={12} className="mb-3">
                         <img src={process} alt="how" className="mt-4 sliderimage"   />
                     </Col>
                     <Col md={6} xs={12} className="mt-4">
@@ -127,7 +127,7 @@ const About = () => {
                                 experiences.
                             </li>
                         </ul>
-                    </Col>
+                    </Col> */}
             
                 </Row>
             </Container>
