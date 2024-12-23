@@ -8,6 +8,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ColHeader from "./Navbar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ColLogin = () => {
   const [number_of_students, setNumberofStudent] = useState("");
@@ -24,13 +25,16 @@ const ColLogin = () => {
   const[visitData,setVisitData]=useState([]);
   const college_name =localStorage.getItem("CollegeName");
   const mousigned=localStorage.getItem("mousigned");
+  const navigate=useNavigate();
   
   console.log("mou",mousigned);
 
   useEffect(()=>{
       axios.get("http://localhost:8000/getlocation")
       .then((res)=>{
-         setLocationData(res.data.data);
+        const data=res.data.data;
+        const stateData=data.filter((state)=> state.location_status === "active")
+         setLocationData(stateData);
       })
   },[])
 
@@ -101,6 +105,7 @@ const ColLogin = () => {
         .then((res) => {
             console.log(res.data);
             alert("Visit successfully added!");
+            navigate("/collegetotalvisit")
             handleClear(); // Clear the form
         })
         .catch((err) => {

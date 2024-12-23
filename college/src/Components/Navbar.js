@@ -132,7 +132,7 @@ return (
                 {notificationCount > 0 && (
                   <span
                     className="position-absolute translate-middle badge rounded-pill bg-primary text-white"
-                    style={{ top: "10px", right: "15px" }}
+                    style={{ top: "10px", right: "10px" }}
                   >
                     {notificationCount}
                   </span>

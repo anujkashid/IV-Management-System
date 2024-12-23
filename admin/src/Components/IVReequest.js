@@ -4,7 +4,15 @@ import { CSVLink } from "react-csv"; // For exporting CSV
 import jsPDF from "jspdf"; // For exporting PDF
 import "jspdf-autotable";
 import * as XLSX from "xlsx"; // For exporting Excel
-import { Table, Button, Container, Row, Form, Modal, Pagination } from "react-bootstrap";
+import {
+  Table,
+  Button,
+  Container,
+  Row,
+  Form,
+  Modal,
+  Pagination,
+} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { FaCaretDown, FaRegThumbsDown, FaRegThumbsUp } from "react-icons/fa";
 import { MdFileDownload } from "react-icons/md";
@@ -23,7 +31,7 @@ const IVRequest = () => {
   const [feesdata, setFeesData] = useState([]);
   const [feestitle, setFeestitle] = useState([]);
   const [selectedFeeTitle, setSelectedFeeTitle] = useState("");
-  const [selectedFee, setSelectedFee] = useState(null);;
+  const [selectedFee, setSelectedFee] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const visitsPerPage = 10; // Number of rows per page
 
@@ -32,7 +40,6 @@ const IVRequest = () => {
 
   // disabled={isButtonDisabled()}
 
-
   const handleOpenModal = (visit, type) => {
     if (visit.mousigned === "Yes") {
       setId(visit._id);
@@ -40,9 +47,7 @@ const IVRequest = () => {
       setModalType(type);
       setShow(true);
       setShowAddFeeModal(false);
-    }
-
-    else if (visit.mousigned === "No") {
+    } else if (visit.mousigned === "No") {
       if (visit.fees_status === "paid" && visit.fees_received === "complete") {
         setId(visit._id);
         setCollegeName(visit.college_name);
@@ -50,7 +55,6 @@ const IVRequest = () => {
         setShow(true);
       }
     }
-
   };
 
   const handleClear = () => {
@@ -139,33 +143,28 @@ const IVRequest = () => {
     XLSX.writeFile(workbook, "visit_data.xlsx");
   };
 
- // Pagination logic
- const indexOfLastVisit = currentPage * visitsPerPage;
- const indexOfFirstVisit = indexOfLastVisit - visitsPerPage;
- const currentVisits = visitData.slice(
-   indexOfFirstVisit,
-   indexOfLastVisit
- );
+  // Pagination logic
+  const indexOfLastVisit = currentPage * visitsPerPage;
+  const indexOfFirstVisit = indexOfLastVisit - visitsPerPage;
+  const currentVisits = visitData.slice(indexOfFirstVisit, indexOfLastVisit);
 
- const totalPages = Math.ceil(visitData.length / visitsPerPage);
+  const totalPages = Math.ceil(visitData.length / visitsPerPage);
 
- const handlePageChange = (pageNumber) => {
-   setCurrentPage(pageNumber);
- };
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
- const handleNextPage = () => {
-   if (currentPage < totalPages) {
-     setCurrentPage((prevPage) => prevPage + 1);
-   }
- };
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
 
- const handlePrevPage = () => {
-   if (currentPage > 1) {
-     setCurrentPage((prevPage) => prevPage - 1);
-   }
- };
-
-
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
 
   const handleUpdate = () => {
     const formData = { college_name: collegeName, Visit_accept };
@@ -194,9 +193,6 @@ const IVRequest = () => {
 
   const renderModalContent = () => {
     if (modalType === "accept") {
-
-
-
       return (
         <>
           <Modal.Header closeButton>
@@ -296,10 +292,10 @@ const IVRequest = () => {
 
   // feesget
   const feesget = () => {
-    const fees = selectedFee.fees_amount
+    const fees = selectedFee.fees_amount;
     const userData = {
-      fees
-    }
+      fees,
+    };
 
     axios
       .put(`http://localhost:8000/updatevisit/${id}`, userData)
@@ -326,9 +322,10 @@ const IVRequest = () => {
 
   const formatDate = (date) => {
     const d = new Date(date);
-    return `${d.getDate()}-${d.toLocaleString('default', { month: 'short' })}-${d.getFullYear()}`;
+    return `${d.getDate()}-${d.toLocaleString("default", {
+      month: "short",
+    })}-${d.getFullYear()}`;
   };
-
 
   return (
     <Container>
@@ -367,108 +364,118 @@ const IVRequest = () => {
         </thead>
         <tbody className="text-center">
           {currentVisits.map((visit, index) => (
-           <React.Fragment key={visit._id}>
-           <tr>
-           <td>
-               <Button
-                 variant="link"
-                 className="fs-4"
-                 onClick={() => toggleRowExpansion(visit._id)}
-               >
-                 {visit.isExpanded ? "-" : "+"}
-               </Button>
-             </td>
-             <td>{visit.college_name}</td>
-             <td>{visit.number_of_students}</td>
-             <td>{formatDate(visit.Date_of_visit)}</td>
-             <td>{visit.start_time}</td>
-             <td>{visit.visting_location}</td>
-             <td>{visit.mousigned}</td>
-             <td>{visit.fees_status}</td>
-             <td>{visit.fees_received}</td>
-             <td>
-                {visit.fees}
-                <Button
-                  variant="link"
-                  className="bg-primary  px-2 mt-1 ms-3"
-                  onClick={() => handleOpenFeesModal(visit)}
-                >
-                  <span className="text-white" >Add</span>
-                </Button>
-              </td>
-              <td>
-                <Button
-                  className="btn btn-primary"
-                  onClick={() => {
-                    handleOpenModal(visit, "accept");
-                    handledata(visit);
-                  }}
-                >
-                  <FaRegThumbsUp
-                    size={24}
-                    className="text-white"
-                  ></FaRegThumbsUp>
-                </Button>
-                <Button
-                  className="btn btn-danger ms-2"
-                  onClick={() => handleOpenModal(visit, "reject")}
-                >
-                  <FaRegThumbsDown
-                    size={24}
-                    className="text-white"
-                  ></FaRegThumbsDown>
-                </Button>
-              </td>
-           </tr>
-           {visit.isExpanded && (
-  <>
-    <tr>
-      <th>End Time</th>
-      <th>Number of Faculty</th>
-      <th>Student Details</th>
-      <th>Faculty Details</th>
-      <th>Purpose</th>
-      <th>Comment</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-    <tr>
-      <td>{visit.end_time}</td>
-      <td>{visit.number_of_faculty}</td>
-      <td>
-                <a
-                  href={`http://localhost:8000/images/${visit.student_details}`}
-                  download
-                  className="btn btn-link"
-                >
-                  <MdFileDownload size={30} />
-                </a>
-              </td>
-              <td>
-                <a
-                  href={`http://localhost:8000/images/${visit.faculty_details}`}
-                  download
-                  className="btn btn-link"
-                >
-                  <MdFileDownload size={30} />
-                </a>
-              </td>
-      <td>{visit.purpose}</td>
-      <td>{visit.comment}</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-      
-    </tr>
-  </>
-)}
-
-         </React.Fragment>
+            <React.Fragment key={visit._id}>
+              <tr>
+                <td>
+                  <Button
+                    variant="link"
+                    className="fs-4"
+                    onClick={() => toggleRowExpansion(visit._id)}
+                  >
+                    {visit.isExpanded ? "-" : "+"}
+                  </Button>
+                </td>
+                <td>{visit.college_name}</td>
+                <td>{visit.number_of_students}</td>
+                <td>{formatDate(visit.Date_of_visit)}</td>
+                <td>{visit.start_time}</td>
+                <td>{visit.visting_location}</td>
+                <td>{visit.mousigned}</td>
+                {visit.mousigned === "No" && (
+                  <>
+                    <td>{visit.fees_status}</td>
+                    <td>{visit.fees_received}</td>
+                    <td>
+                      {visit.fees}
+                      <Button
+                        variant="link"
+                        className="bg-primary px-2 mt-1 ms-3"
+                        onClick={() => handleOpenFeesModal(visit)}
+                      >
+                        <span className="text-white">Add</span>
+                      </Button>
+                    </td>
+                  </>
+                )}
+                {visit.mousigned === "Yes" && (
+                  <>
+                    <td></td>
+                    <td></td>
+                    <td>
+                    </td>
+                  </>
+                )}
+                <td>
+                  <Button
+                    className="btn btn-primary"
+                    onClick={() => {
+                      handleOpenModal(visit, "accept");
+                      handledata(visit);
+                    }}
+                  >
+                    <FaRegThumbsUp
+                      size={24}
+                      className="text-white"
+                    ></FaRegThumbsUp>
+                  </Button>
+                  <Button
+                    className="btn btn-danger ms-2"
+                    onClick={() => handleOpenModal(visit, "reject")}
+                  >
+                    <FaRegThumbsDown
+                      size={24}
+                      className="text-white"
+                    ></FaRegThumbsDown>
+                  </Button>
+                </td>
+              </tr>
+              {visit.isExpanded && (
+                <>
+                  <tr>
+                    <th>End Time</th>
+                    <th>Number of Faculty</th>
+                    <th>Student Details</th>
+                    <th>Faculty Details</th>
+                    <th>Purpose</th>
+                    <th>Comment</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>{visit.end_time}</td>
+                    <td>{visit.number_of_faculty}</td>
+                    <td>
+                      <a
+                        href={`http://localhost:8000/images/${visit.student_details}`}
+                        download
+                        className="btn btn-link"
+                      >
+                        <MdFileDownload size={30} />
+                      </a>
+                    </td>
+                    <td>
+                      <a
+                        href={`http://localhost:8000/images/${visit.faculty_details}`}
+                        download
+                        className="btn btn-link"
+                      >
+                        <MdFileDownload size={30} />
+                      </a>
+                    </td>
+                    <td>{visit.purpose}</td>
+                    <td>{visit.comment}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </>
+              )}
+            </React.Fragment>
           ))}
         </tbody>
       </Table>
@@ -529,10 +536,7 @@ const IVRequest = () => {
               <>
                 <Form.Group as={Row} className="mb-3">
                   <Form.Label>Fee Amount</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={selectedFee.fees_amount}
-                  />
+                  <Form.Control type="text" value={selectedFee.fees_amount} />
                 </Form.Group>
               </>
             )}
