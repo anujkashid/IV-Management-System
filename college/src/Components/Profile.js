@@ -5,6 +5,8 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import ColHeader from "./Navbar";
 import axios from "axios";
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const [profileData, setProfileData] = useState({});
@@ -186,6 +188,14 @@ const Profile = () => {
                     />
                   </Col>
                 </Form.Group>
+                <Link to="/home" className="text-decoration-none">
+                <Button
+                  type="button"
+                  className="btn btn-danger ms-5 px-3 py-1"
+                >
+                  Back
+                </Button>
+                </Link>
               </Form>
             </Container>
           </Col>

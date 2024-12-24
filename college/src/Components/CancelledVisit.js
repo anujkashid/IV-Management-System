@@ -17,7 +17,6 @@ const CancelledVisit = () => {
       .get(`http://localhost:8000/getvisitone/${id}`)
       .then((res) => {
         setVisitData(res.data.data);
-        console.log(res.data.data);
       })
       .catch((error) => {
         console.error("Error fetching visit data:", error);

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row, Container } from "react-bootstrap";
 // import { FaCaretDown } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Update_city = () => {
   const [city_state, setCityState] = useState("");
@@ -167,15 +167,16 @@ const Update_city = () => {
             {/* Buttons */}
             <div className="text-center">
               <Button type="submit" className="btn btn-primary me-3">
-                Submit
+                Update
               </Button>
-              <Button
-                type="button"
-                className="btn btn-danger"
-                onClick={handleClear}
-              >
-                Clear
-              </Button>
+              <Link to="/head/city" className="text-decoration-none">
+                <Button
+                  type="button"
+                  className="btn btn-danger ms-5 px-3 py-2"
+                >
+                  Back
+                </Button>
+                </Link>
             </div>
           </Form>
         </Col>

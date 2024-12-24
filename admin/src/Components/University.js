@@ -90,8 +90,8 @@ const University = () => {
 
             <Row className="text-center mt-4">
               <Col>
-                <Button type="submit" className="btn btn-primary">
-                  Submit
+              <Button type="submit" className="btn btn-primary px-3 py-2">
+                  Add
                 </Button>
                 <Button
                   type="button"

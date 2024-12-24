@@ -64,15 +64,23 @@ const CollegeTotalVisit = () => {
   const exportPDF = () => {
     const doc = new jsPDF();
     const tableColumn = [
-      "university_name",
-      "university_status",
+      "College name",
+     "Number Of Student",
+     "Number of faculty",
+     "Date of visit",
+     "Visiting Location",
+     "Visit Status"
     ];
     const tableRows = [];
 
     ivcount.forEach((university) => {
         tableRows.push([
-     university.university_name,
-     university.university_status
+        university.college_name,
+        university.number_of_students,
+        university.number_of_faculty,
+        formatDate(university.Date_of_visit),
+        university.visting_location,
+        university.Visit_status
         ]);
       });
 
@@ -120,7 +128,7 @@ const CollegeTotalVisit = () => {
       <Table striped bordered hover responsive>
                 <thead className="thead-dark">
                   <tr className="text-center">
-                    <th>Sr.No</th>
+                    <th>Sr.</th>
                     <th>Number of student</th>
                     <th>Number of faculty</th>
                     <th>Date of visit</th>
@@ -138,7 +146,7 @@ const CollegeTotalVisit = () => {
                       <td>{formatDate(IV.Date_of_visit)}</td>
                       <td>{IV.visting_location}</td>
                       <td>{IV.Visit_accept}</td>
-                      <td><Button variant="danger" href="/visitcancelled" onClick={()=> handleUpdate(IV._id)}><MdDelete/></Button></td>
+                      <td><Button variant="danger" href="/visitcancelled" onClick={()=> handleUpdate(IV._id)}><MdDelete size={24}/></Button></td>
                     </tr>
                   ))}
                 </tbody>

@@ -284,6 +284,30 @@ const Dashboard = () => {
           </Card>
         </Col>
 
+        <Col md={4} lg={3}>
+          <Card
+            className="h-100 shadow-md"
+            style={{
+              backgroundColor: "rgba(0, 123, 255, 0.5)",
+              borderRadius: "10px",
+            }}
+          >
+            <Card.Body>
+              <Card.Title className="fs-3 text-center mt-2">
+                {cancelledvisitcount}
+              </Card.Title>
+              <Card.Text className="text-dark fs-5 fw-bold mt-3">
+                Count Of Cancel Visit
+              </Card.Text>
+            </Card.Body>
+            <Card.Footer className="text-center border border-0">
+              <Card.Link href="/head/cancelledvisit">
+                <Button className="btn btn-primary">Details</Button>
+              </Card.Link>
+            </Card.Footer>
+          </Card>
+        </Col>
+
         {/* card 7 */}
         <Col md={4} lg={3}>
           <Card
@@ -315,29 +339,7 @@ const Dashboard = () => {
           </Card>
         </Col>
 
-        <Col md={4} lg={3}>
-          <Card
-            className="h-100 shadow-md"
-            style={{
-              backgroundColor: "rgba(0, 123, 255, 0.5)",
-              borderRadius: "10px",
-            }}
-          >
-            <Card.Body>
-              <Card.Title className="fs-3 text-center mt-2">
-                {cancelledvisitcount}
-              </Card.Title>
-              <Card.Text className="text-dark fs-5 fw-bold mt-3">
-                Count Of Cancel Visit
-              </Card.Text>
-            </Card.Body>
-            <Card.Footer className="text-center border border-0">
-              <Card.Link href="/head/cancelledvisit">
-                <Button className="btn btn-primary">Details</Button>
-              </Card.Link>
-            </Card.Footer>
-          </Card>
-        </Col>
+       
       </Row>
     </Container>
   );

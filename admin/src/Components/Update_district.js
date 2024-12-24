@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row, Container } from "react-bootstrap";
+import { FaCaretDown } from "react-icons/fa";
 // import { FaCaretDown } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Update_district = () => {
   const [district_state, setDistrictstate] = useState("");
@@ -19,7 +20,7 @@ const Update_district = () => {
     axios
       .get(`http://localhost:8000/getonedistrict/${id}`)
       .then((response) => {
-        console.log(response.data.data)
+        console.log(response.data.data);
         setDistrictdata(response.data);
         setDistrictstate(response.data.district_state);
         setDistrictname(response.data.district_name);
@@ -28,17 +29,15 @@ const Update_district = () => {
       .catch((err) => console.log(err));
   }, [id]);
 
-    //   get API for state
-    useEffect(() => {
-      axios
-        .get("http://localhost:8000/getstate")
-        .then((res) => {
-          setStatedata(res.data.data);
-        })
-        .catch((err) => console.log(err));
-    }, []);
-  
-  
+  //   get API for state
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/getstate")
+      .then((res) => {
+        setStatedata(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const handleClear = () => {
     setDistrictname("");
@@ -75,19 +74,26 @@ const Update_district = () => {
             {/* State Dropdown */}
             <Form.Group controlId="stateDropdown" className="mb-3">
               <Form.Label className="fw-bold ms-3">State</Form.Label>
-              <Form.Control
-                as="select"
-                value={district_state}
-                onChange={(e) => setDistrictstate(e.target.value)}
-                required
-              >
-                <option value="">-- Select State --</option>
-                {statedata.map((state) => (
-                  <option key={state.id} value={state.state_name}>
-                    {state.state_name}
-                  </option>
-                ))}
-              </Form.Control>
+              <div className="position-relative">
+                <Form.Control
+                  as="select"
+                  value={district_state}
+                  onChange={(e) => setDistrictstate(e.target.value)}
+                  className="py-2"
+                  required
+                >
+                  <option value="">-- Select State --</option>
+                  {statedata.map((state) => (
+                    <option key={state.id} value={state.state_name}>
+                      {state.state_name}
+                    </option>
+                  ))}
+                </Form.Control>
+                <FaCaretDown
+                  className="position-absolute top-50 end-0 translate-middle-y me-3 text-primary"
+                  style={{ pointerEvents: "none" }}
+                />
+              </div>
             </Form.Group>
 
             {/* District Dropdown */}
@@ -105,8 +111,8 @@ const Update_district = () => {
             {/* Status */}
             <Form.Group className="mb-3">
               <div>
-              <Form.Label className="fw-bold ms-3">Status</Form.Label>
-              
+                <Form.Label className="fw-bold ms-3">Status</Form.Label>
+
                 <Form.Check
                   type="radio"
                   label="Active"
@@ -132,15 +138,13 @@ const Update_district = () => {
             {/* Buttons */}
             <div className="text-center">
               <Button type="submit" className="btn btn-primary me-3">
-                Submit
+                Update
               </Button>
-              <Button
-                type="button"
-                className="btn btn-danger"
-                onClick={handleClear}
-              >
-                Clear
-              </Button>
+              <Link to="/head/district" className="text-decoration-none">
+                <Button type="button" className="btn btn-danger ms-5 px-3 py-2">
+                  Back
+                </Button>
+              </Link>
             </div>
           </Form>
         </Col>

@@ -39,8 +39,10 @@ const Sidebar = () => {
           position: fixed;
           background-color: #f8f9fa;
           height: 100vh;
-          width: 250px;
+          width: 270px;
           z-index: 1045; 
+          overflow-y:auto;
+          overflow-x:hidden;
         }
         .nav-link {
           color: black;
@@ -209,7 +211,7 @@ const Sidebar = () => {
 
           <Nav.Item>
             <Link to="/head/visitcomplete" className="nav-link p-2">
-              <LuCalendarCheck size={30} className="me-2 text-dark" /> Confirm Visit
+              <LuCalendarCheck size={30} className="me-2 text-dark" /> Visited Colleges
             </Link>
           </Nav.Item>
 
@@ -377,7 +379,7 @@ const Sidebar = () => {
 
           <Nav.Item>
             <Link to="/head/visitcomplete" className="nav-link p-2">
-              <LuCalendarCheck size={30} className="me-2 text-dark" /> Confirm Visit
+              <LuCalendarCheck size={30} className="me-2 text-dark" /> Visited Colleges
             </Link>
           </Nav.Item>
 

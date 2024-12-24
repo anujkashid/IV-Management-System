@@ -3,6 +3,7 @@ import { Col, Modal, Button } from "react-bootstrap";
 import Calendar from "react-calendar"; // Make sure to install react-calendar
 import "react-calendar/dist/Calendar.css"; // Import calendar styles
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Calender = () => {
   const [bookedData, setBookedData] = useState({});
@@ -70,6 +71,11 @@ const Calender = () => {
 
   const closeModal = () => setShowModal(false);
 
+  const navigate=useNavigate();
+  const handleNavigate=()=>{
+    navigate("/head/totalvisits")
+ }
+
   return (
     <div>
       <Col md={6} xs={12} className="mt-4 mx-auto">
@@ -99,6 +105,9 @@ const Calender = () => {
             )}
           </Modal.Body>
           <Modal.Footer>
+          <Button className="btn btn-primary px-3 py-2 me-3" onClick={handleNavigate}>
+                    View All Visits
+                  </Button>
             <Button variant="secondary" onClick={closeModal}>
               Close
             </Button>

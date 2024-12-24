@@ -354,11 +354,11 @@ const IVRequest = () => {
             {/* <th>End Time</th> */}
             <th>Visiting Location</th>
             <th>Mou Signed</th>
-            <th>Fee Status</th>
-            <th>Fee Received</th>
+            <th>Fees Status</th>
+            <th>Fees Received</th>
             {/* <th>Student Details</th>
             <th>Faculty Details</th> */}
-            <th>Add Fee</th>
+            <th>Add Fees</th>
             <th>Visit Accept/reject</th>
           </tr>
         </thead>

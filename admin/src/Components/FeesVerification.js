@@ -26,7 +26,7 @@ const FeesVerification = () => {
       .then((response) => {
         const filteredData =
           response.data?.userData?.filter(
-            (visit) => visit.fees_received === "incomplete"
+            (visit) => visit.fees_received === "incomplete" && visit.mousigned==="No"
           ) || [];
         setVisitData(filteredData);
       })

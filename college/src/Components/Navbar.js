@@ -80,18 +80,20 @@ const ColHeader = () => {
 
 return (
     <>
-      <Navbar collapseOnSelect expand="lg" bg="danger" variant="dark">
+      <Navbar collapseOnSelect expand="lg" bg="danger" variant="dark" >
         <Container>
           {/* Brand */}
-          <Navbar.Brand className="fs-4">
-            <img src={logo} className="" style={{width:"50px",height:"50px"}}/>
-            <span
-            className="text-white fw-bold ms-2"
-            style={{ fontFamily: "Times New Roman" }}
-          >
-            Sumago Infotech
-          </span></Navbar.Brand>
-
+          <Navbar.Brand className="fs-5 d-flex align-items-center">
+  <img src={logo} alt="Logo" className="me-3" style={{ width: "70px", height: "70px" }} />
+  <div>
+    <span className="text-white fw-bold d-block" style={{ fontFamily: "Times New Roman" }}>
+      Sumago Infotech
+    </span>
+    <span className="text-white fw-bold" style={{ fontFamily: "Times New Roman" }}>
+      Private Limited
+    </span>
+  </div>
+</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
           <Navbar.Collapse id="responsive-navbar-nav">

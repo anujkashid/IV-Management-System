@@ -4,7 +4,7 @@ import { CSVLink } from "react-csv"; // For exporting CSV
 import jsPDF from "jspdf"; // For exporting PDF
 import "jspdf-autotable";
 import * as XLSX from "xlsx"; // For exporting Excel
-import { Table, Button, Container, Row, Form } from "react-bootstrap";
+import { Table, Button, Container, Row, Form, Pagination } from "react-bootstrap";
 
 const Report = () => {
   const [visitData, setVisitData] = useState([]);
@@ -13,6 +13,8 @@ const Report = () => {
   const [selectedCollege, setSelectedCollege] = useState(""); // State for selected college
   const [selectedDate, setSelectedDate] = useState(""); // State for selected date
   const [filteredData, setFilteredData] = useState([]); // State for filtered data
+  const visitsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     axios
@@ -107,6 +109,30 @@ const Report = () => {
     XLSX.writeFile(workbook, "visit_data.xlsx");
   };
 
+  const indexOfLastVisit = currentPage * visitsPerPage;
+  const indexOfFirstVisit = indexOfLastVisit - visitsPerPage;
+  const currentVisits = filteredData.slice(indexOfFirstVisit, indexOfLastVisit);
+
+  const totalPages = Math.ceil(filteredData.length / visitsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
+  
+
+
   return (
     <Container>
       <h2 className="mt-4 text-center mb-3">Report</h2>
@@ -171,7 +197,7 @@ const Report = () => {
           </tr>
         </thead>
         <tbody className="text-center">
-          {filteredData.map((state, index) => (
+          {currentVisits.map((state, index) => (
             <tr key={state._id}>
               <td>{index + 1}</td>
               <td>{state.college_name}</td>
@@ -187,6 +213,25 @@ const Report = () => {
           ))}
         </tbody>
       </Table>
+
+      {totalPages > 1 && (
+        <Pagination className="justify-content-end">
+          <Pagination.Prev disabled={currentPage === 1} onClick={handlePrevPage} />
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <Pagination.Item
+              key={page}
+              active={page === currentPage}
+              onClick={() => handlePageChange(page)}
+            >
+              {page}
+            </Pagination.Item>
+          ))}
+          <Pagination.Next
+            disabled={currentPage === totalPages}
+            onClick={handleNextPage}
+          />
+        </Pagination>
+      )}
     </Container>
   );
 };

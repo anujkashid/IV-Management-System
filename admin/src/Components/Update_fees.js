@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, } from "react";
 import { Button, Col, Form, Row, Container } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Update_fees = () => {
   const [feesData, setFeesData] = useState({});
@@ -124,7 +124,15 @@ useEffect(() => {
               <Col>
                 <Button type="submit" className="btn btn-primary">
                   Update
-                </Button>        
+                </Button>  
+                <Link to="/head/getfees" className="text-decoration-none">
+                <Button
+                  type="button"
+                  className="btn btn-danger ms-5 px-3 py-2"
+                >
+                  Back
+                </Button>
+                </Link>      
               </Col>
             </Row>
           </Form>

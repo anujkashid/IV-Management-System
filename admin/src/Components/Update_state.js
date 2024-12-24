@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row, Container } from "react-bootstrap";
 // import { FaCaretDown } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Update_state = () => {
   const [state_data, setStatedata] = useState("");
   const [state_name, setStatename] = useState("");
@@ -18,6 +18,7 @@ const Update_state = () => {
         .then((res) => {
           setStatedata(res.data.data);
           setStatename(res.data.state_name);
+          setStatus(res.data.state_status);
         })
         .catch((err) => console.log(err));
     }, []);
@@ -95,15 +96,16 @@ const Update_state = () => {
             {/* Buttons */}
             <div className="text-center">
               <Button type="submit" className="btn btn-primary me-3">
-                Submit
+                Update
               </Button>
-              <Button
-                type="button"
-                className="btn btn-danger"
-                onClick={handleClear}
-              >
-                Clear
-              </Button>
+              <Link to="/head/getstate" className="text-decoration-none">
+                <Button
+                  type="button"
+                  className="btn btn-danger ms-5 px-3 py-2"
+                >
+                  Back
+                </Button>
+                </Link>
             </div>
           </Form>
         </Col>

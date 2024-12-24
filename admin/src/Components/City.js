@@ -79,6 +79,7 @@ const City = () => {
             <Row className="mb-3 text-start">
               <Form.Group controlId="categoryDropdown" className="">
                 <Form.Label className="fw-bold ms-3">State</Form.Label>
+                <div className="position-relative">
                 <Form.Control
                   as="select"
                   value={city_state}
@@ -87,7 +88,10 @@ const City = () => {
                 >
                   <option value="">
                     -- Select State --{" "}
-                    <FaCaretDown className="ms-2 text-primary" />
+                    <FaCaretDown
+                  className="position-absolute top-50 end-0 translate-middle-y me-3 text-primary"
+                  style={{ pointerEvents: "none" }}
+                />
                   </option>
                   {statedata.map((item, index) => {
                     return (
@@ -97,6 +101,7 @@ const City = () => {
                     );
                   })}
                 </Form.Control>
+               </div>
               </Form.Group>
             </Row>
 
@@ -178,8 +183,8 @@ const City = () => {
 
             <Row className="text-center mt-4">
               <Col>
-                <Button type="submit" className="btn btn-primary">
-                  Submit
+              <Button type="submit" className="btn btn-primary px-3 py-2">
+                  Add
                 </Button>
                 <Button
                   type="button"

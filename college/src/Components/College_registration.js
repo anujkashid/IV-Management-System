@@ -39,12 +39,10 @@ const College_registration = () => {
     let errors = {};
     let isValid = true;
 
-    if (!collage_name) {
+
+    if (!collage_name.trim()) {
       isValid = false;
-      errors["collage_name"] = "College name is required";
-    } else if (!/^[a-zA-Z]+$/.test(collage_name)) {
-      isValid = false;
-      errors["collage_name"] = "College name is invalid";
+      errors["collage_name"] = "State is required.";
     }
     if (!reg_state.trim()) {
       isValid = false;
@@ -140,7 +138,6 @@ const College_registration = () => {
       .post("http://localhost:8000/add_registration", userdata)
       .then((res) => {
         navigate('/')
-        console.log("hiiiiiiii",res.data.data);
         handleClear();
       })}
 
@@ -202,7 +199,6 @@ const College_registration = () => {
 
   // Filter Districts When State Changes
   useEffect(() => {
-    console.log(reg_state)
     if (reg_state) {
       
       const filtered = district.filter(
@@ -234,7 +230,6 @@ const College_registration = () => {
 
   // Filter City When District Changes
   useEffect(() => {
-    console.log(reg_district)
     if (reg_district) {
       
       const filtered = city.filter(

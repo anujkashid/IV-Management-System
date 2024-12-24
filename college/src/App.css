@@ -1,30 +1,47 @@
 /* home page */
 @media only screen and (max-width: 768px) {
-    .home-img{
-      width:270px;
-      height: 150px;
-    }   
+  .home-img{
+    width:270px;
+    height: 300px;
+  }  
+  
+  .contactus-img{
+    width: 150px;
+    height: 150px;
   }
+}
+
+
 
   @media only screen and (min-width:768px) and (max-width:1023px) {
     .home-img {
-      width: 240px;
-      height: 220px;
+      width: 350px;
+      height: 350px;
     }
 
     .vision-img{
       width:340px;
       height: 230px;
     }
+
+    .contactus-img{
+      width: 200px;
+      height: 200px;
+    }
   }
   
   @media only screen and (min-width:1024px) {
     .home-img {
       width: 270px;
-      height: 260px;
+      height: 500px;
     }
     .text-md-class{
       font-size: 20px;
+    }
+
+    .contactus-img{
+      width: 250px;
+      height: 250px;
     }
   }
 

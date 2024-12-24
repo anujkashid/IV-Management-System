@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row, Container } from "react-bootstrap";
 import { FaCaretDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { IoIosArrowDropdown } from "react-icons/io";
 
 const District = () => {
   const [district_state, setDistrictState] = useState("");
@@ -16,8 +17,10 @@ const District = () => {
     axios
       .get("http://localhost:8000/getstate")
       .then((res) => {
-        const data=res.data.data;
-         const stateData=data.filter((state)=> state.state_status === "active")
+        const data = res.data.data;
+        const stateData = data.filter(
+          (state) => state.state_status === "active"
+        );
         setData(stateData);
       })
       .catch((err) => console.log(err));
@@ -58,24 +61,25 @@ const District = () => {
             <Row className="mb-3 text-start">
               <Form.Group controlId="categoryDropdown" className="mt-4">
                 <Form.Label className="fw-bold ms-3">State</Form.Label>
-                <Form.Control
-                  as="select"
-                  value={district_state}
-                  onChange={(e) => setDistrictState(e.target.value)}
-                  className="mx-auto mt-3 py-2 dropdown-width"
-                >
-                  <option value="">
-                    -- Select State --{" "}
-                    <FaCaretDown className="ms-2 text-primary" />
-                  </option>
-                  {statedata.map((item, index) => {
-                    return (
+                <div className="position-relative mx-auto dropdown-width">
+                  <Form.Control
+                    as="select"
+                    value={district_state}
+                    onChange={(e) => setDistrictState(e.target.value)}
+                    className="py-2"
+                  >
+                    <option value="">-- Select State --</option>
+                    {statedata.map((item) => (
                       <option key={item._id} value={item.state_name}>
                         {item.state_name}
                       </option>
-                    );
-                  })}
-                </Form.Control>
+                    ))}
+                  </Form.Control>
+                  <FaCaretDown
+                    className="position-absolute top-50 end-0 translate-middle-y me-3 text-primary"
+                    style={{ pointerEvents: "none" }}
+                  />
+                </div>
               </Form.Group>
             </Row>
 
@@ -102,11 +106,11 @@ const District = () => {
             <Row className="mb-3">
               <Col>
                 <Form.Group className="text-start">
-                <div>
-                  <Form.Label className="fw-bold ms-3">
-                    Select Status
-                  </Form.Label>
-                  
+                  <div>
+                    <Form.Label className="fw-bold ms-3">
+                      Select Status
+                    </Form.Label>
+
                     <Form.Check
                       type="radio"
                       label="Active"
@@ -133,8 +137,8 @@ const District = () => {
 
             <Row className="text-center mt-4">
               <Col>
-                <Button type="submit" className="btn btn-primary">
-                  Submit
+                <Button type="submit" className="btn btn-primary px-3 py-2">
+                  Add
                 </Button>
                 <Button
                   type="button"

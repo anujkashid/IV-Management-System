@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import ColHeader from "./Navbar";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const UpdateProfile = () => {
   const [profileData, setProfileData] = useState({
@@ -316,6 +317,15 @@ const UpdateProfile = () => {
                   <Button variant="primary" type="submit">
                     Update Profile
                   </Button>
+
+                  <Link to="/home" className="text-decoration-none">
+                <Button
+                  type="button"
+                  className="btn btn-danger ms-5 px-3 py-1"
+                >
+                  Back
+                </Button>
+                </Link>
                 </div>
               </Form>
             </Container>

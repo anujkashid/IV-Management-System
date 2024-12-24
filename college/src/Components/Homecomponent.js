@@ -19,6 +19,7 @@ import slider1 from "../Images/slider1.jpg";
 import slider2 from "../Images/slider2.jpg";
 import slider3 from "../Images/slider3.jpg";
 import '../App.css';
+import { useNavigate } from "react-router-dom";
 
 
 const Homecomponent = () => {
@@ -30,6 +31,7 @@ const Homecomponent = () => {
   const [rejectediv, setRejectediv] = useState(0);
   // const [collegeData, setCollegeData] = useState([]);
   const collegename = localStorage.getItem("CollegeName");
+  const navigate=useNavigate();
 
   // Format date helper
   const formatDate = (date) => {
@@ -113,22 +115,27 @@ const Homecomponent = () => {
     return bookedData[currentDate] ? "booked-date" : null;
   };
 
+  const handleNavigate=()=>{
+     navigate("/addvisit")
+  }
+
   return (
     <div style={{ backgroundColor: "#EEEEFF" }}>
       <ColHeader />
-      
-      <h2 className="text-center text-danger mt-2">Welcome To Sumago Infotech !!!!</h2>
-      <h3 className="text-center text-dark ">{collegename}</h3>
+   
       
       {/* Carousel Section */}
       <Container fluid className="mt-3">
+           
+      <h2 className="text-center text-danger mt-2">Welcome To Sumago Infotech !!!!</h2>
+      <h3 className="text-center text-dark ">{collegename}</h3>
         <Container>
           <Col md={10} className="mx-auto">
             <Carousel data-bs-theme="dark">
               {[slider1, slider2, slider3].map((slide, index) => (
                 <Carousel.Item key={index}>
                   <img
-                    className="d-block w-100 sliderimage"
+                    className="d-block w-100 home-img"
                     src={slide}
                     alt={`Slide ${index + 1}`}
                   />
@@ -214,10 +221,10 @@ const Homecomponent = () => {
           </Col>
           {/* Calendar */}
           <Col  md={12} lg={4} xs={12} className="mt-4">
-            <h2 className="text-center  mt-4 mb-3 text-danger">
+            <h2 className="text-center mt-4 mb-3 text-danger">
               Booked Slots
             </h2>
-            <div className="ms-3  mb-3 d-flex justify-content-md-center">
+            <div className="ms-3  d-flex justify-content-md-center mb-3 ms-lg-5  ">
               <Calendar
                 onClickDay={handleDateClick}
                 tileClassName={tileClassName}
@@ -242,7 +249,10 @@ const Homecomponent = () => {
                   )}
                 </Modal.Body>
                 <Modal.Footer>
-                  <Button variant="secondary" onClick={closeModal}>
+                <Button className="btn btn-primary px-3 py-2 me-3" onClick={handleNavigate}>
+                    Book
+                  </Button>
+                  <Button variant="dark" onClick={closeModal}>
                     Close
                   </Button>
                 </Modal.Footer>
@@ -281,19 +291,19 @@ const Homecomponent = () => {
           {/* Left Column */}
           <Col md={6} className="text-center mt-5">
             <h3 className="text-danger">
-              <p className="fs-lg-5 fs-md-0 fw-bold">
+              <p className="fs-lg-2 fs-md-0 fw-bold mt-3">
                 Let us help you bridge the gap between education and industry,
                 shaping the innovators and leaders of tomorrow.
               </p>
             </h3>
-            <Button
+            {/* <Button
               variant="danger"
               className="mt-lg-4 py-3 px-5 mb-3 rounded-pill"
             >
               <a href="/about" className="text-white text-decoration-none fs-lg-5 fs-md-0">
-                About Us
+                
               </a>
-            </Button>
+            </Button> */}
           </Col>
           {/* Right Column */}
           <Col
@@ -303,7 +313,7 @@ const Homecomponent = () => {
             <img
               src={cta}
               alt="Contact Us"
-              className="home-img"
+              className="contactus-img"
             />
           </Col>
         </Row>
@@ -320,7 +330,7 @@ const Homecomponent = () => {
           </Col>
           <Col md={6}>
             <h2 className="text-center mt-lg-4 mt-3 mt-md-0 fs-2 text-danger">Our Vision</h2>
-            <p className="text-md-class ms-3 ms-md-0  text-start mt-lg-3">
+            <p className="text-md-class ms-3 ms-md-0  mt-lg-3" style={{textAlign:"justify"}}>
               To create a comprehensive learning environment that prepares
               students for the demands of the professional world by integrating
               academic knowledge with industrial exposure.

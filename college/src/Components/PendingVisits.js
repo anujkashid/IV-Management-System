@@ -41,7 +41,7 @@ const PendingVisit = () => {
             <Table striped bordered hover responsive>
                 <thead className="thead-dark">
                     <tr className="text-center">
-                        <th>Sr.No</th>
+                        <th>Sr.</th>
                         <th>Number of student</th>
                         <th>Number of faculty</th>
                         <th>Date of visit</th>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, } from "react";
 import { Button, Col, Form, Row, Container } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Update_location = () => {
   const [locationData, setLocationData] = useState({});
@@ -130,13 +130,14 @@ useEffect(() => {
                 <Button type="submit" className="btn btn-primary">
                   Update
                 </Button>
+                <Link to="/head/location" className="text-decoration-none">
                 <Button
                   type="button"
-                  className="btn btn-danger ms-5"
-                  onClick={handleClear}
+                  className="btn btn-danger ms-5 px-3 py-2"
                 >
-                  Clear
+                  Back
                 </Button>
+                </Link>
               </Col>
             </Row>
           </Form>
