@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row, Container } from "react-bootstrap";
 import ColHeader from "./Navbar";
 import { setDate } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 const PendingFee = () => {
   const [visitData, setVisitData] = useState([]);
@@ -12,6 +13,7 @@ const PendingFee = () => {
   const [fees_status, setFeesStatus] = useState("");
   const [id, setId] = useState("");
   const [transaction_id,setTransactionId]=useState("");
+  const navigate=useNavigate();
 
   useEffect(() => {
     axios
@@ -71,6 +73,7 @@ const PendingFee = () => {
       .put(`http://localhost:8000/updatevisit/${id}`, userdata)
       .then(() => {
         alert("Fee status updated successfully!");
+        navigate("/pendingvisit")
         setId("");
         setFeesStatus("");
         setDate("");
@@ -109,14 +112,14 @@ const PendingFee = () => {
               <Col>
                 <Form.Group className="mb-2 text-center">
                   <Form.Label className="text-dark">Date of Visit:</Form.Label>
-                  <Form.Control as="select" onChange={handleDateChange}>
+                  <Form.Select aria-label="Select Date" onChange={handleDateChange}>
                     <option value="">Select Date</option>
                     {datedata.map((dateItem, idx) => (
                       <option key={idx} value={dateItem.date}>
                         {formatDate(dateItem.date)}
                       </option>
                     ))}
-                  </Form.Control>
+                  </Form.Select>
                 </Form.Group>
               </Col>
               <Col>

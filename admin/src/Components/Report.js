@@ -155,7 +155,7 @@ const Report = () => {
         <>
           <h6 className="mt-4 ms-3 fw-bold">Select Date</h6>
           <Form.Select
-            aria-label="Select date"
+            aria-label="Select Date"
             value={selectedDate}
             onChange={(e) => setSelectedDate(e.target.value)}
           >
@@ -192,8 +192,8 @@ const Report = () => {
             <th>End Time</th>
             <th>Number of Faculty</th>
             <th>Visiting Location</th>
-            <th>Visit Accept</th>
-            <th>Visit Completed</th>
+            <th>Visit Status</th>
+            <th>Visit Completed Status</th>
           </tr>
         </thead>
         <tbody className="text-center">

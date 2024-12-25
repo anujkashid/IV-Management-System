@@ -90,8 +90,8 @@ const Feedback = () => {
               <Row className="mb-3 text-center">
                 <Form.Group controlId="categoryDropdown" className="">
                   <Form.Label className=" text-dark">Visit Date:</Form.Label>
-                  <Form.Control
-                    as="select"
+                  <Form.Select
+                   aria-label="Select Date"
                     value={feedback_Visit_Date}
                     onChange={(e) => setVisitDate(e.target.value)}
                     className="mx-auto mt-3 py-2 dropdown-width"
@@ -105,7 +105,7 @@ const Feedback = () => {
                         {formatDate(item.Date_of_visit)} 
                       </option>
                     ))}
-                  </Form.Control>
+                  </Form.Select>
                 </Form.Group>
               </Row>
 

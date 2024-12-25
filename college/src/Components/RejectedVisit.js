@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Table, Container } from "react-bootstrap";
+import { Table, Container, Button } from "react-bootstrap";
 import ColHeader from "./Navbar";
+import { Link } from "react-router-dom";
 
 const RejectedVisit = () => {
   const [rejectediv, setRejectediv] = useState([]);
@@ -39,6 +40,11 @@ const RejectedVisit = () => {
         <Container>
         
             <h2 className="my-4 text-center text-danger">Rejected Visits</h2>
+            <div className="d-flex justify-content-end mb-4">
+          <Link to="/home">
+          <Button className="btn btn-danger"><span className="text-white">Back</span></Button>
+        </Link>
+        </div>
             <Table striped bordered hover responsive>
                 <thead className="thead-dark">
                     <tr className="text-center">

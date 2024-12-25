@@ -34,7 +34,8 @@ const Update_district = () => {
     axios
       .get("http://localhost:8000/getstate")
       .then((res) => {
-        setStatedata(res.data.data);
+        const filtestate=res.data.data.filter((state)=>state.state_status==="active")
+          setStatedata(filtestate);
       })
       .catch((err) => console.log(err));
   }, []);

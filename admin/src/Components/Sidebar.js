@@ -276,13 +276,13 @@ const Sidebar = () => {
   <Row>
     <Col md={12}>
       
-      <div className="">
+    <div className="">
         <Button
-          variant="link "
-          className="nav-link p-2"
+          variant="link"
+          className="nav-link  p-2"
           style={{ fontSize: "20px", textDecoration: "none" }}
           onClick={() => setShowDropdown(!showDropdown)}
-        ><MdAppRegistration size={30} className=" me-2 text-dark mt-2" />
+        >
           Master
           <IoIosArrowDropdown size={20} style={{marginLeft:"70px"}} />
         </Button>
@@ -313,7 +313,7 @@ const Sidebar = () => {
            <div>
            <MdLocationOn size={24} className="text-dark me-2" />
            <Link
-              to="/head/state"
+              to="/head/getstate"
               className="nav-link p-2 text-dark"
               style={{ display: "inline-block" }}
             >

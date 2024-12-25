@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row, Container } from "react-bootstrap";
 import { FaCaretDown } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const City = () => {
   const [city_state, setCityState] = useState("");
@@ -80,8 +80,8 @@ const City = () => {
               <Form.Group controlId="categoryDropdown" className="">
                 <Form.Label className="fw-bold ms-3">State</Form.Label>
                 <div className="position-relative">
-                <Form.Control
-                  as="select"
+                <Form.Select
+                  aria-label="Select State"
                   value={city_state}
                   onChange={(e) => setCityState(e.target.value)}
                   className="mx-auto  py-2 dropdown-width"
@@ -100,7 +100,7 @@ const City = () => {
                       </option>
                     );
                   })}
-                </Form.Control>
+                </Form.Select>
                </div>
               </Form.Group>
             </Row>
@@ -108,8 +108,8 @@ const City = () => {
             <Row className="mb-3 text-start">
               <Form.Group controlId="categoryDropdown" className="">
                 <Form.Label className="fw-bold ms-3">District</Form.Label>
-                <Form.Control
-                  as="select"
+                <Form.Select
+                  aria-label="Select District"
                   value={city_district}
                   onChange={(e) => setCityDistrict(e.target.value)}
                   className="mx-auto  py-2 dropdown-width"
@@ -125,7 +125,7 @@ const City = () => {
                       </option>
                     );
                   })}
-                </Form.Control>
+                </Form.Select>
               </Form.Group>
             </Row>
 
@@ -183,12 +183,20 @@ const City = () => {
 
             <Row className="text-center mt-4">
               <Col>
+              <Link to="/head/city" className="text-decoration-none">
+                <Button
+                  type="button"
+                  className="btn btn-danger me-4 px-3 py-2"
+                >
+                  Back
+                </Button>
+                </Link>
               <Button type="submit" className="btn btn-primary px-3 py-2">
                   Add
                 </Button>
                 <Button
                   type="button"
-                  className="btn btn-danger ms-5"
+                  className="btn btn-danger ms-4"
                   onClick={handleClear}
                 >
                   Clear

@@ -5,6 +5,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import * as XLSX from "xlsx";
 import { Table, Button, Container, Pagination } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const UpcomingVisits = () => {
   const [visitData, setVisitData] = useState([]);
@@ -115,6 +116,10 @@ const UpcomingVisits = () => {
   return (
     <Container>
       <h2 className="mt-4 text-center mb-4">Upcoming Visit Data</h2>
+      <div className="d-flex justify-content-end">
+        <Link className="text-decoration-none" to="/head/dashboard"><Button className="text-primary"><span className="text-white">Back</span></Button></Link>
+        </div>
+
       <div className="mb-4 d-flex justify-content-start gap-2">
         <Button variant="primary" onClick={exportPDF}>
           Export PDF
@@ -133,13 +138,12 @@ const UpcomingVisits = () => {
             <th>Sr.</th>
             <th>College Name</th>
             <th>Number of Students</th>
+            <th>Number of Faculty</th>
             <th>Date of Visit</th>
             <th>Start Time</th>
             <th>End Time</th>
-            <th>Number of Faculty</th>
             <th>Visiting Location</th>
-            <th>Visit Accept</th>
-            <th>Visit Completed</th>
+            <th>Visit Status</th>
           </tr>
         </thead>
         <tbody className="text-center">
@@ -148,13 +152,13 @@ const UpcomingVisits = () => {
               <td>{indexOfFirstVisit + index + 1}</td>
               <td>{visit.college_name}</td>
               <td>{visit.number_of_students}</td>
+              <td>{visit.number_of_faculty}</td>
               <td>{formatDate(visit.Date_of_visit)}</td>
               <td>{formatTime(visit.start_time)}</td>
               <td>{formatTime(visit.end_time)}</td>
-              <td>{visit.number_of_faculty}</td>
+             
               <td>{visit.visting_location}</td>
               <td>{visit.Visit_accept}</td>
-              <td>{visit.Visit_status}</td>
             </tr>
           ))}
         </tbody>

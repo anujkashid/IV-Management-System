@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Button, Col, Form, Row, Container } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Fees = () => {
   const [fees_title, setFees_title] = useState("");
@@ -108,12 +108,20 @@ const Fees = () => {
 
             <Row className="text-center mt-4">
               <Col>
+              <Link to="/head/getfees" className="text-decoration-none">
+                <Button
+                  type="button"
+                  className="btn btn-danger me-4 px-3 py-2"
+                >
+                  Back
+                </Button>
+                </Link>
                <Button type="submit" className="btn btn-primary px-3 py-2">
                   Add
                 </Button>
                 <Button
                   type="button"
-                  className="btn btn-danger ms-5"
+                  className="btn btn-danger ms-4"
                   onClick={handleClear}
                 >
                   Clear

@@ -43,7 +43,7 @@ const GalleryAdd = () => {
             item.college_name === college_name &&
             new Date(item.Date_of_visit) <= today &&
             new Date(item.Date_of_visit) >= pastWeek &&
-            item.Visit_status === "complete"
+            item.Visit_status === "completed"
         )
         .map((item) => ({ date: item.Date_of_visit, id: item._id }));
 
@@ -67,7 +67,7 @@ const GalleryAdd = () => {
 
     const formdata = new FormData();
     formdata.append("college_name", college_name);
-    formdata.append("Date_of_visit", Date_of_visit);
+    formdata.append("Date_of_visit", Date_of_visit); // Send raw date value
 
     galleryimage.forEach((file) => {
       formdata.append("galleryimage", file);
@@ -83,20 +83,22 @@ const GalleryAdd = () => {
 
   const formatDate = (date) => {
     const d = new Date(date);
-    return `${d.getDate()}-${d.toLocaleString('default', { month: 'short' })}-${d.getFullYear()}`;
+    return `${d.getDate()}-${d.toLocaleString("default", {
+      month: "short",
+    })}-${d.getFullYear()}`;
   };
 
   return (
     <Container className="mt-4" fluid>
       <Row>
         <Col md={4} className="mx-auto">
-          <h2 className="text-center">Media files add</h2>
+          <h2 className="text-center">Media Files Add</h2>
           <Form className="border border-dark p-2 mt-4" onSubmit={handleSubmit}>
             <Row className="mb-3 text-start">
-              <Form.Group controlId="categoryDropdown" className="mt-3">
+              <Form.Group controlId="collegeDropdown" className="mt-3">
                 <Form.Label className="fw-bold ms-3">College</Form.Label>
-                <Form.Control
-                  as="select"
+                <Form.Select
+                  aria-label="Select College"
                   value={college_name}
                   onChange={(e) => setCollegeName(e.target.value)}
                   className="mx-auto py-2 dropdown-width"
@@ -107,15 +109,15 @@ const GalleryAdd = () => {
                       {college}
                     </option>
                   ))}
-                </Form.Control>
+                </Form.Select>
               </Form.Group>
             </Row>
 
             <Row className="mb-3 text-start">
-              <Form.Group controlId="categoryDropdown" className="">
+              <Form.Group controlId="dateDropdown" className="">
                 <Form.Label className="fw-bold ms-3">Date</Form.Label>
-                <Form.Control
-                  as="select"
+                <Form.Select
+                 aria-label="Select Date"
                   value={Date_of_visit}
                   onChange={(e) => setDateOfVisit(e.target.value)}
                   className="mx-auto py-2 dropdown-width"
@@ -123,11 +125,11 @@ const GalleryAdd = () => {
                 >
                   <option value="">-- Select Date of Visit --</option>
                   {datedata.map((item, index) => (
-                    <option key={index} value={formatDate(item.date)}>
+                    <option key={index} value={item.date}>
                       {formatDate(item.date)}
                     </option>
                   ))}
-                </Form.Control>
+                </Form.Select>
               </Form.Group>
             </Row>
 

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Table, Container } from "react-bootstrap";
+import { Table, Container, Button } from "react-bootstrap";
 import ColHeader from "./Navbar";
+import { Link } from "react-router-dom";
 
 const PendingVisit = () => {
   const [pendingiv, setPendingiv] = useState([]);
@@ -37,7 +38,13 @@ const PendingVisit = () => {
       <div className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>
       <ColHeader></ColHeader>
         <Container>    
-            <h2 className="my-4 text-danger text-center">Pending Visits</h2>
+            <h2 className="my-3 text-danger text-center">Pending Visits</h2>
+            <div className="d-flex justify-content-end mb-4">
+          <Link to="/home">
+          <Button
+           className="btn btn-danger"><span className="text-white">Back</span></Button>
+        </Link>
+        </div>
             <Table striped bordered hover responsive>
                 <thead className="thead-dark">
                     <tr className="text-center">
@@ -57,7 +64,7 @@ const PendingVisit = () => {
                             <td>{IV.number_of_faculty}</td>
                             <td>{formatDate(IV.Date_of_visit)}</td>
                             <td>{IV.visting_location}</td>
-                            <td>{IV.Visit_status}</td>
+                            <td>{IV.Visit_accept}</td>
                         </tr>
                     ))}
                 </tbody>

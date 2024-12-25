@@ -35,7 +35,8 @@ const Update_city = () => {
       axios
         .get("http://localhost:8000/getstate")
         .then((res) => {
-          setStatedata(res.data.data);
+          const filtestate=res.data.data.filter((state)=>state.state_status==="active")
+          setStatedata(filtestate);
         })
         .catch((err) => console.log(err));
     }, []);
@@ -47,7 +48,7 @@ const Update_city = () => {
           .get("http://localhost:8000/getdistrict")
           .then((res) => {
             const filteredDistricts = res.data.data.filter(
-              (district) => district.district_state === city_state
+              (district) => district.district_state === city_state && district.district_status=="active"
             );
             setDistrictdata(filteredDistricts);
           })
@@ -93,8 +94,8 @@ const Update_city = () => {
             {/* State Dropdown */}
             <Form.Group controlId="stateDropdown" className="mb-3">
               <Form.Label className="fw-bold ms-3">State</Form.Label>
-              <Form.Control
-                as="select"
+              <Form.Select
+                aria-label="Select State"
                 value={city_state}
                 onChange={(e) => setCityState(e.target.value)}
                 required
@@ -105,14 +106,14 @@ const Update_city = () => {
                     {state.state_name}
                   </option>
                 ))}
-              </Form.Control>
+              </Form.Select>
             </Form.Group>
 
             {/* District Dropdown */}
             <Form.Group controlId="districtDropdown" className="mb-3">
               <Form.Label className="fw-bold ms-3">District</Form.Label>
-              <Form.Control
-                as="select"
+              <Form.Select
+                aria-label="Select District"
                 value={city_district}
                 onChange={(e) => setCityDistrict(e.target.value)}
                 required
@@ -123,7 +124,7 @@ const Update_city = () => {
                     {district.district_name}
                   </option>
                 ))}
-              </Form.Control>
+              </Form.Select>
             </Form.Group>
 
             {/* City Name */}

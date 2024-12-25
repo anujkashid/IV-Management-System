@@ -3,6 +3,7 @@ import axios from "axios";
 import ColHeader from "./Navbar";
 import { Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import { IoMdClose } from "react-icons/io";
 
 const Notification = () => {
   const [visitData, setVisitData] = useState([]);
@@ -60,6 +61,9 @@ const Notification = () => {
       <ColHeader />
       <div className="container mt-4">
         <h3 className="text-center mb-4 text-danger">Notifications</h3>
+        <div className="d-flex justify-content-end">
+        <Link className="text-decoration-none" to="/home"><IoMdClose className="text-dark" size={40}/></Link>
+        </div>
         {visitData.length === 0 ? (
           <p>No notifications to display.</p>
         ) : (

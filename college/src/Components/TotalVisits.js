@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Table, Container, Pagination } from "react-bootstrap";
+import { Table, Container, Pagination, Button } from "react-bootstrap";
 import ColHeader from "./Navbar";
 import { MdFileDownload } from "react-icons/md";
+import { GrFormPreviousLink } from "react-icons/gr";
+import { Link } from "react-router-dom";
 
 const TotalVisit = () => {
   const [ivcount, setIvcount] = useState([]);
@@ -57,7 +59,12 @@ const TotalVisit = () => {
     <>
       <ColHeader></ColHeader>
       <Container>
-        <h2 className="my-5 text-center">Total Visits</h2>
+        <h2 className="my-3 text-center">Total Visits</h2>
+        <div className="d-flex justify-content-end mb-4">
+          <Link to="/home">
+          <Button className="btn btn-danger"><span className="text-white">Back</span></Button>
+        </Link>
+        </div>
         <Table striped bordered hover responsive>
           <thead className="thead-dark">
             <tr className="text-center">
@@ -66,7 +73,7 @@ const TotalVisit = () => {
               <th>Number of faculty</th>
               <th>Date of visit</th>
               <th>Visiting Location</th>
-              <th>Visit Status</th>
+              <th>Visit Completed Status</th>
             </tr>
           </thead>
           <tbody className="text-center">
@@ -77,7 +84,7 @@ const TotalVisit = () => {
                 <td>{IV.number_of_faculty}</td>
                 <td>{formatDate(IV.Date_of_visit)}</td>
                 <td>{IV.visting_location}</td>
-                <td>{IV.Visit_accept}</td>
+                <td>{IV.Visit_status}</td>
               </tr>
             ))}
           </tbody>

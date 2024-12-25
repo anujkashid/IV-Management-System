@@ -108,9 +108,9 @@ const FeesVerification = () => {
                 <th>Date of Visit</th>
                 <th>Visiting Location</th>
                 <th>Mou Signed</th>
-                <th>Fee Status</th>
-                <th>Fee Received</th>
-                <th>Confirm Fee Status</th>
+                <th>Fees Status</th>
+                <th>Fees Received</th>
+                <th>Confirm Fees Status</th>
               </tr>
             </thead>
             <tbody className="text-center">

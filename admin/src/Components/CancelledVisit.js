@@ -5,6 +5,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import * as XLSX from "xlsx";
 import { Table, Button, Container, Pagination } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const CancelledVisits = () => {
   const [visitData, setVisitData] = useState([]);
@@ -113,7 +114,12 @@ const CancelledVisits = () => {
 
   return (
     <Container>
-      <h2 className="mt-4 text-center mb-4">Upcoming Visit Data</h2>
+      <h2 className="mt-4 text-center mb-4">Cancelled Visit Data</h2>
+
+      <div className="d-flex justify-content-end">
+        <Link className="text-decoration-none" to="/head/dashboard"><Button className="text-primary"><span className="text-white">Back</span></Button></Link>
+        </div>
+
       <div className="mb-4 d-flex justify-content-start gap-2">
         <Button variant="primary" onClick={exportPDF}>
           Export PDF
@@ -132,13 +138,13 @@ const CancelledVisits = () => {
             <th>Sr.</th>
             <th>College Name</th>
             <th>Number of Students</th>
+            <th>Number of Faculty</th>
             <th>Date of Visit</th>
             <th>Start Time</th>
             <th>End Time</th>
-            <th>Number of Faculty</th>
             <th>Visiting Location</th>
-            <th>Visit Accept</th>
-            <th>Visit Completed</th>
+            <th>Visit Status</th>
+            <th>Visit Completed Status</th>
           </tr>
         </thead>
         <tbody className="text-center">

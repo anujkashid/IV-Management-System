@@ -273,7 +273,7 @@ const Dashboard = () => {
                 {noMousigned}
               </Card.Title>
               <Card.Text className="text-dark fs-5 fw-bold mt-3">
-                Count Of Non-signed MOU Colleges
+                Count Of Non-MOU Signed  Colleges
               </Card.Text>
             </Card.Body>
             <Card.Footer className="text-center border border-0">

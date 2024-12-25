@@ -5,6 +5,7 @@ import jsPDF from "jspdf"; // For exporting PDF
 import "jspdf-autotable";
 import * as XLSX from "xlsx"; // For exporting Excel
 import { Table, Button, Container, Pagination } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const MouSigned = () => {
   const [collegeData, setCollegeData] = useState([]);
@@ -111,6 +112,10 @@ const handlePrevPage = () => {
   return (
     <Container>
       <h2 className="mt-4 text-center mb-4">MOU Signed College Data</h2>
+      <div className="d-flex justify-content-end">
+        <Link className="text-decoration-none" to="/head/dashboard"><Button className="text-primary"><span className="text-white">Back</span></Button></Link>
+        </div>
+
       <div className="mb-4 d-flex justify-content-start gap-2">
         <Button variant="primary" onClick={exportPDF}>
           Export PDF
@@ -135,8 +140,6 @@ const handlePrevPage = () => {
             <th>Contact Person Contact 1</th>
             <th>Contact Person Contact 2</th>
             <th>College Email</th>
-            <th>College Username</th>
-            <th>Visit Location</th>
             <th>MOU Signed</th>
           </tr>
         </thead>
@@ -144,7 +147,7 @@ const handlePrevPage = () => {
           {currentVisits.map((state, index) => (
             <tr key={state._id}>
               <td>{index + 1}</td>
-              <td>{state.college_name}</td>
+              <td>{state.collage_name}</td>
               <td>{state.reg_city}</td>
               <td>{state.reg_university_name}</td>
               <td>{state.reg_principal_name}</td>
@@ -152,8 +155,6 @@ const handlePrevPage = () => {
               <td>{state.reg_contact_person_contact1}</td>
               <td>{state.reg_contact_person_contact2}</td>
               <td>{state.reg_college_email_id}</td>
-              <td>{state.reg_college_username}</td>
-              <td>{state.reg_visit_location}</td>
               <td>{state.reg_mou_sign}</td>
             </tr>
           ))}

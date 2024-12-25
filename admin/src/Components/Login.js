@@ -91,7 +91,6 @@ const Login = () => {
                   label="Show Password"
                   onClick={() => setShowPassword(!showPassword)}
                 />
-                <Form.Check type="checkbox" label="Remember me" />
               </Form.Group>
 
               <div className="text-center mb-4">

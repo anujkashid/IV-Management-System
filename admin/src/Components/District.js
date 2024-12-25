@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row, Container } from "react-bootstrap";
 import { FaCaretDown } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoIosArrowDropdown } from "react-icons/io";
 
 const District = () => {
@@ -137,12 +137,20 @@ const District = () => {
 
             <Row className="text-center mt-4">
               <Col>
+              <Link to="/head/district" className="text-decoration-none">
+                <Button
+                  type="button"
+                  className="btn btn-danger me-4 px-3 py-2"
+                >
+                  Back
+                </Button>
+                </Link>
                 <Button type="submit" className="btn btn-primary px-3 py-2">
                   Add
                 </Button>
                 <Button
                   type="button"
-                  className="btn btn-danger ms-5"
+                  className="btn btn-danger ms-4"
                   onClick={handleClear}
                 >
                   Clear

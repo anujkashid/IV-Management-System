@@ -49,9 +49,9 @@ const Notification = () => {
                 visitData.map((visit, index) => (
                   <div
                     key={index}
-                    className="border border-dark bg-primary p-2 text-white fs-5 mt-2"
+                    className="border border-dark bg-secondary p-2 text-white fs-5 mt-2"
                   >
-                    <Link className="text-decoration-none text-white" to="/head/ivrequest">
+                    <Link className="text-white" to="/head/ivrequest">
                     You have a visit request from <strong>{visit.college_name}</strong>
                     </Link>
                   </div>
@@ -66,7 +66,7 @@ const Notification = () => {
                 {cancelledVisit.map((item, index) => (
                   <div
                     key={index}
-                    className="border border-dark bg-danger p-2 text-white fs-5 mt-2 d-flex justify-content-between align-items-center"
+                    className="border border-dark bg-secondary p-2 text-white fs-5 mt-2 d-flex justify-content-between align-items-center"
                   >
                     <span>
                       Visit request cancelled by <strong>{item.college_name}</strong>

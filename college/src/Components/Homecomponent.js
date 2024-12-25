@@ -128,7 +128,7 @@ const Homecomponent = () => {
       <Container fluid className="mt-3">
            
       <h2 className="text-center text-danger mt-2">Welcome To Sumago Infotech !!!!</h2>
-      <h3 className="text-center text-dark ">{collegename}</h3>
+      <h3 className="text-center text-dark mb-4 ">{collegename}</h3>
         <Container>
           <Col md={10} className="mx-auto">
             <Carousel data-bs-theme="dark">
@@ -319,7 +319,7 @@ const Homecomponent = () => {
         </Row>
       </Container>
       {/* Vision Section */}
-      <Container className="mt-4">
+      <Container className="my-4 ">
         <Row>
           <Col md={6}>
             <img

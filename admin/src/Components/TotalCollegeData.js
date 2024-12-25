@@ -92,6 +92,9 @@ const TotalCollege = () => {
   return (
     <Container>
       <h2 className="mt-4 text-center mb-4"> College Data</h2>
+      <div className="d-flex justify-content-end">
+        <Link className="text-decoration-none" to="/head/dashboard"><Button className="text-primary"><span className="text-white">Back</span></Button></Link>
+        </div>
       <div className="mb-4 d-flex justify-content-start gap-2">
         <Button variant="primary" onClick={exportPDF}>
           Export PDF
@@ -116,8 +119,6 @@ const TotalCollege = () => {
             <th>Contact Person Contact 1</th>
             <th>Contact Person Contact 2</th>
             <th>College Email</th>
-            <th>College Username</th>
-            <th>Visit Location</th>
             <th>MOU Signed</th>
           </tr>
         </thead>
@@ -133,8 +134,6 @@ const TotalCollege = () => {
               <td>{state.reg_contact_person_contact1}</td>
               <td>{state.reg_contact_person_contact2}</td>
               <td>{state.reg_college_email_id}</td>
-              <td>{state.reg_college_username}</td>
-              <td>{state.reg_visit_location}</td>
               <td>{state.reg_mou_sign}</td>
             </tr>
           ))}

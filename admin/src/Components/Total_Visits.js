@@ -5,6 +5,7 @@ import jsPDF from "jspdf"; // For exporting PDF
 import "jspdf-autotable";
 import * as XLSX from "xlsx"; // For exporting Excel
 import { Table, Button, Container, Pagination } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const GetState = () => {
   const [visitData, setVisitData] = useState([]);
@@ -25,11 +26,16 @@ const GetState = () => {
 
   const formatDate = (date) => {
     const d = new Date(date);
-    return `${d.getDate()}-${d.toLocaleString('default', { month: 'short' })}-${d.getFullYear()}`;
+    return `${d.getDate()}-${d.toLocaleString("default", {
+      month: "short",
+    })}-${d.getFullYear()}`;
   };
 
   const formatTime = (time) => {
-    return new Date(time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }); // Format to 'HH:mm'
+    return new Date(time).toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    }); // Format to 'HH:mm'
   };
 
   // Function to export as PDF
@@ -102,6 +108,13 @@ const GetState = () => {
   return (
     <Container>
       <h2 className="mt-4 text-center mb-4">Total Visit Data</h2>
+      <div className="d-flex justify-content-end">
+        <Link className="text-decoration-none" to="/head/dashboard">
+          <Button className="text-primary">
+            <span className="text-white">Back</span>
+          </Button>
+        </Link>
+      </div>
       <div className="mb-4 d-flex justify-content-start gap-2">
         <Button variant="primary" onClick={exportPDF}>
           Export PDF
@@ -120,13 +133,12 @@ const GetState = () => {
             <th>Sr.</th>
             <th>College Name</th>
             <th>Number of Students</th>
+            <th>Number of Faculty</th>
             <th>Date of Visit</th>
             <th>Start Time</th>
             <th>End Time</th>
-            <th>Number of Faculty</th>
             <th>Visiting Location</th>
-            <th>Visit Accept</th>
-            <th>Visit Completed</th>
+            <th>Visit Completed Status</th>
           </tr>
         </thead>
         <tbody className="text-center">
@@ -135,12 +147,11 @@ const GetState = () => {
               <td>{indexOfFirstVisit + index + 1}</td>
               <td>{state.college_name}</td>
               <td>{state.number_of_students}</td>
+              <td>{state.number_of_faculty}</td>
               <td>{formatDate(state.Date_of_visit)}</td>
               <td>{formatTime(state.start_time)}</td>
               <td>{formatTime(state.end_time)}</td>
-              <td>{state.number_of_faculty}</td>
               <td>{state.visting_location}</td>
-              <td>{state.Visit_accept}</td>
               <td>{state.Visit_status}</td>
             </tr>
           ))}
@@ -150,7 +161,10 @@ const GetState = () => {
       {/* Pagination */}
       {totalPages > 1 && (
         <Pagination className="justify-content-end">
-          <Pagination.Prev disabled={currentPage === 1} onClick={handlePrevPage} />
+          <Pagination.Prev
+            disabled={currentPage === 1}
+            onClick={handlePrevPage}
+          />
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
             <Pagination.Item
               key={page}

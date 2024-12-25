@@ -12,13 +12,14 @@ const Footer = () => {
     <Container fluid className="bg-dark text-white">
       <Row>
         {/* Contact Us Section */}
-        <Col sm={12} md={4} className="text-center mb-3 mt-3">
-          <h4 className="text-center mb-3">Contact Us</h4>
+        <Col md={1}></Col>
+        <Col sm={12} md={3} className=" mb-3 mt-3 ps-5">
+          <h4 className=" mb-3">Contact Us</h4>
           <Row className="mb-2">
             <Col>
               <a
                 href="mailto:info@sumagoinfotech.com"
-                className="d-flex align-items-center justify-content-center mx-2 text-white text-decoration-none"
+                className=" mx-2 text-white text-decoration-none"
               >
                 <MdOutlineEmail size={20} className="me-3" />
                 <span>info@sumagoinfotech.com</span>
@@ -29,7 +30,7 @@ const Footer = () => {
             <Col>
               <a
                 href="tel:+918408084888"
-                className="d-flex align-items-center justify-content-center mx-2 text-white text-decoration-none"
+                className=" mx-2 text-white text-decoration-none"
               >
                 <FaPhoneAlt size={20} className="me-3" />
                 <span>+91 8408084888</span>
@@ -40,7 +41,7 @@ const Footer = () => {
             <Col>
               <a
                 href="tel:+917263084881"
-                className="d-flex align-items-center justify-content-center mx-2 text-white text-decoration-none"
+                className=" mx-2 text-white text-decoration-none"
               >
                 <FaPhoneAlt size={20} className="me-3" />
                 <span>+91 7263084881</span>
@@ -48,8 +49,8 @@ const Footer = () => {
             </Col>
           </Row>
 
-          <h4 className="mt-4 mb-3">Social Media</h4>
-          <div className="d-flex justify-content-center">
+          <h4 className="mt-4 mb-3 ps-2">Social Media</h4>
+          <div className="ps-3">
             <a
               href="https://www.youtube.com/c/SumagoInfotechPvtLtd"
               target="_blank"
@@ -78,9 +79,9 @@ const Footer = () => {
         </Col>
 
         {/* Quick Links Section */}
-        <Col sm={12} md={4} className="text-center mb-3 mt-3">
-          <h4 className="text-center mb-3">Quick Links</h4>
-          <div className="d-flex flex-column align-items-center">
+        <Col sm={12} md={3} className=" mb-3 mt-3 ps-5">
+          <h4 className=" mb-3 ps-4">Quick Links</h4>
+          <div className="d-flex flex-column  ps-5">
             <Link to="/home" className="text-decoration-none text-white mb-2">
               Home
             </Link>
@@ -126,12 +127,13 @@ const Footer = () => {
             </Col>
           </Row>
         </Col>
+        <Col md={1}></Col>
       </Row>
 
       {/* Copyright Line */}
       <Row className="mt-0 text-center">
         <Col>
-          <p className="mb-0">
+          <p className="my-3">
             &copy; {new Date().getFullYear()} Sumago Infotech private limited. All Rights Reserved.
           </p>
         </Col>

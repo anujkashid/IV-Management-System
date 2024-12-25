@@ -106,7 +106,7 @@ const CollegeTotalVisit = () => {
     <ColHeader />
     <Container>
     
-      <h2 className="my-4 text-center">Visit Data</h2>
+      <h2 className="my-4 text-center text-danger">Scheduled Visits</h2>
       <div className="mb-4 d-flex justify-content-start gap-2">
   <Button variant="primary" onClick={exportPDF}>
     Export PDF
