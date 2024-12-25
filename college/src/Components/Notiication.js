@@ -62,7 +62,7 @@ const Notification = () => {
       <div className="container mt-4">
         <h3 className="text-center mb-4 text-danger">Notifications</h3>
         <div className="d-flex justify-content-end">
-        <Link className="text-decoration-none" to="/home"><IoMdClose className="text-dark" size={40}/></Link>
+        <Link className="text-decoration-none" to="/home"><IoMdClose className="text-dark" size={30}/></Link>
         </div>
         {visitData.length === 0 ? (
           <p>No notifications to display.</p>

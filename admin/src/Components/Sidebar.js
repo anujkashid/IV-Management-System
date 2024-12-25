@@ -87,7 +87,7 @@ const Sidebar = () => {
             className="text-danger fw-bold ms-2"
             style={{ fontFamily: "Times New Roman" }}
           >
-            Sumago Infotech
+            Sumago Infotech Private Limited
           </h4>
         </div>
         <Nav defaultActiveKey="/dashboard" className="flex-column">

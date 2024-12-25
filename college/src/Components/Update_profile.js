@@ -95,12 +95,22 @@ const UpdateProfile = () => {
       <Container>
         <Row>
           <Col md={8} className="mx-auto">
-            <h2 className="text-center mt-4 text-danger mb-4">Update Profile</h2>
+            <h2 className="text-center mt-4 text-danger ">Update Profile</h2>
+            <div className="d-flex justify-content-end mb-3">
+            <Link to="/home" className="text-decoration-none">
+                <Button
+                  type="button"
+                  className="btn btn-danger ms-5 px-3 py-1"
+                >
+                  Back
+                </Button>
+                </Link>
+            </div>
             <Container className="border border-dark p-4">
               <Form onSubmit={handleSubmit}>
                 {/* College Name */}
-                <Form.Group className="mb-3 " controlId="formGroupCollege">
-                  <Form.Label>College Name</Form.Label>
+                <Form.Group className="mb-3 text-center" controlId="formGroupCollege">
+                  <Form.Label>College Name:</Form.Label>
                   <Form.Control
                     required
                     type="text"
@@ -112,8 +122,8 @@ const UpdateProfile = () => {
                 </Form.Group>
 
                 {/* State */}
-                <Form.Group className="mb-3 " controlId="formGroupState">
-                  <Form.Label>State</Form.Label>
+                <Form.Group className="mb-3 text-center" controlId="formGroupState">
+                  <Form.Label>State:</Form.Label>
                   <Form.Select
                     required
                     name="reg_state"
@@ -130,8 +140,8 @@ const UpdateProfile = () => {
                 </Form.Group>
 
                 {/* District */}
-                <Form.Group className="mb-3 " controlId="formGroupDistrict">
-                  <Form.Label>District</Form.Label>
+                <Form.Group className="mb-3 text-center" controlId="formGroupDistrict">
+                  <Form.Label>District:</Form.Label>
                   <Form.Select
                     required
                     name="reg_district"
@@ -148,8 +158,8 @@ const UpdateProfile = () => {
                 </Form.Group>
 
                 {/* City */}
-                <Form.Group className="mb-3" controlId="formGroupCity">
-                  <Form.Label>City</Form.Label>
+                <Form.Group className="mb-3 text-center" controlId="formGroupCity">
+                  <Form.Label>City:</Form.Label>
                   <Form.Select
                     required
                     name="reg_city"
@@ -166,8 +176,8 @@ const UpdateProfile = () => {
                 </Form.Group>
 
                 {/* University Name */}
-                <Form.Group className="mb-3 " controlId="formGroupUniversity">
-                  <Form.Label>University Name</Form.Label>
+                <Form.Group className="mb-3 text-center " controlId="formGroupUniversity">
+                  <Form.Label>University Name:</Form.Label>
                   <Form.Select
                     required
                     name="reg_university_name"
@@ -184,8 +194,8 @@ const UpdateProfile = () => {
                 </Form.Group>
 
                 {/* Principal Name */}
-                <Form.Group className="mb-3 " controlId="formGroupPrincipalName">
-                  <Form.Label>Principal Name</Form.Label>
+                <Form.Group className="mb-3 text-center" controlId="formGroupPrincipalName">
+                  <Form.Label>Principal Name:</Form.Label>
                   <Form.Control
                     required
                     type="text"
@@ -197,8 +207,8 @@ const UpdateProfile = () => {
                 </Form.Group>
 
                 {/* Contact Person */}
-                <Form.Group className="mb-3 " controlId="formGroupContactPerson">
-                  <Form.Label>Contact Person</Form.Label>
+                <Form.Group className="mb-3 text-center" controlId="formGroupContactPerson">
+                  <Form.Label>Contact Person:</Form.Label>
                   <Form.Control
                     required
                     type="text"
@@ -212,8 +222,8 @@ const UpdateProfile = () => {
                 <Row>
                   <Col>
                     {/* Contact Person Contact 1 */}
-                    <Form.Group className="mb-3 " controlId="formGroupContact1">
-                      <Form.Label>Contact Person Contact 1</Form.Label>
+                    <Form.Group className="mb-3 text-center " controlId="formGroupContact1">
+                      <Form.Label>Contact Person Contact 1:</Form.Label>
                       <Form.Control
                         required
                         type="tel"
@@ -227,8 +237,8 @@ const UpdateProfile = () => {
                   </Col>
                   <Col>
                     {/* Contact Person Contact 2 */}
-                    <Form.Group className="mb-3 " controlId="formGroupContact2">
-                      <Form.Label>Contact Person Contact 2</Form.Label>
+                    <Form.Group className="mb-3 text-center" controlId="formGroupContact2">
+                      <Form.Label>Contact Person Contact 2:</Form.Label>
                       <Form.Control
                         type="tel"
                         name="reg_contact_person_contact2"
@@ -242,8 +252,8 @@ const UpdateProfile = () => {
                 </Row>
 
                 {/* Email ID */}
-                <Form.Group className="mb-3 " controlId="formGroupEmail">
-                  <Form.Label>Email ID</Form.Label>
+                <Form.Group className="mb-3 text-center " controlId="formGroupEmail">
+                  <Form.Label>Email ID:</Form.Label>
                   <Form.Control
                     required
                     type="email"
@@ -255,8 +265,8 @@ const UpdateProfile = () => {
                 </Form.Group>
 
                 {/* Username */}
-                <Form.Group className="mb-3 " controlId="formGroupUsername">
-                  <Form.Label>Username</Form.Label>
+                <Form.Group className="mb-3 text-center" controlId="formGroupUsername">
+                  <Form.Label>Username:</Form.Label>
                   <Form.Control
                     required
                     type="text"
@@ -268,8 +278,8 @@ const UpdateProfile = () => {
                 </Form.Group>
 
                 {/* MOU Signed */}
-                <Form.Group className="mb-3 " controlId="formGroupMOU">
-                  <Form.Label>MOU Signed</Form.Label>
+                <Form.Group className="mb-3 text-center " controlId="formGroupMOU">
+                  <Form.Label>MOU Signed:</Form.Label>
                   <Form.Select
                     required
                     name="reg_mou_sign"
@@ -285,8 +295,8 @@ const UpdateProfile = () => {
                 {/* Status */}
                 <Row className="mb-3">
                   <Col>
-                    <Form.Group className="">
-                      <Form.Label className="text-dark fs-5">Select Status:</Form.Label>
+                    <Form.Group className="text-center">
+                      <Form.Label className="">Select Status:</Form.Label>
                       <div>
                         <Form.Check
                           type="radio"
@@ -317,15 +327,6 @@ const UpdateProfile = () => {
                   <Button variant="primary" type="submit">
                     Update Profile
                   </Button>
-
-                  <Link to="/home" className="text-decoration-none">
-                <Button
-                  type="button"
-                  className="btn btn-danger ms-5 px-3 py-1"
-                >
-                  Back
-                </Button>
-                </Link>
                 </div>
               </Form>
             </Container>

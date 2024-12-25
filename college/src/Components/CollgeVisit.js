@@ -8,7 +8,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ColHeader from "./Navbar";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ColLogin = () => {
   const [number_of_students, setNumberofStudent] = useState("");
@@ -121,12 +121,17 @@ const ColLogin = () => {
       <Container className="mb-1">
         <Row>
           <Col md={9} className="mx-auto">
-            <h3 className="text-center mt-4 mb-4 text-danger">Add Visit</h3>
+            <h3 className="text-center mt-4 text-danger">Add Visit</h3>
+            <div className="d-flex justify-content-end mb-4">
+          <Link to="/collegetotalvisit">
+          <Button className="btn btn-danger"><span className="text-white">Back</span></Button>
+        </Link>
+        </div>
             <Container className="border border-dark p-4 d-flex justify-content-center bg-white">
               <Form className="w-100 =" onSubmit={handleSubmit} >
                 <Row className="mb-3">
-                  <Col md={5} className="d-flex align-items-center">
-                    <Form.Label className="mb-0">Number of Students:</Form.Label>
+                  <Col md={5} className="text-center">
+                    <Form.Label className="mb-1">Number of Students:</Form.Label>
                     <Form.Control
                       type="text"
                       required
@@ -137,8 +142,8 @@ const ColLogin = () => {
                     />
                   </Col>
                   <Col md={1}></Col>
-                  <Col md={5} className="d-flex align-items-center">
-                    <Form.Label className="mb-0">Number of Faculty:</Form.Label>
+                  <Col md={5} className="text-center">
+                    <Form.Label className="mb-1">Number of Faculty:</Form.Label>
                     <Form.Control
                       type="text"
                       required
@@ -151,56 +156,57 @@ const ColLogin = () => {
                 </Row>
 
                 <Row>
-                  <Col md={4} className="d-flex align-items-center">
-                  <Form.Label className="mb-0">Date of Visit:</Form.Label>
-                  <DatePicker
-                      selected={Date_of_visit}
-                      onChange={(date) => setStartDate(date)}
-                      className="form-control ms-2"
-                      dateFormat="dd/MM/yyyy"
-                      placeholderText="Select a date"
-                      required
-                      minDate={new Date()}
-                    />
-                  </Col>
-                  <Col md={4} className="d-flex align-items-center">
-                  <Form.Label className="mb-0">Start Time:</Form.Label>
-                  <DatePicker
-                      selected={start_time}
-                      onChange={(time) => {
-                        setStartTime(time);
-                        const endTime = new Date(time);
-                        endTime.setHours(time.getHours() + 2);
-                        setEndTime(endTime);
-                      }}
-                      showTimeSelect
-                      showTimeSelectOnly
-                      timeIntervals={60}
-                      timeCaption="Time"
-                      dateFormat="hh:mm aa"
-                      className="form-control ms-2 mt-2 mt-md-0"
-                      placeholderText="Select Start Time"
-                      required
-                    />
-                  </Col>
-                  <Col md={4} className="d-flex align-items-center">
-                  <Form.Label className="mb-0 ">End Time:</Form.Label>
-                  <DatePicker
-                      selected={end_time}
-                      onChange={(time) => setEndTime(time)}
-                      showTimeSelect
-                      showTimeSelectOnly
-                      timeIntervals={120}
-                      timeCaption="Time"
-                      dateFormat="hh:mm aa"
-                      className="form-control ms-2 mt-2 mt-md-0"
-                      placeholderText="Select End Time"
-                      required
-                      minTime={start_time || new Date().setHours(0, 0, 0, 0)}
-                      maxTime={new Date().setHours(23, 30, 0, 0)}
-                    />
-                  </Col>
-                </Row>
+  <Col md={4} className="text-center">
+    <Form.Label className="mb-2 d-block">Date of Visit:</Form.Label>
+    <DatePicker
+      selected={Date_of_visit}
+      onChange={(date) => setStartDate(date)}
+      className="form-control mx-auto"
+      dateFormat="dd/MM/yyyy"
+      placeholderText="Select a date"
+      required
+      minDate={new Date()}
+    />
+  </Col>
+  <Col md={4} className="text-center">
+    <Form.Label className="mb-2 d-block">Start Time:</Form.Label>
+    <DatePicker
+      selected={start_time}
+      onChange={(time) => {
+        setStartTime(time);
+        const endTime = new Date(time);
+        endTime.setHours(time.getHours() + 2);
+        setEndTime(endTime);
+      }}
+      showTimeSelect
+      showTimeSelectOnly
+      timeIntervals={60}
+      timeCaption="Time"
+      dateFormat="hh:mm aa"
+      className="form-control w-100"
+      placeholderText="Select Start Time"
+      required
+    />
+  </Col>
+  <Col md={4} className="text-center">
+    <Form.Label className="mb-2 d-block">End Time:</Form.Label>
+    <DatePicker
+      selected={end_time}
+      onChange={(time) => setEndTime(time)}
+      showTimeSelect
+      showTimeSelectOnly
+      timeIntervals={120}
+      timeCaption="Time"
+      dateFormat="hh:mm aa"
+      className="form-control w-100"
+      placeholderText="Select End Time"
+      required
+      minTime={start_time || new Date().setHours(0, 0, 0, 0)}
+      maxTime={new Date().setHours(23, 30, 0, 0)}
+    />
+  </Col>
+</Row>
+
 
                 <Form.Group className="mb-3 text-center" controlId="formGroupLocation">
                   <Form.Label className="mt-3">Visiting Location:</Form.Label>

@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Form, Button, Col } from "react-bootstrap";
+import { Form, Button, Col, Container } from "react-bootstrap";
 import ColHeader from "./Navbar";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const CancelledVisit = () => {
   const [visitData, setVisitData] = useState({});
@@ -46,6 +46,7 @@ const CancelledVisit = () => {
         .put(`http://localhost:8000/updatevisit/${cancelid}`, userdata)
         .then((res) => {
           alert("Visit cancelled successfully");
+          navigate("/collegetotalvisit")
         })
         .catch((err) => {
           console.error("Error cancelling visit:", err);
@@ -57,7 +58,13 @@ const CancelledVisit = () => {
   return (
     <div className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>
       <ColHeader />
+      <Container>
       <h3 className="text-center text-danger mb-4 mt-4">Cancel Visit</h3>
+      <div className="d-flex justify-content-end mb-4 me-5">
+          <Link to="/collegetotalvisit">
+          <Button className="btn btn-danger"><span className="text-white">Back</span></Button>
+        </Link>
+        </div>
       <Col md={4} className="mx-auto">
         <div className="container">
           <form className="border border-dark p-2" onSubmit={handleSubmit}>
@@ -112,6 +119,7 @@ const CancelledVisit = () => {
           </form>
         </div>
       </Col>
+      </Container>
     </div>
   );
 };

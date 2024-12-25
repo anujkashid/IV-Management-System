@@ -8,6 +8,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ColHeader from "./Navbar";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 const Updatevisit = () => {
   const [number_of_students, setNumberofStudent] = useState("");
@@ -23,6 +24,7 @@ const Updatevisit = () => {
   const college_name =localStorage.getItem("CollegeName");
   const mousigned=localStorage.getItem("mousigned");
   const rescheduleid=localStorage.getItem("resceduledid");
+  const navigate= useNavigate();
   
   useEffect(()=>{
     axios.get(`http://localhost:8000/getvisitone/${rescheduleid}`)
@@ -95,6 +97,7 @@ const Updatevisit = () => {
         .then((res) => {
             console.log(res.data);
             alert("Visit successfully rescheduled!");
+            navigate("/collegetotalvisit")
             handleClear(); // Clear the form
         })
         .catch((err) => {
@@ -111,6 +114,11 @@ const Updatevisit = () => {
         <Row>
           <Col md={9} className="mx-auto">
             <h3 className="text-center mt-4 mb-4 text-danger">Reschedule Visit:</h3>
+            <div className="d-flex justify-content-end mb-4">
+          <Link to="/collegetotalvisit">
+          <Button className="btn btn-danger"><span className="text-white">Back</span></Button>
+        </Link>
+        </div>
             <Container className="border border-dark p-4 d-flex justify-content-center bg-white">
               <Form className="w-100 =" onSubmit={handleSubmit} >
                 <Row className="mb-3">

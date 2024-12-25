@@ -275,7 +275,7 @@ const College_registration = () => {
         <Form className=" p-2">
           {/* College Name */}
           <Form.Group className="mb-3 text-center" controlId="formGroupCollege">
-            <Form.Label>College Name</Form.Label>
+            <Form.Label>College Name:</Form.Label>
             <Form.Control
               required
               type="text"
@@ -289,7 +289,7 @@ const College_registration = () => {
 
           {/* State */}
           <Form.Group className="mb-3 text-center" controlId="formGroupState">
-            <Form.Label>State</Form.Label>
+            <Form.Label>State:</Form.Label>
             <Form.Select
               required
               value={reg_state}
@@ -307,7 +307,7 @@ const College_registration = () => {
 
           {/* District */}
           <Form.Group className="mb-3 text-center" controlId="formGroupDistrict">
-            <Form.Label>District</Form.Label>
+            <Form.Label>District:</Form.Label>
             <Form.Select
               required
               value={reg_district}
@@ -325,7 +325,7 @@ const College_registration = () => {
 
           {/* City */}
           <Form.Group className="mb-3 text-center" controlId="formGroupCity">
-            <Form.Label>City</Form.Label>
+            <Form.Label>City:</Form.Label>
             <Form.Select
               required
               value={reg_city}
@@ -343,7 +343,7 @@ const College_registration = () => {
 
           {/* University Name */}
            <Form.Group className="mb-3 text-center" controlId="formGroupCity">
-            <Form.Label>Univesity Name</Form.Label>
+            <Form.Label>Univesity Name:</Form.Label>
             <Form.Select
               required
               value={reg_university_name}
@@ -362,7 +362,7 @@ const College_registration = () => {
 
           {/* Principal Name */}
           <Form.Group className="mb-3 text-center" controlId="formGroupPrincipalName">
-            <Form.Label>Principal Name</Form.Label>
+            <Form.Label>Principal Name:</Form.Label>
             <Form.Control
               required
               type="text"
@@ -375,7 +375,7 @@ const College_registration = () => {
 
           {/* Contact Person */}
           <Form.Group className="mb-3 text-center" controlId="formGroupContactPerson">
-            <Form.Label>Contact Person</Form.Label>
+            <Form.Label>Contact Person:</Form.Label>
             <Form.Control
               required
               type="text"
@@ -390,7 +390,7 @@ const College_registration = () => {
             <Col>
               {/* Contact Person Contact 1 */}
               <Form.Group className="mb-3 text-center" controlId="formGroupContact1">
-                <Form.Label>Contact Person Contact 1</Form.Label>
+                <Form.Label>Contact Person Contact 1:</Form.Label>
                 <Form.Control
                   required
                   type="tel"
@@ -407,7 +407,7 @@ const College_registration = () => {
             <Col>
               {/* Contact Person Contact 2 */}
               <Form.Group className="mb-3 text-center" controlId="formGroupContact2">
-                <Form.Label>Contact Person Contact 2</Form.Label>
+                <Form.Label>Contact Person Contact 2:</Form.Label>
                 <Form.Control
                   type="tel"
                   value={reg_contact_person_contact2}
@@ -423,7 +423,7 @@ const College_registration = () => {
 
           {/* Email ID */}
           <Form.Group className="mb-3 text-center" controlId="formGroupEmail">
-            <Form.Label>Email ID</Form.Label>
+            <Form.Label>Email ID:</Form.Label>
             <Form.Control
               required
               type="email"
@@ -436,7 +436,7 @@ const College_registration = () => {
 
           {/* Username */}
           <Form.Group className="mb-3 text-center" controlId="formGroupUsername">
-            <Form.Label>Username</Form.Label>
+            <Form.Label>Username:</Form.Label>
             <Form.Control
               required
               type="text"
@@ -450,7 +450,7 @@ const College_registration = () => {
 
           {/* Password */}
           <Form.Group className="mb-3 text-center" controlId="formGroupPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label>Password:</Form.Label>
             <Form.Control
               required
               type="password"
@@ -465,7 +465,7 @@ const College_registration = () => {
 
           {/* Confirm Password */}
           <Form.Group className="mb-3 text-center" controlId="formGroupConfirmPassword">
-            <Form.Label>Confirm Password</Form.Label>
+            <Form.Label>Confirm Password:</Form.Label>
             <Form.Control
               required
               type="password"
@@ -480,7 +480,7 @@ const College_registration = () => {
           </Form.Group>
 
           <Form.Group className="mb-3 text-center" controlId="formGroupMOU">  
-        <Form.Label>MOU Signed</Form.Label>  
+        <Form.Label>MOU Signed:</Form.Label>  
         <Form.Select  
           required  
           value={reg_mou_sign}  
@@ -497,7 +497,7 @@ const College_registration = () => {
       <Row className="mb-3">
               <Col>
                 <Form.Group className="text-center">
-                  <Form.Label className="text-dark fs-5">
+                  <Form.Label className="text-dark ">
                     Select Status:
                   </Form.Label>
                   <div>

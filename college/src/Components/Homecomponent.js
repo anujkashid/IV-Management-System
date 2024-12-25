@@ -18,9 +18,8 @@ import cta from "../Images/contact.png";
 import slider1 from "../Images/slider1.jpg";
 import slider2 from "../Images/slider2.jpg";
 import slider3 from "../Images/slider3.jpg";
-import '../App.css';
+import "../App.css";
 import { useNavigate } from "react-router-dom";
-
 
 const Homecomponent = () => {
   const [bookedData, setBookedData] = useState({}); // Store booked slots
@@ -31,7 +30,7 @@ const Homecomponent = () => {
   const [rejectediv, setRejectediv] = useState(0);
   // const [collegeData, setCollegeData] = useState([]);
   const collegename = localStorage.getItem("CollegeName");
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   // Format date helper
   const formatDate = (date) => {
@@ -52,7 +51,7 @@ const Homecomponent = () => {
       try {
         const response = await axios.get("http://localhost:8000/getvisit");
         const data = response.data.userData;
-    
+
         // Structure booked data as { date: [{start_time, end_time, visiting_location}, ...] }
         const bookings = data.reduce((acc, visit) => {
           const visitDate = formatDate(visit.start_time);
@@ -60,7 +59,7 @@ const Homecomponent = () => {
           acc[visitDate].push({
             start_time: formatTime(visit.start_time),
             end_time: formatTime(visit.end_time),
-            visting_location: visit.visting_location,  // Ensure this is added
+            visting_location: visit.visting_location, // Ensure this is added
           });
           return acc;
         }, {});
@@ -69,7 +68,7 @@ const Homecomponent = () => {
         console.error("Error fetching slots:", error);
       }
     };
-    
+
     fetchSlots();
   }, []);
 
@@ -115,20 +114,20 @@ const Homecomponent = () => {
     return bookedData[currentDate] ? "booked-date" : null;
   };
 
-  const handleNavigate=()=>{
-     navigate("/addvisit")
-  }
+  const handleNavigate = () => {
+    navigate("/addvisit");
+  };
 
   return (
     <div style={{ backgroundColor: "#EEEEFF" }}>
       <ColHeader />
-   
-      
+
       {/* Carousel Section */}
       <Container fluid className="mt-3">
-           
-      <h2 className="text-center text-danger mt-2">Welcome To Sumago Infotech !!!!</h2>
-      <h3 className="text-center text-dark mb-4 ">{collegename}</h3>
+        <h2 className="text-center text-danger mt-2">
+          Welcome To Sumago Infotech !!!!
+        </h2>
+        <h3 className="text-center text-dark mb-4 ">{collegename}</h3>
         <Container>
           <Col md={10} className="mx-auto">
             <Carousel data-bs-theme="dark">
@@ -149,7 +148,7 @@ const Homecomponent = () => {
       <Container>
         <Row>
           {/* Report Cards */}
-          <Col  lg={8} md={12} xs={12} className="mt-4 ">
+          <Col lg={8} md={12} xs={12} className="mt-4 ">
             <Row>
               <h2 className="text-center mb-4 mt-4 text-danger">Reports</h2>
               <Col md={3} xs={8} className="mx-auto me-md-4">
@@ -158,17 +157,17 @@ const Homecomponent = () => {
                   style={{ width: "13rem", height: "13rem" }}
                 >
                   <Card.Body>
-                    <Card.Title className="text-center fs-2">{ivcount}</Card.Title>
+                    <Card.Title className="text-center fs-2">
+                      {ivcount}
+                    </Card.Title>
 
-                    <Card.Title className="text-center mt-4">Total Visit Count</Card.Title>
+                    <Card.Title className="text-center mt-4">
+                      Total Visit Count
+                    </Card.Title>
                     <div className="mt-5 text-center">
-                    <Button
-                      variant="danger"
-                      className=""
-                      href="/totalvisit"
-                    >
-                      View Details
-                    </Button>
+                      <Button variant="danger" className="" href="/totalvisit">
+                        View Details
+                      </Button>
                     </div>
                   </Card.Body>
                 </Card>
@@ -180,17 +179,21 @@ const Homecomponent = () => {
                   style={{ width: "13rem", height: "13rem" }}
                 >
                   <Card.Body>
-                    <Card.Title className="text-center fs-2">{pendingiv}</Card.Title>
+                    <Card.Title className="text-center fs-2">
+                      {pendingiv}
+                    </Card.Title>
 
-                    <Card.Title className="text-center mt-4">Pending Visit Count</Card.Title>
+                    <Card.Title className="text-center mt-4">
+                      Pending Visit Count
+                    </Card.Title>
                     <div className="mt-4 text-center">
-                    <Button
-                      variant="danger"
-                      className=""
-                      href="/pendingvisit"
-                    >
-                      View Details
-                    </Button>
+                      <Button
+                        variant="danger"
+                        className=""
+                        href="/pendingvisit"
+                      >
+                        View Details
+                      </Button>
                     </div>
                   </Card.Body>
                 </Card>
@@ -202,17 +205,21 @@ const Homecomponent = () => {
                   style={{ width: "13rem", height: "13rem" }}
                 >
                   <Card.Body>
-                    <Card.Title className="text-center fs-2">{rejectediv}</Card.Title>
+                    <Card.Title className="text-center fs-2">
+                      {rejectediv}
+                    </Card.Title>
 
-                    <Card.Title className="text-center mt-4">Rejected Visit Count</Card.Title>
+                    <Card.Title className="text-center mt-4">
+                      Rejected Visit Count
+                    </Card.Title>
                     <div className="mt-4 text-center">
-                    <Button
-                      variant="danger"
-                      className=""
-                      href="/rejectedvisit"
-                    >
-                      View Details
-                    </Button>
+                      <Button
+                        variant="danger"
+                        className=""
+                        href="/rejectedvisit"
+                      >
+                        View Details
+                      </Button>
                     </div>
                   </Card.Body>
                 </Card>
@@ -220,14 +227,15 @@ const Homecomponent = () => {
             </Row>
           </Col>
           {/* Calendar */}
-          <Col  md={12} lg={4} xs={12} className="mt-4">
-            <h2 className="text-center mt-4 mb-3 text-danger">
-              Booked Slots
-            </h2>
+          <Col md={12} lg={4} xs={12} className="mt-4">
+            <h2 className="text-center mt-4 mb-3 text-danger">Booked Slots</h2>
             <div className="ms-3  d-flex justify-content-md-center mb-3 ms-lg-5  ">
               <Calendar
                 onClickDay={handleDateClick}
                 tileClassName={tileClassName}
+                tileDisabled={({ date }) =>
+                  date < new Date().setHours(0, 0, 0, 0)
+                } // Disable past dates
               />
               {/* Modal */}
               <Modal show={showModal} onHide={closeModal}>
@@ -249,7 +257,10 @@ const Homecomponent = () => {
                   )}
                 </Modal.Body>
                 <Modal.Footer>
-                <Button className="btn btn-primary px-3 py-2 me-3" onClick={handleNavigate}>
+                  <Button
+                    className="btn btn-primary px-3 py-2 me-3"
+                    onClick={handleNavigate}
+                  >
                     Book
                   </Button>
                   <Button variant="dark" onClick={closeModal}>
@@ -264,26 +275,36 @@ const Homecomponent = () => {
 
       {/* Rules and regulations */}
       <Container>
-          <Row className="mt-4">
-            <h3 className="text-danger text-center mt-2 mb-2">Code Of Conduct For Attending IV</h3>
-             <Col md={6} className="mt-3">
-              <ul>
-                <li className="text-md-class mb-2">All students must be in their college uniform.</li>
-                <li className="text-md-class mb-2">All students should wear their identity cards.</li>
-                <li className="text-md-class ">Maintain discipline during visit.</li>
-              </ul>
+        <Row className="mt-4">
+          <h3 className="text-danger text-center mt-2 mb-2">
+            Code Of Conduct For Attending IV
+          </h3>
+          <Col md={6} className="mt-3">
+            <ul>
+              <li className="text-md-class mb-2">
+                All students must be in their college uniform.
+              </li>
+              <li className="text-md-class mb-2">
+                All students should wear their identity cards.
+              </li>
+              <li className="text-md-class ">
+                Maintain discipline during visit.
+              </li>
+            </ul>
+          </Col>
 
-             </Col>
-
-             <Col md={6} className="mt-md-3 mt-0">
-              <ul>
-                <li className="text-md-class mb-2">Be polite and professional while interacting with the  staff.</li>
-                <li className="text-md-class mb-2">Avoid touching system.</li>
-                <li className="text-md-class">All students are supposed to follow the agenda for visit.</li>
-              </ul>
-
-             </Col>
-          </Row>
+          <Col md={6} className="mt-md-3 mt-0">
+            <ul>
+              <li className="text-md-class mb-2">
+                Be polite and professional while interacting with the staff.
+              </li>
+              <li className="text-md-class mb-2">Avoid touching system.</li>
+              <li className="text-md-class">
+                All students are supposed to follow the agenda for visit.
+              </li>
+            </ul>
+          </Col>
+        </Row>
       </Container>
       {/* Contact Section */}
       <Container fluid className="mt-4 bg-white">
@@ -310,11 +331,7 @@ const Homecomponent = () => {
             md={6}
             className="d-flex justify-content-center align-items-center"
           >
-            <img
-              src={cta}
-              alt="Contact Us"
-              className="contactus-img"
-            />
+            <img src={cta} alt="Contact Us" className="contactus-img" />
           </Col>
         </Row>
       </Container>
@@ -329,15 +346,19 @@ const Homecomponent = () => {
             />
           </Col>
           <Col md={6}>
-            <h2 className="text-center mt-lg-4 mt-3 mt-md-0 fs-2 text-danger">Our Vision</h2>
-            <p className="text-md-class ms-3 ms-md-0  mt-lg-3" style={{textAlign:"justify"}}>
+            <h2 className="text-center mt-lg-4 mt-3 mt-md-0 fs-2 text-danger">
+              Our Vision
+            </h2>
+            <p
+              className="text-md-class ms-3 ms-md-0  mt-lg-3"
+              style={{ textAlign: "justify" }}
+            >
               To create a comprehensive learning environment that prepares
               students for the demands of the professional world by integrating
               academic knowledge with industrial exposure.
-              <br/> We strive to foster
-              innovation, creativity, and critical thinking among our students,
-              empowering them to become leaders and changemakers in their
-              respective fields. 
+              <br /> We strive to foster innovation, creativity, and critical
+              thinking among our students, empowering them to become leaders and
+              changemakers in their respective fields.
             </p>
           </Col>
         </Row>

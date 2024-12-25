@@ -187,10 +187,11 @@ const Report = () => {
             <th>Sr.No</th>
             <th>College Name</th>
             <th>Number of Students</th>
+            <th>Number of Faculty</th>
             <th>Date of Visit</th>
             <th>Start Time</th>
             <th>End Time</th>
-            <th>Number of Faculty</th>
+           
             <th>Visiting Location</th>
             <th>Visit Status</th>
             <th>Visit Completed Status</th>
@@ -202,10 +203,11 @@ const Report = () => {
               <td>{index + 1}</td>
               <td>{state.college_name}</td>
               <td>{state.number_of_students}</td>
+              <td>{state.number_of_faculty}</td>
               <td>{formatDate(state.Date_of_visit)}</td>
               <td>{formatTime(state.start_time)}</td>
               <td>{formatTime(state.end_time)}</td>
-              <td>{state.number_of_faculty}</td>
+              
               <td>{state.visting_location}</td>
               <td>{state.Visit_accept}</td>
               <td>{state.Visit_status}</td>

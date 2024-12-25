@@ -37,7 +37,7 @@ const HeaderComponent = () => {
         style={{ borderColor: "white", color: "white" }}
       />
       <Navbar.Collapse id="basic-navbar-nav">
-         <h3 className="text-white fs-5 ms-3">
+         <h3 className="text-white fs-4 ms-5">
             {adminname}
             </h3>
     

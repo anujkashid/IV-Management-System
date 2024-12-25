@@ -30,7 +30,12 @@ const Profile = () => {
       <Container>
         <Row>
           <Col md={8} className="mx-auto">
-            <h2 className="text-center mt-3 mb-4 text-danger">Profile Details</h2>
+            <h2 className="text-center mt-3  text-danger">Profile Details</h2>
+            <div className="d-flex justify-content-end mb-4">
+          <Link to="/home">
+          <Button className="btn btn-danger"><span className="text-white">Back</span></Button>
+        </Link>
+        </div>
             <Container className="border border-dark p-4">
               <Form>
                 <Form.Group as={Row} className="mb-3">
@@ -188,16 +193,7 @@ const Profile = () => {
                     />
                   </Col>
                 </Form.Group>
-                <div className="d-flex justify-content-center">
-                <Link to="/home" className="text-decoration-none">
-                <Button
-                  type="button"
-                  className="btn btn-danger mt-2 px-3 py-1"
-                >
-                  Back
-                </Button>
-                </Link>
-                </div>
+                
               </Form>
             </Container>
           </Col>
