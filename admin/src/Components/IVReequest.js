@@ -70,13 +70,21 @@ const IVRequest = () => {
       .then((res) => {
         const data = res.data.userData;
         const count = data.filter((visit) => visit.Visit_accept === "pending");
-        const formattedData = count.map((visit) => ({
-          ...visit,
-          isExpanded: false,
-          Date_of_visit: visit.Date_of_visit.split("T")[0],
-          start_time: visit.start_time.split("T")[1].slice(0, 5),
-          end_time: visit.end_time.split("T")[1].slice(0, 5),
-        }));
+        const formattedData = count.map((visit) => {
+          const dateOptions = { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit" };
+        
+          const startTimeIST = new Date(visit.start_time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+          const endTimeIST = new Date(visit.end_time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+        
+          return {
+            ...visit,
+            isExpanded: false,
+            Date_of_visit: visit.Date_of_visit.split("T")[0],
+            start_time: startTimeIST,
+            end_time: endTimeIST,
+          };
+        });
+        
         setVisitData(formattedData);
       })
       .catch((error) => {
@@ -326,6 +334,7 @@ const IVRequest = () => {
       month: "short",
     })}-${d.getFullYear()}`;
   };
+  
 
   return (
     <Container>
@@ -387,6 +396,7 @@ const IVRequest = () => {
                     <td>{visit.fees_received}</td>
                     <td>
                       {visit.fees}
+                      {visit.fees_received==="incomplete" && 
                       <Button
                         variant="link"
                         className="bg-primary px-2 mt-1 ms-3"
@@ -394,6 +404,7 @@ const IVRequest = () => {
                       >
                         <span className="text-white">Add</span>
                       </Button>
+                      }
                     </td>
                   </>
                 )}

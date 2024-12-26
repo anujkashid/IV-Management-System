@@ -37,7 +37,7 @@ const Sidebar = () => {
         {`
         .sidebar {
           position: fixed;
-          background-color: #f8f9fa;
+          background-color:rgb(59, 59, 59);
           height: 100vh;
           width: 270px;
           z-index: 1045; 
@@ -45,15 +45,12 @@ const Sidebar = () => {
           overflow-x:hidden;
         }
         .nav-link {
-          color: black;
+          color: white;
           font-size: 20px;
         }
         .nav-link:hover {
           background-color: #e2e6ea; 
           color: #007bff; 
-        }
-        .offcanvas-header {
-          background-color: #f8f9fa;
         }
         `}
       </style>
@@ -71,7 +68,7 @@ const Sidebar = () => {
       {/* Sidebar for Larger Screens */}
       <div className="sidebar d-none d-md-block">
         <div
-          className="mt-3 mb-4"
+          className="mt-3 mb-3"
           style={{
             display: "flex",
             justifyContent: "center",
@@ -93,19 +90,19 @@ const Sidebar = () => {
         <Nav defaultActiveKey="/dashboard" className="flex-column">
           <Nav.Item>
             <Link to="/head/dashboard" className="nav-link p-2">
-              <BsBarChartLineFill size={30} className="me-3 text-darks" /> Dashboard
+              <BsBarChartLineFill size={30} className="me-3 " /> Dashboard
             </Link>
           </Nav.Item>
           <Nav.Item>
             <Link to="/head/college_registarion" className="nav-link p-2">
-              <FaUserPlus size={30} className="me-2 text-dark" /> College
+              <FaUserPlus size={30} className="me-2" /> College
               Registration
             </Link>
           </Nav.Item>
           <Nav.Item>
   <Row>
     <Col md={2}>
-      <MdAppRegistration size={30} className="ms-2 text-dark mt-2" />
+      <MdAppRegistration size={30} className="ms-2 mt-2 text-white" />
     </Col>
     <Col md={10}>
       <div className="">
@@ -119,12 +116,12 @@ const Sidebar = () => {
           <IoIosArrowDropdown size={20} style={{marginLeft:"70px"}} />
         </Button>
         {showDropdown && (
-          <div className="mt-2 d-flex flex-column">
+          <div className="mt-2 d-flex flex-column text-white">
             <div>
-              <FaMapMarkerAlt size={24} className="text-dark me-2"></FaMapMarkerAlt>
+              <FaMapMarkerAlt size={24} className=" me-2"></FaMapMarkerAlt>
             <Link
               to="/head/location"
-              className="nav-link p-2 text-dark"
+              className="nav-link p-2"
               style={{ display: "inline-block" }}
             >
               Location
@@ -132,10 +129,10 @@ const Sidebar = () => {
             </div>
                 
             <div>
-              <FaGraduationCap size={24} className="text-dark me-2"/>   
+              <FaGraduationCap size={24} className=" me-2"/>   
             <Link
               to="/head/university"
-              className="nav-link p-2 text-dark"
+              className="nav-link p-2"
               style={{ display: "inline-block" }}
             >
               University
@@ -143,10 +140,10 @@ const Sidebar = () => {
             </div>
            
            <div>
-           <MdLocationOn size={24} className="text-dark me-2" />
+           <MdLocationOn size={24} className=" me-2" />
            <Link
               to="/head/getstate"
-              className="nav-link p-2 text-dark"
+              className="nav-link p-2"
               style={{ display: "inline-block" }}
             >
               State
@@ -154,10 +151,10 @@ const Sidebar = () => {
           </div>
 
           <div>
-            <FaMapPin size={24} className="text-dark me-2"/>
+            <FaMapPin size={24} className="me-2"/>
             <Link
               to="/head/district"
-              className="nav-link p-2 text-dark"
+              className="nav-link p-2 "
               style={{ display: "inline-block" }}
             >
               District
@@ -165,10 +162,10 @@ const Sidebar = () => {
           </div>
   
           <div>
-            <FaMapPin size={24} className="text-dark me-2"/>
+            <FaMapPin size={24} className=" me-2"/>
             <Link
               to="/head/city"
-              className="nav-link p-2 text-dark"
+              className="nav-link p-2"
               style={{ display: "inline-block" }}
             >
               City
@@ -184,47 +181,47 @@ const Sidebar = () => {
 
           <Nav.Item>
             <Link to="/head/getagenda" className="nav-link p-2">
-              <AiOutlineCalendar size={30} className="me-2 text-dark" /> Agenda
+              <AiOutlineCalendar size={30} className="me-2" /> Agenda
             </Link>
           </Nav.Item>
           <Nav.Item>
             <Link to="/head/getfees" className="nav-link p-2">
-              <FaMoneyBillWave size={30} className="me-2 text-dark" /> Fees
+              <FaMoneyBillWave size={30} className="me-2" /> Fees
             </Link>
           </Nav.Item>
           <Nav.Item>
             <Link to="/head/report" className="nav-link p-2">
-            <TbReport size={30} className="me-2 text-dark" /> Report
+            <TbReport size={30} className="me-2" /> Report
             </Link>
           </Nav.Item>
           <Nav.Item>
             <Link to="/head/ivrequest" className="nav-link p-2">
-              <TbMessageUser size={30} className="me-2 text-dark" /> IV Requests
+              <TbMessageUser size={30} className="me-2" /> IV Requests
             </Link>
           </Nav.Item>
 
           <Nav.Item>
             <Link to="/head/feeverification" className="nav-link p-2">
-              <GiConfirmed size={30} className="me-2 text-dark" />Confirm Fees
+              <GiConfirmed size={30} className="me-2" />Confirm Fees
             </Link>
           </Nav.Item>
 
           <Nav.Item>
             <Link to="/head/visitcomplete" className="nav-link p-2">
-              <LuCalendarCheck size={30} className="me-2 text-dark" /> Visited Colleges
+              <LuCalendarCheck size={30} className="me-2 " /> Visited Colleges
             </Link>
           </Nav.Item>
 
           <Nav.Item>
             <Link to="/head/media" className="nav-link p-2">
-              <PiImageSquare size={30} className="me-2 text-dark" />Add Media 
+              <PiImageSquare size={30} className="me-2 " />Add Media 
             </Link>
           </Nav.Item>
 
           <Nav.Item>
 
             <Link to="/head/feedback" className="nav-link p-2">
-              <MdOutlineFeedback size={30} className="me-2 text-dark" />Feedback
+              <MdOutlineFeedback size={30} className="me-2 " />Feedback
             </Link>
           </Nav.Item>
           
@@ -233,66 +230,83 @@ const Sidebar = () => {
       </div>
 
       {/* Offcanvas for Smaller Screens */}
-      <Offcanvas show={show} onHide={handleClose} className="d-md-none">
+      <style>
+      {`
+      .small_sidebar {
+        position: fixed;
+        background-color:rgb(56, 51, 56);
+        height:;
+        width: 270px;
+        z-index: 1045; 
+        overflow-y:auto;
+        overflow-x:hidden;
+      }
+      
+      `}
+    </style>
+
+      <Offcanvas show={show} onHide={handleClose} className="d-md-none small_sidebar">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>
-            <div
-              className="mt-3 mb-4"
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
+          <div
+            className="mt-4 ms-3"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <img
+              src={sumago}
+              alt="profile"
+              style={{ width: "50px", height: "50px" }}
+            />
+            <h4
+              className="text-danger fw-bold ms-2"
+              style={{ fontFamily: "Times New Roman" }}
             >
-              <img
-                src={sumago}
-                alt="profile"
-                style={{ width: "50px", height: "50px" }}
-              />
-              <h4
-                className="text-danger fw-bold"
-                style={{ fontFamily: "Times New Roman" }}
-              >
-                Sumago Infotech
-              </h4>
-            </div>
+              Sumago Infotech Private Limited
+            </h4>
+          </div>
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <div className="sidebar d-block d-md-none">
+          <div className="d-block d-md-none">
           <Nav defaultActiveKey="/dashboard" className="flex-column">
           <Nav.Item>
             <Link to="/head/dashboard" className="nav-link p-2">
-              <BsBarChartLineFill size={30} className="me-3 text-darks" /> Dashboard
+              <BsBarChartLineFill size={30} className="me-3 " /> Dashboard
             </Link>
           </Nav.Item>
           <Nav.Item>
             <Link to="/head/college_registarion" className="nav-link p-2">
-              <FaUserPlus size={30} className="me-2 text-dark" /> College
+              <FaUserPlus size={30} className="me-3" /> College
               Registration
             </Link>
           </Nav.Item>
           <Nav.Item>
   <Row>
-    <Col md={12}>
-      
-    <div className="">
+    <Col md={2}>
+      <MdAppRegistration size={30} className=" mt-2 text-white" />
+    </Col>
+    <Col md={10}>
+      <div className="">
         <Button
           variant="link"
-          className="nav-link  p-2"
+          className="nav-link "
           style={{ fontSize: "20px", textDecoration: "none" }}
           onClick={() => setShowDropdown(!showDropdown)}
         >
           Master
-          <IoIosArrowDropdown size={20} style={{marginLeft:"70px"}} />
+          <IoIosArrowDropdown size={20} style={{marginLeft:"50px"}} />
         </Button>
         {showDropdown && (
-          <div className="mt-2 d-flex flex-column">
+          <div className="mt-2 d-flex flex-column text-white">
             <div>
-              <FaMapMarkerAlt size={24} className="text-dark me-2"></FaMapMarkerAlt>
+              <FaMapMarkerAlt size={24} className=" me-2"></FaMapMarkerAlt>
             <Link
               to="/head/location"
-              className="nav-link p-2 text-dark"
+              className="nav-link p-2"
               style={{ display: "inline-block" }}
             >
               Location
@@ -300,10 +314,10 @@ const Sidebar = () => {
             </div>
                 
             <div>
-              <FaGraduationCap size={24} className="text-dark me-2"/>   
+              <FaGraduationCap size={24} className=" me-2"/>   
             <Link
               to="/head/university"
-              className="nav-link p-2 text-dark"
+              className="nav-link p-2"
               style={{ display: "inline-block" }}
             >
               University
@@ -311,10 +325,10 @@ const Sidebar = () => {
             </div>
            
            <div>
-           <MdLocationOn size={24} className="text-dark me-2" />
+           <MdLocationOn size={24} className=" me-2" />
            <Link
               to="/head/getstate"
-              className="nav-link p-2 text-dark"
+              className="nav-link p-2"
               style={{ display: "inline-block" }}
             >
               State
@@ -322,10 +336,10 @@ const Sidebar = () => {
           </div>
 
           <div>
-            <FaMapPin size={24} className="text-dark me-2"/>
+            <FaMapPin size={24} className="me-2"/>
             <Link
               to="/head/district"
-              className="nav-link p-2 text-dark"
+              className="nav-link p-2 "
               style={{ display: "inline-block" }}
             >
               District
@@ -333,10 +347,10 @@ const Sidebar = () => {
           </div>
   
           <div>
-            <FaMapPin size={24} className="text-dark me-2"/>
+            <FaMapPin size={24} className=" me-2"/>
             <Link
               to="/head/city"
-              className="nav-link p-2 text-dark"
+              className="nav-link p-2"
               style={{ display: "inline-block" }}
             >
               City
@@ -351,48 +365,48 @@ const Sidebar = () => {
 
 
           <Nav.Item>
-            <Link to="/head/agenda" className="nav-link p-2">
-              <AiOutlineCalendar size={30} className="me-2 text-dark" /> Agenda
+            <Link to="/head/getagenda" className="nav-link p-2">
+              <AiOutlineCalendar size={30} className="me-2" /> Agenda
             </Link>
           </Nav.Item>
           <Nav.Item>
             <Link to="/head/getfees" className="nav-link p-2">
-              <FaMoneyBillWave size={30} className="me-2 text-dark" /> Fees
+              <FaMoneyBillWave size={30} className="me-2" /> Fees
             </Link>
           </Nav.Item>
           <Nav.Item>
             <Link to="/head/report" className="nav-link p-2">
-            <TbReport size={30} className="me-2 text-dark" /> Report
+            <TbReport size={30} className="me-2" /> Report
             </Link>
           </Nav.Item>
           <Nav.Item>
             <Link to="/head/ivrequest" className="nav-link p-2">
-              <TbMessageUser size={30} className="me-2 text-dark" /> IV Requests
+              <TbMessageUser size={30} className="me-2" /> IV Requests
             </Link>
           </Nav.Item>
 
           <Nav.Item>
             <Link to="/head/feeverification" className="nav-link p-2">
-              <GiConfirmed size={30} className="me-2 text-dark" />Confirm Fees
+              <GiConfirmed size={30} className="me-2" />Confirm Fees
             </Link>
           </Nav.Item>
 
           <Nav.Item>
             <Link to="/head/visitcomplete" className="nav-link p-2">
-              <LuCalendarCheck size={30} className="me-2 text-dark" /> Visited Colleges
+              <LuCalendarCheck size={30} className="me-2 " /> Visited Colleges
             </Link>
           </Nav.Item>
 
           <Nav.Item>
             <Link to="/head/media" className="nav-link p-2">
-              <PiImageSquare size={30} className="me-2 text-dark" />Add Media 
+              <PiImageSquare size={30} className="me-2 " />Add Media 
             </Link>
           </Nav.Item>
 
           <Nav.Item>
 
             <Link to="/head/feedback" className="nav-link p-2">
-              <MdOutlineFeedback size={30} className="me-2 text-dark" />Feedback
+              <MdOutlineFeedback size={30} className="me-2 " />Feedback
             </Link>
           </Nav.Item>
           

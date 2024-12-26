@@ -31,7 +31,7 @@ const About = () => {
     return (
         <>
         <ColHeader></ColHeader>
-        <Container fluid style={{ backgroundColor: "#EEEEFF" }}>
+        <Container fluid className="min-vh-100" style={{ backgroundColor: "#EEEEFF" }}>
             <Container>
                 {/* About IVMS */}
                 <Row className="text-center">

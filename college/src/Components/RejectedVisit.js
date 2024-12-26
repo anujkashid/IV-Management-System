@@ -35,7 +35,7 @@ const RejectedVisit = () => {
   };
 
     return (
-      <div className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>
+      <div className="min-vh-100" style={{ backgroundColor: "#EEEEFF" }}>
       <ColHeader></ColHeader>
         <Container>
         

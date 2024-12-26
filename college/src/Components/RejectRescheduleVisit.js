@@ -10,7 +10,7 @@ import ColHeader from "./Navbar";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
-const Updatevisit = () => {
+const RejectResceduled = () => {
   const [number_of_students, setNumberofStudent] = useState("");
   const [Date_of_visit, setStartDate] = useState(new Date());
   const [start_time, setStartTime] = useState("");
@@ -23,7 +23,7 @@ const Updatevisit = () => {
   const[visitData,setVisitData]=useState({});
   const college_name =localStorage.getItem("CollegeName");
   const mousigned=localStorage.getItem("mousigned");
-  const rescheduleid=localStorage.getItem("resceduledid");
+  const rescheduleid=localStorage.getItem("rejectresceduleid");
   const navigate= useNavigate();
   
   useEffect(()=>{
@@ -266,5 +266,5 @@ const Updatevisit = () => {
   );
 };
 
-export default Updatevisit;
+export default RejectResceduled;
 

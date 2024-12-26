@@ -35,7 +35,7 @@ const PendingVisit = () => {
   };
 
     return (
-      <div className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>
+      <div className="min-vh-100" style={{ backgroundColor: "#EEEEFF" }}>
       <ColHeader></ColHeader>
         <Container>    
             <h2 className="my-3 text-danger text-center">Pending Visits</h2>
@@ -53,6 +53,7 @@ const PendingVisit = () => {
                         <th>Number of faculty</th>
                         <th>Date of visit</th>
                         <th>Visiting Location</th>
+                        <th>Fees Status</th>
                         <th>Visit Status</th>
                     </tr>
                 </thead>
@@ -64,6 +65,7 @@ const PendingVisit = () => {
                             <td>{IV.number_of_faculty}</td>
                             <td>{formatDate(IV.Date_of_visit)}</td>
                             <td>{IV.visting_location}</td>
+                            <td>{IV.fees_status}</td>
                             <td>{IV.Visit_accept}</td>
                         </tr>
                     ))}

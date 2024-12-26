@@ -56,7 +56,7 @@ const TotalVisit = () => {
   };
 
   return (
-    <>
+    <div className="min-vh-100" style={{ backgroundColor: "#EEEEFF" }}>
       <ColHeader></ColHeader>
       <Container>
         <h2 className="my-3 text-center">Total Visits</h2>
@@ -112,7 +112,7 @@ const TotalVisit = () => {
         )}
 
       </Container>
-    </>
+    </div>
   );
 };
 export default TotalVisit;

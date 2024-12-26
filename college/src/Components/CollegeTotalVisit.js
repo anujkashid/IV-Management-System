@@ -30,7 +30,7 @@ const CollegeTotalVisit = () => {
         );
         setIvcount(totalIV);
       })
-  },);
+  },[]);
   
   const formatDate = (date) => {
     const d = new Date(date);
@@ -101,21 +101,20 @@ const CollegeTotalVisit = () => {
    localStorage.setItem("cancelvisitid",id);
   }
   return (
-
-    <>
+    <div style={{ backgroundColor: "#EEEEFF" }} className="min-vh-100">
     <ColHeader />
     <Container>
     
       <h2 className="my-4 text-center text-danger">Scheduled Visits</h2>
       <div className="mb-4 d-flex justify-content-start gap-2">
-  <Button variant="primary" onClick={exportPDF}>
+  <Button variant="danger" onClick={exportPDF}>
     Export PDF
   </Button>
-  <Button variant="primary" onClick={exportExcel}>
+  <Button variant="danger" onClick={exportExcel}>
     Export Excel
   </Button>
   <CSVLink data={ivcount} filename="visit_data.csv">
-    <Button variant="primary">Export CSV</Button>
+    <Button variant="danger">Export CSV</Button>
   </CSVLink>
 </div>
 
@@ -172,7 +171,7 @@ const CollegeTotalVisit = () => {
             </Pagination>
           )}
     </Container>
-    </>
+    </div>
   );
 };
 

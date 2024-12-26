@@ -25,9 +25,7 @@ const CancelledVisit = () => {
 
   const formatDate = (date) => {
     const d = new Date(date);
-    return `${d.getDate()}/${d.toLocaleString("default", {
-      month: "short",
-    })}/${d.getFullYear()}`;
+    return `${d.getDate()}-${d.toLocaleString('default', { month: 'short' })}-${d.getFullYear()}`;
   };
 
   const cancelid = visitData._id;
@@ -56,7 +54,7 @@ const CancelledVisit = () => {
   };
 
   return (
-    <div className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>
+    <div className="min-vh-100" style={{ backgroundColor: "#EEEEFF" }}>
       <ColHeader />
       <Container>
       <h3 className="text-center text-danger mb-4 mt-4">Cancel Visit</h3>

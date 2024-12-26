@@ -117,7 +117,7 @@ const ColLogin = () => {
   return (
     <>
       <ColHeader />
-      <Container fluid style={{ backgroundColor: "#EEEEFF" }}>
+      <Container className="min-vh-100" fluid style={{ backgroundColor: "#EEEEFF" }}>
       <Container className="mb-1">
         <Row>
           <Col md={9} className="mx-auto">
@@ -171,22 +171,24 @@ const ColLogin = () => {
   <Col md={4} className="text-center">
     <Form.Label className="mb-2 d-block">Start Time:</Form.Label>
     <DatePicker
-      selected={start_time}
-      onChange={(time) => {
-        setStartTime(time);
-        const endTime = new Date(time);
-        endTime.setHours(time.getHours() + 2);
-        setEndTime(endTime);
-      }}
-      showTimeSelect
-      showTimeSelectOnly
-      timeIntervals={60}
-      timeCaption="Time"
-      dateFormat="hh:mm aa"
-      className="form-control w-100"
-      placeholderText="Select Start Time"
-      required
-    />
+    selected={start_time}
+    onChange={(time) => {
+      setStartTime(time);
+      const endTime = new Date(time);
+      endTime.setHours(time.getHours() + 2);
+      setEndTime(endTime);
+    }}
+    showTimeSelect
+    showTimeSelectOnly
+    timeIntervals={60}
+    timeCaption="Time"
+    dateFormat="hh:mm aa"
+    className="form-control w-100"
+    placeholderText="Select Start Time"
+    required
+    minTime={new Date().setHours(9, 0, 0, 0)} // 9:00 AM
+    maxTime={new Date().setHours(15, 0, 0, 0)} // 3:00 PM
+  />
   </Col>
   <Col md={4} className="text-center">
     <Form.Label className="mb-2 d-block">End Time:</Form.Label>

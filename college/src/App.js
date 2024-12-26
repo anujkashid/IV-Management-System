@@ -20,6 +20,7 @@ import UpdateProfile from './Components/Update_profile';
 import Gallery from './Components/Gallery';
 import CollegeTotalVisit from './Components/CollegeTotalVisit';
 import Updatevisit from './Components/RescheduledVisit';
+import RejectResceduled from './Components/RejectRescheduleVisit';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
          <Route path='/update_profile' element={<UpdateProfile/>}/>
          <Route path='/collegetotalvisit' element={<CollegeTotalVisit/>}/>
          <Route path="/reschedulevisit" element={<Updatevisit/>}/>
+         <Route path="/rejectrescedulevisit" element={<RejectResceduled/>}/>
       </Routes>
       </BrowserRouter>
   );

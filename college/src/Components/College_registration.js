@@ -86,10 +86,14 @@ const College_registration = () => {
       errors["reg_password"] = "Password is required.";
     }
 
-    if (!/^[a-zA-Z]+$/.test(reg_contact_person)) {
+    if (!reg_contact_person.trim()) {
       isValid = false;
-      errors["reg_contact_person"] = "First name must contain only letters";
+      errors["reg_contact_person"] = "Contact name must contain only letters.";
     }
+    // if (!/^[a-zA-Z]+$/.test(reg_contact_person)) {
+    //   isValid = false;
+    //   errors["reg_contact_person"] = "First name must contain only letters";
+    // }
 
     if (!reg_contact_person_contact1) {
       isValid = false;
@@ -494,7 +498,7 @@ const College_registration = () => {
 
       </Form.Group>  
 
-      <Row className="mb-3">
+      {/* <Row className="mb-3">
               <Col>
                 <Form.Group className="text-center">
                   <Form.Label className="text-dark ">
@@ -523,7 +527,7 @@ const College_registration = () => {
                   </div>
                 </Form.Group>
               </Col>
-            </Row>
+            </Row> */}
 
           {/* Submit Button */}
           <div className="text-center">
