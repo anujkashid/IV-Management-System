@@ -53,7 +53,7 @@ const Head = () => {
       <Sidebar />
       </div>
       {/* Main Content */}
-      <div className="content-container flex-grow-1"> 
+      <div className="content-container flex-grow-1 min-vh-100" style={{ backgroundColor: "#EEEEFF" }}> 
           <HeaderComponent />
         <Container>
           <Routes>

@@ -271,7 +271,7 @@ const College_registration = () => {
       <Container
       >
         <Row>
-          <Col xs={10} className="mx-auto h-100  p-2 p-md-4 bg-white mt-4 rounded-2 "style={{ maxWidth: "600px" }}  >
+          <Col xs={10} className="mx-auto h-100  p-2 bg-white mt-4 rounded-2 "style={{ maxWidth: "600px" }}  >
          <h2 className="text-center text-dark fs-3 mb-3">Registration Form</h2>
         <Form className=" p-4 border border-dark">
           {/* College Name */}

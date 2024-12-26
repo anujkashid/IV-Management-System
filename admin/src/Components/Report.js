@@ -169,7 +169,7 @@ const Report = () => {
         </>
       )}
 
-      <div className="mb-4 mt-4 d-flex justify-content-start gap-2">
+      <div className="mb-4 mt-4 d-flex justify-content-start gap-2 ms-4">
         <Button variant="primary" onClick={exportPDF}>
           Export PDF
         </Button>

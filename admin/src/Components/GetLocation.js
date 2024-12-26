@@ -79,7 +79,7 @@ const GetLocation = () => {
   return (
     <Container>
       <h2 className="my-4 text-center">Location Data</h2>
-      <div className="mb-4 d-flex justify-content-start gap-2">
+      <div className="mb-4 d-flex justify-content-start gap-2  ms-4">
   <Button variant="primary" onClick={exportPDF}>
     Export PDF
   </Button>

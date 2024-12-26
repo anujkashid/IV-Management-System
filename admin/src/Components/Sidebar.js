@@ -37,7 +37,7 @@ const Sidebar = () => {
         {`
         .sidebar {
           position: fixed;
-          background-color:rgb(59, 59, 59);
+          background-color:rgb(65, 56, 56);
           height: 100vh;
           width: 270px;
           z-index: 1045; 

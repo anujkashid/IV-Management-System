@@ -29,7 +29,7 @@ const HeaderComponent = () => {
   }, []);
 
   return (
-    <Navbar expand="sm" className="bg-dark px-3" style={{ marginBottom: 0 }}>
+    <Navbar expand="sm" className=" px-3" style={{ marginBottom: 0 ,background:"grey"}}>
       {/* Align the toggle button to the right */}
       <Navbar.Toggle
         aria-controls="basic-navbar-nav"

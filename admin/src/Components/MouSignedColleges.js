@@ -116,7 +116,7 @@ const handlePrevPage = () => {
         <Link className="text-decoration-none" to="/head/dashboard"><Button className="text-primary"><span className="text-white">Back</span></Button></Link>
         </div>
 
-      <div className="mb-4 d-flex justify-content-start gap-2">
+      <div className="mb-4 d-flex justify-content-start gap-2 ms-4">
         <Button variant="primary" onClick={exportPDF}>
           Export PDF
         </Button>

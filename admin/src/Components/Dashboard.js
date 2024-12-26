@@ -288,7 +288,8 @@ const Dashboard = () => {
           <Card
             className="h-100 shadow-md"
             style={{
-              backgroundColor: "rgba(0, 123, 255, 0.5)",
+              
+              backgroundColor: "rgba(255, 193, 7, 0.5)",
               borderRadius: "10px",
             }}
           >
@@ -313,7 +314,7 @@ const Dashboard = () => {
           <Card
             className="h-100 shadow-md "
             style={{
-              backgroundColor: "rgba(255, 193, 7, 0.5)",
+              backgroundColor: "rgba(0, 123, 255, 0.5)",
               borderRadius: "10px",
             }}
           >
