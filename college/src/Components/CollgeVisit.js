@@ -58,27 +58,36 @@ const ColLogin = () => {
     setComment("");
   };
 
+  
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    
     const startDateTime = new Date(Date_of_visit);
     startDateTime.setHours(start_time.getHours(), start_time.getMinutes(), 0, 0);
-
+    
     const endDateTime = new Date(Date_of_visit);
-    endDateTime.setHours(end_time.getHours(), end_time.getMinutes(), 0, 0); 
-
-
+    endDateTime.setHours(end_time.getHours(), end_time.getMinutes(), 0, 0);
+    
     const isTimeConflict = visitData.some((visit) => {
-        const existingStartTime = new Date(visit.start_time); 
-        existingStartTime.setSeconds(0, 0); 
-
-        return existingStartTime.getTime() === startDateTime.getTime() && visit.visting_location === visting_location;
+        const existingStartTime = new Date(visit.start_time);
+        existingStartTime.setSeconds(0, 0);
+    
+        const existingEndTime = new Date(existingStartTime);
+        existingEndTime.setHours(existingStartTime.getHours() + 1);
+        existingEndTime.setHours(existingEndTime.getHours()+1);
+        return (
+            (startDateTime < existingEndTime && endDateTime > existingStartTime) && 
+            visit.visting_location === visting_location
+        );
     });
-
+    
     if (isTimeConflict) {
         alert("Schedule is busy.");
         return;
     }
+    
 
     // Prepare form data for submission
     const formData = new FormData();

@@ -158,3 +158,16 @@
     } 
     }
 
+
+    .booked-date {
+      background-color: rgb(235, 142, 142) !important;
+      color:black !important;
+      border: solid 1px black !important;
+    }
+    
+    .selected-date {
+      background-color:white !important; /* Highlight slot booking dates */
+      color:black !important;         /* Optional: Change text color */            /* Optional: Circle styling */
+    }
+    
+

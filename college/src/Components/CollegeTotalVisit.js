@@ -96,6 +96,10 @@ const CollegeTotalVisit = () => {
     XLSX.writeFile(workbook, "university_data.xlsx");
   };
 
+  const formatTime = (time) => {
+    return new Date(time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }); // Format to 'HH:mm'
+  };
+
   const handleUpdate=(id)=>
   {
    localStorage.setItem("cancelvisitid",id);
@@ -131,6 +135,8 @@ const CollegeTotalVisit = () => {
                     <th>Number of student</th>
                     <th>Number of faculty</th>
                     <th>Date of visit</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
                     <th>Visiting Location</th>
                     <th>Visit Status</th>
                     <th>Action</th>
@@ -143,6 +149,8 @@ const CollegeTotalVisit = () => {
                       <td>{IV.number_of_students}</td>
                       <td>{IV.number_of_faculty}</td>
                       <td>{formatDate(IV.Date_of_visit)}</td>
+                      <td>{formatTime(IV.start_time)}</td>
+                      <td>{formatTime(IV.end_time)}</td>
                       <td>{IV.visting_location}</td>
                       <td>{IV.Visit_accept}</td>
                       <td><Button variant="danger" href="/visitcancelled" onClick={()=> handleUpdate(IV._id)}><MdDelete size={24}/></Button></td>

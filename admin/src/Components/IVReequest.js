@@ -352,6 +352,7 @@ const IVRequest = () => {
           </CSVLink>
         </div>
       </Row>
+      <div className="table-responsive">
       <Table striped bordered hover responsive>
         <thead className="thead-dark">
           <tr className="text-center">
@@ -490,6 +491,7 @@ const IVRequest = () => {
           ))}
         </tbody>
       </Table>
+      </div>
       {/* Pagination */}
       <Pagination className="justify-content-end">
         <Pagination.Prev

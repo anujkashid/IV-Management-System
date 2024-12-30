@@ -32,7 +32,8 @@ const ColHeader = () => {
             visit.notification_status === "unseen" &&
             (visit.Visit_accept === "accept" ||
               visit.Visit_accept === "reject" ||
-              visit.Visit_accept === "pending")
+              visit.Visit_accept === "pending"
+              )
         );
         setVisitData(filteredData);
         setNotificationCount(filteredData.length);

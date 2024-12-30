@@ -52,14 +52,13 @@ const Homecomponent = () => {
         const response = await axios.get("http://localhost:8000/getvisit");
         const data = response.data.userData;
 
-        // Structure booked data as { date: [{start_time, end_time, visiting_location}, ...] }
         const bookings = data.reduce((acc, visit) => {
           const visitDate = formatDate(visit.start_time);
           if (!acc[visitDate]) acc[visitDate] = [];
           acc[visitDate].push({
             start_time: formatTime(visit.start_time),
             end_time: formatTime(visit.end_time),
-            visting_location: visit.visting_location, // Ensure this is added
+            visting_location: visit.visting_location,
           });
           return acc;
         }, {});
@@ -111,15 +110,34 @@ const Homecomponent = () => {
   // Highlight booked dates on calendar
   const tileClassName = ({ date }) => {
     const currentDate = formatDate(date);
-    return bookedData[currentDate] ? "booked-date" : null;
+    const today = formatDate(new Date());
+  
+    // Ignore previous dates
+    if (new Date(currentDate) < new Date(today)) {
+      return null; // No styles for past dates
+    }
+  
+    // Change color only for the selected booking dates
+    if (currentDate === formatDate(selectedDate)) {
+      return "selected-date";
+    }
+  
+    // Leave booked slots with default styles
+    if (bookedData[currentDate]) {
+      return "booked-date";
+    }
+  
+    return null;
   };
+  
+  
 
   const handleNavigate = () => {
     navigate("/addvisit");
   };
 
   return (
-    <div style={{ backgroundColor: "#EEEEFF" }}>
+    <div style={{ backgroundColor: ""}}>
       <ColHeader />
 
       {/* Carousel Section */}
@@ -128,7 +146,7 @@ const Homecomponent = () => {
           Welcome To Sumago Infotech !!!!
         </h2>
         <h3 className="text-center text-dark mb-4 ">{collegename}</h3>
-        <Container>
+        {/* <Container>
           <Col md={10} className="mx-auto">
             <Carousel data-bs-theme="dark">
               {[slider1, slider2, slider3].map((slide, index) => (
@@ -142,7 +160,7 @@ const Homecomponent = () => {
               ))}
             </Carousel>
           </Col>
-        </Container>
+        </Container> */}
       </Container>
       {/* Reports and Calendar */}
       <Container>
@@ -153,7 +171,7 @@ const Homecomponent = () => {
               <h2 className="text-center mb-4 mt-4 text-danger">Reports</h2>
               <Col md={3} xs={8} className="mx-auto me-md-4">
                 <Card
-                  className="me-2"
+                  className="me-2 shadow shadow-md"
                   style={{ width: "13rem", height: "13rem" }}
                 >
                   <Card.Body>
@@ -175,7 +193,7 @@ const Homecomponent = () => {
 
               <Col md={3} xs={8} className="mx-auto me-md-4 mt-3 mt-md-0">
                 <Card
-                  className="me-2"
+                  className="me-2 shadow shadow-md"
                   style={{ width: "13rem", height: "13rem" }}
                 >
                   <Card.Body>
@@ -201,7 +219,7 @@ const Homecomponent = () => {
 
               <Col md={3} xs={8} className="mx-auto  mt-3 mt-md-0">
                 <Card
-                  className="me-2"
+                  className="me-2 shadow shadow-md"
                   style={{ width: "13rem", height: "13rem" }}
                 >
                   <Card.Body>
@@ -229,8 +247,9 @@ const Homecomponent = () => {
           {/* Calendar */}
           <Col md={12} lg={4} xs={12} className="mt-4">
             <h2 className="text-center mt-4 mb-3 text-danger">Booked Slots</h2>
-            <div className="ms-3  d-flex justify-content-md-center mb-3 ms-lg-5  ">
+            <div className="ms-3  d-flex justify-content-md-center mb-3 ms-lg-5   ">
               <Calendar
+              className="shadow shadow-md"
                 onClickDay={handleDateClick}
                 tileClassName={tileClassName}
                 tileDisabled={({ date }) =>

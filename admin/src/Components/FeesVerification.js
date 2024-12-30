@@ -110,6 +110,7 @@ const FeesVerification = () => {
                 <th>Mou Signed</th>
                 <th>Fees Status</th>
                 <th>Fees Received</th>
+                <th>Transaction ID</th>
                 <th>Confirm Fees Status</th>
               </tr>
             </thead>
@@ -122,6 +123,7 @@ const FeesVerification = () => {
                   <td>{visit.mousigned}</td>
                   <td>{visit.fees_status}</td>
                   <td>{visit.fees_received}</td>
+                  <td>{visit.transaction_id}</td>
                   {visit.fees_status === "paid" && (
                     <td>
                       <button

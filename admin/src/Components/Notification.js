@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Notification = () => {
   const [visitData, setVisitData] = useState([]);
@@ -38,6 +38,13 @@ const Notification = () => {
         console.error("Error updating notification", error);
       });
   };
+
+  const formatDate = (date) => {
+    const d = new Date(date);
+    return `${d.getDate()}-${d.toLocaleString('default', { month: 'short' })}-${d.getFullYear()}`;
+  };
+
+  const navigate =useNavigate();
 
   return (
     <>
@@ -83,6 +90,24 @@ const Notification = () => {
                 ))}
               </div>
             )}
+
+         {visitData.map((visit, item) =>
+          visit.Visit_accept === "pending" && visit.fees_status === "paid" ? (
+            <div
+              key={item}
+              className="alert alert-primary d-flex justify-content-between align-items-center"
+            >
+              Confirm fees status {visit.fees} to accept request on{" "}
+              {formatDate(visit.Date_of_visit)} by {visit.college_name}.
+              <Button
+                className="ms-5 px-2 py-1 mt-2 btn btn-danger"
+                onClick={() => navigate("/head/feeverification")}
+              >
+                Pay Now
+              </Button>
+            </div>
+          ) : null
+        )}
           </Col>
         </Row>
       </Container>

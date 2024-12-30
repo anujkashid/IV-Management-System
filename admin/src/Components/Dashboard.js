@@ -105,7 +105,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <Container className="mt-5" fluid>
+    <Container className="mt-5 ms-2" fluid>
       <Row className="g-4">
 
         {/* Card 0 */}
