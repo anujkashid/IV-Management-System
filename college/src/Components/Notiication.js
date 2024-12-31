@@ -57,7 +57,7 @@ const Notification = () => {
   }
 
   return (
-    <div className="min-vh-100" style={{ backgroundColor: "#EEEEFF" }}>
+    <div className="min-vh-100" style={{marginTop:'18vh'}}>
       <ColHeader />
       <div className="container mt-4">
         <h3 className="text-center mb-4 text-danger">Notifications</h3>

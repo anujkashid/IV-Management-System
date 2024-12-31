@@ -25,7 +25,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="min-vh-100" style={{ backgroundColor: "#EEEEFF" }}>
+    <div className="min-vh-100" style={{marginTop:'18vh'}}>
       <ColHeader />
       <Container>
         <Row>

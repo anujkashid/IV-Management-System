@@ -35,7 +35,7 @@ const PendingVisit = () => {
   };
 
     return (
-      <div className="min-vh-100" style={{ backgroundColor: "#EEEEFF" }}>
+      <div className="min-vh-100" style={{marginTop:'18vh'}}>
       <ColHeader></ColHeader>
         <Container>    
             <h2 className="my-3 text-danger text-center">Pending Visits</h2>

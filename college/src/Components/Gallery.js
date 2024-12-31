@@ -68,7 +68,7 @@ const Gallery = () => {
   return (
     <>
       <ColHeader />
-      <Container fluid className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>
+      <Container fluid className="h-100 vh-100" style={{marginTop:'15vh'}}>
         <Container className="py-4">
           <h2 className="text-center mb-4 text-danger">Gallery</h2>
           <Col md={8} className="mx-auto">

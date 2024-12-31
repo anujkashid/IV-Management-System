@@ -20,7 +20,7 @@ const Agenda = () => {
   }, []);
 
   return (
-    <div className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>
+    <div className="h-100 vh-100" style={{marginTop:'20vh'}}>
       <ColHeader />
       <Container>
         <h3 className="mt-4 text-danger mb-4 text-center">Visit Agenda</h3>

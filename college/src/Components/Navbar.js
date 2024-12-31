@@ -88,7 +88,7 @@ const ColHeader = () => {
 
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" bg="danger" variant="dark">
+      <Navbar collapseOnSelect expand="lg" style={{background:" rgba(93, 91, 91, 0.5)"}} fixed="top"  variant="dark">
         {/* Brand */}
         <Navbar.Brand className="fs-5 ms-4 d-flex align-items-center">
           <img
@@ -99,13 +99,13 @@ const ColHeader = () => {
           />
           <div>
             <span
-              className="text-white fw-bold d-block"
+              className="text-white fw-bold d-block fs-4"
               style={{ fontFamily: "Times New Roman" }}
             >
               Sumago Infotech
             </span>
             <span
-              className="text-white fw-bold"
+              className="text-white fw-bold fs-4"
               style={{ fontFamily: "Times New Roman" }}
             >
               Private Limited

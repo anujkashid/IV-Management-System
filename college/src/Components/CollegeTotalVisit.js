@@ -105,10 +105,10 @@ const CollegeTotalVisit = () => {
    localStorage.setItem("cancelvisitid",id);
   }
   return (
-    <div style={{ backgroundColor: "#EEEEFF" }} className="min-vh-100">
+    <div  className="min-vh-100" style={{backgroundColor:"#eaf5fc"}}>
     <ColHeader />
     <Container>
-    
+    <div style={{paddingTop:'15vh'}}>
       <h2 className="my-4 text-center text-danger">Scheduled Visits</h2>
       <div className="mb-4 d-flex justify-content-start gap-2">
   <Button variant="danger" onClick={exportPDF}>
@@ -178,8 +178,11 @@ const CollegeTotalVisit = () => {
               />
             </Pagination>
           )}
+             </div>
     </Container>
+ 
     </div>
+ 
   );
 };
 

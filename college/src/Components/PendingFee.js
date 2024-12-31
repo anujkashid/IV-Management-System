@@ -87,12 +87,12 @@ const PendingFee = () => {
   };
 
   return (
-    <Container fluid className="h-100 vh-100" style={{ backgroundColor: "#EEEEFF" }}>
+    <Container fluid className="h-100 vh-100" style={{marginTop:'15vh'}} >
       <Row>
         <ColHeader />
         <Col md={6} className="mx-auto mt-4">
           <h3 className="text-center text-danger">Update Fee Status</h3>
-          <Form className="border border-dark p-4 mt-5" onSubmit={handleSubmit}>
+          <Form className="border border-dark p-4 mt-5 shadow shadow-md" onSubmit={handleSubmit}>
             <Row className="mb-3">
               <Col>
                 <Form.Group className="text-center">

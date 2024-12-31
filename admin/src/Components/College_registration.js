@@ -271,12 +271,12 @@ const College_registration = () => {
       <Container
       >
         <Row>
-          <Col xs={10} className="mx-auto h-100  p-2 bg-white mt-4 rounded-2 "style={{ maxWidth: "600px" }}  >
+          <Col xs={10} className="mx-auto h-100  p-2 bg-white mt-4 rounded-2 border border-dark"style={{ maxWidth: "600px" }}  >
          <h2 className="text-center text-dark fs-3 mb-3">Registration Form</h2>
-        <Form className=" p-4 border border-dark">
+        <Form className=" p-4 ">
           {/* College Name */}
-          <Form.Group className="mb-3 text-center" controlId="formGroupCollege">
-            <Form.Label>College Name</Form.Label>
+          <Form.Group className="mb-3 text-start" controlId="formGroupCollege">
+            <Form.Label className="fw-bold ms-3">College Name</Form.Label>
             <Form.Control
               required
               type="text"
@@ -289,8 +289,8 @@ const College_registration = () => {
           </Form.Group>
 
           {/* State */}
-          <Form.Group className="mb-3 text-center" controlId="formGroupState">
-            <Form.Label>State</Form.Label>
+          <Form.Group className="mb-3 text-start" controlId="formGroupState">
+            <Form.Label className="fw-bold ms-3" >State</Form.Label>
             <Form.Select
               required
               value={reg_state}
@@ -307,8 +307,8 @@ const College_registration = () => {
           </Form.Group>
 
           {/* District */}
-          <Form.Group className="mb-3 text-center" controlId="formGroupDistrict">
-            <Form.Label>District</Form.Label>
+          <Form.Group className="mb-3 text-start" controlId="formGroupDistrict">
+            <Form.Label className="fw-bold ms-3">District</Form.Label>
             <Form.Select
               required
               value={reg_district}
@@ -325,8 +325,8 @@ const College_registration = () => {
           </Form.Group>
 
           {/* City */}
-          <Form.Group className="mb-3 text-center" controlId="formGroupCity">
-            <Form.Label>City</Form.Label>
+          <Form.Group className="mb-3 text-start" controlId="formGroupCity">
+            <Form.Label className="fw-bold ms-3">City</Form.Label>
             <Form.Select
               required
               value={reg_city}
@@ -343,8 +343,8 @@ const College_registration = () => {
           </Form.Group>
 
           {/* University Name */}
-           <Form.Group className="mb-3 text-center" controlId="formGroupCity">
-            <Form.Label>Univesity Name</Form.Label>
+           <Form.Group className="mb-3 text-start" controlId="formGroupCity">
+            <Form.Label className="fw-bold ms-3">Univesity Name</Form.Label>
             <Form.Select
               required
               value={reg_university_name}
@@ -362,8 +362,8 @@ const College_registration = () => {
           </Form.Group>
 
           {/* Principal Name */}
-          <Form.Group className="mb-3 text-center" controlId="formGroupPrincipalName">
-            <Form.Label>Principal Name</Form.Label>
+          <Form.Group className="mb-3 text-start" controlId="formGroupPrincipalName">
+            <Form.Label className="fw-bold ms-3">Principal Name</Form.Label>
             <Form.Control
               required
               type="text"
@@ -375,8 +375,8 @@ const College_registration = () => {
           </Form.Group>
 
           {/* Contact Person */}
-          <Form.Group className="mb-3 text-center" controlId="formGroupContactPerson">
-            <Form.Label>Contact Person</Form.Label>
+          <Form.Group className="mb-3 text-start" controlId="formGroupContactPerson">
+            <Form.Label className="fw-bold ms-3">Contact Person</Form.Label>
             <Form.Control
               required
               type="text"
@@ -390,8 +390,8 @@ const College_registration = () => {
           <Row>
             <Col>
               {/* Contact Person Contact 1 */}
-              <Form.Group className="mb-3 text-center" controlId="formGroupContact1">
-                <Form.Label>Contact Person Contact 1</Form.Label>
+              <Form.Group className="mb-3 text-start" controlId="formGroupContact1">
+                <Form.Label className="fw-bold ms-3">Contact Person Contact 1</Form.Label>
                 <Form.Control
                   required
                   type="tel"
@@ -407,8 +407,8 @@ const College_registration = () => {
             </Col>
             <Col>
               {/* Contact Person Contact 2 */}
-              <Form.Group className="mb-3 text-center" controlId="formGroupContact2">
-                <Form.Label>Contact Person Contact 2</Form.Label>
+              <Form.Group className="mb-3 text-start" controlId="formGroupContact2">
+                <Form.Label className="fw-bold ms-3">Contact Person Contact 2</Form.Label>
                 <Form.Control
                   type="tel"
                   value={reg_contact_person_contact2}
@@ -423,8 +423,8 @@ const College_registration = () => {
           </Row>
 
           {/* Email ID */}
-          <Form.Group className="mb-3 text-center" controlId="formGroupEmail">
-            <Form.Label>Email ID</Form.Label>
+          <Form.Group className="mb-3 text-start" controlId="formGroupEmail">
+            <Form.Label className="fw-bold ms-3">Email ID</Form.Label>
             <Form.Control
               required
               type="email"
@@ -436,8 +436,8 @@ const College_registration = () => {
           </Form.Group>
 
           {/* Username */}
-          <Form.Group className="mb-3 text-center" controlId="formGroupUsername">
-            <Form.Label>Username</Form.Label>
+          <Form.Group className="mb-3 text-start" controlId="formGroupUsername">
+            <Form.Label className="fw-bold ms-3">Username</Form.Label>
             <Form.Control
               required
               type="text"
@@ -450,8 +450,8 @@ const College_registration = () => {
           </Form.Group>
 
           {/* Password */}
-          <Form.Group className="mb-3 text-center" controlId="formGroupPassword">
-            <Form.Label>Password</Form.Label>
+          <Form.Group className="mb-3 text-start" controlId="formGroupPassword">
+            <Form.Label className="fw-bold ms-3">Password</Form.Label>
             <Form.Control
               required
               type="password"
@@ -465,8 +465,8 @@ const College_registration = () => {
           </Form.Group>
 
           {/* Confirm Password */}
-          <Form.Group className="mb-3 text-center" controlId="formGroupConfirmPassword">
-            <Form.Label>Confirm Password</Form.Label>
+          <Form.Group className="mb-3 text-start" controlId="formGroupConfirmPassword">
+            <Form.Label className="fw-bold ms-3">Confirm Password</Form.Label>
             <Form.Control
               required
               type="password"
@@ -480,8 +480,8 @@ const College_registration = () => {
             </Form.Control.Feedback>
           </Form.Group>
 
-          <Form.Group className="mb-3 text-center" controlId="formGroupMOU">  
-        <Form.Label>MOU Signed</Form.Label>  
+          <Form.Group className="mb-3 text-start" controlId="formGroupMOU">  
+        <Form.Label className="fw-bold ms-3">MOU Signed</Form.Label>  
         <Form.Select  
           required  
           value={reg_mou_sign}  
@@ -495,36 +495,6 @@ const College_registration = () => {
 
       </Form.Group>  
 
-      <Row className="mb-3">
-              <Col>
-                <Form.Group className="text-center">
-                  <Form.Label className="text-dark fs-5">
-                    Select Status:
-                  </Form.Label>
-                  <div>
-                    <Form.Check
-                      type="radio"
-                      label="Active"
-                      name="status"
-                      value="active"
-                      className="me-5 text-dark"
-                      checked={reg_status === "Active"}
-                      onChange={(e) => setstatus(e.target.value)}
-                      inline
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="Inactive"
-                      name="status"
-                      value="inactive"
-                      checked={reg_status === "Inactive"}
-                      onChange={(e) => setstatus(e.target.value)}
-                      inline
-                    />
-                  </div>
-                </Form.Group>
-              </Col>
-            </Row>
 
           {/* Submit Button */}
           <div className="text-center">

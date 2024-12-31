@@ -53,7 +53,8 @@ const Login = () => {
     <Container>
       <Row className="">
         <Col md={4} className="mx-auto">
-          <Card className="border border-primary">
+          
+          <Card className="border border-primary shadow shadow-md">
             <Card.Body>
               <h3 className="text-center text-primary fs-2">Login</h3>
               {serverError && <Alert variant="danger">{serverError}</Alert>}

@@ -126,7 +126,7 @@ const ColLogin = () => {
   return (
     <>
       <ColHeader />
-      <Container className="min-vh-100" fluid style={{ backgroundColor: "#EEEEFF" }}>
+      <Container className="min-vh-100" fluid style={{marginTop:'15vh'}}>
       <Container className="mb-1">
         <Row>
           <Col md={9} className="mx-auto">
@@ -136,8 +136,8 @@ const ColLogin = () => {
           <Button className="btn btn-danger"><span className="text-white">Back</span></Button>
         </Link>
         </div>
-            <Container className="border border-dark p-4 d-flex justify-content-center bg-white">
-              <Form className="w-100 =" onSubmit={handleSubmit} >
+            <Container className="border border-dark p-4 d-flex justify-content-center bg-white shadow shadow-md">
+              <Form className="w-100 " onSubmit={handleSubmit} >
                 <Row className="mb-3">
                   <Col md={5} className="text-center">
                     <Form.Label className="mb-1">Number of Students:</Form.Label>

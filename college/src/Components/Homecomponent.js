@@ -19,7 +19,10 @@ import slider1 from "../Images/slider1.jpg";
 import slider2 from "../Images/slider2.jpg";
 import slider3 from "../Images/slider3.jpg";
 import "../App.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FaCheckCircle } from "react-icons/fa";
+import AOS from "aos"
+import "aos/dist/aos.css"
 
 const Homecomponent = () => {
   const [bookedData, setBookedData] = useState({}); // Store booked slots
@@ -111,79 +114,76 @@ const Homecomponent = () => {
   const tileClassName = ({ date }) => {
     const currentDate = formatDate(date);
     const today = formatDate(new Date());
-  
+
     // Ignore previous dates
     if (new Date(currentDate) < new Date(today)) {
       return null; // No styles for past dates
     }
-  
+
     // Change color only for the selected booking dates
     if (currentDate === formatDate(selectedDate)) {
       return "selected-date";
     }
-  
+
     // Leave booked slots with default styles
     if (bookedData[currentDate]) {
       return "booked-date";
     }
-  
+
     return null;
   };
-  
-  
 
   const handleNavigate = () => {
     navigate("/addvisit");
   };
 
+  useEffect(() => {
+    AOS.init({
+      duration: 2000, // Animation duration (in ms)
+      once: true, // Animation only happens once
+    });
+    }, []);
+
   return (
-    <div style={{ backgroundColor: ""}}>
+    <div style={{ backgroundColor: "#eaf5fc" }}>
+      <div className="home-section">
       <ColHeader />
 
-      {/* Carousel Section */}
-      <Container fluid className="mt-3">
-        <h2 className="text-center text-danger mt-2">
-          Welcome To Sumago Infotech !!!!
-        </h2>
-        <h3 className="text-center text-dark mb-4 ">{collegename}</h3>
-        {/* <Container>
-          <Col md={10} className="mx-auto">
-            <Carousel data-bs-theme="dark">
-              {[slider1, slider2, slider3].map((slide, index) => (
-                <Carousel.Item key={index}>
-                  <img
-                    className="d-block w-100 home-img"
-                    src={slide}
-                    alt={`Slide ${index + 1}`}
-                  />
-                </Carousel.Item>
-              ))}
-            </Carousel>
-          </Col>
-        </Container> */}
+      {/* Content Section */}
+      <Container fluid className=" d-flex flex-column justify-content-center" style={{ height: "100vh" }}>
+        <h1 className="text-center text-white mt-2 fssize">
+          Welcome
+        </h1>
+        <h3 className="text-center text-white mb-4  " style={{fontSize:"50px"}}>{collegename}</h3>
+         <div className="text-center">
+           <Link to="/addvisit" className="text-decoration-none"><Button className="px-4 py-2 btn btn-success rounded-4 fs-5">Book Visit</Button></Link>
+         </div>
       </Container>
+      </div>
+
+
       {/* Reports and Calendar */}
       <Container>
         <Row>
           {/* Report Cards */}
           <Col lg={8} md={12} xs={12} className="mt-4 ">
             <Row>
-              <h2 className="text-center mb-4 mt-4 text-danger">Reports</h2>
+              <h2 className="text-center mb-4 mt-4 text-dark">Reports</h2>
               <Col md={3} xs={8} className="mx-auto me-md-4">
                 <Card
                   className="me-2 shadow shadow-md"
-                  style={{ width: "13rem", height: "13rem" }}
+                  style={{ width: "13rem", height: "20rem",background:"linear-gradient(-135deg, #145a76, #1d809f, #67b7d1)"}}
                 >
-                  <Card.Body>
-                    <Card.Title className="text-center fs-2">
+                  <Card.Body className="d-flex flex-column">
+                    <Card.Title className="text-center text-dark fs-1 mt-3">
                       {ivcount}
                     </Card.Title>
-
-                    <Card.Title className="text-center mt-4">
+                    <Card.Title className="text-center text-white mt-auto fs-4">
                       Total Visit Count
                     </Card.Title>
-                    <div className="mt-5 text-center">
-                      <Button variant="danger" className="" href="/totalvisit">
+                    <div className="mt-auto text-center">
+                      <Button    variant="dark"
+                        className="text-white" href="/totalvisit">
                         View Details
                       </Button>
                     </div>
@@ -194,22 +194,18 @@ const Homecomponent = () => {
               <Col md={3} xs={8} className="mx-auto me-md-4 mt-3 mt-md-0">
                 <Card
                   className="me-2 shadow shadow-md"
-                  style={{ width: "13rem", height: "13rem" }}
+                  style={{ width: "13rem", height: "20rem",background:"linear-gradient(-135deg, #145a76, #1d809f, #67b7d1)" }}
                 >
-                  <Card.Body>
-                    <Card.Title className="text-center fs-2">
+                  <Card.Body className="d-flex flex-column">
+                    <Card.Title className="text-center text-dark fs-1 mt-3">
                       {pendingiv}
                     </Card.Title>
-
-                    <Card.Title className="text-center mt-4">
+                    <Card.Title className="text-center text-white fs-4 mt-auto">
                       Pending Visit Count
                     </Card.Title>
-                    <div className="mt-4 text-center">
-                      <Button
-                        variant="danger"
-                        className=""
-                        href="/pendingvisit"
-                      >
+                    <div className="mt-auto text-center">
+                      <Button     variant="dark"
+                        className="text-white" href="/pendingvisit">
                         View Details
                       </Button>
                     </div>
@@ -220,20 +216,20 @@ const Homecomponent = () => {
               <Col md={3} xs={8} className="mx-auto  mt-3 mt-md-0">
                 <Card
                   className="me-2 shadow shadow-md"
-                  style={{ width: "13rem", height: "13rem" }}
+                  style={{ width: "13rem", height: "20rem",background:"linear-gradient(-135deg, #145a76, #1d809f, #67b7d1)" }}
                 >
-                  <Card.Body>
-                    <Card.Title className="text-center fs-2">
+                  <Card.Body className="d-flex flex-column">
+                    <Card.Title className="text-center text-dark fs-1 mt-3">
                       {rejectediv}
                     </Card.Title>
 
-                    <Card.Title className="text-center mt-4">
+                    <Card.Title className="text-center text-white mt-auto fs-4">
                       Rejected Visit Count
                     </Card.Title>
-                    <div className="mt-4 text-center">
+                    <div className="mt-auto text-center">
                       <Button
-                        variant="danger"
-                        className=""
+                        variant="dark"
+                        className="text-white"
                         href="/rejectedvisit"
                       >
                         View Details
@@ -246,10 +242,10 @@ const Homecomponent = () => {
           </Col>
           {/* Calendar */}
           <Col md={12} lg={4} xs={12} className="mt-4">
-            <h2 className="text-center mt-4 mb-3 text-danger">Booked Slots</h2>
+            <h2 className="text-center mt-4 mb-3 text-dark">Booked Slots</h2>
             <div className="ms-3  d-flex justify-content-md-center mb-3 ms-lg-5   ">
               <Calendar
-              className="shadow shadow-md"
+                className="shadow shadow-md"
                 onClickDay={handleDateClick}
                 tileClassName={tileClassName}
                 tileDisabled={({ date }) =>
@@ -293,44 +289,76 @@ const Homecomponent = () => {
       </Container>
 
       {/* Rules and regulations */}
-      <Container>
-        <Row className="mt-4">
-          <h3 className="text-danger text-center mt-2 mb-2">
-            Code Of Conduct For Attending IV
-          </h3>
-          <Col md={6} className="mt-3">
-            <ul>
-              <li className="text-md-class mb-2">
-                All students must be in their college uniform.
-              </li>
-              <li className="text-md-class mb-2">
-                All students should wear their identity cards.
-              </li>
-              <li className="text-md-class ">
-                Maintain discipline during visit.
-              </li>
+     {/* Rules and regulations */}
+     <Container className="rules">
+      <Row className="mt-4">
+        <h3 className="text-dark text-center mt-2 mb-2" data-aos="fade-up">
+          Code Of Conduct For Attending IV
+        </h3>
+        <Col md={6} className="mt-3">
+          <ul className="list-unstyled">
+            <li
+              className="text-md-class mb-2"
+              data-aos="fade-left"
+              data-aos-delay="200"
+            >
+            <FaCheckCircle className="text-success me-2" />
+              All students must be in their college uniform.
+            </li>
+            <li
+              className="text-md-class mb-2"
+              data-aos="fade-left"
+              data-aos-delay="400"
+            >
+            <FaCheckCircle className="text-success me-2" />
+              All students should wear their identity cards.
+            </li>
+            <li
+              className="text-md-class mb-2"
+              data-aos="fade-left"
+              data-aos-delay="600"
+            >
+            <FaCheckCircle className="text-success me-2" />
+              Maintain discipline during visit.
+            </li>
             </ul>
-          </Col>
-
-          <Col md={6} className="mt-md-3 mt-0">
-            <ul>
-              <li className="text-md-class mb-2">
-                Be polite and professional while interacting with the staff.
-              </li>
-              <li className="text-md-class mb-2">Avoid touching system.</li>
-              <li className="text-md-class">
-                All students are supposed to follow the agenda for visit.
-              </li>
-            </ul>
-          </Col>
-        </Row>
-      </Container>
+            </Col>
+            <Col md={6} className="mt-3">
+            <ul className="list-unstyled">
+            <li
+              className="text-md-class mb-2"
+              data-aos="fade-left"
+              data-aos-delay="800"
+            >
+            <FaCheckCircle className="text-success me-2" />
+              Be polite and professional while interacting with the staff.
+            </li>
+            <li
+              className="text-md-class mb-2"
+              data-aos="fade-left"
+              data-aos-delay="1000"
+            >
+            <FaCheckCircle className="text-success me-2" />
+              Avoid touching system.
+            </li>
+            <li
+              className="text-md-class mb-2"
+              data-aos="fade-left"
+              data-aos-delay="1200"
+            >
+            <FaCheckCircle className="text-success me-2" />
+              All student supposed to follow the agenda for visit.
+            </li>
+          </ul>
+        </Col>
+      </Row>
+    </Container>
       {/* Contact Section */}
       <Container fluid className="mt-4 bg-white">
-        <Row>
+        <Row  style={{backgroundColor:"rgb(135,212,195)"}}>
           {/* Left Column */}
           <Col md={6} className="text-center mt-5">
-            <h3 className="text-danger">
+            <h3 className="text-dark">
               <p className="fs-lg-2 fs-md-0 fw-bold mt-3">
                 Let us help you bridge the gap between education and industry,
                 shaping the innovators and leaders of tomorrow.
@@ -350,7 +378,7 @@ const Homecomponent = () => {
             md={6}
             className="d-flex justify-content-center align-items-center"
           >
-            <img src={cta} alt="Contact Us" className="contactus-img" />
+            <img src={cta} alt="Contact Us" className="contactus-img p-2" />
           </Col>
         </Row>
       </Container>
@@ -365,7 +393,7 @@ const Homecomponent = () => {
             />
           </Col>
           <Col md={6}>
-            <h2 className="text-center mt-lg-4 mt-3 mt-md-0 fs-2 text-danger">
+            <h2 className="text-center mt-lg-4 mt-3 mt-md-0 fs-2 text-dark">
               Our Vision
             </h2>
             <p

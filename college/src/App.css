@@ -25,7 +25,7 @@
     }
 
     .contactus-img{
-      width: 200px;
+      width: 250px;
       height: 200px;
     }
   }
@@ -40,8 +40,8 @@
     }
 
     .contactus-img{
-      width: 250px;
-      height: 250px;
+      width: 300px;
+      height: 200px;
     }
   }
 
@@ -160,7 +160,7 @@
 
 
     .booked-date {
-      background-color: rgb(235, 142, 142) !important;
+      background-color: rgb(191, 191, 225) !important;
       color:black !important;
       border: solid 1px black !important;
     }
@@ -169,5 +169,21 @@
       background-color:white !important; /* Highlight slot booking dates */
       color:black !important;         /* Optional: Change text color */            /* Optional: Circle styling */
     }
-    
 
+    .home-section{
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+       url("./Images/sumgo-home.jpg") center center no-repeat;
+      background-size: cover;
+      height: 100vh;
+      width: 100%;
+  }
+
+  .fssize{
+    font-size: 70px;
+  }
+
+  .welcome-section {
+    position: relative;
+    z-index: 1; /* Ensure content is above the background */
+    text-align: center;
+  }
