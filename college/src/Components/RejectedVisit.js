@@ -35,11 +35,11 @@ const RejectedVisit = () => {
   };
 
     return (
-      <div className="min-vh-100" style={{marginTop:'18vh'}}>
+      <div className="min-vh-100" style={{paddingTop:'15vh',backgroundColor:"#eaf5fc"}}>
       <ColHeader></ColHeader>
         <Container>
         
-            <h2 className="my-4 text-center text-danger">Rejected Visits</h2>
+            <h2 className="my-4 text-center text-dark">Rejected Visits</h2>
             <div className="d-flex justify-content-end mb-4">
           <Link to="/home">
           <Button className="btn btn-danger"><span className="text-white">Back</span></Button>

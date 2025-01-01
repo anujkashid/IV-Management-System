@@ -68,9 +68,9 @@ const Gallery = () => {
   return (
     <>
       <ColHeader />
-      <Container fluid className="h-100 vh-100" style={{marginTop:'15vh'}}>
+      <Container fluid className="min-vh-100" style={{paddingTop:'15vh',backgroundColor:"#eaf5fc"}}>
         <Container className="py-4">
-          <h2 className="text-center mb-4 text-danger">Gallery</h2>
+          <h2 className="text-center mb-4 text-dark">Gallery</h2>
           <Col md={8} className="mx-auto">
             <Form.Group controlId="visitDateDropdown" className="mb-4 text-center">
               <Form.Label className="mb-2">Select Visit Date:</Form.Label>

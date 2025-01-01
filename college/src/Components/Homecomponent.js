@@ -21,8 +21,10 @@ import slider3 from "../Images/slider3.jpg";
 import "../App.css";
 import { Link, useNavigate } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
-import AOS from "aos"
-import "aos/dist/aos.css"
+import AOS from "aos";
+import "aos/dist/aos.css";
+import WOW from "wowjs";
+import "animate.css";
 
 const Homecomponent = () => {
   const [bookedData, setBookedData] = useState({}); // Store booked slots
@@ -33,6 +35,8 @@ const Homecomponent = () => {
   const [rejectediv, setRejectediv] = useState(0);
   // const [collegeData, setCollegeData] = useState([]);
   const collegename = localStorage.getItem("CollegeName");
+  const [lastDate, setLastDate] = useState("");
+
   const navigate = useNavigate();
 
   // Format date helper
@@ -42,6 +46,13 @@ const Homecomponent = () => {
       2,
       "0"
     )}-${String(d.getDate()).padStart(2, "0")}`;
+  };
+
+  const formatDate1 = (date) => {
+    const d = new Date(date);
+    return `${d.getDate()}-${d.toLocaleString("default", {
+      month: "short",
+    })}-${d.getFullYear()}`;
   };
 
   const formatTime = (time) => {
@@ -83,6 +94,21 @@ const Homecomponent = () => {
           (visit) => visit.college_name === collegename
         );
         // setCollegeData(data);
+
+        const latestDate = data
+          .filter((visit) => visit.Visit_status === "completed")
+          .reduce((latest, visit) => {
+            const visitDate = new Date(visit.Date_of_visit);
+            return !latest || visitDate > new Date(latest)
+              ? visit.Date_of_visit
+              : latest;
+          }, null);
+
+        // Update state with the latest date
+        if (latestDate) {
+          setLastDate(latestDate);
+        }
+        // Update state with the latest date or fallback to "No Booking"
 
         setIvcount(data.length);
         setPendingiv(
@@ -141,26 +167,55 @@ const Homecomponent = () => {
     AOS.init({
       duration: 2000, // Animation duration (in ms)
       once: true, // Animation only happens once
-    });
-    }, []);
+    });
+  }, []);
 
+  useEffect(() => {
+    new WOW.WOW({
+      live: false, // Disable live updates after page load
+    }).init();
+  }, []);
   return (
     <div style={{ backgroundColor: "#eaf5fc" }}>
       <div className="home-section">
-      <ColHeader />
+        <ColHeader />
 
-      {/* Content Section */}
-      <Container fluid className=" d-flex flex-column justify-content-center" style={{ height: "100vh" }}>
-        <h1 className="text-center text-white mt-2 fssize">
-          Welcome
-        </h1>
-        <h3 className="text-center text-white mb-4  " style={{fontSize:"50px"}}>{collegename}</h3>
-         <div className="text-center">
-           <Link to="/addvisit" className="text-decoration-none"><Button className="px-4 py-2 btn btn-success rounded-4 fs-5">Book Visit</Button></Link>
-         </div>
-      </Container>
+        {/* Content Section */}
+        <Container
+          fluid
+          className=" d-flex flex-column justify-content-center"
+          style={{ height: "100vh" }}
+        >
+          <h1 className="text-center text-white mt-2 fssize">Welcome</h1>
+          <h3
+            className="text-center text-white mb-4  "
+            style={{ fontSize: "50px" }}
+          >
+            {collegename}
+          </h3>
+
+          <div className="mt-5 text-center text-white">
+            <h1>Streamline Your Industrial Visit With Ease</h1>
+          </div>
+
+          <div className="text-center">
+            <Link to="/addvisit" className="text-decoration-none">
+              <Button className="px-4 py-2 btn btn-info rounded-4 fs-5 mt-3">
+                Book Visit
+              </Button>
+            </Link>
+          </div>
+
+          <div className="marquee-container">
+            <div className="marquee mt-5">
+              Your Last Visit with Sumago Infotech Private Limited was on &nbsp;
+              {lastDate && !isNaN(new Date(lastDate).getTime())
+                ? `${formatDate1(lastDate)} 🌟`
+                : "No Booking"}
+            </div>
+          </div>
+        </Container>
       </div>
-
 
       {/* Reports and Calendar */}
       <Container>
@@ -172,18 +227,26 @@ const Homecomponent = () => {
               <Col md={3} xs={8} className="mx-auto me-md-4">
                 <Card
                   className="me-2 shadow shadow-md"
-                  style={{ width: "13rem", height: "20rem",background:"linear-gradient(-135deg, #145a76, #1d809f, #67b7d1)"}}
+                  style={{
+                    width: "13rem",
+                    height: "20rem",
+                    background:
+                      "linear-gradient(-135deg, #145a76, #1d809f, #67b7d1)",
+                  }}
                 >
                   <Card.Body className="d-flex flex-column">
-                    <Card.Title className="text-center text-dark fs-1 mt-3">
+                    <Card.Title className="text-center text-white fw-bold fs-1 mt-3">
                       {ivcount}
                     </Card.Title>
                     <Card.Title className="text-center text-white mt-auto fs-4">
                       Total Visit Count
                     </Card.Title>
                     <div className="mt-auto text-center">
-                      <Button    variant="dark"
-                        className="text-white" href="/totalvisit">
+                      <Button
+                        variant="dark"
+                        className="text-white"
+                        href="/totalvisit"
+                      >
                         View Details
                       </Button>
                     </div>
@@ -194,18 +257,26 @@ const Homecomponent = () => {
               <Col md={3} xs={8} className="mx-auto me-md-4 mt-3 mt-md-0">
                 <Card
                   className="me-2 shadow shadow-md"
-                  style={{ width: "13rem", height: "20rem",background:"linear-gradient(-135deg, #145a76, #1d809f, #67b7d1)" }}
+                  style={{
+                    width: "13rem",
+                    height: "20rem",
+                    background:
+                      "linear-gradient(-135deg, #145a76, #1d809f, #67b7d1)",
+                  }}
                 >
                   <Card.Body className="d-flex flex-column">
-                    <Card.Title className="text-center text-dark fs-1 mt-3">
+                    <Card.Title className="text-center text-white fw-bold fs-1 mt-3">
                       {pendingiv}
                     </Card.Title>
                     <Card.Title className="text-center text-white fs-4 mt-auto">
                       Pending Visit Count
                     </Card.Title>
                     <div className="mt-auto text-center">
-                      <Button     variant="dark"
-                        className="text-white" href="/pendingvisit">
+                      <Button
+                        variant="dark"
+                        className="text-white"
+                        href="/pendingvisit"
+                      >
                         View Details
                       </Button>
                     </div>
@@ -216,10 +287,15 @@ const Homecomponent = () => {
               <Col md={3} xs={8} className="mx-auto  mt-3 mt-md-0">
                 <Card
                   className="me-2 shadow shadow-md"
-                  style={{ width: "13rem", height: "20rem",background:"linear-gradient(-135deg, #145a76, #1d809f, #67b7d1)" }}
+                  style={{
+                    width: "13rem",
+                    height: "20rem",
+                    background:
+                      "linear-gradient(-135deg, #145a76, #1d809f, #67b7d1)",
+                  }}
                 >
                   <Card.Body className="d-flex flex-column">
-                    <Card.Title className="text-center text-dark fs-1 mt-3">
+                    <Card.Title className="text-center text-white fw-bold fs-1 mt-3">
                       {rejectediv}
                     </Card.Title>
 
@@ -289,73 +365,73 @@ const Homecomponent = () => {
       </Container>
 
       {/* Rules and regulations */}
-     {/* Rules and regulations */}
-     <Container className="rules">
-      <Row className="mt-4">
-        <h3 className="text-dark text-center mt-2 mb-2" data-aos="fade-up">
-          Code Of Conduct For Attending IV
-        </h3>
-        <Col md={6} className="mt-3">
-          <ul className="list-unstyled">
-            <li
-              className="text-md-class mb-2"
-              data-aos="fade-left"
-              data-aos-delay="200"
-            >
-            <FaCheckCircle className="text-success me-2" />
-              All students must be in their college uniform.
-            </li>
-            <li
-              className="text-md-class mb-2"
-              data-aos="fade-left"
-              data-aos-delay="400"
-            >
-            <FaCheckCircle className="text-success me-2" />
-              All students should wear their identity cards.
-            </li>
-            <li
-              className="text-md-class mb-2"
-              data-aos="fade-left"
-              data-aos-delay="600"
-            >
-            <FaCheckCircle className="text-success me-2" />
-              Maintain discipline during visit.
-            </li>
-            </ul>
-            </Col>
-            <Col md={6} className="mt-3">
+      {/* Rules and regulations */}
+      <Container className="rules">
+        <Row className="mt-4">
+          <h3 className="text-dark text-center mt-2 mb-2" data-aos="fade-up">
+            Code Of Conduct For Attending IV
+          </h3>
+          <Col md={6} className="mt-3">
             <ul className="list-unstyled">
-            <li
-              className="text-md-class mb-2"
-              data-aos="fade-left"
-              data-aos-delay="800"
-            >
-            <FaCheckCircle className="text-success me-2" />
-              Be polite and professional while interacting with the staff.
-            </li>
-            <li
-              className="text-md-class mb-2"
-              data-aos="fade-left"
-              data-aos-delay="1000"
-            >
-            <FaCheckCircle className="text-success me-2" />
-              Avoid touching system.
-            </li>
-            <li
-              className="text-md-class mb-2"
-              data-aos="fade-left"
-              data-aos-delay="1200"
-            >
-            <FaCheckCircle className="text-success me-2" />
-              All student supposed to follow the agenda for visit.
-            </li>
-          </ul>
-        </Col>
-      </Row>
-    </Container>
+              <li
+                className="text-md-class mb-2"
+                data-aos="fade-left"
+                data-aos-delay="200"
+              >
+                <FaCheckCircle className="text-success me-2" />
+                All students must be in their college uniform.
+              </li>
+              <li
+                className="text-md-class mb-2"
+                data-aos="fade-left"
+                data-aos-delay="400"
+              >
+                <FaCheckCircle className="text-success me-2" />
+                All students should wear their identity cards.
+              </li>
+              <li
+                className="text-md-class mb-2"
+                data-aos="fade-left"
+                data-aos-delay="600"
+              >
+                <FaCheckCircle className="text-success me-2" />
+                Maintain discipline during visit.
+              </li>
+            </ul>
+          </Col>
+          <Col md={6} className="mt-3">
+            <ul className="list-unstyled">
+              <li
+                className="text-md-class mb-2"
+                data-aos="fade-left"
+                data-aos-delay="800"
+              >
+                <FaCheckCircle className="text-success me-2" />
+                Be polite and professional while interacting with the staff.
+              </li>
+              <li
+                className="text-md-class mb-2"
+                data-aos="fade-left"
+                data-aos-delay="1000"
+              >
+                <FaCheckCircle className="text-success me-2" />
+                Avoid touching system.
+              </li>
+              <li
+                className="text-md-class mb-2"
+                data-aos="fade-left"
+                data-aos-delay="1200"
+              >
+                <FaCheckCircle className="text-success me-2" />
+                All student supposed to follow the agenda for visit.
+              </li>
+            </ul>
+          </Col>
+        </Row>
+      </Container>
       {/* Contact Section */}
       <Container fluid className="mt-4 bg-white">
-        <Row  style={{backgroundColor:"rgb(135,212,195)"}}>
+        <Row style={{ backgroundColor: "rgb(135,212,195)" }}>
           {/* Left Column */}
           <Col md={6} className="text-center mt-5">
             <h3 className="text-dark">
@@ -385,14 +461,22 @@ const Homecomponent = () => {
       {/* Vision Section */}
       <Container className="my-4 ">
         <Row>
-          <Col md={6}>
+          <Col
+            md={6}
+            className="wow animate__animated animate__fadeInLeft"
+            data-wow-delay="0.3s"
+          >
             <img
               src={vision}
               alt="Our Vision"
               className="vision-img mt-4 rounded-2"
             />
           </Col>
-          <Col md={6}>
+          <Col
+            md={6}
+            className="wow animate__animated animate__fadeInRight"
+            data-wow-delay="0.3s"
+          >
             <h2 className="text-center mt-lg-4 mt-3 mt-md-0 fs-2 text-dark">
               Our Vision
             </h2>

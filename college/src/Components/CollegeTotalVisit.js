@@ -109,16 +109,16 @@ const CollegeTotalVisit = () => {
     <ColHeader />
     <Container>
     <div style={{paddingTop:'15vh'}}>
-      <h2 className="my-4 text-center text-danger">Scheduled Visits</h2>
+      <h2 className="my-4 text-center text-dark">Scheduled Visits</h2>
       <div className="mb-4 d-flex justify-content-start gap-2">
-  <Button variant="danger" onClick={exportPDF}>
+  <Button variant="success" onClick={exportPDF}>
     Export PDF
   </Button>
-  <Button variant="danger" onClick={exportExcel}>
+  <Button variant="success" onClick={exportExcel}>
     Export Excel
   </Button>
   <CSVLink data={ivcount} filename="visit_data.csv">
-    <Button variant="danger">Export CSV</Button>
+    <Button variant="success">Export CSV</Button>
   </CSVLink>
 </div>
 

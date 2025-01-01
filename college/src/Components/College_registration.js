@@ -7,6 +7,8 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import { Link, useNavigate } from "react-router-dom";
+import { Nav, Navbar } from "react-bootstrap";
+import logo from "../Images/sumago-logo.png";
 
 const College_registration = () => {
   const [collage_name, setCollage_name] = useState("");
@@ -265,16 +267,55 @@ const College_registration = () => {
   return (
     <>
      <div  style={{
-      background: "linear-gradient(135deg, #145a76, #1d809f, #67b7d1)",
+      background: "linear-gradient(135deg,rgb(133, 202, 230),rgb(45, 128, 154),rgb(125, 205, 232))",
       height: "100%",           
-      width: "100vw"                
+      // width: "100vw"                
     }}>
+
+    <Navbar collapseOnSelect expand="lg"   variant="dark">
+    {/* Brand */}
+    <Navbar.Brand className="fs-5 ms-4 d-flex align-items-center">
+      <img
+        src={logo}
+        alt="Logo"
+        className="me-3"
+        style={{ width: "70px", height: "70px" }}
+      />
+      <div>
+        <span
+          className=" fw-bold d-block text-danger fs-3"
+          style={{ fontFamily: "Times New Roman" }}
+        >
+          Sumago Infotech  Private Limited
+        </span>
+      </div>
+    </Navbar.Brand>
+    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+
+    <Navbar.Collapse id="responsive-navbar-nav">
+      <Nav className="ms-auto d-flex align-items-center">
+        {/* Profile */}
+        <Nav.Link href="/">
+        <Button className="me-3">
+        REGISTER
+        </Button>
+        </Nav.Link>
+
+        {/* Login */}
+        <Nav.Link href="/">
+        <Button className="me-5">
+        LOGIN
+        </Button>
+        </Nav.Link>
+      </Nav>
+    </Navbar.Collapse>
+  </Navbar>
      
       {/* Form  */}
       <Container
       >
         <Row>
-          <Col xs={10} className="mx-auto h-100  p-2 p-md-4 bg-white mt-5 rounded-2 "style={{ maxWidth: "600px" }}  >
+          <Col xs={10} className="mx-auto h-100  p-2 p-md-4 bg-white mt-4 rounded-2 "style={{ maxWidth: "600px" }}  >
          <h2 className="text-center text-primary fs-3 mb-3">Registration Form</h2>
         <Form className=" p-2">
           {/* College Name */}

@@ -187,3 +187,28 @@
     z-index: 1; /* Ensure content is above the background */
     text-align: center;
   }
+
+
+  .marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    color: white;
+    font-size: 30px;
+    padding: 10px 0;
+  }
+  
+  .marquee {
+    display: inline-block;
+    animation: marquee 10s linear infinite;
+  }
+  
+  @keyframes marquee {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  

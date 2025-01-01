@@ -82,10 +82,10 @@ const Feedback = () => {
   return (
     <>
      <ColHeader />
-    <Container fluid className="h-100 vh-100" style={{marginTop:'15vh'}}> 
+    <Container fluid className="h-100 vh-100" style={{paddingTop:'15vh',backgroundColor:"#eaf5fc"}}> 
         <Row>
           <Col md={4} className="mx-auto">
-            <h2 className="text-center text-danger mt-4">Add Feedback</h2>
+            <h2 className="text-center text-dark mt-4">Add Feedback</h2>
             <Form className="border border-dark p-4 mt-4 shadow shadow-md" onSubmit={handleSubmit}>
               <Row className="mb-3 text-center">
                 <Form.Group controlId="categoryDropdown" className="">

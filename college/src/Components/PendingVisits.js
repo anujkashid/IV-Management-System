@@ -35,10 +35,10 @@ const PendingVisit = () => {
   };
 
     return (
-      <div className="min-vh-100" style={{marginTop:'18vh'}}>
+      <div className="min-vh-100" style={{paddingTop:'15vh',backgroundColor:"#eaf5fc"}}>
       <ColHeader></ColHeader>
         <Container>    
-            <h2 className="my-3 text-danger text-center">Pending Visits</h2>
+            <h2 className="my-3 text-dark text-center">Pending Visits</h2>
             <div className="d-flex justify-content-end mb-4">
           <Link to="/home">
           <Button

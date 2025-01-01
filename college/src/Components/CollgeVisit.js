@@ -126,17 +126,17 @@ const ColLogin = () => {
   return (
     <>
       <ColHeader />
-      <Container className="min-vh-100" fluid style={{marginTop:'15vh'}}>
-      <Container className="mb-1">
+      <Container className="min-vh-100" fluid  style={{backgroundColor:"#eaf5fc"}}>
+      <Container className="mb-1" style={{paddingTop:'15vh'}}>
         <Row>
           <Col md={9} className="mx-auto">
-            <h3 className="text-center mt-4 text-danger">Add Visit</h3>
+            <h3 className="text-center mt-4 text-dark">Add Visit</h3>
             <div className="d-flex justify-content-end mb-4">
           <Link to="/collegetotalvisit">
           <Button className="btn btn-danger"><span className="text-white">Back</span></Button>
         </Link>
         </div>
-            <Container className="border border-dark p-4 d-flex justify-content-center bg-white shadow shadow-md">
+            <Container className=" p-4 d-flex justify-content-center bg-white shadow shadow-md">
               <Form className="w-100 " onSubmit={handleSubmit} >
                 <Row className="mb-3">
                   <Col md={5} className="text-center">

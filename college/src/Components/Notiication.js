@@ -57,12 +57,12 @@ const Notification = () => {
   }
 
   return (
-    <div className="min-vh-100" style={{marginTop:'18vh'}}>
+    <div className="min-vh-100" style={{paddingTop:'15vh',backgroundColor:"#eaf5fc"}}>
       <ColHeader />
       <div className="container mt-4">
-        <h3 className="text-center mb-4 text-danger">Notifications</h3>
+        <h3 className="text-center mb-3 text-dark">Notifications</h3>
         <div className="d-flex justify-content-end">
-          <Link className="text-decoration-none" to="/home">
+          <Link className="text-decoration-none mb-2" to="/home">
             <IoMdClose className="text-dark" size={30} />
           </Link>
         </div>

@@ -18,7 +18,7 @@ const TotalVisit = () => {
       .then((res) => {
         setCollegeData(res.data.userData);
         const data = res.data.userData;
-        console.log("data", data)
+        // console.log("data", data)
 
         // total IV
         const totalIV = data.filter(
@@ -56,7 +56,7 @@ const TotalVisit = () => {
   };
 
   return (
-    <div className="min-vh-100" style={{marginTop:'18vh'}}>
+    <div className="min-vh-100" style={{paddingTop:'15vh',backgroundColor:"#eaf5fc"}}>
       <ColHeader></ColHeader>
       <Container>
         <h2 className="my-3 text-center">Total Visits</h2>
