@@ -111,20 +111,20 @@ const CollegeTotalVisit = () => {
     <div style={{paddingTop:'15vh'}}>
       <h2 className="my-4 text-center text-dark">Scheduled Visits</h2>
       <div className="mb-4 d-flex justify-content-start gap-2">
-  <Button variant="success" onClick={exportPDF}>
+  <Button variant="info" onClick={exportPDF}>
     Export PDF
   </Button>
-  <Button variant="success" onClick={exportExcel}>
+  <Button variant="info" onClick={exportExcel}>
     Export Excel
   </Button>
   <CSVLink data={ivcount} filename="visit_data.csv">
-    <Button variant="success">Export CSV</Button>
+    <Button variant="info">Export CSV</Button>
   </CSVLink>
 </div>
 
 <div className="d-flex justify-content-end me-3 mb-3">
   <Link to="/addvisit">
-    <Button className="btn btn-primary py-2 px-3">Add</Button>
+    <Button className="btn btn-info py-2 px-3">Add</Button>
   </Link>
 </div>
 

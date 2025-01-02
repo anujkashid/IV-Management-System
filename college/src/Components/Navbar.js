@@ -12,6 +12,7 @@ import { FaRegUser } from "react-icons/fa";
 import { IoIosLogOut, IoIosNotificationsOutline } from "react-icons/io";
 import axios from "axios";
 import logo from "../Images/sumago-logo.png";
+import "../App.css";
 // import bcrypt from "bcryptjs";
 
 const ColHeader = () => {
@@ -32,8 +33,7 @@ const ColHeader = () => {
             visit.notification_status === "unseen" &&
             (visit.Visit_accept === "accept" ||
               visit.Visit_accept === "reject" ||
-              visit.Visit_accept === "pending"
-              )
+              visit.Visit_accept === "pending")
         );
         setVisitData(filteredData);
         setNotificationCount(filteredData.length);
@@ -88,7 +88,13 @@ const ColHeader = () => {
 
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" style={{background:" rgba(93, 91, 91, 0.5)"}} fixed="top"  variant="dark">
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        style={{ background: " rgba(93, 91, 91, 0.5)" }}
+        fixed="top"
+        variant="dark"
+      >
         {/* Brand */}
         <Navbar.Brand className="fs-5 ms-4 d-flex align-items-center">
           <img
@@ -149,7 +155,7 @@ const ColHeader = () => {
             {/* Notifications */}
             <Nav.Link href="/notifications" className="position-relative">
               <IoIosNotificationsOutline
-                className="me-3 text-white fw-bold"
+                className="me-3 text-white fw-bold notification-icon"
                 size={35}
               />
               {notificationCount > 0 && (

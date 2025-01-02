@@ -38,12 +38,14 @@ const Gallery = () => {
       .catch((err) => console.log(err));
   }, [collegename]);
 
+  // Filter images based on the selected date
   const filteredImages = selectedDate
     ? galleryData.filter(
         (item) => new Date(item.Date_of_visit).toISOString() === selectedDate
       )
-    : [];
+    : galleryData;
 
+  // Collect all images from the filtered data
   const allImages = filteredImages.flatMap((item) => item.galleryimage);
 
   // Function to download all images as a zip file
@@ -68,65 +70,85 @@ const Gallery = () => {
   return (
     <>
       <ColHeader />
-      <Container fluid className="min-vh-100" style={{paddingTop:'15vh',backgroundColor:"#eaf5fc"}}>
-        <Container className="py-4">
-          <h2 className="text-center mb-4 text-dark">Gallery</h2>
-          <Col md={8} className="mx-auto">
-            <Form.Group controlId="visitDateDropdown" className="mb-4 text-center">
-              <Form.Label className="mb-2">Select Visit Date:</Form.Label>
-              <Form.Select
-                aria-label="Select Date"
-                value={selectedDate}
-                onChange={(e) => setSelectedDate(e.target.value)}
-              >
-                <option value="">-- Select Date --</option>
-                {visitDates.map((date, index) => (
-                  <option key={index} value={new Date(date).toISOString()}>
-                    {formatDate(date)}
-                  </option>
-                ))}
-              </Form.Select>
-            </Form.Group>
-
-            {selectedDate && allImages.length > 0 ? (
-              <>
-                <div className="text-center mb-4">
-                  <Button variant="primary" onClick={handleDownloadAll}>
+      <Container fluid style={{ paddingTop: "18vh" }}>
+        <h2 className="text-center mb-4 text-dark">Gallery</h2>
+        <Row>
+          {/* Left Side: Date Selection */}
+          <Col md={3} className="border-end border-dark shadow-md vh-100">
+            <Card className="border border-0" style={{ minHeight: "25rem" }}>
+              <Card.Body>
+                <Form.Group controlId="visitDateDropdown" className="mb-4">
+                  <Form.Label className="mb-2">Select Visit Date:</Form.Label>
+                  <Form.Select
+                    aria-label="Select Date"
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                  >
+                    <option value="">-- Show All Dates --</option>
+                    {visitDates.map((date, index) => (
+                      <option key={index} value={new Date(date).toISOString()}>
+                        {formatDate(date)}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Form.Group>
+                {allImages.length > 0 && (
+                  <Button
+                    variant="primary"
+                    className="w-100"
+                    onClick={handleDownloadAll}
+                  >
                     Download All Images
                   </Button>
-                </div>
-                <Row>
-                  {allImages.map((image, index) => (
-                    <Col key={index} xs={12} sm={6} md={4} lg={3} className="mb-4">
-                      <Card className="h-100 shadow-sm">
-                        <a
-                          href={`http://localhost:8000/images/${image}`}
-                          download={`Gallery_Item_${index + 1}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Card.Img
-                            variant="top"
-                            src={`http://localhost:8000/images/${image}`}
-                            alt={`Gallery Item ${index + 1}`}
-                            style={{
-                              height: "200px",
-                              objectFit: "cover",
-                            }}
-                          />
-                        </a>
-                      </Card>
-                    </Col>
-                  ))}
-                </Row>
-              </>
-            ) : selectedDate ? (
-              <p className="text-center">No images available for the selected date.</p>
-            ) : (
-              <p className="text-center">Please select a visit date to view the gallery images.</p>
-            )}
+                )}
+              </Card.Body>
+            </Card>
           </Col>
-        </Container>
+
+          {/* Right Side: Gallery */}
+          <Col md={9}>
+            <Card className="border border-0">
+              <Card.Body>
+                {allImages.length > 0 ? (
+                  <Row>
+                    {allImages.map((image, index) => (
+                      <Col
+                        key={index}
+                        xs={12}
+                        sm={6}
+                        md={4}
+                        lg={3}
+                        className="mb-4"
+                      >
+                        <Card className="h-100 shadow-sm">
+                          <a
+                            href={`http://localhost:8000/images/${image}`}
+                            download={`Gallery_Item_${index + 1}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Card.Img
+                              variant="top"
+                              src={`http://localhost:8000/images/${image}`}
+                              alt={`Gallery Item ${index + 1}`}
+                              style={{
+                                height: "200px",
+                                objectFit: "cover",
+                              }}
+                              onError={(e) => (e.target.src = "/fallback-image.jpg")}
+                            />
+                          </a>
+                        </Card>
+                      </Col>
+                    ))}
+                  </Row>
+                ) : (
+                  <p className="text-center">No images available to display.</p>
+                )}
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
       </Container>
     </>
   );

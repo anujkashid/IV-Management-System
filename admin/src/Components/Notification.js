@@ -95,16 +95,10 @@ const Notification = () => {
           visit.Visit_accept === "pending" && visit.fees_status === "paid" ? (
             <div
               key={item}
-              className="alert alert-primary d-flex justify-content-between align-items-center"
+              className="alert alert-primary d-flex justify-content-between align-items-center mt-4"
             >
-              Confirm fees status {visit.fees} to accept request on{" "}
+               Confirm fees status {visit.fees} to accept request on{" "}
               {formatDate(visit.Date_of_visit)} by {visit.college_name}.
-              <Button
-                className="ms-5 px-2 py-1 mt-2 btn btn-danger"
-                onClick={() => navigate("/head/feeverification")}
-              >
-                Pay Now
-              </Button>
             </div>
           ) : null
         )}
